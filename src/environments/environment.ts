@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  cordova: false,
-  electron: false
+  serverBase: 'http://127.0.0.1:8000/riegoInteligente',
+  baseHref: '/'  
 };

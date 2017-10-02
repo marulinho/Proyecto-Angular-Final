@@ -14,6 +14,7 @@ import { RouterModule, NoPreloading } from '@angular/router';
 import { DialogExampleComponent } from './shared/dialog/dialog-example/dialog-example.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { ComponentDialogComponent } from './pages/component-dialog/component-dialog.component';
+//import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ComponentButtonsComponent } from './pages/component-buttons/component-buttons.component';
 import { ComponentProgressComponent } from './pages/component-progress/component-progress.component';
@@ -62,7 +63,6 @@ import { PagesSignupComponent } from './pages/pages-signup/pages-signup.componen
 import { AppsCalendarComponent } from './pages/apps-calendar/apps-calendar.component';
 import { AppsExplorerComponent } from './pages/apps-explorer/apps-explorer.component';
 import { AppsMailComponent } from './pages/apps-mail/apps-mail.component';
-import { MapsVectorExampleComponent } from './pages/maps-vector/maps-vector.component';
 import { IconMaterialComponent } from './pages/icon-material/icon-material.component';
 import { ScheduleModule } from './shared/schedule/schedule.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -77,6 +77,19 @@ import { DashboardEdgeComponent } from './pages/dashboard-edge/dashboard-edge.co
 import { DialogThemeComponent } from './shared/dialog/dialog-theme/dialog-theme.component';
 import { TranslateStaticLoader, TranslateLoader, TranslateModule } from 'ng2-translate';
 import { QuillEditorComponent } from './shared/editor/quill-editor.component';
+
+import { MenuComponent } from './Menu/menu.component';
+
+import { IniciarSesionComponent } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.component';
+import { IniciarSesionService } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.service';
+import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.component';
+import { ModificarUsuarioService } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.service';
+import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.component';
+import { RegistrarUsuarioService } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.service';
+import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
+import { RecuperarCuentaService } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.service';
+
+
 /**
  * Root Module
  *
@@ -117,7 +130,6 @@ import { QuillEditorComponent } from './shared/editor/quill-editor.component';
     IconMaterialComponent,
     IconFontawesomeComponent,
     MapsGoogleComponent,
-    MapsVectorExampleComponent,
     FormsValidationComponent,
     FormsWizardComponent,
     FormsAutocompleteComponent,
@@ -142,7 +154,15 @@ import { QuillEditorComponent } from './shared/editor/quill-editor.component';
     AppsCalendarComponent,
     AppsExplorerComponent,
     AppsMailComponent,
-    QuillEditorComponent
+    QuillEditorComponent,
+
+    MenuComponent,
+
+    IniciarSesionComponent,
+    ModificarUsuarioComponent,
+    RegistrarUsuarioComponent,
+    RecuperarCuentaComponent
+    
   ],
   imports: [
     // Angular Imports
@@ -168,6 +188,7 @@ import { QuillEditorComponent } from './shared/editor/quill-editor.component';
     FileUploadModule,
     CustomFormsModule,
     TreeModule,
+    
     // Replace to your Google map API key.
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyC4-U6Eo0eHV7UFGjAIO6ZRB4X5z7hWS-8'
@@ -180,7 +201,12 @@ import { QuillEditorComponent } from './shared/editor/quill-editor.component';
   ],
   providers: [
     // Global service (Global state)
-    AppService
+    AppService,
+    IniciarSesionService,
+    ModificarUsuarioService,
+    RegistrarUsuarioService,
+    RecuperarCuentaService
+    
   ],
   entryComponents: [
     // Customize dialog must be import here.

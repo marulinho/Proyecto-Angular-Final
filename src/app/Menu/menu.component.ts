@@ -1,20 +1,20 @@
-import { Component, ViewEncapsulation, OnInit, HostListener } from '@angular/core';
-import { AppService } from './app.service';
+import { Component, ViewEncapsulation, OnInit, HostListener,Input } from '@angular/core';
+import { AppService } from '../app.service';
 import { Router } from '@angular/router';
-import { MenuMock } from './shared/mockdata/menu';
-import { SearchMock } from './shared/mockdata/search';
+import { MenuMock } from '../shared/mockdata/menu';
+import { SearchMock } from '../shared/mockdata/search';
 import { MdDialog, MdSnackBar } from '@angular/material';
-import { DialogThemeComponent } from './shared/dialog/dialog-theme/dialog-theme.component';
+import { DialogThemeComponent } from '../shared/dialog/dialog-theme/dialog-theme.component';
 import { TranslateService } from 'ng2-translate';
 
-@Component({
-  selector: 'lk-app',
-  encapsulation: ViewEncapsulation.None,
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
-export class AppComponent implements OnInit {
 
+@Component({
+  selector: 'app-menu',
+  templateUrl: './menu.component.html'
+})
+export class MenuComponent implements OnInit {
+  
+  
   // Mock Menu
   mainMenu = MenuMock.root;
   // Mock search item
@@ -26,10 +26,9 @@ export class AppComponent implements OnInit {
   snackBarRef: any;
 
   constructor(private appService: AppService,
-              private dialog: MdDialog,
-              private translate: TranslateService,
-              private router: Router,
-              private snackBar: MdSnackBar) {
+    private dialog: MdDialog,
+    private translate: TranslateService,
+    private router: Router) {
 
     // Change your page title here
     //appService.getState().topnavTitle = 'Loading';
@@ -39,11 +38,12 @@ export class AppComponent implements OnInit {
     setInterval(() => {
       this.date = new Date();
     }, 1000);
-    //this.snackBarRef = this.snackBar.open('Welcome to Smart Farming!', 'Done', {duration: 5000,});
+
   }
 
   ngOnInit() {
-    this.onResize();
+    this.onResize();    
+    this.router.navigate(['/perfilUsuario']);
   }
 
 
@@ -158,10 +158,4 @@ export class AppComponent implements OnInit {
   openThemeDialog() {
     let dialogRef = this.dialog.open(DialogThemeComponent);
   }
-
-  apretamosProfile(){
-    console.log("apretamos profile");
-    this.router.navigate(['/perfilUsuario']);
-  }
-
 }

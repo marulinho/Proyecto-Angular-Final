@@ -1,4 +1,6 @@
-import { Routes } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
 import { ComponentDialogComponent } from './pages/component-dialog/component-dialog.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ComponentButtonsComponent } from './pages/component-buttons/component-buttons.component';
@@ -49,8 +51,14 @@ import { PagesSignupComponent } from './pages/pages-signup/pages-signup.componen
 import { AppsCalendarComponent } from './pages/apps-calendar/apps-calendar.component';
 import { AppsExplorerComponent } from './pages/apps-explorer/apps-explorer.component';
 import { AppsMailComponent } from './pages/apps-mail/apps-mail.component';
-import { MapsVectorExampleComponent } from './pages/maps-vector/maps-vector.component';
 import { DashboardEdgeComponent } from './pages/dashboard-edge/dashboard-edge.component';
+import { AppComponent } from './app.component';
+
+import { MenuComponent } from './Menu/menu.component';
+import { IniciarSesionComponent } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.component';
+import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.component';
+import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.component';
+import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
 
 /**
  * Router Setting
@@ -59,16 +67,20 @@ import { DashboardEdgeComponent } from './pages/dashboard-edge/dashboard-edge.co
  */
 export const ROUTES: Routes = [
   // This default is router like '/'.
-  {
+  /*{
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full'
-  },
+  },*/
+
+
   // Emergency loading, need to import component form file.
-  {
-    path: 'dashboard',
-    component: DashboardComponent
-  },
+ 
+  
+  //{
+    //path: 'dashboard',
+    //component: DashboardComponent
+  //},
   // Lazy loading, you need to create a module file.
   //
   // 1. Find file dashboard.module.lazy at folder dashboard
@@ -78,216 +90,24 @@ export const ROUTES: Routes = [
   // 4. Modify file app.module.ts
   //    remove line "DashboardComponent," and "import { DashboardComponent } from './pages/dashboard/dashboard.component';"
   //
-  // {
-  //   path: 'dashboard',
-  //   loadChildren: './dashboard/dashboard.module#DashboardModule'
-  // },
-  {
-    path: 'dashboard-edge',
-    component: DashboardEdgeComponent
+  { path:'',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
-  {
-    path: 'component-buttons',
-    component: ComponentButtonsComponent
-  },
-  {
-    path: 'component-progress',
-    component: ComponentProgressComponent
-  },
-  {
-    path: 'component-card',
-    component: ComponentCardComponent
-  },
-  {
-    path: 'component-bootstrap',
-    component: ComponentBootstrapComponent
-  },
-  {
-    path: 'component-dialog',
-    component: ComponentDialogComponent
-  },
-  {
-    path: 'component-notifications',
-    component: ComponentNotificationsComponent
-  },
-  {
-    path: 'radio-button',
-    component: ComponentRadioButtonComponent
-  },
-  {
-    path: 'component-checkbox',
-    component: ComponentCheckboxComponent
-  },
-  {
-    path: 'component-chips',
-    component: ComponentChipsComponent
-  },
-  {
-    path: 'component-date-picker',
-    component: ComponentDatePickerComponent
-  },
-  {
-    path: 'component-list',
-    component: ComponentListComponent
-  },
-  {
-    path: 'component-media-player',
-    component: ComponentMediaPlayerComponent
-  },
-  {
-    path: 'component-menu',
-    component: ComponentMenuComponent
-  },
-  {
-    path: 'component-grid-list',
-    component: ComponentGridListComponent
-  },
-  {
-    path: 'component-select',
-    component: ComponentSelectComponent
-  },
-  {
-    path: 'component-slide-toggle',
-    component: ComponentSlideToggleComponent
-  },
-  {
-    path: 'component-slider',
-    component: ComponentSliderComponent
-  },
-  {
-    path: 'component-tabs',
-    component: ComponentTabsComponent
-  },
-  {
-    path: 'component-text-editor',
-    component: ComponentTextEditorComponent
-  },
-  {
-    path: 'component-toolbar',
-    component: ComponentToolbarComponent
-  },
-  {
-    path: 'component-tooltip',
-    component: ComponentTooltipComponent
-  },
-  {
-    path: 'component-radio-button',
-    component: ComponentRadioButtonComponent
-  },
-  {
-    path: 'icon-material',
-    component: IconMaterialComponent
-  },
-  {
-    path: 'icon-weather',
-    component: IconWeatherComponent
-  },
-  {
-    path: 'icon-fontawesome',
-    component: IconFontawesomeComponent
-  },
-  {
-    path: 'maps-google',
-    component: MapsGoogleComponent
-  },
-  {
-    path: 'maps-vector',
-    component: MapsVectorExampleComponent
-  },
-  {
-    path: 'forms-validation',
-    component: FormsValidationComponent
-  },
-  {
-    path: 'forms-wizard',
-    component: FormsWizardComponent
-  },
-  {
-    path: 'forms-autocomplete',
-    component: FormsAutocompleteComponent
-  },
-  {
-    path: 'forms-upload',
-    component: FormsUploadComponent
-  },
-  {
-    path: 'forms-tree',
-    component: FormsTreeComponent
-  },
-  {
-    path: 'tables-basic',
-    component: TablesBasicComponent
-  },
-  {
-    path: 'tables-dynamic',
-    component: TablesDynamicComponent
-  },
-  {
-    path: 'charts-chartjs',
-    component: ChartsChartjsComponent
-  },
-  {
-    path: 'charts-peity',
-    component: ChartsPeityComponent
-  },
-  {
-    path: 'widgets',
-    component: WidgetsComponent
-  },
-  {
-    path: 'layout-flex',
-    component: LayoutFlexComponent
-  },
-  {
-    path: 'layout-tabs',
-    component: LayoutTabsComponent
-  },
-  {
-    path: 'layout-edges',
-    component: LayoutEdgesComponent
-  },
-  {
-    path: 'layout-cards',
-    component: LayoutCardsComponent
-  },
-  {
-    path: 'layout-fullscreen',
-    component: LayoutFullscreenComponent
-  },
-  {
-    path: 'pages-error',
-    component: PagesErrorComponent
-  },
-  {
-    path: 'pages-lockscreen',
-    component: PagesLockscreenComponent
-  },
-  {
-    path: 'pages-invoice',
-    component: PagesInvoiceComponent
-  },
-  {
-    path: 'pages-notfound',
-    component: PagesNotfoundComponent
-  },
-  {
-    path: 'pages-signin',
-    component: PagesSigninComponent
-  },
-  {
-    path: 'pages-signup',
-    component: PagesSignupComponent
-  },
-  {
-    path: 'apps-calendar',
-    component: AppsCalendarComponent
-  },
-  {
-    path: 'apps-explorer',
-    component: AppsExplorerComponent
-  },
-  {
-    path: 'apps-mail',
-    component: AppsMailComponent
-  }
+
+  { path:'home' , component: MenuComponent},
+  { path:'login', component: IniciarSesionComponent},
+  { path:'registrarse', component:RegistrarUsuarioComponent},
+  { path: 'recuperarCuenta' , component: RecuperarCuentaComponent },
+  { path:'perfilUsuario', component:ModificarUsuarioComponent}
+  
+  /*{
+     path: 'dashboard',
+     component: DashboardComponent
+   }*/
+   
+
+  
 ];
+
+export const routing: ModuleWithProviders = RouterModule.forRoot( ROUTES );

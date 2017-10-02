@@ -28,12 +28,22 @@ export class AppService {
 
   // Set your states default value.
   private state: InternalStateType = {
-    appName: 'Lokra UI Starter',
+    
+    //appName: 'Lokra UI Starter',
+    appName: 'Smart Farming',
+    
     darkMode: false,
     defaultLang: 'en',
-    topnavTitle: 'Lokra',
+
+    //topnavTitle: 'Lokra',
+    topnavTitle: 'Smart Farming',
+    
     messagePanelOpen: false,
-    sidenavOpen: false,
+    
+    //abre el menu lateral
+    sidenavOpen: true,
+
+    //menu lateral uno encima del otro
     sidenavMode: 'over',
     sidenavCollapse: true,
     pageFullscreen: false,
@@ -47,7 +57,7 @@ export class AppService {
    * @return  {InternalStateType} State do not respond to changes.
    */
   public cloneState(): InternalStateType {
-    return JSON.parse(JSON.stringify(this.state));
+    return JSON.parse(JSON.stringify(this.state));    
   }
 
   /**

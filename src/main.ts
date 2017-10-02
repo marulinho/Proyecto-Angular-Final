@@ -8,10 +8,5 @@ if (environment.production) {
   enableProdMode();
 }
 
-if (environment.electron) {
-}
-
-if (environment.cordova) {
-}
 
 platformBrowserDynamic().bootstrapModule(AppModule);

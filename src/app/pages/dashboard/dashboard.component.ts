@@ -101,12 +101,14 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   storageChart = ChartJSDountMock.donutChart;
   parjectChart = ChartJsTableLineMock;
 
-  constructor(private appService: AppService, privateelementRef: ElementRef, private dialog: MdDialog,) {
+
+  constructor(private appService: AppService, privateelementRef: ElementRef, private dialog: MdDialog) {
     appService.getState().topnavTitle = 'Dashboard';
     appService.getState().pageFooter = true;
     setInterval(() => {
       this.changeChartData();
     }, 800);
+    
   }
 
   ngOnInit(): void {

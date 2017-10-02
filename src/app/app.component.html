@@ -6,17 +6,22 @@
   </a>
   <!--Application Title-->
   <span class="topnav-title">
-    <img src="assets/img/logo-half-light.svg"
-         *ngIf="appService.getState().sidenavMode === 'side'">
+    <!--<img src="assets/img/logo-half-light.svg"
+         *ngIf="appService.getState().sidenavMode === 'side'">-->
     {{appService.getState().topnavTitle}}</span>
+
   <span class="toolbar-filler"></span>
   <!--Apps Menu-->
   <span fxShow.sm="false" fxShow.xs="false">
-  <a md-icon-button
+ 
+    <!--Buscador-->
+ <!-- <a md-icon-button
      (click)="toggleTopnavSearch()">
     <md-icon>search</md-icon>
   </a>
+-->
   </span>
+  <!--
   <div class="topnav-search" fxShow.sm="false" fxShow.xs="false">
     <md2-autocomplete
       [class.show]="showTopnavSearch"
@@ -28,11 +33,19 @@
       [(ngModel)]="searchItem">
     </md2-autocomplete>
   </div>
+-->
+
+<!-- Full Screen
   <span fxShow.sm="false" fxShow.xs="false">
   <a md-icon-button (click)="toggleFullscreen()">
     <md-icon>fullscreen</md-icon>
   </a>
   </span>
+  
+-->
+
+
+<!-- Menu de aplicaciones 
   <span fxShow.sm="false" fxShow.xs="false">
   <a md-icon-button [md-menu-trigger-for]="topnavAppsMenu">
     <span class="notify">6</span>
@@ -54,6 +67,8 @@
       <a class="menu-block-bottom-btn">More</a>
     </div>
   </md-menu>
+-->
+
   <!--Notifications Menu-->
   <a md-icon-button [md-menu-trigger-for]="topnavNotificationsMenu">
     <span class="notify">3</span>
@@ -87,12 +102,13 @@
       <a class="menu-block-bottom-btn">View all</a>
     </div>
   </md-menu>
+
   <!--User Menu-->
   <a md-icon-button [md-menu-trigger-for]="topnavUserMenu">
     <img class="topnav-avatar" src="assets/img/avatar.jpg">
   </a>
   <md-menu #topnavUserMenu="mdMenu">
-    <button md-menu-item>
+    <button md-menu-item (click)="apretamosProfile()">
       <md-icon>person</md-icon>
       <span>Profile</span></button>
     <button md-menu-item>
@@ -102,11 +118,11 @@
       <md-icon>lock_outline</md-icon>
       <span>Lock</span></button>
   </md-menu>
-  <a md-icon-button (click)="toggleMessagePanel()">
-    <md-icon>list</md-icon>
-  </a>
+
 </md-toolbar>
+
 <!--Page container-->
+
 <md-sidenav-container>
 
   <!--Side nva bar-->
@@ -281,15 +297,7 @@
   <!--Page content-->
   <div [class.page-container]="!appService.getState().pageFullscreen">
     <router-outlet></router-outlet>
-    <!--Page footer-->
-    <md-toolbar class="page-footer" *ngIf="appService.getState().pageFooter">
-      © 2016 Lokra Studio.
-      <span class="filler"></span>
-      <button md-button>About</button>
-      <button md-button>Contact</button>
-    </md-toolbar>
+
   </div>
 </md-sidenav-container>
-<button md-fab color="warn" style="position: absolute;bottom: 16px;right: 16px;z-index: 5;" (click)="openThemeDialog()">
-  <md-icon>brush</md-icon>
-</button>
+
