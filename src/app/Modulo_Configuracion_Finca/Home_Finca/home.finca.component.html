@@ -1,0 +1,124 @@
+<!--SECCION FINCA ENCARGADO-->
+<div class="page-content">
+    <md-card class="page-card" >
+      <md-card-title>
+        Finca con Rol Encargado
+      </md-card-title>
+      
+      <md-card-content>
+            <section *ngIf="errorMessage" class="bs">
+                    <div class="bd-example" data-example-id="">
+                      <div class="alert alert-danger" role="alert">
+                        <strong>{{errorMessage}}</strong>
+                      </div>
+                    </div><br>
+                  </section>
+        <section *ngIf="getFincasEncargado()" class="bs">
+          <table class="table table-striped table-hover table-card">
+          <thead>
+          <tr>
+            <th style="width:37%;">Nombre</th>
+            <th style="width:36%;">Tama&ntilde;o</th>
+            <th>Ubicaci&oacute;n</th>
+            <th class="actions">Acci&oacute;n</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let fincaEncargado of fincasEncargado">
+            <td>{{fincaEncargado.nombre}}</td>
+            <td>{{fincaEncargado.tamanio}}</td>
+            <td>{{fincaEncargado.ubicacion}}</td>
+            <td><a md-icon-button>
+              <md-icon>remove_red_eye</md-icon>
+            </a></td>
+          </tr>
+          
+          </tbody>
+        </table>
+        </section>
+      </md-card-content>
+    </md-card>
+
+    <!--SECCION FINCA OTRO ROL-->
+        <md-card class="page-card" >
+          <md-card-title>
+            Finca con otro Rol
+          </md-card-title>
+          
+          <md-card-content>
+                <section *ngIf="errorMessage" class="bs">
+                        <div class="bd-example" data-example-id="">
+                          <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessage}}</strong>
+                          </div>
+                        </div><br>
+                      </section>
+            <section *ngIf="getFincasUsuario()" class="bs">
+              <table class="table table-striped table-hover table-card">
+              <thead>
+              <tr>
+                <th style="width:37%;">Nombre</th>
+                <th style="width:36%;">Tama&ntilde;o</th>
+                <th>Ubicaci&oacute;n</th>
+                <th class="actions">Acci&oacute;n</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let fincaUsuario of fincasUsuario">
+                <td>{{fincaUsuario.nombre}}</td>
+                <td>{{fincaUsuario.tamanio}}</td>
+                <td>{{fincaUsuario.ubicacion}}</td>
+                <td><a md-icon-button>
+                  <md-icon>remove_red_eye</md-icon>
+                </a></td>
+              </tr>
+              
+              </tbody>
+            </table>
+            </section>
+          </md-card-content>
+        </md-card>
+
+           
+
+    <!--SECCION FINCA PENDIENTE APROBACION-->
+    <md-card class="page-card" >
+            <md-card-title>
+              Fincas Pendientes Aprobaci&oacute;n
+            </md-card-title>
+            
+            <md-card-content>
+                  <section *ngIf="errorMessage" class="bs">
+                          <div class="bd-example" data-example-id="">
+                            <div class="alert alert-danger" role="alert">
+                              <strong>{{errorMessage}}</strong>
+                            </div>
+                          </div><br>
+                        </section>
+              <section *ngIf="getFincasPendientes()" class="bs">
+                <table class="table table-striped table-hover table-card">
+                <thead>
+                <tr>
+                  <th style="width:37%;">Nombre</th>
+                  <th style="width:36%;">Tama&ntilde;o</th>
+                  <th>Ubicaci&oacute;n</th>
+                  <th class="actions">Acci&oacute;n</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let fincaPendientes of fincasPendientes">
+                  <td>{{fincaPendientes.nombre}}</td>
+                  <td>{{fincaPendientes.tamanio}}</td>
+                  <td>{{fincaPendientes.ubicacion}}</td>
+                  <td><a md-icon-button>
+                    <md-icon>remove_red_eye</md-icon>
+                  </a></td>
+                </tr>
+                
+                </tbody>
+              </table>
+              </section>
+            </md-card-content>
+          </md-card>
+    
+</div>

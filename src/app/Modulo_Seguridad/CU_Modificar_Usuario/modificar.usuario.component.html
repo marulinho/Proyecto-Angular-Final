@@ -3,7 +3,7 @@
         <md-card class="page-card">
                 <md-card-title>Perfil Usuario
                         <a (click)="apretarEditarIcono()"><img src="assets/icons/editar.png"></a>
-                        <a (click)="apretarEliminarIcono()"><img src="assets/icons/delete.png"></a>
+                        <a (click)="apretarEliminarIcono()" ><img src="assets/icons/delete.png"></a>
                 </md-card-title>
                 <md-card-content>
                                 <section *ngIf="errorMessage" class="bs">
@@ -44,9 +44,9 @@
                         <label id=valor class="col-3">{{usuarioActual.cuit}}</label><br>
                 </md-card-content>
         </md-card>
-
 </div>
 
+<!--SECCION MODIFICAR USUARIO-->
 <md-card *ngIf="getEditarUsuario()" class="page-card">
         <md-card-title>Modificar Usuario</md-card-title>
         <md-card-content>
@@ -91,8 +91,6 @@
                 <md-input-container>
                         <input mdInput placeholder="Direcci&oacute;n" type="text" [(ngModel)]="direccion" name="direccion"><br>
                 </md-input-container>
-
-
         </md-card-content>
         <md-card-actions>
                 <button md-raised-button (click)="apretarModificarUsuario()">MODIFICAR</button>
@@ -101,70 +99,7 @@
         <md-card-footer></md-card-footer>
 </md-card>
 
-
-
-
-
-
-<div *ngIf="editar" class="page-content">
-        <h2 md-line>Editar Usuario</h2>
-        <form>
-                <div class="form-group row">
-                        <label for="usuario" class="col-sm-1 col-form-label">Usuario</label>
-                        <div class="col-sm-5">
-                                <input type="text" class="form-control" #usuario id="usuario" placeholder="{{usuarioActual.usuario}}">
-                        </div>
-                </div>
-
-                <div class="form-group row">
-                        <label for="nombre" class="col-sm-1 col-form-label">Nombre</label>
-                        <div class="col-sm-5">
-                                <input type="text" class="form-control" #nombre id="nombre" placeholder="{{usuarioActual.nombre}}">
-                        </div>
-                </div>
-                <div class="form-group row">
-                        <label for="apellido" class="col-sm-1 col-form-label">Apellido</label>
-                        <div class="col-sm-5">
-                                <input type="text" class="form-control" #apellido id="apellido" placeholder="{{usuarioActual.apellido}}">
-                        </div>
-                </div>
-                <div class="form-group row">
-                        <label for="domicilio" class="col-sm-1 col-form-label">Domicilio</label>
-                        <div class="col-sm-5">
-                                <input type="text" class="form-control" #domicilio id="domicilio" placeholder="{{usuarioActual.domicilio}}">
-                        </div>
-                </div>
-                <div class="form-group row ">
-                        <label for="fechaNacimiento" class="col-sm-1 col-form-label">Fecha de Nacimiento</label>
-                        <div class="col-sm-5">
-                                <input type="text" class="form-control" #fechaNac id="fechaNacimiento" placeholder="{{usuarioActual.fechaNacimiento}}">
-                        </div>
-                </div>
-                <div class="form-group row">
-                        <label for="email" class="col-sm-1 col-form-label">Email</label>
-                        <div class="col-sm-5">
-                                <input type="email" class="form-control" #email id="email" placeholder="{{usuarioActual.email}}">
-                        </div>
-                </div>
-
-                <div class="form-group row">
-                        <label for="dni" class="col-sm-1 col-form-label">DNI</label>
-                        <div class="col-sm-5">
-                                <input type="number" class="form-control" #dni id="dni" placeholder="{{usuarioActual.dni}}">
-                        </div>
-                </div>
-                <div class="form-group row">
-                        <label for="cuit" class="col-sm-1 col-form-label">CUIT</label>
-                        <div class="col-sm-5">
-                                <input type="number" class="form-control" #cuit id="cuit" placeholder="{{usuarioActual.cuit}}">
-                        </div>
-                </div>
-                <button type="button" class="btn btn-success" (click)="apretarModificar(usuario.value,nombre.value,apellido.value,domicilio.value,
-                                                  fechaNac.value,email.value,dni.value,cuit.value)">Modificar</button>
-                <button type="button" class="btn btn-danger" (click)="apretarCancelarModificacion()">Cancelar</button>
-
-        </form>
-</div>
+<
 
 <div *ngIf="cambiarContrasenia" class="page-content">
         <h2 md-line>Modificar Contrase&ntilde;a</h2>

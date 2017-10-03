@@ -60,6 +60,9 @@ import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuar
 import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.component';
 import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
 
+
+import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
+
 /**
  * Router Setting
  *
@@ -99,12 +102,220 @@ export const ROUTES: Routes = [
   { path:'login', component: IniciarSesionComponent},
   { path:'registrarse', component:RegistrarUsuarioComponent},
   { path: 'recuperarCuenta' , component: RecuperarCuentaComponent },
-  { path:'perfilUsuario', component:ModificarUsuarioComponent}
+  { path:'perfilUsuario', component:ModificarUsuarioComponent},
   
-  /*{
+  {
      path: 'dashboard',
      component: DashboardComponent
-   }*/
+   },
+   {
+     path:'homeFinca',
+     component: HomeFincaComponent
+   },
+
+
+
+
+
+   {
+    path: 'dashboard-edge',
+    component: DashboardEdgeComponent
+  },
+  {
+    path: 'component-buttons',
+    component: ComponentButtonsComponent
+  },
+  {
+    path: 'component-progress',
+    component: ComponentProgressComponent
+  },
+  {
+    path: 'component-card',
+    component: ComponentCardComponent
+  },
+  {
+    path: 'component-bootstrap',
+    component: ComponentBootstrapComponent
+  },
+  {
+    path: 'component-dialog',
+    component: ComponentDialogComponent
+  },
+  {
+    path: 'component-notifications',
+    component: ComponentNotificationsComponent
+  },
+  {
+    path: 'radio-button',
+    component: ComponentRadioButtonComponent
+  },
+  {
+    path: 'component-checkbox',
+    component: ComponentCheckboxComponent
+  },
+  {
+    path: 'component-chips',
+    component: ComponentChipsComponent
+  },
+  {
+    path: 'component-date-picker',
+    component: ComponentDatePickerComponent
+  },
+  {
+    path: 'component-list',
+    component: ComponentListComponent
+  },
+  {
+    path: 'component-media-player',
+    component: ComponentMediaPlayerComponent
+  },
+  {
+    path: 'component-menu',
+    component: ComponentMenuComponent
+  },
+  {
+    path: 'component-grid-list',
+    component: ComponentGridListComponent
+  },
+  {
+    path: 'component-select',
+    component: ComponentSelectComponent
+  },
+  {
+    path: 'component-slide-toggle',
+    component: ComponentSlideToggleComponent
+  },
+  {
+    path: 'component-slider',
+    component: ComponentSliderComponent
+  },
+  {
+    path: 'component-tabs',
+    component: ComponentTabsComponent
+  },
+  {
+    path: 'component-text-editor',
+    component: ComponentTextEditorComponent
+  },
+  {
+    path: 'component-toolbar',
+    component: ComponentToolbarComponent
+  },
+  {
+    path: 'component-tooltip',
+    component: ComponentTooltipComponent
+  },
+  {
+    path: 'component-radio-button',
+    component: ComponentRadioButtonComponent
+  },
+  {
+    path: 'icon-material',
+    component: IconMaterialComponent
+  },
+  {
+    path: 'icon-weather',
+    component: IconWeatherComponent
+  },
+  {
+    path: 'icon-fontawesome',
+    component: IconFontawesomeComponent
+  },
+  {
+    path: 'maps-google',
+    component: MapsGoogleComponent
+  },
+
+  {
+    path: 'forms-validation',
+    component: FormsValidationComponent
+  },
+  {
+    path: 'forms-wizard',
+    component: FormsWizardComponent
+  },
+  {
+    path: 'forms-autocomplete',
+    component: FormsAutocompleteComponent
+  },
+  {
+    path: 'forms-upload',
+    component: FormsUploadComponent
+  },
+  {
+    path: 'forms-tree',
+    component: FormsTreeComponent
+  },
+  {
+    path: 'tables-basic',
+    component: TablesBasicComponent
+  },
+  {
+    path: 'tables-dynamic',
+    component: TablesDynamicComponent
+  },
+  {
+    path: 'charts-chartjs',
+    component: ChartsChartjsComponent
+  },
+  {
+    path: 'charts-peity',
+    component: ChartsPeityComponent
+  },
+  {
+    path: 'widgets',
+    component: WidgetsComponent
+  },
+  {
+    path: 'layout-flex',
+    component: LayoutFlexComponent
+  },
+  {
+    path: 'layout-tabs',
+    component: LayoutTabsComponent
+  },
+  {
+    path: 'layout-edges',
+    component: LayoutEdgesComponent
+  },
+  {
+    path: 'layout-cards',
+    component: LayoutCardsComponent
+  },
+  {
+    path: 'layout-fullscreen',
+    component: LayoutFullscreenComponent
+  },
+  {
+    path: 'pages-error',
+    component: PagesErrorComponent
+  },
+  {
+    path: 'pages-lockscreen',
+    component: PagesLockscreenComponent
+  },
+  {
+    path: 'pages-invoice',
+    component: PagesInvoiceComponent
+  },
+  {
+    path: 'pages-notfound',
+    component: PagesNotfoundComponent
+  },
+
+
+  {
+    path: 'apps-calendar',
+    component: AppsCalendarComponent
+  },
+  {
+    path: 'apps-explorer',
+    component: AppsExplorerComponent
+  },
+  {
+    path: 'apps-mail',
+    component: AppsMailComponent
+  }
    
 
   

@@ -89,6 +89,10 @@ import { RegistrarUsuarioService } from './Modulo_Seguridad/CU_Registrar_Usuario
 import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
 import { RecuperarCuentaService } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.service';
 
+import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
+import { HomeFincaService } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.service';
+
+
 
 /**
  * Root Module
@@ -161,7 +165,9 @@ import { RecuperarCuentaService } from './Modulo_Seguridad/CU_Recuperar_Cuenta/r
     IniciarSesionComponent,
     ModificarUsuarioComponent,
     RegistrarUsuarioComponent,
-    RecuperarCuentaComponent
+    RecuperarCuentaComponent,
+
+    HomeFincaComponent
     
   ],
   imports: [
@@ -205,7 +211,9 @@ import { RecuperarCuentaService } from './Modulo_Seguridad/CU_Recuperar_Cuenta/r
     IniciarSesionService,
     ModificarUsuarioService,
     RegistrarUsuarioService,
-    RecuperarCuentaService
+    RecuperarCuentaService,
+
+    HomeFincaService
     
   ],
   entryComponents: [

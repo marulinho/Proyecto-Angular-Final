@@ -1,10 +1,18 @@
 export class SearchMock {
   static items = [
+    
     {
-      name: 'dashboard',
-      title: 'Dashboard',
+      name: 'perfil',
+      title: 'Perfil',
+      faIcon: 'fa-user',
+      link: '/perfilUsuario/'
+    },
+
+    {
+      name: 'finca',
+      title: 'Finca',
       faIcon: 'fa-tachometer',
-      link: '/dashboard'
+      link: '/finca'
     },
     {
       name: 'buttons',

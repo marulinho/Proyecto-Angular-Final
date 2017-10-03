@@ -1,0 +1,69 @@
+<h1>Solicitar Creaci&oacute;n Finca</h1>
+
+<div *ngIf="divDatosFinca" class="container">
+    <h3>Datos de la Finca</h3>
+    <form>
+
+        <div>
+
+            <label>Nombre</label><br>
+            <input type="text" name="nombre" #nombreFinca maxlength="20" placeholder="Ingrese Nombre de Finca" required="Debe ingresar un nombre"><br>
+
+            <label>Direcci&oacute;n Legal</label><br>
+            <input type="text" name="dir" #dirLegalFinca maxlength="40" placeholder="Ingrese Direcci&oacute; Legal" required="Debe ingresar una direcci&oacute;n"><br>
+
+            <label>Ubicaci&oacute;n</label><br>
+            <input type="text" name="ubicacion" #ubicacionFinca maxlength="60" placeholder="Ingrese Ubicaci&oacute;n" required="Debe ingresar una ubicaci&oacute;n"><br>
+
+            <label>Tama&ntilde;o</label><br>
+            <input type="number" name="tamanio" #tamanioFinca maxlength="10" placeholder="Ingrese Tama&ntilde;o" required="Debe ingresar un tama&ntilde;o"><br>
+
+            <button class="solicitar" (click)="apretarSolicitar(nombreFinca.value,dirLegalFinca.value,ubicacionFinca.value,tamanioFinca.value)">Solicitar</button>
+            <button class="cancelar" (click)="apretarCancelar()">Cancelar</button>
+
+        </div>
+
+    </form>
+
+</div>
+<div *ngIf="divDatosProveedor" class="container">
+
+    <h3>Seleccionar Proveedor de Informaci&oacute;n externa</h3>
+
+    <form>
+        <label>Proveedor Informaci&oacute;n</label>
+        <select placeholder="Seleccionar Proveedor" #seleccionado [(ngModel)]="selectedValue">
+                <option *ngFor="let proveedor of proveedoresInformacion" [value]="proveedor.nombreProveedor">
+                  {{proveedor.nombreProveedor}}
+                </option>
+        </select>
+
+        <button class="solicitar" data-toggle="modal" data-target="#seleccionProveedorModal" 
+            (click)="apretarSeleccionar(seleccionado.value)"
+        >Seleccionar</button>
+        <button class="cancelar" (click)="apretarCancelar()">Cancelar</button>
+
+    </form>
+
+</div>
+
+<!-- Modal Creacion Finca-->
+<div class="modal fade" id="seleccionProveedorModal" tabindex="-1" role="dialog" aria-labelledby="seleccionProveedorLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                            <h5 class="modal-title" id="seleccionProveedorLabel">Creaci&oacute;n Finca</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                            <label>La finca ha sido creada exitosamente</label>
+                    </div>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal" 
+                                (click)="apretarAceptar()">Aceptar</button>
+                    </div>
+            </div>
+    </div>
+</div>

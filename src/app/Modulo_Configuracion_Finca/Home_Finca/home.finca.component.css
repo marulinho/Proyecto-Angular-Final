@@ -1,0 +1,33 @@
+table{
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 100px;
+}
+td,th{
+    text-align: left;
+    padding: 10px;
+    cursor: pointer;
+    
+}
+th{
+    background-color:#4CAF50; 
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+label{
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+
+}
+select{
+    padding: 5px;
+    margin-bottom: 20px;
+    width: 30%;
+    border-radius: 5px;
+    border: 1px solid;
+    border-color: #D8D1D0;
+}

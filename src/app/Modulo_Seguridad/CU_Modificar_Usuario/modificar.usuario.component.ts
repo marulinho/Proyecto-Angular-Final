@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModificarUsuarioService, Usuario} from './modificar.usuario.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-//import { CerrarSesionService } from '../CU_Cerrar_Sesion/cerrar.sesion.service';
+import { AppService } from '../../app.service';
+import { MdDialog } from '@angular/material';
+import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialog-example.component';
+
+
 
 @Component({
     selector:'app-modificar-usuario',
@@ -15,12 +19,12 @@ export class ModificarUsuarioComponent implements OnInit{
     
     //ATRIBUTOS PERFIL USUARIO
     perfilUsuarioSeleccionado:Boolean;
+    usuarioActual: Usuario;
 
     //ATRIBUTOS MODIFICAR USUARIO
     errorMessage:string="";
     editarUsuarioSeleccionado:Boolean;
     cambiarContrasenia:Boolean;
-    usuarioActual: Usuario;
 
     nombre:string;
     apellido:string;
@@ -32,9 +36,17 @@ export class ModificarUsuarioComponent implements OnInit{
     usuario:string;
     password1:string;
     password2:string;
+
+    //ATRIBUTOS ELIMINAR USUARIO
+    selectedOption: string;
+    
     
     constructor(private router:Router,
-                private modificarUsuarioService:ModificarUsuarioService){
+                private modificarUsuarioService:ModificarUsuarioService,
+                private appService:AppService,
+                private dialog: MdDialog){
+    appService.getState().topnavTitle = 'Perfil Usuario';
+                    
         
         
     }
@@ -72,16 +84,7 @@ export class ModificarUsuarioComponent implements OnInit{
         this.perfilUsuarioSeleccionado=false;
         console.log("perfil: "+ this.perfilUsuarioSeleccionado);
         this.editarUsuarioSeleccionado=true;
-        
-        /*this.modificarUsuarioService.modificarUsuario(this.usuario,this.nombre,this.apellido,this.direccion,
-                                                      this.fechaNacimiento,this.email,this.dni,this.cuit)
-        .then(
-            response=>{
-                console.log("modificacion exitosa");
-                this.usuarioActual=response;
-            }
-        )
-          */                                              
+                                                    
         
     }
 
@@ -98,9 +101,10 @@ export class ModificarUsuarioComponent implements OnInit{
             response=>{
             console.log("modificacion exitosa");
             this.usuarioActual=response;
-            this.router.navigate(['/home/']);
             this.perfilUsuarioSeleccionado=true;
             this.editarUsuarioSeleccionado=false;
+            this.router.navigate(['/perfilUsuario/']);
+            
             }
         )
         .catch(
@@ -113,61 +117,38 @@ export class ModificarUsuarioComponent implements OnInit{
     apretarSalir(){
         this.perfilUsuarioSeleccionado=true;
         this.editarUsuarioSeleccionado=false;
-        this.errorMessage="";
+        this.errorMessage=""
+        this.router.navigate(['/perfilUsuario/']);
       }
-
-
-    apretarModificar(usuario:string,nombre:string,apellido:string,domicilio:string,
-        fechaNac:string,email:string,dni:number,cuit:number){
-        console.log("estamos aca");
-        if(usuario==''){
-            console.log("el usuario es null");
-            usuario=this.usuarioActual.usuario;
-        }
-        if(email==''){
-            console.log("el email es null");
-            email=this.usuarioActual.email;
-        }
-        if(nombre==''){
-            console.log("el nombre es null");
-            nombre=this.usuarioActual.nombre;
-        }
-        if(apellido==''){
-            console.log("el apellido es null");
-            apellido=this.usuarioActual.apellido;
-        }
-        if(domicilio==''){
-            console.log("el domicilio es null");
-            domicilio='';
-        }
-        if(fechaNac==''){
-            console.log("la fechaNac es null");
-            fechaNac='';
-        }
-        //tengo que verificar si el campo del dni y cuit es null
-        
-        
-        this.modificarUsuarioService.modificarUsuario(usuario,nombre,apellido,domicilio,fechaNac,email,dni,cuit)
-        .then(
-            response=>this.editarUsuarioSeleccionado=false
-        );
-        
-    }
-    
-    apretarCancelarModificacion(){
-        this.editarUsuarioSeleccionado=false;
-        this.cambiarContrasenia=false;
-    }
-
 
     //TERMINA MODIFICAR USUARIO
 
-    apretarEliminar(){
+    //EMPEZAR ELIMINAR USUARIO
+    
+    apretarEliminarIcono(){
+        console.log("apretar eliminar");
         this.modificarUsuarioService.eliminarUsuario()
         .then(
-            response=>this.router.navigate(['/'])
+            response=>{
+                console.log("eliminacion exitosa");
+                this.router.navigate(['/login/']);
+            }
+        )
+        .catch(
+            error=>{
+                this.errorMessage=error.error_description;
+            }
         );
+        
     }
+
+    openDialog() {
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.afterClosed().subscribe(result => {
+          this.selectedOption = result;
+        });
+      }
+
 
     apretarCambiarContrasenia(){
         this.editarUsuarioSeleccionado=false;

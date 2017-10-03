@@ -3,11 +3,19 @@
  */
 export class MenuMock {
   static root = [
+       
     {
-      name: 'dashboard',
-      title: 'Dashboard',
+      name: 'perfil',
+      title: 'Perfil',
+      faIcon: 'fa-user',
+      link: '/perfilUsuario/'
+    },
+
+    {
+      name: 'finca',
+      title: 'Finca',
       faIcon: 'fa-tachometer',
-      link: '/dashboard'
+      link: '/homeFinca/'
     },
     {
       name: 'dashboard-edge',

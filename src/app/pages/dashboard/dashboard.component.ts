@@ -11,7 +11,7 @@ import ChartData = Chart.ChartData;
     './dashboard.component.scss'
   ]
 })
-export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   chartMockLength = 20;
   clusterLoadDataL0 = this.createChartDataArray(this.chartMockLength, true);
@@ -118,12 +118,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.appService.getState().pageFooter = false;
   }
 
-  ngAfterViewInit() {
-    if (!this.appService.getState().initial) {
-      this.dialog.open(DialogThemeComponent);
-      this.appService.getState().initial = true;
-    }
-  }
+
 
   changeChartData() {
     this.clusterLoadDataL0.shift();
