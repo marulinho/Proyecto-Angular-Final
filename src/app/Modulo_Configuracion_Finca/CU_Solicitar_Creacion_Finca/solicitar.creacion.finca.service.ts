@@ -11,7 +11,7 @@ export class SolicitarCreacionFincaService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  solicitarCreacion(nombreFinca: string, dirFinca: string, ubicacionFinca:string, tamFinca:number): Promise<Finca> {
+  solicitarCreacion(nombreFinca: string, dirFinca: string, ubicacionFinca:string, tamFinca:number): Promise<FincaCreada> {
     const data = {
       'nombreFinca': nombreFinca,
       'direccionLegal': dirFinca,
@@ -22,7 +22,7 @@ export class SolicitarCreacionFincaService extends RestBaseService{
     return this.http.put(SolicitarCreacionFincaService.serverUrl +this.crearFincaUrl, JSON.stringify(data), this.getRestHeader())
       .toPromise()
       .then(response => {
-        return response.json() as Finca;
+        return response.json() as FincaCreada;
       })
       .catch(this.handleError);
   }
@@ -51,7 +51,7 @@ export class SolicitarCreacionFincaService extends RestBaseService{
 
 }
 
-export interface Finca {
+export interface FincaCreada {
   idFinca;
   nombreFinca: string;
   direccionLegal: string;

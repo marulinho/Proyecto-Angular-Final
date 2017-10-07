@@ -1,6 +1,6 @@
-<h1 md-dialog-title>Dialog</h1>
-<div md-dialog-content>What would you like to do?</div>
+<h1 class="cabecera" md-dialog-title>{{title}}</h1>
+<div class=" detalle" md-dialog-content>{{description}}</div>
 <div md-dialog-actions>
-  <button md-button (click)="dialogRef.close('Option 1')">Option 1</button>
-  <button md-button (click)="dialogRef.close('Option 2')">Option 2</button>
+  <button class="example-md-buttons" md-raised-button color="primary" (click)="dialogRef.close('Aceptar')">{{option1}}</button>
+  <button class="example-md-buttons" md-raised-button color="warn" (click)="dialogRef.close('Cancelar')">{{option2}}</button>
 </div>

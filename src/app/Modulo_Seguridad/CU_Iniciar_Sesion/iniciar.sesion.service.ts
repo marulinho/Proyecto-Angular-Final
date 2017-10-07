@@ -13,7 +13,7 @@ export class IniciarSesionService extends RestBaseService{
     const data = {
       'usuario': username,
       'contrasenia': password,
-      //'tipoDispositivo':
+      'idTipoSesion':1
     };
 
     return this.http.post(IniciarSesionService.serverUrl +this.loginUrl, JSON.stringify(data), this.getRestHeader())
@@ -29,14 +29,9 @@ export class IniciarSesionService extends RestBaseService{
 }
 
 export interface Usuario {
-  apellido:string;
-  cuit:number;
-  usuario: string;
-  dni:number;
-  nombre:string;
-  email:string;
-  docimicilio:string;
-  fechaNacimiento;
+  resultado:boolean;
+  datos_operacion;
+  
 }
 
 

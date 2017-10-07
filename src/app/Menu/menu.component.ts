@@ -43,7 +43,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.onResize();    
-    this.router.navigate(['/perfilUsuario']);
+    //this.router.navigate(['/perfilUsuario']);
   }
 
 

@@ -45,6 +45,13 @@
               <small>Datos Personales</small>
             </h3>
             <p>Los campos con (*) son obligatorios.</p>
+            <section *ngIf="errorMessage" class="bs">
+              <div class="bd-example" data-example-id="">
+                <div class="alert alert-danger" role="alert">
+                  <strong>{{errorMessage}}</strong>
+                </div>
+              </div><br>
+            </section>
             <md-input-container>
               <input mdInput placeholder="Nombre" type="text" [(ngModel)]="nombre" name="nombre" required><br>
             </md-input-container>
@@ -58,19 +65,19 @@
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Fecha Nacimiento" type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento"><br>
+                <input mdInput placeholder="Fecha Nacimiento" type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" requerid><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="DNI" type="number" [(ngModel)]="dni" name="dni" ><br>
+                <input mdInput placeholder="DNI" type="number" [(ngModel)]="dni" name="dni" requerid><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="CUIT" type="number" [(ngModel)]="cuit" name="cuit" ><br>
+                <input mdInput placeholder="CUIT" type="number" [(ngModel)]="cuit" name="cuit" requerid><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Direcci&oacute;n" type="text" [(ngModel)]="direccion" name="direccion" ><br>
+                <input mdInput placeholder="Domicilio" type="text" [(ngModel)]="domicilio" name="domicilio" requerid><br>
             </md-input-container>
 
 
@@ -82,7 +89,13 @@
               <small>Datos Usuario</small>
             </h3>
             <p>Los campos con (*) son obligatorios.</p><br>        
-            
+            <section *ngIf="errorMessage" class="bs">
+              <div class="bd-example" data-example-id="">
+                <div class="alert alert-danger" role="alert">
+                  <strong>{{errorMessage}}</strong>
+                </div>
+              </div><br>
+            </section>
             <md-input-container>  
               <input mdInput placeholder="Usuario" type="text" [(ngModel)]="usuario" name="usuario" required>
             </md-input-container>
@@ -122,7 +135,7 @@
     </md-card-content>
     <md-card-actions>
       <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-      <button *ngIf="selectIndex <=1" md-raised-button [disabled]="selectIndex >= 2" (click)="selectIndex = selectIndex + 1">NEXT</button>
+      <button *ngIf="selectIndex <=1" md-raised-button [disabled]="selectIndex >= 2" (click)="apretarNextRegistrar()">NEXT</button>
       <button *ngIf="selectIndex == 2" md-raised-button (click)="apretarRegistrarUsuario()">REGISTRAR</button>
       <button md-raised-button (click)="apretarSalir()">SALIR</button>
     </md-card-actions>
@@ -191,7 +204,7 @@
       </md-card-content>
       <md-card-actions>
         <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-        <button *ngIf="selectIndex <1" md-raised-button [disabled]="selectIndex >= 2" (click)="apretarNext()">NEXT</button>
+        <button *ngIf="selectIndex <1" md-raised-button [disabled]="selectIndex >= 2" (click)="apretarNextRecuperar()">NEXT</button>
         <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarRecuperarCuenta()">RECUPERAR</button>
         <button md-raised-button (click)="apretarSalir()">SALIR</button>
       </md-card-actions>

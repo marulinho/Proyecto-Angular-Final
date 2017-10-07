@@ -54,14 +54,14 @@ import { AppsMailComponent } from './pages/apps-mail/apps-mail.component';
 import { DashboardEdgeComponent } from './pages/dashboard-edge/dashboard-edge.component';
 import { AppComponent } from './app.component';
 
-import { MenuComponent } from './Menu/menu.component';
 import { IniciarSesionComponent } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.component';
 import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.component';
 import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.component';
 import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
 
-
 import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
+import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
+
 
 /**
  * Router Setting
@@ -98,7 +98,7 @@ export const ROUTES: Routes = [
     pathMatch: 'full'
   },
 
-  { path:'home' , component: MenuComponent},
+  //MODULO SEGURIDAD
   { path:'login', component: IniciarSesionComponent},
   { path:'registrarse', component:RegistrarUsuarioComponent},
   { path: 'recuperarCuenta' , component: RecuperarCuentaComponent },
@@ -108,10 +108,10 @@ export const ROUTES: Routes = [
      path: 'dashboard',
      component: DashboardComponent
    },
-   {
-     path:'homeFinca',
-     component: HomeFincaComponent
-   },
+
+   //MODULO CONFIGURACION FINCA
+   { path:'homeFinca',component: HomeFincaComponent },
+   { path:'crearFinca', component: SolicitarCreacionFincaComponent },
 
 
 

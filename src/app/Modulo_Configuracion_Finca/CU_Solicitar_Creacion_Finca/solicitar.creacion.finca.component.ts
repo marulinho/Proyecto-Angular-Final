@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SolicitarCreacionFincaService, Finca, ProveedorInformacion } from './solicitar.creacion.finca.service';
+import { SolicitarCreacionFincaService, FincaCreada, ProveedorInformacion } from './solicitar.creacion.finca.service';
 import { LoginComponent } from '../../Modulo_Seguridad/CU_Iniciar_Sesion/login.component';
 
 @Component({
@@ -11,7 +11,7 @@ import { LoginComponent } from '../../Modulo_Seguridad/CU_Iniciar_Sesion/login.c
 })
 
 export class SolicitarCreacionFincaComponent implements OnInit{
-    fincaCreada: Finca;
+    fincaCreada: FincaCreada;
     proveedoresInformacion:ProveedorInformacion[];
     divDatosProveedor:Boolean;
     divDatosFinca:Boolean;

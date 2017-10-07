@@ -108,15 +108,15 @@
     <img class="topnav-avatar" src="assets/img/avatar.jpg">
   </a>
   <md-menu #topnavUserMenu="mdMenu">
-    <button md-menu-item (click)="apretamosProfile()">
+    <button md-menu-item (click)="apretamosPerfil()">
       <md-icon>person</md-icon>
-      <span>Profile</span></button>
+      <span>Perfil</span></button>
     <button md-menu-item>
       <md-icon>settings</md-icon>
       <span>Setting</span></button>
-    <button md-menu-item>
+    <button md-menu-item (click)="apretamosCerrarSesion()">
       <md-icon>lock_outline</md-icon>
-      <span>Lock</span></button>
+      <span>Cerrar Sesion</span></button>
   </md-menu>
 
 </md-toolbar>

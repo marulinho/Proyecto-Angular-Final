@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AppService } from '../../app.service';
 import { IniciarSesionService,Usuario } from './iniciar.sesion.service';
 import { RegistrarUsuarioService } from '../CU_Registrar_Usuario/registrar.usuario.service';
-import { RecuperarCuentaService } from '../CU_Recuperar_Cuenta/recuperar.cuenta.service';
+import { RecuperarCuentaService,ResultadoRecuperacion } from '../CU_Recuperar_Cuenta/recuperar.cuenta.service';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
   apellido:string;
   dni:number;
   cuit:number;
-  direccion:string;
+  domicilio:string;
   fechaNacimiento;
   email:string;
   usuario:string;
@@ -41,6 +41,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
   //ATRIBUTOS RECUPERAR CUENTA
   recuperarSeleccionado:boolean;
   codigo:string;
+  usuarioRecuperado:ResultadoRecuperacion;
   
 
   constructor(private appService: AppService, 
@@ -73,7 +74,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
       .then(
         response =>{
           this.errorMessage="";
-          this.usuarioLogeado=response;
+          this.usuarioLogeado=response.datos_operacion;
           this.inicioSesion=true;
           this.router.navigate(['/dashboard/']);
         } 
@@ -102,7 +103,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
     this.apellido="";
     this.dni=null;
     this.cuit=null;
-    this.direccion="";
+    this.domicilio="";
     this.fechaNacimiento=null;
     this.email="";
     this.usuario="";
@@ -138,27 +139,21 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
     this.errorMessage="";
   }
 
-  apretarRegistrarUsuario(){
-
-    if (this.password1 != this.password2) {
-      this.errorMessage.concat("Las contrase&ntilde;as deben coincidir");
-    }
-    else {
-      this.registrarUsuario.registrarUsuario(this.nombre, this.apellido, this.dni, this.cuit,
-        this.fechaNacimiento, this.direccion, this.email, this.usuario, this.password1)
-        .then(
-          response=>{
-            this.exitoRegistracion=response.resultado;
-            if(this.exitoRegistracion==true){
-              this.iniciarSesionSeleccionado=true;
-              this.registrarSeleccionado=false;
-              this.errorMessage="";
-            } 
-          })
-        .catch(error => this.errorMessage = error.error_description);
-    }
-    
-   
+  apretarRegistrarUsuario() {
+    this.registrarUsuario.registrarUsuario(this.nombre, this.apellido, this.dni, this.cuit,
+      this.fechaNacimiento, this.domicilio, this.email, this.usuario, this.password1)
+      .then(
+      response => {
+          this.iniciarSesionSeleccionado = true;
+          this.registrarSeleccionado = false;
+          this.errorMessage = "";
+        }
+      )
+      .catch(
+        error => {
+          this.errorMessage = error.error_description;
+        }
+      );
   }
 
   //TERMINA REGISTRAR USUARIO
@@ -183,30 +178,64 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
     return this.recuperarSeleccionado;
   }
 
-  apretarNext(){
-    console.log("verificamos el email ");
-    if(this.email.length==0){
-      this.errorMessage="Debe completar todos los campos";
-    }
-    else{
-      this.recuperarCuenta.recuperarCuenta(this.email)
-      .then(
-        response=>{
-          this.usuario=response.usuario;
-          this.errorMessage="";
-          this.selectIndex += 1; 
-
-        }
-      )
-      .catch(
-        error=>{
-          this.errorMessage=error.error_description;
-        }
-      );
-    }
-    
+  apretarNextRecuperar(){
+      console.log("verificamos el email ");
+      if(this.email.length==0){
+        this.errorMessage="Debe completar todos los campos (*).";
+      }
+      else{
+        this.recuperarCuenta.recuperarCuenta(this.email)
+        .then(
+          response=>{
+            this.usuarioRecuperado=response.detalle_operacion;
+            this.errorMessage="";
+            this.selectIndex += 1; 
+  
+          }
+        )
+        .catch(
+          error=>{
+            this.errorMessage=error.error_description;
+          }
+        );
+      }
   }
 
+  apretarNextRegistrar(){
+    if(this.selectIndex==0){
+      if(this.nombre=="" || this.nombre==null ||
+        this.apellido=="" || this.apellido==null ||
+        this.email=="" || this.email==null ||
+        this.dni==null || this.cuit==null ||
+        this.fechaNacimiento==null ||
+        this.domicilio=="" || this.domicilio==null){
+          this.errorMessage="Debe completar todos los campos obligatorios (*)."
+        }
+      else{
+        this.selectIndex= this.selectIndex + 1;
+        this.errorMessage="";
+      }
+    }
+    else{
+      if(this.selectIndex==1){
+        if(this.usuario=="" || this.usuario==null ||
+          this.password1=="" || this.password1==null ||
+          this.password2==""  || this.password2==null){
+            this.errorMessage="Debe completar todos los campos obligatorios (*).";
+        }
+        else{
+          if (this.password1 != this.password2) {
+            this.errorMessage=("Las contraseñas deben coincidir.");
+          }
+          else{
+            this.errorMessage="";
+            this.selectIndex= this.selectIndex+1;
+          }
+        }
+     }
+    }
+}
+    
   apretarRecuperarCuenta(){
     console.log("apretamos recuperar cuenta");
     if(this.password1.length==0 || this.password2.length==0){
@@ -214,13 +243,14 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
     }
     else{
       if(this.password1!=this.password2){
-        this.errorMessage="Las contrase&ntilde;as deben coincidir";
+        this.errorMessage="Las contraseñas deben coincidir";
       }
       else{
         this.recuperarCuenta.cambiarContraseniaRecuperarCuenta(this.usuario,this.codigo,this.password1)
         .then(
           response=>{
             console.log("cuenta recuperada");
+            this.errorMessage="";
             this.iniciarSesionSeleccionado=true;
             this.recuperarSeleccionado=false;
             this.registrarSeleccionado=false;
@@ -234,14 +264,12 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
         );
       }
     }
-
-    
     
   }
 
   //TERMINA RECUPERAR CUENTA
-
+}
  
 
 
-}
+

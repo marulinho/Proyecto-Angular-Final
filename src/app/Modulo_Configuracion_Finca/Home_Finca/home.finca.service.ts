@@ -12,10 +12,10 @@ export class HomeFincaService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  obtenerFincasPendientes():Promise<Finca[]> {
+  obtenerFincasPendientes():Promise<Finca> {
     return this.http.get(HomeFincaService.serverUrl + this.fincasPendientesUrl, this.getRestHeader())
     .toPromise()
-    .then(response => {return response.json() as Finca[];})
+    .then(response => {return response.json() as Finca;})
     .catch(this.handleError);
   }
   
@@ -26,10 +26,10 @@ export class HomeFincaService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  obtenerFincasEncargado():Promise<Finca[]>{
+  obtenerFincasEncargado():Promise<Finca>{
     return this.http.get(HomeFincaService.serverUrl + this.fincasEncargadoUrl, this.getRestHeader())
     .toPromise()
-    .then(response => {return response.json() as Finca[];})
+    .then(response => {return response.json() as Finca;})
     .catch(this.handleError);
   }
 
@@ -38,17 +38,17 @@ export class HomeFincaService extends RestBaseService{
 }
 
 export interface Finca {
-  nombre:string;
-  ubicacion:string;
-  tamanio: number;
-  direccionLegal:string;
+  resultado:boolean;
+  detalle_operacion;
   
 }
 
 export interface FincaUsuario {
-  nombreFinca:string;
+  resultado:boolean;
+  detalle_operacion;
+  /*nombreFinca:string;
   nombreRol:string;
-  idFinca:number;
+  idFinca:number;*/
   
 }
 

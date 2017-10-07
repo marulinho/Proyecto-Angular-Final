@@ -6,6 +6,7 @@ import { SearchMock } from './shared/mockdata/search';
 import { MdDialog, MdSnackBar } from '@angular/material';
 import { DialogThemeComponent } from './shared/dialog/dialog-theme/dialog-theme.component';
 import { TranslateService } from 'ng2-translate';
+import { FinalizarSesionService } from '../app/Modulo_Seguridad/CU_Finalizar_Sesion/finalizar.sesion.service';
 
 @Component({
   selector: 'lk-app',
@@ -25,11 +26,14 @@ export class AppComponent implements OnInit {
   date: Date;
   snackBarRef: any;
 
+  errroMessage:string="";
+
   constructor(private appService: AppService,
               private dialog: MdDialog,
               private translate: TranslateService,
               private router: Router,
-              private snackBar: MdSnackBar) {
+              private snackBar: MdSnackBar,
+              private finalizarSesionService:FinalizarSesionService ) {
 
     // Change your page title here
     //appService.getState().topnavTitle = 'Loading';
@@ -159,9 +163,23 @@ export class AppComponent implements OnInit {
     let dialogRef = this.dialog.open(DialogThemeComponent);
   }
 
-  apretamosProfile(){
-    console.log("apretamos profile");
+  //LLAMADAS
+  
+  apretamosPerfil(){
     this.router.navigate(['/perfilUsuario']);
   }
 
+  apretamosCerrarSesion(){
+    this.finalizarSesionService.cerrarSesion()
+      .then(
+        response=>{
+          this.router.navigate(['/login/']);
+        }
+      )
+      .catch(
+        error=>{
+          this.errroMessage=error.error_description;
+        }
+      );
+  }
 }

@@ -23,29 +23,29 @@ export class ModificarUsuarioService extends RestBaseService{
   }
 
   modificarUsuario(usuario:string,nombre:string,apellido:string,domicilio:string,
-    fechaNac:string,email:string,dni:number,cuit:number):Promise<Usuario> {
-    const data = {
-      'usuario': usuario,
-      'email':email,
-      'nombre': nombre,
-      'apellido':apellido,
-      'dni':dni,
-      'cuit':cuit,
-      'domicilio':domicilio,
-      'fechaNacimiento':fechaNac,
-      'imagenUsuario':""
-      
-    };
+      fechaNac:string,email:string,dni:number,cuit:number):Promise<Usuario> {
+          const data = {
+            'usuario': usuario,
+            'email':email,
+            'nombre': nombre,
+            'apellido':apellido,
+            'dni':dni,
+            'cuit':cuit,
+            'domicilio':domicilio,
+            'fechaNacimiento':fechaNac,
+            'imagenUsuario':""
+            
+          };
 
-    return this.http.post(ModificarUsuarioService.serverUrl +this.modificarUrl, JSON.stringify(data), this.getRestHeader())
-      .toPromise()
-      .then(response => {
-        let estado = response.status;
-        return response.json() as Usuario;
-        
-        
-      })
-      .catch(this.handleError);
+          return this.http.post(ModificarUsuarioService.serverUrl +this.modificarUrl, JSON.stringify(data), this.getRestHeader())
+            .toPromise()
+            .then(response => {
+              let estado = response.status;
+              return response.json() as Usuario;
+              
+              
+            })
+            .catch(this.handleError);
   }
 
   eliminarUsuario(): Promise<Boolean> {
@@ -79,14 +79,9 @@ export class ModificarUsuarioService extends RestBaseService{
 
 
 export interface Usuario {
-  usuario:string;
-  nombre:string;
-  apellido:string;
-  dni:number;
-  cuit:number;
-  email:string;
-  domicilio:string;
-  fechaNacimiento;
+  resultado;
+  datos_operacion;
 
+  
 }
 

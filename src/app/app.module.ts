@@ -78,8 +78,8 @@ import { DialogThemeComponent } from './shared/dialog/dialog-theme/dialog-theme.
 import { TranslateStaticLoader, TranslateLoader, TranslateModule } from 'ng2-translate';
 import { QuillEditorComponent } from './shared/editor/quill-editor.component';
 
-import { MenuComponent } from './Menu/menu.component';
 
+//IMPORTS MODULO SEGURIDAD
 import { IniciarSesionComponent } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.component';
 import { IniciarSesionService } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.service';
 import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.component';
@@ -88,9 +88,15 @@ import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuar
 import { RegistrarUsuarioService } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.service';
 import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
 import { RecuperarCuentaService } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.service';
+import { FinalizarSesionService } from './Modulo_Seguridad/CU_Finalizar_Sesion/finalizar.sesion.service';
 
+
+//IMPORTS MODULOS CONFIGURACION FINCA
 import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
 import { HomeFincaService } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.service';
+import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
+import { SolicitarCreacionFincaService } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.service';
+
 
 
 
@@ -160,14 +166,17 @@ import { HomeFincaService } from './Modulo_Configuracion_Finca/Home_Finca/home.f
     AppsMailComponent,
     QuillEditorComponent,
 
-    MenuComponent,
+    //COMPONENTS MODULO SEGURIDAD
 
     IniciarSesionComponent,
     ModificarUsuarioComponent,
     RegistrarUsuarioComponent,
     RecuperarCuentaComponent,
 
-    HomeFincaComponent
+
+    //COMPONENTS MODULO CONFIGURACION FINCA
+    HomeFincaComponent,
+    SolicitarCreacionFincaComponent
     
   ],
   imports: [
@@ -207,13 +216,18 @@ import { HomeFincaService } from './Modulo_Configuracion_Finca/Home_Finca/home.f
   ],
   providers: [
     // Global service (Global state)
+    
+    //SERVICES MODULO SEGURIDAD
     AppService,
     IniciarSesionService,
     ModificarUsuarioService,
     RegistrarUsuarioService,
     RecuperarCuentaService,
+    FinalizarSesionService,
 
-    HomeFincaService
+    //LLAMADAS MODULO CONFIGURACION FINCA
+    HomeFincaService,
+    SolicitarCreacionFincaService
     
   ],
   entryComponents: [

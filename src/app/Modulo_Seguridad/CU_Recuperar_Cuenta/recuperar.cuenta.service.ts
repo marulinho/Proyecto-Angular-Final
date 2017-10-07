@@ -13,7 +13,7 @@ export class RecuperarCuentaService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  recuperarCuenta(email:string) {
+  recuperarCuenta(email:string):Promise<ResultadoRecuperacion> {
     const data = {
       'email': email
     };
@@ -21,7 +21,7 @@ export class RecuperarCuentaService extends RestBaseService{
     return this.http.post(RecuperarCuentaService.serverUrl +this.recuerparUrl, JSON.stringify(data), this.getRestHeader())
       .toPromise()
       .then(response => {
-        return response.json();
+        return response.json() as ResultadoRecuperacion;
       })
       .catch(this.handleError);
   }
@@ -42,13 +42,10 @@ export class RecuperarCuentaService extends RestBaseService{
   }
 }
 
-export interface Cuenta {
-  usuario:string;
-  
-}
 
 export interface ResultadoRecuperacion{
   resultado:boolean;
+  detalle_operacion;
 }
 
 
