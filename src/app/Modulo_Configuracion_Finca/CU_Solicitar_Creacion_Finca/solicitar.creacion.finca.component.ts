@@ -11,54 +11,60 @@ import { LoginComponent } from '../../Modulo_Seguridad/CU_Iniciar_Sesion/login.c
 })
 
 export class SolicitarCreacionFincaComponent implements OnInit{
-    fincaCreada: FincaCreada;
-    proveedoresInformacion:ProveedorInformacion[];
-    divDatosProveedor:Boolean;
-    divDatosFinca:Boolean;
+    
+    errorMessage:string="";
+    selectIndex: number = 0;   
+    proveedoresInformacion = new Array;
+
     constructor(private router:Router,
                 private solicitarCreacionFincaService:SolicitarCreacionFincaService){
 
     }
 
     ngOnInit(){
-        this.divDatosFinca=true;
-        this.divDatosProveedor=false;
-        this.solicitarCreacionFincaService.obtenerProveedores()
-                                          .then(response => this.proveedoresInformacion=response);
+       this.solicitarCreacionFincaService.obtenerProveedores()
+            .then(
+                response=>{
+                    console.log("response: "+response);
+                    this.llenarProveedores(response);
+                    //this.proveedoresInformacion=response.datos_operacion;
+                    //console.log("proveedores: "+this.proveedoresInformacion);
+                    //this.proveedoresInformacion=response;
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessage=error.error_description;
+                }
+            );
+            //console.log("proveedores: "+this.proveedoresInformacion);
     }
     
-    apretarSolicitar(nombre:string, direccionLegal:string,ubicacion:string,tamanio:number){
-        console.log("estamos aca");
-        console.log("nombre: "+nombre);
-        console.log("direccionLegal: "+direccionLegal);
-        console.log("ubicacion: "+direccionLegal);
-        console.log("tamanio: "+direccionLegal);
-        //this.router.navigate(['/home']);)
-
-        this.solicitarCreacionFincaService.solicitarCreacion(nombre,direccionLegal,ubicacion,tamanio)
-                                            .then(response => this.fincaCreada=response);
-        this.divDatosFinca=false;
-        this.divDatosProveedor=true;
+    llenarProveedores(response){
+        let longitud = Object.keys(response.datos_operacion).length;
+        for(var i = 0; i<longitud; i++){
+            let valor= response['datos_operacion'][i]['nombreProveedor'];
+            this.proveedoresInformacion.push(valor);
+        }
     }
-
-    apretarCancelar(){
-        console.log("estamos aca");
-        this.router.navigate(['/homeFinca/']);
-    }
-
-    apretarSeleccionar(proveedor:string){
-        console.log(proveedor);
-        let finca=this.fincaCreada.idFinca;
-        this.solicitarCreacionFincaService.seleccionarProveedor(proveedor,finca)
-        this.divDatosFinca=false;
-        this.divDatosProveedor=false;
-                                          
-    }
-
-    apretarAceptar(){
-        this.router.navigate(['/homeFinca/']);
-    }
-
-
     
+/*    apretarCrearFinca(){
+        console.log("apretamos crear finca");
+        if(this.nombre=="" || this.direccion=="" || this.ubicacion=="" || this.tamanio==null){
+            this.errorMessageCrearFinca="Debe completar todos los campos.";
+        }
+        else{
+            this.solicitarCreacionFinca.solicitarCreacion(this.nombre,this.direccion,this.ubicacion,this.tamanio)
+            .then(
+                response=>{
+                    this.fincaCreada=response;
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageCrearFinca=error.error_description;
+                }
+            );
+        }
+    */
 }

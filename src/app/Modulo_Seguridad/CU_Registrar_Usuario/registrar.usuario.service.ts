@@ -12,7 +12,7 @@ export class RegistrarUsuarioService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  registrarUsuario(nombre:string,apellido:string,dni:number,cuit:number,
+  registrarUsuario(nombre:string,apellido:string,dni:number,cuit:string,
     fechaNac:string,domicilio:string, email:string, usuario:string,pass1:string): Promise<RespuestaRegistrar> {
     const data = {
       'nombre': nombre,
@@ -23,8 +23,8 @@ export class RegistrarUsuarioService extends RestBaseService{
       'domicilio':domicilio,
       'email':email,
       'usuario':usuario,
-      'contrasenia':pass1,
-      'imagenUsuario':''
+      'contrasenia':pass1
+      //'imagenUsuario':''
     };
 
     return this.http.put(RegistrarUsuarioService.serverUrl +this.loginUrl, JSON.stringify(data), this.getRestHeader())

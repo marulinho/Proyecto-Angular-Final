@@ -45,6 +45,7 @@ export class RecuperarCuentaService extends RestBaseService{
 
 export interface ResultadoRecuperacion{
   resultado:boolean;
+  datos_operacion;
   detalle_operacion;
 }
 

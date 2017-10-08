@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { HomeFincaService, Finca, FincaUsuario } from './home.finca.service';
-import { SolicitarCreacionFincaService,FincaCreada,ProveedorInformacion } from '../CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.service';
+import { HomeFincaService, Finca } from './home.finca.service';
+
 @Component({
     selector:'homeFinca',
     templateUrl: './home.finca.component.html',
@@ -11,16 +11,13 @@ import { SolicitarCreacionFincaService,FincaCreada,ProveedorInformacion } from '
 
 export class HomeFincaComponent implements OnInit{
     
-    
-    crearFincaSeleccionado:Boolean;
+    position = 'above';
+    tooltipCrearFinca='Crear Finca';
+    tooltipVer="Ver Finca";
 
-    //ATRIBUTOS LLAMADA FINCAS PENDIENTES
-    fincasPendientes:Finca;
-    fincasPendienteSeleccionado:Boolean;
-    errorMessageFincasPendientes:string;
 
     //ATRIBUTOS LLAMADA FINCAS USUARIO
-    fincasUsuario:FincaUsuario[];
+    fincasUsuario:Finca;
     fincasUsuarioSeleccionado:Boolean;
     rolesFincaUsuario:string[];
     errorMessageFincasUsuario:string;
@@ -31,6 +28,7 @@ export class HomeFincaComponent implements OnInit{
     errorMessageFincasEncargado:string;
 
     //ATRIBUTOS LLAMADA CREAR FINCA
+    /*crearFincaSeleccionado:Boolean;    
     errorMessageCrearFinca:string;
     selectIndex: number = 0;
     nombre:string;
@@ -39,34 +37,29 @@ export class HomeFincaComponent implements OnInit{
     tamanio:number;   
     fincaCreada : FincaCreada; 
     proveedor: string;
-    proveedoresInformacion: ProveedorInformacion[];
+    proveedoresInformacion: ProveedorInformacion[];*/
     
     
     constructor(private router:Router,
-                private homeFincaService:HomeFincaService,
-                private solicitarCreacionFinca:SolicitarCreacionFincaService){
+                private homeFincaService:HomeFincaService){
 
     }
 
     ngOnInit(){
+        this.errorMessageFincasEncargado="";        
+        this.errorMessageFincasUsuario="";
         this.fincasEncargadoSeleccionado=false;
-        this.fincasPendienteSeleccionado=false;
         this.fincasUsuarioSeleccionado=false;
-        this.crearFincaSeleccionado=false;
-        this.errorMessageFincasUsuario="";
-        this.errorMessageCrearFinca="";
-        this.errorMessageFincasPendientes="";
-        this.errorMessageFincasUsuario="";
 
         this.homeFincaService.obtenerFincasEncargado()
             .then(
                 response=>{
                     
-                    if(response.detalle_operacion=="no_hay_datos"){
+                    if(response.detalle_operacion=="No hay datos"){
                         this.errorMessageFincasEncargado="No existen fincas asociadas al usuario con el rol especificado.";
                     }
                     else{
-                        this.fincasEncargado=response.detalle_operacion;
+                        this.fincasEncargado=response.datos_operacion;
                         this.fincasEncargadoSeleccionado=true;
                     }
                 }
@@ -76,36 +69,16 @@ export class HomeFincaComponent implements OnInit{
                     this.errorMessageFincasEncargado=error.error_description;
                 }
             );
-        
-       
-        this.homeFincaService.obtenerFincasPendientes()
-            .then(
-                response=>{
-                        if(response.detalle_operacion=="no_hay_datos"){
-                            this.errorMessageFincasPendientes="No existen fincas asociadas al estado especificado.";
-                        }
-                        else{
-                            this.fincasPendientes=response.detalle_operacion;
-                            this.fincasPendienteSeleccionado=true;
-                            
-                        }
-                    }
-                )
-            .catch(
-                error=>{
-                    this.errorMessageFincasPendientes=error.error_description;
-                }
-            );
 
-            //hay que terminarlo
         this.homeFincaService.obtenerFincasUsuario()
             .then(
                     response=>{
-                        this.fincasUsuario=response;
-                        if(this.fincasUsuario.length==0){
+                        if(response.detalle_operacion=="No hay datos"){
                             this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
                         }
                         else{
+                            this.fincasUsuario=response.datos_operacion;
+                            this.obtenerRoles();
                             this.fincasUsuarioSeleccionado=true
                         }
                     }
@@ -115,18 +88,8 @@ export class HomeFincaComponent implements OnInit{
                     this.errorMessageFincasUsuario=error.error_description;
                 }
             );
-              
-        this.solicitarCreacionFinca.obtenerProveedores()
-            .then(
-                response=>{
-                    this.proveedoresInformacion=response;
-                }
-            )
-            .catch(
-                error=>{
-                    this.errorMessageCrearFinca=error.error_description;
-                }
-            );
+             
+
         
     }
 
@@ -134,83 +97,40 @@ export class HomeFincaComponent implements OnInit{
         return this.fincasEncargadoSeleccionado;
     }
 
-    getFincasPendientes(){
-        return this.fincasPendienteSeleccionado;
-    }
     getFincasUsuario(){
         return this.fincasUsuarioSeleccionado;
     }
 
 
-    apretarNuevaIcono(){
+    apretarNuevaFincaIcono(){
         console.log("apretamos crear nueva finca");
-        this.selectIndex=0;
-        this.nombre="";
-        this.direccion="";
-        this.ubicacion="";
-        this.tamanio=null;
-        this.proveedor="";
-        this.errorMessageCrearFinca="";
-        this.crearFincaSeleccionado=true;
+        this.router.navigate(['/crearFinca/']);
     }
 
-    getCrearFinca(){
-        return this.crearFincaSeleccionado;
-    }
-
-
-    apretarSalir(){
-        this.crearFincaSeleccionado=false;
-    }
-
-    apretarCrearFinca(){
-        console.log("apretamos crear finca");
-        if(this.nombre=="" || this.direccion=="" || this.ubicacion=="" || this.tamanio==null){
-            this.errorMessageCrearFinca="Debe completar todos los campos.";
+    obtenerRoles(){
+        let roles = new Array;
+        let longitud= Object.keys(this.fincasUsuario).length;
+        for(var i=0;i<longitud;i++){
+            roles.push(this.fincasUsuario[i]['nombreRol']);
         }
-        else{
-            this.solicitarCreacionFinca.solicitarCreacion(this.nombre,this.direccion,this.ubicacion,this.tamanio)
-            .then(
-                response=>{
-                    this.fincaCreada=response;
-                }
-            )
-            .catch(
-                error=>{
-                    this.errorMessageCrearFinca=error.error_description;
-                }
-            );
-        }
-    }
+        let rolesUnicos = new Array;
+        let actual;
+        for(var j=0;j<longitud;j++){
+            actual = roles[j];
+            console.log("posicion "+j+ "valor: "+actual);
 
-
-    prev() {
-        if (this.selectIndex <= 0)
-          this.selectIndex = 0;
-        else
-          this.selectIndex = this.selectIndex - 1;
-      }
-    
-      next() {
-        if (this.selectIndex >= 3)
-          this.selectIndex = 3;
-        else
-          this.selectIndex = this.selectIndex + 1;
-      }
-    obtenerRoles(arr){
-        /*let rolesUsuario:string[];
-        for(let i=0;i<this.fincasUsuario.length;i++){
-            rolesUsuario.push(this.fincasUsuario[i].nombreRol);
-            for(let j=1;j<this.fincasUsuario.length;j++){
-                if(rolesUsuario[i]==this.fincasUsuario[j].nombreRol){
-
-                }
-                else{
-                    rolesUsuario.push(this.fincasUsuario[j].nombreRol);
-                }
+            if(rolesUnicos.includes(actual)==true){
+                console.log("roles unicos: "+rolesUnicos);
+                console.log("el valor "+actual +" ya se encuentra en roles unicos. Intento "+j);
+            }
+            else{
+                console.log("el valor "+actual+" no se encuentra. Posicion "+j);
+                rolesUnicos.push(actual);
             }
         }
-        console.log(rolesUsuario);
-    */
+        console.log("roles unicos: "+rolesUnicos);
+   
     }
 }
+
+

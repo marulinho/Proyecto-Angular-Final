@@ -27,10 +27,10 @@ export class SolicitarCreacionFincaService extends RestBaseService{
       .catch(this.handleError);
   }
 
-  obtenerProveedores():Promise<ProveedorInformacion[]>{
+  obtenerProveedores():Promise<ProveedorInformacion>{
     return this.http.get(SolicitarCreacionFincaService.serverUrl + this.obtenerProvUrl, this.getRestHeader())
     .toPromise()
-    .then(response => {return response.json() as ProveedorInformacion[];})
+    .then(response => {return response.json() as ProveedorInformacion;})
     .catch(this.handleError);
   }
 
@@ -60,8 +60,7 @@ export interface FincaCreada {
 }
 
 export interface ProveedorInformacion{
-  nombreProveedor:string;
-  frecuenciaMaxPosible:number;
-  urlAPI:string;
+  resultado:boolean;
+  datos_operacion;
 }
 

@@ -29,9 +29,9 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
   nombre:string;
   apellido:string;
   dni:number;
-  cuit:number;
+  cuit:string;
   domicilio:string;
-  fechaNacimiento;
+  fechaNacimiento:string;
   email:string;
   usuario:string;
   password1:string;
@@ -94,8 +94,6 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
   //EMPIEZA REGISTRAR USUARIO
 
   apretarLinkRegistrar(){
-    console.log("apretamos registrar");
-    
     //CONFIGURACION DE LOS ELEMENTOS
     this.errorMessage="";
     this.selectIndex=0;
@@ -104,7 +102,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
     this.dni=null;
     this.cuit=null;
     this.domicilio="";
-    this.fechaNacimiento=null;
+    this.fechaNacimiento="";
     this.email="";
     this.usuario="";
     this.password1="";
@@ -118,20 +116,6 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
     return this.registrarSeleccionado;
   }
 
-  prev() {
-    if (this.selectIndex <= 0)
-      this.selectIndex = 0;
-    else
-      this.selectIndex = this.selectIndex - 1;
-  }
-
-  next() {
-    if (this.selectIndex >= 3)
-      this.selectIndex = 3;
-    else
-      this.selectIndex = this.selectIndex + 1;
-  }
-
   apretarSalir(){
     this.iniciarSesionSeleccionado=true;
     this.registrarSeleccionado=false;
@@ -140,6 +124,17 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
   }
 
   apretarRegistrarUsuario() {
+    console.log("VALORES ENVIADOS:");
+    console.log("usuario: "+this.usuario);
+    console.log("contraseña: "+this.password1);
+    console.log("nombre: "+this.nombre);
+    console.log("apellido: "+this.apellido);
+    console.log("email: "+this.email);
+    console.log("cuit: "+this.cuit);
+    console.log("dni: "+this.dni);
+    console.log("fechaNac: "+this.fechaNacimiento);
+    console.log("domicilio: "+this.domicilio);
+
     this.registrarUsuario.registrarUsuario(this.nombre, this.apellido, this.dni, this.cuit,
       this.fechaNacimiento, this.domicilio, this.email, this.usuario, this.password1)
       .then(
@@ -179,7 +174,6 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
   }
 
   apretarNextRecuperar(){
-      console.log("verificamos el email ");
       if(this.email.length==0){
         this.errorMessage="Debe completar todos los campos (*).";
       }
@@ -187,7 +181,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
         this.recuperarCuenta.recuperarCuenta(this.email)
         .then(
           response=>{
-            this.usuarioRecuperado=response.detalle_operacion;
+            this.usuarioRecuperado=response.datos_operacion;
             this.errorMessage="";
             this.selectIndex += 1; 
   
@@ -205,10 +199,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
     if(this.selectIndex==0){
       if(this.nombre=="" || this.nombre==null ||
         this.apellido=="" || this.apellido==null ||
-        this.email=="" || this.email==null ||
-        this.dni==null || this.cuit==null ||
-        this.fechaNacimiento==null ||
-        this.domicilio=="" || this.domicilio==null){
+        this.email=="" || this.email==null){
           this.errorMessage="Debe completar todos los campos obligatorios (*)."
         }
       else{
@@ -225,11 +216,16 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
         }
         else{
           if (this.password1 != this.password2) {
-            this.errorMessage=("Las contraseñas deben coincidir.");
+            this.errorMessage="Las contraseñas deben coincidir.";
           }
           else{
-            this.errorMessage="";
-            this.selectIndex= this.selectIndex+1;
+            if(this.usuario==this.password1){
+              this.errorMessage="El nombre de usuario y contraseña debe ser diferente.";
+            }
+            else{
+              this.errorMessage="";
+              this.selectIndex= this.selectIndex+1;
+            }
           }
         }
      }
@@ -237,7 +233,6 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
 }
     
   apretarRecuperarCuenta(){
-    console.log("apretamos recuperar cuenta");
     if(this.password1.length==0 || this.password2.length==0){
       this.errorMessage="Debe completar todos los campos";
     }
@@ -246,10 +241,9 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
         this.errorMessage="Las contraseñas deben coincidir";
       }
       else{
-        this.recuperarCuenta.cambiarContraseniaRecuperarCuenta(this.usuario,this.codigo,this.password1)
+        this.recuperarCuenta.cambiarContraseniaRecuperarCuenta(this.usuarioRecuperado['KEY_USUARIO'],this.codigo,this.password1)
         .then(
           response=>{
-            console.log("cuenta recuperada");
             this.errorMessage="";
             this.iniciarSesionSeleccionado=true;
             this.recuperarSeleccionado=false;
