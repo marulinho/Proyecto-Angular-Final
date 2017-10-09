@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 export class HomeFincaDetalleService extends RestBaseService{
   private buscarFincaUrl = "/buscarFincaId/";
   private eliminarFincaUrl="/eliminarFinca/";
+  private devolverPermisosUrl="/devolverPermisos/";
  
 
 
@@ -34,17 +35,27 @@ export class HomeFincaDetalleService extends RestBaseService{
       .catch(this.handleError);
     
   }
-
+  
+  devolverPermisos(idFinca:number):Promise<Permisos>{
+    const data = {
+      'idFinca':idFinca
+    };
+    return this.http.post(HomeFincaDetalleService.serverUrl + this.devolverPermisosUrl, JSON.stringify(data), this.getRestHeader())
+    .toPromise()
+    .then(response => {return response.json() as Permisos;})
+    .catch(this.handleError);
+  }
   
 }
 
 export interface Finca {
-  idFinca:number;
-  nombre:string;
-  ubicacion:string;
-  tamanio: number;
-  direccionLegal:string;
-  
+  resultado:boolean;
+  datos_operacion;
+}
+
+export interface Permisos{
+  resultado:boolean;
+  datos_operacion;
 }
 
 

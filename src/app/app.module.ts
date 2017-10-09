@@ -94,10 +94,12 @@ import { FinalizarSesionService } from './Modulo_Seguridad/CU_Finalizar_Sesion/f
 //IMPORTS MODULOS CONFIGURACION FINCA
 import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
 import { HomeFincaService } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.service';
+import { HomeFincaDetalleComponent } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.component';
+import { HomeFincaDetalleService } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.service';
 import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
 import { SolicitarCreacionFincaService } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.service';
-
-
+import { GestionarFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.service';
+import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
 
 
 /**
@@ -176,6 +178,7 @@ import { SolicitarCreacionFincaService } from './Modulo_Configuracion_Finca/CU_S
 
     //COMPONENTS MODULO CONFIGURACION FINCA
     HomeFincaComponent,
+    HomeFincaDetalleComponent,
     SolicitarCreacionFincaComponent
     
   ],
@@ -227,7 +230,10 @@ import { SolicitarCreacionFincaService } from './Modulo_Configuracion_Finca/CU_S
 
     //LLAMADAS MODULO CONFIGURACION FINCA
     HomeFincaService,
-    SolicitarCreacionFincaService
+    HomeFincaDetalleService,
+    SolicitarCreacionFincaService,
+    GestionarFincaService,
+    GestionarUsuarioFincaService
     
   ],
   entryComponents: [

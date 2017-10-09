@@ -22,10 +22,9 @@ export class ModificarUsuarioService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  modificarUsuario(usuario:string,nombre:string,apellido:string,domicilio:string,
+  modificarUsuario(nombre:string,apellido:string,domicilio:string,
       fechaNac:string,email:string,dni:number,cuit:number):Promise<Usuario> {
           const data = {
-            'usuario': usuario,
             'email':email,
             'nombre': nombre,
             'apellido':apellido,

@@ -15,8 +15,8 @@ export class GestionarFincaService extends RestBaseService{
       'ubicacion':ubicacion,
       'tamanio':tamanio,
       'direccionLegal':direccion,
-      'logo':'12',
-      'estadoFinca':''
+      'logo':'',
+      'estadoFinca':'habilitado'
       
     };
 

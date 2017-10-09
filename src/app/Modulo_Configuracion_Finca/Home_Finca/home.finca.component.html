@@ -46,7 +46,8 @@
                 <td>{{fincaEncargado.ubicacion}}</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
-                  <img src="assets/icons/ver.png">
+                  <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaEncargado.idFinca]">
+                  
                 </a>
                 </td>
               </tr>

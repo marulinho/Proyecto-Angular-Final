@@ -60,6 +60,7 @@ import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuar
 import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
 
 import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
+import { HomeFincaDetalleComponent } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.component';
 import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
 
 
@@ -111,6 +112,7 @@ export const ROUTES: Routes = [
 
    //MODULO CONFIGURACION FINCA
    { path:'homeFinca',component: HomeFincaComponent },
+   { path: 'homeFincaDetalle/:idFinca', component: HomeFincaDetalleComponent },
    { path:'crearFinca', component: SolicitarCreacionFincaComponent },
 
 

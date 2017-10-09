@@ -1,135 +1,133 @@
-<div class="container">
+<!--SECCION PERFIL FINCA-->
+<div *ngIf="getPerfilFincaSeleccionada()" class="sign-container">
+        <md-card class="page-card">
+                <md-card-title>Perfil Finca
+                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarFinca}} [mdTooltipPosition]="position"
+                                (click)="apretarEditarIcono()"><img src="assets/icons/editar.png">
+                        </a>
+                        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarFinca}} [mdTooltipPosition]="position"
+                                (click)="apretarEliminarIcono()"><img src="assets/icons/delete.png">
+                                
+                        </a>
+                </md-card-title>
+                <md-card-content>         
+                        <section *ngIf="errorMessagePerfilFinca" class="bs">
+                                <div class="bd-example" data-example-id="">
+                                        <div class="alert alert-danger" role="alert">
+                                                <strong>{{errorMessagePerfilFinca}}</strong>
+                                        </div>
+                                </div><br>
+                        </section>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <h3>Datos Finca</h3>
-            <label id=atributo>Nombre:</label>
-            <label id=valor>{{fincaEncontrada.nombre}}</label><br>
+                        <h2>Datos Finca</h2>
 
-            <label id=atributo>Direcci&oacute;n:</label>
-            <label id=valor>{{fincaEncontrada.ubicacion}}</label><br>
+                        <label id="atributo" class="col-2">Nombre: </label>
+                        <label class="col-3">{{perfilFinca.nombre}}</label><br>
 
-            <label id=atributo>Ubicaci&oacute;n:</label>
-            <label id=valor>{{fincaEncontrada.direccionLegal}}</label><br>
+                        <label id=atributo class="col-2">Direcci&oacute;n: </label>
+                        <label id=valor class="col-3">{{perfilFinca.direccionLegal}}</label><br>
+                        
+                        <label id=atributo class="col-2">Ubicaci&oacute;n: </label>
+                        <label id=valor class="col-3">{{perfilFinca.ubicacion}}</label><br>
 
-            <label id=atributo>Tama&ntilde;o:</label>
-            <label id=valor>{{fincaEncontrada.tamanio}}</label><br>
+                        <label id=atributo class="col-2">Tama&ntilde;o: </label>
+                        <label id=valor class="col-3">{{perfilFinca.tamanio }} hect&aacute;reas</label><br>
 
-            <button type="button" (click)="apretarEditarFinca()" >Editar Finca</button>
-            <button type="button" data-toggle="modal" data-target="#eliminarFincaModal">
-                    Eliminar Finca
-            </button><br>            
-            <button type="button" data-toggle="modal" data-target="#aprobarFincaModal">
-                Aprobar Finca
-             </button><br>
+                </md-card-content>
 
-        </div>
+        <!--SECCION USUARIOS FINCA-->
+                <md-card class="page-card">
+                        <md-card-title>
+                                Usuarios Finca
+                                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarUsuario}} [mdTooltipPosition]="position"
+                                        (click)="apretarAgregarIcono()"><img src="assets/icons/nuevoUsuario.png">
+                                </a>
+                        </md-card-title>
+                        <md-card-content>
+                                <section *ngIf="errorMessageUsuarioFinca" class="bs">
+                                        <div class="bd-example" data-example-id="">
+                                                <div class="alert alert-danger" role="alert">
+                                                        <strong>{{errorMessageUsuarioFinca}}</strong>
+                                                </div>
+                                        </div><br>
+                                </section>
+                                <section *ngIf="getUsuariosFincaSeleccionado()" class="bs">
+                                        <table class="table table-striped table-hover table-card">
+                                                <thead>
+                                                        <tr>
+                                                                <th style="width:37%;">Nombre</th>
+                                                                <th style="width:36%;">Tama&ntilde;o</th>
+                                                                <th>Ubicaci&oacute;n</th>
+                                                                <th class="actions">Acci&oacute;n</th>
+                                                        </tr>
+                                                </thead>
+                                                <!--<tbody>
+                                                        <tr *ngFor="let fincaEncargado of fincasEncargado">
+                                                <td>{{fincaEncargado.nombre}}</td>
+                                                <td>{{fincaEncargado.tamanio}}</td>
+                                                <td>{{fincaEncargado.ubicacion}}</td>
+                                                <td>
+                                                <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
+                                                <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaEncargado.idFinca]">
+                                                
+                                                </a>
+                                                </td>
+                                                </tr>
+        
+                                                </tbody>-->
+                                        </table>
+                                </section>
+                        </md-card-content>
+                </md-card>
+        </md-card>
 
-
-        <div class="col-lg-5">
-            <h3>Acciones</h3>
-                <button type="button" class="btn btn-link col-lg-10" [routerLink]="['/gestionarUsuariosFinca/', fincaEncontrada.idFinca]">Administrar Usuarios Finca</button>
-            <button type="button" class="btn btn-link col-lg-10">Administrar Sectores</button>
-
-        </div>
-
-
-
-    </div>
 </div>
 
-<div *ngIf="editar" class="container">
-        <h1>Editar Finca</h1>
-        <form>
-                <div class="form-group row">
-                        <label for="nombre" class="col-sm-1 col-form-label">Nombre</label>
-                        <div class="col-sm-5">
-                                <input type="text" class="form-control" #nombre id="nombre" placeholder="Nombre Finca">
-                        </div>
-                </div>
-                <div class="form-group row">
-                        <label for="direccion" class="col-sm-1 col-form-label">Direcci&oacute;n</label>
-                        <div class="col-sm-5">
-                                <input type="text" class="form-control" #direccion id="direccion" placeholder="Direcci&oacute;n Finca">
-                        </div>
-                </div>
-                <div class="form-group row">
-                                <label for="ubicacion" class="col-sm-1 col-form-label">Ubicaci&oacute;n</label>
-                                <div class="col-sm-5">
-                                        <input type="text" class="form-control" #ubicacion id="ubicacion" placeholder="Ubicaci&oacute;n Finca">
-                                </div>
-                </div>
-                <div class="form-group row">
-                        <label for="tamanio" class="col-sm-1 col-form-label">Tama&ntilde;o</label>
-                        <div class="col-sm-5">
-                                <input type="number" class="form-control" #tamanio id="tamanio" placeholder="Tama&ntilde;o Finca">
-                        </div>
-                </div>
                 
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modificarFincaModal" (click)="apretarModificarFinca(nombre.value,direccion.value,ubicacion.value,tamanio.value)">Modificar</button>
-                <button type="button" class="btn btn-danger" (click)="apretarCancelarModificacionFinca()">Cancelar</button>
-                
-        </form>
-</div>
 
-<!-- Modal Modificar Finca -->
-<div class="modal fade" id="modificarFincaModal" tabindex="-1" role="dialog" aria-labelledby="modificarFincaLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                        <div class="modal-header">
-                                <h5 class="modal-title" id="modificarFincaLabel">Modificaci&oacute;n Finca</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-                        </div>
-                        <div class="modal-body">
-                                <label>La modificaci&oacute;n fue exitosa</label>
-                        </div>
-                        <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="apretarAceptarModificarModal()">Eliminar</button>
-                        </div>
-                </div>
-        </div>
-</div>
+<!--SECCION MODIFICAR FINCA-->
+<div *ngIf="getEditarFinca()" class="sign-container">
 
-<!-- Modal Eliminar Finca -->
-<div class="modal fade" id="eliminarFincaModal" tabindex="-1" role="dialog" aria-labelledby="eliminarFincaLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                        <div class="modal-header">
-                                <h5 class="modal-title" id="eliminarFincaLabel">Eliminar Finca</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-                        </div>
-                        <div class="modal-body">
-                                <label>¿Desea eliminar la finca?</label>
-                        </div>
-                        <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="apretarEliminarFincaModal()">Eliminar</button>
-                        </div>
-                </div>
-        </div>
-</div>
 
-<!-- Modal Aprobar Finca -->
-<div class="modal fade" id="aprobarFincaModal" tabindex="-1" role="dialog" aria-labelledby="aprobarFincaLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                        <div class="modal-header">
-                                <h5 class="modal-title" id="aprobarFincaLabel">Aprobar Finca</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-                        </div>
-                        <div class="modal-body">
-                                <label>¿Desea aprobar la finca?</label>
-                        </div>
-                        <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="apretarAceptarAprobarModal()">Aprobar</button>
-                        </div>
-                </div>
+        
+        
+                <md-card class="page-card">
+                        <md-card-title>Modificar Finca</md-card-title>
+                        <md-card-content>
+                                <section *ngIf="errorMessageEditarFinca" class="bs">
+                                        <div class="bd-example" data-example-id="">
+                                                <div class="alert alert-danger" role="alert">
+                                                        <strong>{{errorMessageEditarFinca}}</strong>
+                                                </div>
+                                        </div><br>
+                                </section>
+        
+                                <h2>Datos Finca</h2>
+        
+                                <md-input-container>
+                                        <input mdInput placeholder="Nombre"  type="text" [(ngModel)]="nombre" name="nombre"   required><br>
+                                </md-input-container>
+        
+                                <md-input-container>
+                                        <input mdInput placeholder="Direcci&oacute;n" type="text" [(ngModel)]="direccion" name="direccion"  required><br>
+                                </md-input-container>
+        
+                                <md-input-container>
+                                        <input mdInput placeholder="Ubicaci&oacute;n" type="text" [(ngModel)]="ubicacion" name="ubicacion"  required><br>
+                                </md-input-container>
+        
+                                <md-input-container>
+                                        <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas" type="number" [(ngModel)]="tamanio" name="tamanio"  required><br>
+                                </md-input-container>
+        
+                                
+                        </md-card-content>
+                        <md-card-actions>
+                                <button md-raised-button (click)="apretarModificarFinca()">MODIFICAR</button>
+                                <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                        </md-card-actions>
+                        <md-card-footer></md-card-footer>
+                </md-card>
+        
         </div>
-</div>
+        

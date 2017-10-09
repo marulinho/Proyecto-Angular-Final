@@ -11,12 +11,14 @@ export class SolicitarCreacionFincaService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  solicitarCreacion(nombreFinca: string, dirFinca: string, ubicacionFinca:string, tamFinca:number): Promise<FincaCreada> {
+  solicitarCreacion(nombreFinca: string, dirFinca: string, ubicacionFinca:string, tamFinca:number, frecuencia:number,proveedor:string): Promise<FincaCreada> {
     const data = {
       'nombreFinca': nombreFinca,
       'direccionLegal': dirFinca,
       'ubicacion':ubicacionFinca,
-      'tamanio':tamFinca
+      'tamanio':tamFinca,
+      'frecuencia':frecuencia,
+      'nombreProveedor':proveedor
     };
 
     return this.http.put(SolicitarCreacionFincaService.serverUrl +this.crearFincaUrl, JSON.stringify(data), this.getRestHeader())
@@ -34,29 +36,13 @@ export class SolicitarCreacionFincaService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  seleccionarProveedor(proveedor:string,idFinca:string):Promise<any>{
-    const data = {
-      'nombreProveedor': proveedor,
-      'idFinca': idFinca
 
-    };
-
-    return this.http.post(SolicitarCreacionFincaService.serverUrl +this.selecProvUrl, JSON.stringify(data), this.getRestHeader())
-      .toPromise()
-      .then(response => {
-        return "";
-      })
-      .catch(this.handleError);
-  }
 
 }
 
 export interface FincaCreada {
-  idFinca;
-  nombreFinca: string;
-  direccionLegal: string;
-  ubicacion: string;
-  tamanio: number;
+  resultado:boolean;
+  datos_operacion;
 }
 
 export interface ProveedorInformacion{

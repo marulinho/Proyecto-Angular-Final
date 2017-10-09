@@ -37,7 +37,6 @@ export class ModificarUsuarioComponent implements OnInit{
     domicilio:string;
     fechaNacimiento;
     email:string;
-    usuario:string;
     
 
     //ATRIBUTOS ELIMINAR USUARIO
@@ -103,7 +102,6 @@ export class ModificarUsuarioComponent implements OnInit{
 
 
     apretarModificarUsuario(){
-        let usuarioModificado;
         let nombreModificado;
         let apellidoModificado;
         let emailModificado;
@@ -112,8 +110,7 @@ export class ModificarUsuarioComponent implements OnInit{
         let cuitModificado;
         let domicilioModificado;
 
-        if((this.usuario=="" || this.usuario==null),
-           (this.nombre=="" || this.nombre==null),
+        if((this.nombre=="" || this.nombre==null),
            (this.apellido=="" || this.apellido==null),
            (this.email=="" || this.email==null)){
                 this.errorMessage="Debe completar todos los campos obligatorios.";
@@ -122,13 +119,6 @@ export class ModificarUsuarioComponent implements OnInit{
         else{
 
             //LA PARTE DE LOS CAMPOS OBLIGATORIOS ESTA AL PEDO PORQUE SIEMPRE HAY QUE LLENARLOS
-            //VERIFICACION USUARIO
-            if(this.usuario=="" || this.usuario==null){
-                usuarioModificado=this.usuarioActual['usuario'];            
-            }
-            else{
-                usuarioModificado=this.usuario;                        
-            }
 
             //VERIFICACION NOMBRE
             if(this.nombre=="" || this.nombre==null){
@@ -186,7 +176,7 @@ export class ModificarUsuarioComponent implements OnInit{
                 domicilioModificado=this.domicilio
             }
         
-            this.modificarUsuarioService.modificarUsuario(usuarioModificado,nombreModificado,apellidoModificado,domicilioModificado,
+            this.modificarUsuarioService.modificarUsuario(nombreModificado,apellidoModificado,domicilioModificado,
                 fechaNacimientoModificado,emailModificado,dniModificado,cuitModificado)
                 .then(
                     response=>{

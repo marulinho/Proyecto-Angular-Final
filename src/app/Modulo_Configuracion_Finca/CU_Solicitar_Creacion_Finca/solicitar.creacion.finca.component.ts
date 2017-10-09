@@ -15,6 +15,12 @@ export class SolicitarCreacionFincaComponent implements OnInit{
     errorMessage:string="";
     selectIndex: number = 0;   
     proveedoresInformacion = new Array;
+    proveedor:string;
+    nombre:string;
+    direccion:string;
+    ubicacion:string;
+    tamanio:number;
+    frecuencia:number;
 
     constructor(private router:Router,
                 private solicitarCreacionFincaService:SolicitarCreacionFincaService){
@@ -25,11 +31,7 @@ export class SolicitarCreacionFincaComponent implements OnInit{
        this.solicitarCreacionFincaService.obtenerProveedores()
             .then(
                 response=>{
-                    console.log("response: "+response);
                     this.llenarProveedores(response);
-                    //this.proveedoresInformacion=response.datos_operacion;
-                    //console.log("proveedores: "+this.proveedoresInformacion);
-                    //this.proveedoresInformacion=response;
                 }
             )
             .catch(
@@ -37,7 +39,6 @@ export class SolicitarCreacionFincaComponent implements OnInit{
                     this.errorMessage=error.error_description;
                 }
             );
-            //console.log("proveedores: "+this.proveedoresInformacion);
     }
     
     llenarProveedores(response){
@@ -46,25 +47,51 @@ export class SolicitarCreacionFincaComponent implements OnInit{
             let valor= response['datos_operacion'][i]['nombreProveedor'];
             this.proveedoresInformacion.push(valor);
         }
+        console.log("proveedores: "+this.proveedoresInformacion);   
     }
     
-/*    apretarCrearFinca(){
-        console.log("apretamos crear finca");
-        if(this.nombre=="" || this.direccion=="" || this.ubicacion=="" || this.tamanio==null){
-            this.errorMessageCrearFinca="Debe completar todos los campos.";
+    apretarNextCrear(){
+        if(this.selectIndex==0){
+            if( this.nombre=="" || this.nombre==null ||
+                this.direccion=="" || this.direccion==null ||
+                this.ubicacion=="" || this.ubicacion==null ||
+                this.tamanio==null){
+                    this.errorMessage="Debe completar todos los campos obligatorios (*)";
+                }
+            else{
+                this.errorMessage="";
+                this.selectIndex +=1;
+            } 
         }
         else{
-            this.solicitarCreacionFinca.solicitarCreacion(this.nombre,this.direccion,this.ubicacion,this.tamanio)
+            if(this.selectIndex==1){
+                if( this.proveedor=="" || this.proveedor==null || this.frecuencia==null){
+                    this.errorMessage="Debe completar todos los campos obligatorios (*).";
+                }
+                else{
+                    this.errorMessage="";
+                    this.selectIndex +=1;
+                }
+            }
+        }
+    }
+
+    apretarSalir(){
+        this.router.navigate(['/homeFinca/']);
+    }
+
+    apretarCrearFinca(){
+        this.solicitarCreacionFincaService.solicitarCreacion(this.nombre,this.direccion,this.ubicacion,this.tamanio,this.frecuencia,this.proveedor)
             .then(
                 response=>{
-                    this.fincaCreada=response;
+                    this.router.navigate(['/homeFinca/']);
                 }
             )
             .catch(
                 error=>{
-                    this.errorMessageCrearFinca=error.error_description;
+                    this.errorMessage=error.error_description;
                 }
-            );
-        }
-    */
+            )
+    }
+
 }

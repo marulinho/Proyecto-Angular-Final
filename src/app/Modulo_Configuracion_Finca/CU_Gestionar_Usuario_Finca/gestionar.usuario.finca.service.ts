@@ -15,7 +15,7 @@ export class GestionarUsuarioFincaService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  buscarUsuariosNoEncargado(idFinca:number):Promise<UsuarioNoEncargado[]>{
+  buscarUsuariosNoEncargado(idFinca:number):Promise<UsuarioNoEncargado>{
     const data = {
       'idFinca': idFinca,
       
@@ -23,7 +23,7 @@ export class GestionarUsuarioFincaService extends RestBaseService{
     return this.http.post(GestionarUsuarioFincaService.serverUrl + this.buscarUsuarioNoEncargadoUrl, JSON.stringify(data), this.getRestHeader())
       .toPromise()
       .then(response => {
-          return response.json() as UsuarioNoEncargado[];
+          return response.json() as UsuarioNoEncargado;
       })
       .catch(this.handleError);
   }
@@ -110,10 +110,7 @@ export interface Usuario {
 }
 
 export interface UsuarioNoEncargado{
-  usuario:string;
-  nombre:string;
-  apellido:string;
-  rol:string;
-  email:string;
-  idUsuarioFinca:number;
+  resultado:boolean;
+  datos_operacion;
+  detalle_operacion;
 }

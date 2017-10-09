@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeFincaService, Finca } from './home.finca.service';
+import { AppService } from '../../app.service';
 
 @Component({
     selector:'homeFinca',
@@ -19,7 +20,7 @@ export class HomeFincaComponent implements OnInit{
     //ATRIBUTOS LLAMADA FINCAS USUARIO
     fincasUsuario:Finca;
     fincasUsuarioSeleccionado:Boolean;
-    rolesFincaUsuario:string[];
+    rolesUnicos=new Array;
     errorMessageFincasUsuario:string;
 
     //ATRIBUTOS LLAMADA FINCAS ENCARGADO
@@ -27,21 +28,15 @@ export class HomeFincaComponent implements OnInit{
     fincasEncargadoSeleccionado:Boolean;
     errorMessageFincasEncargado:string;
 
-    //ATRIBUTOS LLAMADA CREAR FINCA
-    /*crearFincaSeleccionado:Boolean;    
-    errorMessageCrearFinca:string;
-    selectIndex: number = 0;
-    nombre:string;
-    direccion:string;
-    ubicacion:string;
-    tamanio:number;   
-    fincaCreada : FincaCreada; 
-    proveedor: string;
-    proveedoresInformacion: ProveedorInformacion[];*/
+
     
     
     constructor(private router:Router,
-                private homeFincaService:HomeFincaService){
+                private homeFincaService:HomeFincaService,
+                private appService:AppService ){
+                    
+           appService.getState().topnavTitle = 'Home Finca';
+                    
 
     }
 
@@ -78,8 +73,14 @@ export class HomeFincaComponent implements OnInit{
                         }
                         else{
                             this.fincasUsuario=response.datos_operacion;
-                            this.obtenerRoles();
-                            this.fincasUsuarioSeleccionado=true
+                            this.obtenerRoles();    
+                            if(this.rolesUnicos.length==0){
+                                this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
+                            }
+                            else{
+                                this.fincasUsuarioSeleccionado=true
+                            }                                                    
+                            
                         }
                     }
                 )
@@ -110,25 +111,31 @@ export class HomeFincaComponent implements OnInit{
     obtenerRoles(){
         let roles = new Array;
         let longitud= Object.keys(this.fincasUsuario).length;
+        
+        //OBTENGO TODOS LOS ROLES DE LA PETICION
         for(var i=0;i<longitud;i++){
             roles.push(this.fincasUsuario[i]['nombreRol']);
         }
-        let rolesUnicos = new Array;
-        let actual;
-        for(var j=0;j<longitud;j++){
-            actual = roles[j];
-            console.log("posicion "+j+ "valor: "+actual);
 
-            if(rolesUnicos.includes(actual)==true){
-                console.log("roles unicos: "+rolesUnicos);
-                console.log("el valor "+actual +" ya se encuentra en roles unicos. Intento "+j);
+        //OBTENGO LOS ROLES UNICOS SIN TENER EN CUENTA EL ENCARGADO
+        for(var j=0;j<longitud;j++){
+            let actual = roles[j];
+            console.log("posicion "+j+ "valor: "+actual);
+            if(actual=="encargado"){
+                //no hago nada
             }
             else{
-                console.log("el valor "+actual+" no se encuentra. Posicion "+j);
-                rolesUnicos.push(actual);
+                if(this.rolesUnicos.includes(actual)==true){
+                    console.log("roles unicos: "+this.rolesUnicos);
+                    console.log("el valor "+actual +" ya se encuentra en roles unicos. Intento "+j);
+                }
+                else{
+                    console.log("el valor "+actual+" no se encuentra. Posicion "+j);
+                    this.rolesUnicos.push(actual);
+                }
             }
         }
-        console.log("roles unicos: "+rolesUnicos);
+        console.log("roles unicos: "+this.rolesUnicos);
    
     }
 }
