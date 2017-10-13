@@ -1,0 +1,35 @@
+<!--SECCION CAMBIAR PROVEEDOR-->
+<div *ngIf="getProveedorSeleccionado()" class="sign-container">
+    
+        <md-card class="page-card">
+            <md-card-title>Cambiar Proveedor</md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessage" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessage}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+    
+                <h2>Datos Proveedor</h2>
+    
+                <md-select placeholder="Seleccionar Proveedor" [(ngModel)]="nombreProveedor" name="nombreProveedor">
+                    <md-option *ngFor="let proveedorInformacion of proveedoresInformacion" [value]="proveedorInformacion.nombreProveedor" requerid>
+                      {{proveedorInformacion.nombreProveedor}}
+                    </md-option>
+                </md-select>  
+                <br><br><md-input-container>
+                    <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones en minutos" type="number" [(ngModel)]="frecuencia" name="frecuencia" required><br>
+                </md-input-container>
+      
+    
+            </md-card-content>
+            <md-card-actions>
+                <button md-raised-button (click)="apretarCambiarProveedor()">CAMBIAR</button>
+                <button md-raised-button (click)="apretarSalir()">SALIR</button>
+            </md-card-actions>
+            <md-card-footer></md-card-footer>
+        </md-card>
+    
+    </div>

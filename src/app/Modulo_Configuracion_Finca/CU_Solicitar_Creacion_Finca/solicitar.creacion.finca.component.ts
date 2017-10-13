@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SolicitarCreacionFincaService, FincaCreada, ProveedorInformacion } from './solicitar.creacion.finca.service';
+import { SolicitarCreacionFincaService, FincaCreada } from './solicitar.creacion.finca.service';
+import { GestionarProveedorInformacionService, ProveedorInformacion } from '../../Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
 import { LoginComponent } from '../../Modulo_Seguridad/CU_Iniciar_Sesion/login.component';
 
 @Component({
@@ -47,7 +48,6 @@ export class SolicitarCreacionFincaComponent implements OnInit{
             let valor= response['datos_operacion'][i]['nombreProveedor'];
             this.proveedoresInformacion.push(valor);
         }
-        console.log("proveedores: "+this.proveedoresInformacion);   
     }
     
     apretarNextCrear(){

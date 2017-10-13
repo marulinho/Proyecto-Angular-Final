@@ -15,6 +15,12 @@ export class SearchMock {
       link: '/finca'
     },
     {
+      name: 'tabla',
+      title: 'Tabla',
+      faIcon: 'fa-tachometer',
+      link: '/tablas'
+    },
+    {
       name: 'buttons',
       title: 'Buttons',
       link: '/component-buttons'

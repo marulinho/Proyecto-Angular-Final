@@ -8,7 +8,7 @@ export class GestionarFincaService extends RestBaseService{
   private modificarFincaUrl="/modificarFinca/"
 
   constructor(private http: Http) {super();}
-  modificarFinca(id:number,nombre:string,direccion:string,ubicacion:string,tamanio:number):Promise<FincaModificada>{
+  modificarFinca(id:number,nombre:string,direccion:string,ubicacion:string,tamanio:number):Promise<Finca>{
     const data = {
       'idFinca':id,
       'nombreFinca': nombre,
@@ -23,7 +23,7 @@ export class GestionarFincaService extends RestBaseService{
     return this.http.post(GestionarFincaService.serverUrl +this.modificarFincaUrl, JSON.stringify(data), this.getRestHeader())
       .toPromise()
       .then(response => {
-        return response.json() as FincaModificada;
+        return response.json() as Finca;
         
         
       })
@@ -34,11 +34,10 @@ export class GestionarFincaService extends RestBaseService{
 
 }
 
-export interface FincaModificada {
-  nombre: string;
-  direccionLegal: string;
-  ubicacion: string;
-  tamanio: number;
+export interface Finca {
+  resultado:boolean;
+  datos_operacion;
+  detalle_operacion;
 }
 
 

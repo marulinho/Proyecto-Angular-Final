@@ -30,7 +30,7 @@ export class GestionarUsuarioFincaService extends RestBaseService{
 
   eliminarUsuarioFinca(usuarioFincaId: number): Promise<any> {
     const data = {
-      'usuarioFincaId': usuarioFincaId,
+      'idUsuarioFinca': usuarioFincaId,
       
     };
     return this.http.post(GestionarUsuarioFincaService.serverUrl + this.eliminarUsuarioFincaUrl,JSON.stringify(data), this.getRestHeader())
@@ -41,7 +41,7 @@ export class GestionarUsuarioFincaService extends RestBaseService{
       .catch(this.handleError);
   }
 
-  buscarUsuarioNoFinca(idFinca:number):Promise<Usuario[]>{
+  buscarUsuarioNoFinca(idFinca:number):Promise<Usuario>{
     const data = {
       'idFinca': idFinca
       
@@ -49,17 +49,17 @@ export class GestionarUsuarioFincaService extends RestBaseService{
     return this.http.post(GestionarUsuarioFincaService.serverUrl + this.buscarUsuarioNoFincaUrl, JSON.stringify(data), this.getRestHeader())
       .toPromise()
       .then(response => {
-          return response.json() as Usuario[];
+          return response.json() as Usuario;
       })
       .catch(this.handleError);
 
   }
 
-  agregarUsuarioFinca(usuario:string,idFinca:number): Promise<any> {
+  agregarUsuarioFinca(usuario:string,idFinca:number,rol:string): Promise<any> {
     const data = {
       'usuario': usuario,
       'idFinca': idFinca,
-      'nombreRol':'stakeholder'
+      'nombreRol':rol
     };
 
     return this.http.put(GestionarUsuarioFincaService.serverUrl +this.agregarUsuarioFincaUrl, JSON.stringify(data), this.getRestHeader())
@@ -98,14 +98,9 @@ export class GestionarUsuarioFincaService extends RestBaseService{
 }
 
 export interface Usuario {
-  nombre:string;
-  apellido: string;
-  cuit:number;
-  dni:number;
-  domicilio:string;
-  email:string;
-  fechaNacimiento;
-  usuario:string;
+  resultado:Boolean;
+  datos_operacion;
+  detalle_operacion;
   
 }
 

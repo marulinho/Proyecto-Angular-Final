@@ -54,15 +54,33 @@ import { AppsMailComponent } from './pages/apps-mail/apps-mail.component';
 import { DashboardEdgeComponent } from './pages/dashboard-edge/dashboard-edge.component';
 import { AppComponent } from './app.component';
 
+//IMPORTS MODULO SEGURIDAD
 import { IniciarSesionComponent } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.component';
-import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.component';
+import { PerfilUsuarioComponent } from './Modulo_Seguridad/Perfil_Usuario/perfil.usuario.component';
+import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/Modificar_Usuario/modificar.usuario.component';
 import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.component';
 import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
+import { ModificarContraseniaComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/Cambiar_Contrasenia/modificar.contrasenia.component';
 
+//IMPORTS MODULO CONFIGURACION FINCA
 import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
 import { HomeFincaDetalleComponent } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.component';
 import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
+import { GestionarFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.component';
+import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.compontent';
 
+
+//IMPORTS MODULO CONFIGURACION SECTORES
+import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.component';
+import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
+
+
+
+//IMPORTS MODULO OBTENCION INFORMACION EXTERNA
+import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
+import { CambiarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Cambiar_Proveedor_Informacion/cambiar.proveedor.component';
+
+import { TablasComponent } from './tablas/tablas.component';
 
 /**
  * Router Setting
@@ -102,8 +120,10 @@ export const ROUTES: Routes = [
   //MODULO SEGURIDAD
   { path:'login', component: IniciarSesionComponent},
   { path:'registrarse', component:RegistrarUsuarioComponent},
-  { path: 'recuperarCuenta' , component: RecuperarCuentaComponent },
-  { path:'perfilUsuario', component:ModificarUsuarioComponent},
+  { path:'recuperarCuenta' , component: RecuperarCuentaComponent },
+  { path:'perfilUsuario', component:PerfilUsuarioComponent},
+  { path:'modificarUsuario', component:ModificarUsuarioComponent},
+  { path:'modificarContraseniaUsuario', component:ModificarContraseniaComponent},
   
   {
      path: 'dashboard',
@@ -112,11 +132,19 @@ export const ROUTES: Routes = [
 
    //MODULO CONFIGURACION FINCA
    { path:'homeFinca',component: HomeFincaComponent },
-   { path: 'homeFincaDetalle/:idFinca', component: HomeFincaDetalleComponent },
+   { path:'homeFincaDetalle/:idFinca', component: HomeFincaDetalleComponent },
    { path:'crearFinca', component: SolicitarCreacionFincaComponent },
+   { path:'gestionarFinca/:idFinca', component: GestionarFincaComponent },
+   { path:'gestionarUsuarioFinca/:idFinca', component: GestionarUsuarioFincaComponent},
+   { path:'gestionarSectorFinca/:idSector', component: GestionarSectorFincaComponent},
+   { path:'crearSectorFinca/:idFinca', component: CrearSectorFincaComponent},
 
 
+   {path:'tablas',component:TablasComponent},
 
+   //MODULO OBTENCION INFORMACION EXTERNA
+   {path:'gestionarProveedor/:idFinca', component:ModificarProveedorInformacionComponent},
+   {path:'cambiarProveedor/:idFinca', component:CambiarProveedorInformacionComponent},
 
 
    {

@@ -85,7 +85,7 @@
           </md-card-content>
           <md-card-actions>
             <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-            <button *ngIf="selectIndex>=0 && selectIndex<=1" md-raised-button (click)="apretarNextCrear()">NEXT</button>
+            <button *ngIf="selectIndex >=0 && selectIndex <=1" md-raised-button (click)="apretarNextCrear()">NEXT</button>
             <button *ngIf="selectIndex == 2" md-raised-button (click)="apretarCrearFinca()">CREAR FINCA</button>
             <button md-raised-button (click)="apretarSalir()">SALIR</button>
           </md-card-actions>

@@ -18,6 +18,12 @@ export class MenuMock {
       link: '/homeFinca/'
     },
     {
+      name: 'tabla',
+      title: 'Tabla',
+      faIcon: 'fa-tachometer',
+      link: '/tablas/'
+    },
+    {
       name: 'dashboard-edge',
       title: 'Dashboard Edge',
       faIcon: 'fa-window-maximize',

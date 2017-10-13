@@ -2,15 +2,14 @@
 <div *ngIf="getPerfilFincaSeleccionada()" class="sign-container">
         <md-card class="page-card">
                 <md-card-title>Perfil Finca
-                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarFinca}} [mdTooltipPosition]="position"
-                                (click)="apretarEditarIcono()"><img src="assets/icons/editar.png">
+                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarFinca}} [mdTooltipPosition]="position">
+                                <img src="assets/icons/editar.png" [routerLink]="['/gestionarFinca/', idFinca]">
                         </a>
-                        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarFinca}} [mdTooltipPosition]="position"
-                                (click)="apretarEliminarIcono()"><img src="assets/icons/delete.png">
+                        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarFinca}} [mdTooltipPosition]="position" (click)="apretarEliminarFincaIcono()"><img src="assets/icons/delete.png">
                                 
                         </a>
                 </md-card-title>
-                <md-card-content>         
+                <md-card-content>
                         <section *ngIf="errorMessagePerfilFinca" class="bs">
                                 <div class="bd-example" data-example-id="">
                                         <div class="alert alert-danger" role="alert">
@@ -26,21 +25,72 @@
 
                         <label id=atributo class="col-2">Direcci&oacute;n: </label>
                         <label id=valor class="col-3">{{perfilFinca.direccionLegal}}</label><br>
-                        
+
                         <label id=atributo class="col-2">Ubicaci&oacute;n: </label>
                         <label id=valor class="col-3">{{perfilFinca.ubicacion}}</label><br>
 
                         <label id=atributo class="col-2">Tama&ntilde;o: </label>
                         <label id=valor class="col-3">{{perfilFinca.tamanio }} hect&aacute;reas</label><br>
 
+
                 </md-card-content>
 
-        <!--SECCION USUARIOS FINCA-->
+                <!--SECCION PROVEEDOR INFORMACION FINCA-->
+                <md-card class="page-card">
+                        <md-card-title>
+                                Proveedor Informaci&oacute;n
+                                <a class="example-tooltip-host" mdTooltip={{tooltipEditarProveedor}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/editar.png" [routerLink]="['/gestionarProveedor/', idFinca]">
+                                </a>
+                                <a class="example-tooltip-host" mdTooltip={{tooltipEliminarProveedor}} [mdTooltipPosition]="position" (click)="apretarEliminarProveedorIcono()">
+                                        <img src="assets/icons/delete.png">                                                        
+                                </a>
+                                <a class="example-tooltip-host" mdTooltip={{tooltipCambiarProveedor}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/cambiar.png" [routerLink]="['/cambiarProveedor/', idFinca]">                                                        
+                                </a>
+                        </md-card-title>
+                        <md-card-content>
+                                <section *ngIf="errorMessageProveedor" class="bs">
+                                        <div class="bd-example" data-example-id="">
+                                                <div class="alert alert-danger" role="alert">
+                                                        <strong>{{errorMessageProveedor}}</strong>
+                                                </div>
+                                        </div><br>
+                                </section>
+                                <section *ngIf="getProveedorInformacionSeleccionado()" class="bs">
+                                        
+                                        <label id="atributo" >Nombre: </label>
+                                        <label >{{proveedores.nombreProveedor}}</label><br>
+                
+                                        <label id=atributo >Frecuencia m&aacute;xima de obtenci&oacute;n de mediciones: </label>
+                                        <label id=valor >{{proveedores.frecuenciaMaximaPosible}} minutos</label><br>
+                                        
+                                        <label id=atributo >Frecuencia actual de obtenci&oacute;n de mediciones: </label>
+                                        <label id=valor>{{proveedores.frecuenciaActual}} minutos</label><br>
+        
+                                        <label id=atributo>Direcci&oacute;n web: </label>
+                                        <label id=valor >{{proveedores.urlApi}}</label><br>
+        
+                                        <label id=atributo >Mediciones:</label>
+                                        <!--<md-list>
+                                                <md-list-item *ngFor="let proveedor of proveedores['listaTipoMedicion']" class="example-md-item">
+                                                        <p md-line>Medici&oacute;n: {{proveedor.nombreTipoMedicionClimatica}}</p>
+                                                        <p md-line>Unidad: {{proveedor.unidadMedicion}}</p>
+                                                </md-list-item>
+                                        </md-list>-->
+                                        <label *ngFor="let proveedor of proveedores['listaTipoMedicion']">
+                                                        {{proveedor.nombreTipoMedicionClimatica}}({{proveedor.unidadMedicion}})
+                                        </label>
+                                </section>
+                        </md-card-content>
+                </md-card>
+
+                <!--SECCION USUARIOS FINCA-->
                 <md-card class="page-card">
                         <md-card-title>
                                 Usuarios Finca
-                                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarUsuario}} [mdTooltipPosition]="position"
-                                        (click)="apretarAgregarIcono()"><img src="assets/icons/nuevoUsuario.png">
+                                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarUsuario}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/nuevoUsuario.png" [routerLink]="['/gestionarUsuarioFinca/', idFinca]">
                                 </a>
                         </md-card-title>
                         <md-card-content>
@@ -55,26 +105,78 @@
                                         <table class="table table-striped table-hover table-card">
                                                 <thead>
                                                         <tr>
-                                                                <th style="width:37%;">Nombre</th>
-                                                                <th style="width:36%;">Tama&ntilde;o</th>
-                                                                <th>Ubicaci&oacute;n</th>
+                                                                <th style="width:37%;">Usuario</th>
+                                                                <th style="width:36%;">Apellido y Nombre</th>
+                                                                <th>Rol</th>
                                                                 <th class="actions">Acci&oacute;n</th>
                                                         </tr>
                                                 </thead>
-                                                <!--<tbody>
-                                                        <tr *ngFor="let fincaEncargado of fincasEncargado">
-                                                <td>{{fincaEncargado.nombre}}</td>
-                                                <td>{{fincaEncargado.tamanio}}</td>
-                                                <td>{{fincaEncargado.ubicacion}}</td>
-                                                <td>
-                                                <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
-                                                <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaEncargado.idFinca]">
-                                                
-                                                </a>
-                                                </td>
-                                                </tr>
-        
-                                                </tbody>-->
+                                                <tbody>
+                                                        <tr *ngFor="let usuarioFinca of usuariosFinca">
+                                                                <td>{{usuarioFinca.usuario}}</td>
+                                                                <td>{{usuarioFinca.apellido}}, {{usuarioFinca.nombre}}</td>
+                                                                <td>{{usuarioFinca.rol}}</td>
+                                                                <td>
+                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" (click)="apretarEditarUsuarioIcono()">
+                                                                                <img src="assets/icons/editar.png">
+                                                                        </a>
+
+                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarUsuario}} [mdTooltipPosition]="position" (click)="apretarEliminarUsuarioIcono(usuarioFinca.idUsuarioFinca)">
+                                                                                <img src="assets/icons/delete.png">
+                                                                        </a>
+                                                                </td>
+                                                        </tr>
+
+                                                </tbody>
+                                        </table>
+                                </section>
+                        </md-card-content>
+                </md-card>
+
+                <!--SECCION SECTORES FINCA-->
+                <md-card class="page-card">
+                        <md-card-title>
+                                Sectores Finca
+                                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarSector}} [mdTooltipPosition]="position">
+                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSectorFinca/', idFinca]">
+                        </a>
+                        </md-card-title>
+                        <md-card-content>
+                                <section *ngIf="errorMessageSectoresFinca" class="bs">
+                                        <div class="bd-example" data-example-id="">
+                                                <div class="alert alert-danger" role="alert">
+                                                        <strong>{{errorMessageSectoresFinca}}</strong>
+                                                </div>
+                                        </div><br>
+                                </section>
+                                <section *ngIf="getSectoresFincaSeleccionado()" class="bs">
+                                        <table class="table table-striped table-hover table-card">
+                                                <thead>
+                                                        <tr>
+                                                                <th style="width:37%;">Nombre</th>
+                                                                <th style="width:36%;">Descripci&oacute;n</th>
+                                                                <th>Superficie</th>
+                                                                <th class="actions">Acci&oacute;n</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr *ngFor="let sectorFinca of sectoresFinca">
+                                                                <td>{{sectorFinca.nombreSector}}</td>
+                                                                <td>{{sectorFinca.descripcionSector}}</td>
+                                                                <td>{{sectorFinca.superficieSector}}</td>
+                                                                <td>
+
+                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarSector}} [mdTooltipPosition]="position">
+                                                                        <img src="assets/icons/editar.png" [routerLink]="['/gestionarSectorFinca/', sectorFinca.idSector]">
+                                                                </a>
+
+                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarSector}} [mdTooltipPosition]="position" (click)="apretarEliminarSectorIcono(sectorFinca.idSector)">
+                                                                        <img src="assets/icons/delete.png">
+                                                                </a>
+                                                                </td>
+                                                        </tr>
+
+                                                </tbody>
                                         </table>
                                 </section>
                         </md-card-content>
@@ -82,52 +184,3 @@
         </md-card>
 
 </div>
-
-                
-
-<!--SECCION MODIFICAR FINCA-->
-<div *ngIf="getEditarFinca()" class="sign-container">
-
-
-        
-        
-                <md-card class="page-card">
-                        <md-card-title>Modificar Finca</md-card-title>
-                        <md-card-content>
-                                <section *ngIf="errorMessageEditarFinca" class="bs">
-                                        <div class="bd-example" data-example-id="">
-                                                <div class="alert alert-danger" role="alert">
-                                                        <strong>{{errorMessageEditarFinca}}</strong>
-                                                </div>
-                                        </div><br>
-                                </section>
-        
-                                <h2>Datos Finca</h2>
-        
-                                <md-input-container>
-                                        <input mdInput placeholder="Nombre"  type="text" [(ngModel)]="nombre" name="nombre"   required><br>
-                                </md-input-container>
-        
-                                <md-input-container>
-                                        <input mdInput placeholder="Direcci&oacute;n" type="text" [(ngModel)]="direccion" name="direccion"  required><br>
-                                </md-input-container>
-        
-                                <md-input-container>
-                                        <input mdInput placeholder="Ubicaci&oacute;n" type="text" [(ngModel)]="ubicacion" name="ubicacion"  required><br>
-                                </md-input-container>
-        
-                                <md-input-container>
-                                        <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas" type="number" [(ngModel)]="tamanio" name="tamanio"  required><br>
-                                </md-input-container>
-        
-                                
-                        </md-card-content>
-                        <md-card-actions>
-                                <button md-raised-button (click)="apretarModificarFinca()">MODIFICAR</button>
-                                <button md-raised-button (click)="apretarSalir()">SALIR</button>
-                        </md-card-actions>
-                        <md-card-footer></md-card-footer>
-                </md-card>
-        
-        </div>
-        

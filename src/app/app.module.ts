@@ -78,16 +78,22 @@ import { DialogThemeComponent } from './shared/dialog/dialog-theme/dialog-theme.
 import { TranslateStaticLoader, TranslateLoader, TranslateModule } from 'ng2-translate';
 import { QuillEditorComponent } from './shared/editor/quill-editor.component';
 
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
+
 
 //IMPORTS MODULO SEGURIDAD
 import { IniciarSesionComponent } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.component';
 import { IniciarSesionService } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.service';
-import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.component';
+import { PerfilUsuarioComponent } from './Modulo_Seguridad/Perfil_Usuario/perfil.usuario.component';
+import { PerfilUsuarioService } from './Modulo_Seguridad/Perfil_Usuario/perfil.usuario.service';
+import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/Modificar_Usuario/modificar.usuario.component';
 import { ModificarUsuarioService } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.service';
 import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.component';
 import { RegistrarUsuarioService } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.service';
 import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
 import { RecuperarCuentaService } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.service';
+import { ModificarContraseniaComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/Cambiar_Contrasenia/modificar.contrasenia.component';
 import { FinalizarSesionService } from './Modulo_Seguridad/CU_Finalizar_Sesion/finalizar.sesion.service';
 
 
@@ -98,9 +104,27 @@ import { HomeFincaDetalleComponent } from './Modulo_Configuracion_Finca/Home_Fin
 import { HomeFincaDetalleService } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.service';
 import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
 import { SolicitarCreacionFincaService } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.service';
+import { GestionarFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.component';
 import { GestionarFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.service';
+import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.compontent';
 import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
 
+
+
+//IMPORTS MODULO CONFIGURACION SECTORES
+import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.component';
+import { GestionarSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
+import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
+import { CrearSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.service';
+
+
+//IMPORTS MODULO OBTENCION INFORMACION EXTERNA
+import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
+import { CambiarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Cambiar_Proveedor_Informacion/cambiar.proveedor.component';
+import { GestionarProveedorInformacionService } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
+
+
+import { TablasComponent } from './tablas/tablas.component';
 
 /**
  * Root Module
@@ -171,16 +195,31 @@ import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Ge
     //COMPONENTS MODULO SEGURIDAD
 
     IniciarSesionComponent,
+    PerfilUsuarioComponent,
     ModificarUsuarioComponent,
     RegistrarUsuarioComponent,
     RecuperarCuentaComponent,
+    ModificarContraseniaComponent,
 
 
     //COMPONENTS MODULO CONFIGURACION FINCA
     HomeFincaComponent,
     HomeFincaDetalleComponent,
-    SolicitarCreacionFincaComponent
+    SolicitarCreacionFincaComponent,
+    GestionarFincaComponent,
+    GestionarUsuarioFincaComponent,
+
+
+    //COMPONENTS MODULO CONFIGURACION SECTORES
+    GestionarSectorFincaComponent,
+    CrearSectorFincaComponent,
     
+
+    TablasComponent,
+
+    //COMPONENTS MODULO OBTENCION INFORMACION EXTERNA
+    ModificarProveedorInformacionComponent,
+    CambiarProveedorInformacionComponent
   ],
   imports: [
     // Angular Imports
@@ -206,6 +245,8 @@ import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Ge
     FileUploadModule,
     CustomFormsModule,
     TreeModule,
+
+    Ng2SmartTableModule,
     
     // Replace to your Google map API key.
     AgmCoreModule.forRoot({
@@ -224,6 +265,7 @@ import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Ge
     AppService,
     IniciarSesionService,
     ModificarUsuarioService,
+    PerfilUsuarioService,
     RegistrarUsuarioService,
     RecuperarCuentaService,
     FinalizarSesionService,
@@ -233,7 +275,14 @@ import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Ge
     HomeFincaDetalleService,
     SolicitarCreacionFincaService,
     GestionarFincaService,
-    GestionarUsuarioFincaService
+    GestionarUsuarioFincaService,
+
+    //LLAMADAS MODULO CONFIGURACION SECTORES
+    GestionarSectorFincaService,
+    CrearSectorFincaService,
+
+    //LLAMADAS MODULO OBTENCION INFORMACION EXTERNA
+    GestionarProveedorInformacionService
     
   ],
   entryComponents: [

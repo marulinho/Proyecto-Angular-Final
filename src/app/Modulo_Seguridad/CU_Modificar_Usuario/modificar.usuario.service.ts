@@ -5,7 +5,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class ModificarUsuarioService extends RestBaseService{
-  private obtenerUsuarioActualUrl="/mostrarUsuario/"
   private modificarUrl = '/modificarUsuario/';
   private eliminarUrl = '/eliminarUsuario/';
   private modificarContraseniaUrl='/cambiarContrasenia/';
@@ -15,15 +14,8 @@ export class ModificarUsuarioService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  obtenerUsuarioActual(): Promise<Usuario> {
-    return this.http.get(ModificarUsuarioService.serverUrl + this.obtenerUsuarioActualUrl, this.getRestHeader())
-    .toPromise()
-    .then(response => {return response.json() as Usuario;})
-    .catch(this.handleError);
-  }
-
   modificarUsuario(nombre:string,apellido:string,domicilio:string,
-      fechaNac:string,email:string,dni:number,cuit:number):Promise<Usuario> {
+      fechaNac:string,email:string,dni:number,cuit:string):Promise<Usuario> {
           const data = {
             'email':email,
             'nombre': nombre,

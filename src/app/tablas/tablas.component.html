@@ -1,0 +1,10 @@
+<!--SECCION PERFIL FINCA-->
+<div class="sign-container">
+        <md-card class="page-card">
+                <md-card-title>Perfil Finca</md-card-title>
+                <md-card-content>
+                    <input #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearch(search.value)">
+                    <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+                </md-card-content>
+        </md-card>
+</div>
