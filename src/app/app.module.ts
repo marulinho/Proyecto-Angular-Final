@@ -112,6 +112,7 @@ import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Ge
 
 
 //IMPORTS MODULO CONFIGURACION SECTORES
+import { HomeSectorComponent } from './Modulo_Configuracion_Sectores/Home_Sector/home.sector.component';
 import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.component';
 import { GestionarSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
 import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
@@ -211,6 +212,7 @@ import { TablasComponent } from './tablas/tablas.component';
 
 
     //COMPONENTS MODULO CONFIGURACION SECTORES
+    HomeSectorComponent,
     GestionarSectorFincaComponent,
     CrearSectorFincaComponent,
     

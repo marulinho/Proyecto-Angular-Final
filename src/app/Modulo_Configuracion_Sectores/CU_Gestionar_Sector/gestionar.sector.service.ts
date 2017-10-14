@@ -7,6 +7,9 @@ import 'rxjs/add/operator/toPromise';
 export class GestionarSectorFincaService extends RestBaseService{
   private mostrarSectoresUrl = "/mostrarSectores/";
   private eliminarSectorUrl = "/eliminarSector/";
+  private buscarSectorIdUrl="/buscarSectorId/";
+  private modificarSectorUrl="/modificarSector/";
+
 
   constructor(private http: Http) {super();}
 
@@ -17,6 +20,29 @@ export class GestionarSectorFincaService extends RestBaseService{
     return this.http.post(GestionarSectorFincaService.serverUrl + this.mostrarSectoresUrl, JSON.stringify(data), this.getRestHeader())
     .toPromise()
     .then(response => {return response.json() as Sector;})
+    .catch(this.handleError);
+  }
+
+  buscarSectorId(id:number):Promise<Sector> {
+    const data = {
+      'idSector':id
+    };
+    return this.http.post(GestionarSectorFincaService.serverUrl + this.buscarSectorIdUrl, JSON.stringify(data), this.getRestHeader())
+    .toPromise()
+    .then(response => {return response.json() as Sector;})
+    .catch(this.handleError);
+  }
+
+  modificarSector(id:number,nombre:string,descripcion:string,superficie:number):Promise<any> {
+    const data = {
+      'idSector':id,
+      'nombreSector':nombre,
+      'descripcionSector':descripcion,
+      'superficieSector':superficie
+    };
+    return this.http.post(GestionarSectorFincaService.serverUrl + this.modificarSectorUrl, JSON.stringify(data), this.getRestHeader())
+    .toPromise()
+    .then(response => {return response.json() as any;})
     .catch(this.handleError);
   }
 
@@ -33,6 +59,7 @@ export class GestionarSectorFincaService extends RestBaseService{
     
   }
 
+ 
   
 }
 

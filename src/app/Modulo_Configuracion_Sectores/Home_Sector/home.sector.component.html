@@ -1,0 +1,39 @@
+<!--SECCION HOME SECTOR-->
+<div *ngIf="getSectorSeleccionado()" class="page-content">
+    <md-card class="page-card">
+      <md-card-title>
+        Resumen del Sector
+        <a class="example-tooltip-host" mdTooltip={{tooltipEditarSector}} [mdTooltipPosition]="position">
+            <img src="assets/icons/editar.png" [routerLink]="['/gestionarSectorFinca/',idSector]">
+        </a>
+
+        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarSector}} [mdTooltipPosition]="position" (click)="apretarEliminarIcono()">
+            <img src="assets/icons/delete.png">
+        </a>
+      </md-card-title>
+      <md-card-content>
+        <section *ngIf="errorMessageHomeSector" class="bs">
+            <div class="bd-example" data-example-id="">
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{errorMessageHomeSector}}</strong>
+                </div>
+            </div><br>
+        </section>
+        
+        <h2>Datos Sector</h2>
+
+        <label id="atributo" class="col-2">Nombre:</label>
+        <label class="col-3">{{sector.nombreSector}}</label><br>
+
+        <label id=atributo class="col-2">Descripci&oacute;n:</label>
+        <label id=valor class="col-3">{{sector.descripcionSector}}</label><br>
+
+        <label id=atributo class="col-2">N&uacute;mero:</label>
+        <label id=valor class="col-3">{{sector.numeroSector}}</label><br>
+
+        <label id=atributo class="col-2">Superficie:</label>
+        <label id=valor class="col-3">{{sector.superficieSector}}</label><br>
+        
+      </md-card-content> 
+    </md-card>
+  </div>

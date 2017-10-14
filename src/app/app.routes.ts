@@ -71,6 +71,7 @@ import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_
 
 
 //IMPORTS MODULO CONFIGURACION SECTORES
+import { HomeSectorComponent } from './Modulo_Configuracion_Sectores/Home_Sector/home.sector.component';
 import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.component';
 import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
 
@@ -136,9 +137,13 @@ export const ROUTES: Routes = [
    { path:'crearFinca', component: SolicitarCreacionFincaComponent },
    { path:'gestionarFinca/:idFinca', component: GestionarFincaComponent },
    { path:'gestionarUsuarioFinca/:idFinca', component: GestionarUsuarioFincaComponent},
-   { path:'gestionarSectorFinca/:idSector', component: GestionarSectorFincaComponent},
-   { path:'crearSectorFinca/:idFinca', component: CrearSectorFincaComponent},
+  
 
+   //MODULO CONFIGURACION SECTORES
+   { path:'homeSector/:idSector' , component: HomeSectorComponent},
+   { path:'crearSectorFinca/:idFinca', component: CrearSectorFincaComponent},
+   { path:'gestionarSectorFinca/:idSector', component: GestionarSectorFincaComponent},
+   
 
    {path:'tablas',component:TablasComponent},
 

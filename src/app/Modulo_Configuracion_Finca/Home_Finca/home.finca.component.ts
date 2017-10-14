@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Ng2SmartTableModule,LocalDataSource } from 'ng2-smart-table';
 import { HomeFincaService, Finca } from './home.finca.service';
 import { AppService } from '../../app.service';
 
@@ -18,10 +19,47 @@ export class HomeFincaComponent implements OnInit{
 
 
     //ATRIBUTOS LLAMADA FINCAS USUARIO
-    fincasUsuario:Finca;
+    fincasUsuario=[];
     fincasUsuarioSeleccionado:Boolean;
     rolesUnicos=new Array;
     errorMessageFincasUsuario:string;
+    source: LocalDataSource;
+    
+    settings = {
+        actions:{
+              columnTitle:'Acción',
+              add:false,
+              delete:false,
+              edit:false
+          }, 
+
+        columns: {
+          nombreFinca: {
+            title: 'Nombre',
+            filter: false,
+            width:'37%'
+          },
+          nombreRol: {
+            title: 'Rol',
+            filter: false,
+            width:'36%'
+          },
+          idFinca: {
+            title: 'Ubicación',
+            filter: false,
+          },
+          acciones:{
+            title:'Acción',
+            filter:false,
+            type:'html',
+            valuePrepareFunction: (value=10)=>{
+                console.log("vvalor: "+value);
+                return '<a href="http://localhost:4200/#/gestionarFinca/${idFinca}"><img src="assets/icons/ver.png"></a>'
+            }
+          }
+        }
+      };
+    
 
     //ATRIBUTOS LLAMADA FINCAS ENCARGADO
     fincasEncargado:Finca;
@@ -73,13 +111,15 @@ export class HomeFincaComponent implements OnInit{
                         }
                         else{
                             this.fincasUsuario=response.datos_operacion;
-                            this.obtenerRoles();    
+                            this.source = new LocalDataSource(this.fincasUsuario);                            
+                            this.fincasUsuarioSeleccionado=true;
+                            /*this.obtenerRoles();    
                             if(this.rolesUnicos.length==0){
                                 this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
                             }
                             else{
                                 this.fincasUsuarioSeleccionado=true
-                            }                                                    
+                            } */                                                   
                             
                         }
                     }
@@ -92,6 +132,29 @@ export class HomeFincaComponent implements OnInit{
              
 
         
+    }
+
+    onSearch(query: string = '') {
+        if(query==""){
+          this.source = new LocalDataSource(this.fincasUsuario);
+        }
+        else{
+          this.source.setFilter([
+            {
+              field: 'nombreFinca',
+              search: query,
+            },
+            {
+              field: 'nombreRol',
+              search: query,
+            },
+            {
+              field: 'idFinca',
+              search: query,
+            }
+          ],false);
+        }
+   
     }
 
     getFincasEncargado(){

@@ -10,24 +10,15 @@ import { GestionarUsuarioFincaService, UsuarioNoEncargado } from '../Modulo_Conf
   
 })
 export class TablasComponent implements OnInit  {
-  mode:'external'
+ 
+  
   settings = {
-    edit:{
-      editButtonContent:'<i class="material-icons">mode_edit</i>',
-          
-     /* editButtonContent:'<a class="example-tooltip-host" mdTooltip=Editar Usuario [mdTooltipPosition]=above>
-                            <img src="assets/icons/editar.png" [routerLink]="['/gestionarFinca/', idFinca]">
-                        </a>'*/
-    },  
     actions:{
           columnTitle:'Accion',
           add:false,
           delete:false,
           edit:false
-      },
-    
-
-  
+      }, 
     columns: {
       nombre: {
         title: 'Nombre',
@@ -53,7 +44,6 @@ export class TablasComponent implements OnInit  {
       }
     }
   };
-
 
   data = [];
 

@@ -50,9 +50,7 @@ export class HomeFincaDetalleComponent implements OnInit{
     //ATRIBUTOS SECTORES FINCA
         errorMessageSectoresFinca="";
         tooltipVerSector='Ver Sector';
-        tooltipAgregarSector='Agregar Sector';
-        tooltipEditarSector='Editar Sector';
-        tooltipEliminarSector='Eliminar Sector';    
+        tooltipAgregarSector='Agregar Sector';    
         sectoresFincaSeleccionado:Boolean;
         sectoresFinca:Sector;
         idSector:number;

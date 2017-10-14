@@ -1,0 +1,38 @@
+<!--SECCION MODIFICAR SECTOR-->
+<div *ngIf="getSectorSeleccionado()" class="sign-container">
+    
+        <md-card class="page-card">
+            <md-card-title>Modificar Sector</md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessageGestionarSectorFinca" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessageGestionarSectorFinca}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+    
+                <h2>Datos Sector</h2>
+
+                <md-input-container>
+                    <input mdInput placeholder="Nombre" type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                </md-input-container>
+             
+                <md-input-container>
+                    <input mdInput placeholder="Descripci&oacute;n" type="text" [(ngModel)]="descripcion" name="descripcion" required><br>
+                </md-input-container>
+
+                <md-input-container>
+                    <input mdInput placeholder="Superficie en hect&acute;reas" type="number" [(ngModel)]="superficie" name="superficie" required><br>
+                </md-input-container>
+      
+    
+            </md-card-content>
+            <md-card-actions>
+                <button md-raised-button (click)="apretarModificarSector()">MODIFICAR</button>
+                <button md-raised-button (click)="apretarSalir()">SALIR</button>
+            </md-card-actions>
+            <md-card-footer></md-card-footer>
+        </md-card>
+    
+    </div>

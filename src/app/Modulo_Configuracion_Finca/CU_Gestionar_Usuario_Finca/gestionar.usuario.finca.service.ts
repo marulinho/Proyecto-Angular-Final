@@ -10,7 +10,7 @@ export class GestionarUsuarioFincaService extends RestBaseService{
   private buscarUsuarioNoFincaUrl="/buscarUsuariosNoFinca/";
   private agregarUsuarioFincaUrl = '/agregarUsuarioFinca/';
   private modificarRolUsuarioFincaUrl="/modificarRolUsuario/";
-  
+  private buscarRolesUrl="/buscarRoles/";
 
 
   constructor(private http: Http) {super();}
@@ -88,13 +88,13 @@ export class GestionarUsuarioFincaService extends RestBaseService{
         .catch(this.handleError);
   }
 
+  buscarRoles(){
+    return this.http.get(GestionarUsuarioFincaService.serverUrl + this.buscarRolesUrl, this.getRestHeader())
+    .toPromise()
+    .then(response => {return response.json() as Roles;})
+    .catch(this.handleError);
+  }
 
-
-  
-
-    
-
-    
 }
 
 export interface Usuario {
@@ -105,6 +105,12 @@ export interface Usuario {
 }
 
 export interface UsuarioNoEncargado{
+  resultado:boolean;
+  datos_operacion;
+  detalle_operacion;
+}
+
+export interface Roles{
   resultado:boolean;
   datos_operacion;
   detalle_operacion;

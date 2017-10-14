@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../../app.service';
-import { GestionarUsuarioFincaService, Usuario } from './gestionar.usuario.finca.service';
+import { GestionarUsuarioFincaService, Usuario,Roles } from './gestionar.usuario.finca.service';
 
 @Component({
     selector:'gestionar-usuario-finca',
@@ -28,9 +28,7 @@ export class GestionarUsuarioFincaComponent implements OnInit{
     errorMessageAgregarUsuarioNoFinca="";
     rolSeleccionado: string;  
     usuario:string;  
-    roles=[
-      {nombreRol:'stakeholder'}
-    ];
+    roles:Roles;
       
     
 
@@ -66,7 +64,18 @@ export class GestionarUsuarioFincaComponent implements OnInit{
     }
 
     ngOnInit(){
-
+      this.gestionarUsuarioFincaService.buscarRoles()
+          .then(
+            response=>{
+              if(response.detalle_operacion=="No hay datos"){
+                this.errorMessageAgregarUsuarioNoFinca="No hay roles disponibles para asignar.";
+              }
+              else{
+                this.roles=response.datos_operacion;
+              }
+              
+            }
+          )
   
     }
 

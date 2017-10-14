@@ -73,29 +73,11 @@
           </div><br>
         </section>
         <section *ngIf="getFincasUsuario()" class="bs">
-          <table class="table table-striped table-hover table-card">
-            <thead>
-              <tr>
-                <th style="width:37%;">Nombre</th>
-                <th style="width:36%;">Tama&ntilde;o</th>
-                <th>Ubicaci&oacute;n</th>
-                <th class="actions">Acci&oacute;n</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let fincaUsuario of fincasUsuario">
-                <td>{{fincaUsuario.nombre}}</td>
-                <td>{{fincaUsuario.tamanio}}</td>
-                <td>{{fincaUsuario.ubicacion}}</td>
-                <td>
-                  <a md-icon-button>
-                    <md-icon>remove_red_eye</md-icon>
-                  </a>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
+          <md-input-container>
+            <input mdInput #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearch(search.value)"><br>
+          </md-input-container>
+          <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+          
         </section>
       </md-card-content>
     </md-card>

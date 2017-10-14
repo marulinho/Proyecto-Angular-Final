@@ -166,12 +166,8 @@
                                                                 <td>{{sectorFinca.superficieSector}}</td>
                                                                 <td>
 
-                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarSector}} [mdTooltipPosition]="position">
-                                                                        <img src="assets/icons/editar.png" [routerLink]="['/gestionarSectorFinca/', sectorFinca.idSector]">
-                                                                </a>
-
-                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarSector}} [mdTooltipPosition]="position" (click)="apretarEliminarSectorIcono(sectorFinca.idSector)">
-                                                                        <img src="assets/icons/delete.png">
+                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipVerSector}} [mdTooltipPosition]="position">
+                                                                        <img src="assets/icons/ver.png" [routerLink]="['/homeSector/', sectorFinca.idSector]">
                                                                 </a>
                                                                 </td>
                                                         </tr>
