@@ -65,7 +65,7 @@
       </md-card-title>
 
       <md-card-content>
-        <section *ngIf="errorMessageFincasUsuario" class="bs">
+       <!-- <section *ngIf="errorMessageFincasUsuario" class="bs">
           <div class="bd-example" data-example-id="">
             <div class="alert alert-danger" role="alert">
               <strong>{{errorMessageFincasUsuario}}</strong>
@@ -79,6 +79,41 @@
           <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
           
         </section>
+      -->
+
+      <section *ngIf="errorMessageFincasUsuario" class="bs">
+        <div class="bd-example" data-example-id="">
+          <div class="alert alert-danger" role="alert">
+            <strong>{{errorMessageFincasUsuario}}</strong>
+          </div>
+        </div><br>
+      </section>
+      <section *ngIf="getFincasUsuario()" class="bs">
+        <table class="table table-striped table-hover table-card">
+          <thead>
+            <tr>
+              <th style="width:37%;">Nombre</th>
+              <th style="width:36%;">Ubicaci&oacute;n</th>
+              <th>Rol</th>
+              <th class="actions">Acci&oacute;n</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fincaSinRolEncargado of fincasSinRolEncargado">
+              <td>{{fincaSinRolEncargado.nombreFinca}}</td>
+              <td>{{fincaSinRolEncargado.ubicacion}}</td>
+              <td>{{fincaSinRolEncargado.nombreRol}}</td>
+              <td>
+                <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
+                <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaSinRolEncargado.idFinca]">
+                
+              </a>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </section>
       </md-card-content>
     </md-card>
 

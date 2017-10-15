@@ -6,7 +6,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { HomeFincaDetalleService } from './home.finca.detalle.service';
 import { GestionarFincaService,Finca } from '../CU_Gestionar_Finca/gestionar.finca.service';
-import { GestionarUsuarioFincaService, UsuarioNoEncargado } from '../CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
+import { GestionarUsuarioFincaService, Usuario, Roles } from '../CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
 import { GestionarUsuarioFincaComponent } from '../CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.component';
 import { GestionarSectorFincaService, Sector } from'../../Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
 import { GestionarProveedorInformacionService, ProveedorInformacion } from '../../Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
@@ -45,7 +45,9 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipEditarUsuario='Editar Usuario';
         tooltipEliminarUsuario='Eliminar Usuario';    
         usuariosFincaSeleccionado:Boolean;
-        usuariosFinca:UsuarioNoEncargado;
+        usuariosFinca:Usuario;
+        roles:Roles;
+        nombreRol:string;
 
     //ATRIBUTOS SECTORES FINCA
         errorMessageSectoresFinca="";
@@ -63,7 +65,7 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipEditarProveedor='Editar Proveedor';
         tooltipEliminarProveedor='Eliminar Proveedor';    
         tooltipCambiarProveedor='Cambiar Proveedor';
-        
+    
     
     constructor(private router:Router,
                 private route:ActivatedRoute,
@@ -109,7 +111,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                     this.errorMessagePerfilFinca=error.error_description;
                 }
             );*/
-        this.gestionarUsuarioFincaService.buscarUsuariosNoEncargado(this.idFinca)
+        this.gestionarUsuarioFincaService.buscarUsuarioFinca(this.idFinca)
             .then(
                 response=>{
                     if(response.detalle_operacion=="No hay datos"){
@@ -203,8 +205,43 @@ export class HomeFincaDetalleComponent implements OnInit{
         this.openDialogEliminarUsuarioFinca();     
     }
 
-    apretarEditarUsuarioIcono(){
-        console.log("apretamos editar usuario finca");
+    apretarEditarUsuarioFincaIcono(id:number){
+        this.idUsuarioFinca=id;
+        this.gestionarUsuarioFincaService.buscarRoles()
+            .then(
+                response=>{
+                        this.roles=response.datos_operacion;
+                        this.perfilFincaSeleccionada=false;
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageUsuarioFinca=error.error_description;
+                }
+            );
+    }
+
+    apretarCambiarRol(){
+        if(this.nombreRol=="" || this.nombreRol==null){
+            this.errorMessageUsuarioFinca="Debe completar todos los campos obligatorios (*).";
+        }
+        else{
+            this.gestionarUsuarioFincaService.modificarRolUsuario(this.idUsuarioFinca,this.idFinca,this.nombreRol)
+                .then(
+                    response=>{
+                        this.refresh();
+                    }
+                )
+                .catch(
+                    error=>{
+                        this.errorMessageUsuarioFinca=error.error_description;
+                    }
+                );
+        }
+    }
+
+    apretarSalir(){
+        this.perfilFincaSeleccionada=true;
     }
 
     apretarEliminarSectorIcono(idSector:number){

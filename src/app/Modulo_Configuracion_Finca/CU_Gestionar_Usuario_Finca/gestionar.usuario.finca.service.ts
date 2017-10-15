@@ -8,6 +8,7 @@ export class GestionarUsuarioFincaService extends RestBaseService{
   private buscarUsuarioNoEncargadoUrl="/buscarUsuariosNoEncargado/";
   private eliminarUsuarioFincaUrl="/eliminarUsuarioFinca/";
   private buscarUsuarioNoFincaUrl="/buscarUsuariosNoFinca/";
+  private buscarUsuarioFincaUrl="/buscarUsuariosFinca/";
   private agregarUsuarioFincaUrl = '/agregarUsuarioFinca/';
   private modificarRolUsuarioFincaUrl="/modificarRolUsuario/";
   private buscarRolesUrl="/buscarRoles/";
@@ -15,7 +16,7 @@ export class GestionarUsuarioFincaService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  buscarUsuariosNoEncargado(idFinca:number):Promise<UsuarioNoEncargado>{
+  buscarUsuariosNoEncargado(idFinca:number):Promise<Usuario>{
     const data = {
       'idFinca': idFinca,
       
@@ -23,7 +24,20 @@ export class GestionarUsuarioFincaService extends RestBaseService{
     return this.http.post(GestionarUsuarioFincaService.serverUrl + this.buscarUsuarioNoEncargadoUrl, JSON.stringify(data), this.getRestHeader())
       .toPromise()
       .then(response => {
-          return response.json() as UsuarioNoEncargado;
+          return response.json() as Usuario;
+      })
+      .catch(this.handleError);
+  }
+
+  buscarUsuarioFinca(idFinca:number):Promise<Usuario>{
+    const data = {
+      'idFinca': idFinca,
+      
+    };
+    return this.http.post(GestionarUsuarioFincaService.serverUrl + this.buscarUsuarioFincaUrl, JSON.stringify(data), this.getRestHeader())
+      .toPromise()
+      .then(response => {
+          return response.json() as Usuario;
       })
       .catch(this.handleError);
   }
@@ -70,9 +84,9 @@ export class GestionarUsuarioFincaService extends RestBaseService{
       .catch(this.handleError);
   }
 
-  modificarRolUsuario(usuario:string,idFinca:number,rol:string):Promise<any> {
+  modificarRolUsuario(idUsuarioFinca:number,idFinca:number,rol:string):Promise<any> {
     const data = {
-        'usuario': usuario,
+        'idUsuarioFinca': idUsuarioFinca,
         'idFinca':idFinca,
         'nombreRol':rol
         
@@ -102,12 +116,6 @@ export interface Usuario {
   datos_operacion;
   detalle_operacion;
   
-}
-
-export interface UsuarioNoEncargado{
-  resultado:boolean;
-  datos_operacion;
-  detalle_operacion;
 }
 
 export interface Roles{

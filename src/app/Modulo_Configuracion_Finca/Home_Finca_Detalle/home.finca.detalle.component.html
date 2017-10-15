@@ -117,8 +117,10 @@
                                                                 <td>{{usuarioFinca.apellido}}, {{usuarioFinca.nombre}}</td>
                                                                 <td>{{usuarioFinca.rol}}</td>
                                                                 <td>
-                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" (click)="apretarEditarUsuarioIcono()">
+                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" 
+                                                                                (click)="apretarEditarUsuarioFincaIcono(usuarioFinca.idUsuarioFinca)">
                                                                                 <img src="assets/icons/editar.png">
+                                                                                
                                                                         </a>
 
                                                                         <a class="example-tooltip-host" mdTooltip={{tooltipEliminarUsuario}} [mdTooltipPosition]="position" (click)="apretarEliminarUsuarioIcono(usuarioFinca.idUsuarioFinca)">
@@ -178,5 +180,38 @@
                         </md-card-content>
                 </md-card>
         </md-card>
+</div>
 
+<!--SECCION MODIFICAR ROL USUARIO-->
+
+<div *ngIf="!getPerfilFincaSeleccionada()" class="sign-container">        
+        <md-card class="page-card">
+                <md-card-title>Modificar Rol Usuario</md-card-title>
+                <md-card-content>
+                        <section *ngIf="errorMessageUsuarioFinca" class="bs">
+                                <div class="bd-example" data-example-id="">
+                                        <div class="alert alert-danger" role="alert">
+                                                <strong>{{errorMessageUsuarioFinca}}</strong>
+                                        </div>
+                                </div><br>
+                        </section>
+
+                        <h2>Datos Roles</h2>
+
+                        <md-select placeholder="Seleccionar Rol" [(ngModel)]="nombreRol" name="nombreRol">
+                                <md-option *ngFor="let rol of roles" [value]="rol.nombreRol" requerid>
+                                        {{rol.nombreRol}}
+                                </md-option>
+                        </md-select>
+                        <br><br>
+
+
+                </md-card-content>
+                <md-card-actions>
+                        <button md-raised-button (click)="apretarCambiarRol()">CAMBIAR</button>
+                        <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                </md-card-actions>
+                <md-card-footer></md-card-footer>
+        </md-card>
+        
 </div>

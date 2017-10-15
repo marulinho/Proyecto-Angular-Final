@@ -23,9 +23,9 @@ export class HomeFincaComponent implements OnInit{
     fincasUsuarioSeleccionado:Boolean;
     rolesUnicos=new Array;
     errorMessageFincasUsuario:string;
-    source: LocalDataSource;
-    
-    settings = {
+    //source: LocalDataSource;
+    fincasSinRolEncargado=[];
+    /*settings = {
         actions:{
               columnTitle:'Acción',
               add:false,
@@ -54,18 +54,18 @@ export class HomeFincaComponent implements OnInit{
             type:'html',
             valuePrepareFunction: (value=10)=>{
                 console.log("vvalor: "+value);
-                return '<a href="http://localhost:4200/#/gestionarFinca/${idFinca}"><img src="assets/icons/ver.png"></a>'
+                return '<a href="http://localhost:4200/#/homeFincaDetalle/${idFinca}"><img src="assets/icons/ver.png"></a>'
             }
           }
         }
       };
-    
+    */
 
     //ATRIBUTOS LLAMADA FINCAS ENCARGADO
     fincasEncargado:Finca;
     fincasEncargadoSeleccionado:Boolean;
     errorMessageFincasEncargado:string;
-
+    idFincasEncargado=[];
 
     
     
@@ -93,6 +93,7 @@ export class HomeFincaComponent implements OnInit{
                     }
                     else{
                         this.fincasEncargado=response.datos_operacion;
+                        this.obtenerIdFincaEncargados();
                         this.fincasEncargadoSeleccionado=true;
                     }
                 }
@@ -111,7 +112,8 @@ export class HomeFincaComponent implements OnInit{
                         }
                         else{
                             this.fincasUsuario=response.datos_operacion;
-                            this.source = new LocalDataSource(this.fincasUsuario);                            
+                            //this.source = new LocalDataSource(this.fincasUsuario);                            
+                            this.obtenerFincasNoEncargado();                            
                             this.fincasUsuarioSeleccionado=true;
                             /*this.obtenerRoles();    
                             if(this.rolesUnicos.length==0){
@@ -134,7 +136,7 @@ export class HomeFincaComponent implements OnInit{
         
     }
 
-    onSearch(query: string = '') {
+    /*onSearch(query: string = '') {
         if(query==""){
           this.source = new LocalDataSource(this.fincasUsuario);
         }
@@ -155,7 +157,7 @@ export class HomeFincaComponent implements OnInit{
           ],false);
         }
    
-    }
+    }*/
 
     getFincasEncargado(){
         return this.fincasEncargadoSeleccionado;
@@ -200,6 +202,31 @@ export class HomeFincaComponent implements OnInit{
         }
         console.log("roles unicos: "+this.rolesUnicos);
    
+    }
+
+    obtenerIdFincaEncargados(){
+        let longitud=Object.keys(this.fincasEncargado).length;
+        for(var i=0;i<longitud;i++){
+            let actual = this.fincasEncargado[i]['idFinca'];
+            this.idFincasEncargado.push(actual);
+        }
+        console.log("Fincas encargado: "+this.idFincasEncargado);
+    }
+
+    obtenerFincasNoEncargado(){
+        let longitud = Object.keys(this.fincasUsuario).length;
+        console.log("fincas: "+longitud);
+
+        for(var i=0;i<longitud;i++){
+            let actual=this.fincasUsuario[i]['idFinca'];
+            if(this.idFincasEncargado.includes(actual)==true){
+                //no hago nada
+            }
+            else{
+                this.fincasSinRolEncargado.push(this.fincasUsuario[i]);
+            }
+        }
+        console.log("Fincas sin rol encargado: "+this.fincasSinRolEncargado);
     }
 }
 

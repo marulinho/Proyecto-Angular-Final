@@ -108,7 +108,7 @@ import { GestionarFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestion
 import { GestionarFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.service';
 import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.compontent';
 import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
-
+import { ModificarRolUsuarioComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/Modificar_Rol_Usuario_Finca/modificar.rol.usuario.component';
 
 
 //IMPORTS MODULO CONFIGURACION SECTORES
@@ -209,6 +209,7 @@ import { TablasComponent } from './tablas/tablas.component';
     SolicitarCreacionFincaComponent,
     GestionarFincaComponent,
     GestionarUsuarioFincaComponent,
+    ModificarRolUsuarioComponent,
 
 
     //COMPONENTS MODULO CONFIGURACION SECTORES

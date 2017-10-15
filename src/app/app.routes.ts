@@ -68,6 +68,7 @@ import { HomeFincaDetalleComponent } from './Modulo_Configuracion_Finca/Home_Fin
 import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
 import { GestionarFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.component';
 import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.compontent';
+import { ModificarRolUsuarioComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/Modificar_Rol_Usuario_Finca/modificar.rol.usuario.component';
 
 
 //IMPORTS MODULO CONFIGURACION SECTORES
@@ -137,7 +138,7 @@ export const ROUTES: Routes = [
    { path:'crearFinca', component: SolicitarCreacionFincaComponent },
    { path:'gestionarFinca/:idFinca', component: GestionarFincaComponent },
    { path:'gestionarUsuarioFinca/:idFinca', component: GestionarUsuarioFincaComponent},
-  
+   { path:'modificarRolUsuario/:idUsuarioFinca', component: ModificarRolUsuarioComponent},
 
    //MODULO CONFIGURACION SECTORES
    { path:'homeSector/:idSector' , component: HomeSectorComponent},

@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Ng2SmartTableModule,LocalDataSource } from 'ng2-smart-table';
 import { Router } from '@angular/router';
-import { GestionarUsuarioFincaService, UsuarioNoEncargado } from '../Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
+import { GestionarUsuarioFincaService, Usuario } from '../Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
 
 @Component({
   selector: 'basic-example-source',
