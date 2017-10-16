@@ -62,11 +62,21 @@ export class HomeFincaComponent implements OnInit{
     */
 
     //ATRIBUTOS LLAMADA FINCAS ENCARGADO
-    fincasEncargado:Finca;
+    fincasEncargado=[];
     fincasEncargadoSeleccionado:Boolean;
     errorMessageFincasEncargado:string;
     idFincasEncargado=[];
 
+    //ATRIBUTOS FINCAS PENDIENTES
+    errorMessageFincasPendientes:string="";
+    fincasPendientesAprobacion=[];   
+    fincasPendientesSeleccionado:Boolean;
+
+    //ATRIBUTOS FINCA DESHABILITADAS
+    errorMessageFincasDeshabilitadas:string="";
+    fincasDeshabilitadas=[];   
+    tooltipHabilitarFinca='Habilitar Finca';
+    fincasDeshabilitadasSeleccionado:Boolean;
     
     
     constructor(private router:Router,
@@ -79,61 +89,30 @@ export class HomeFincaComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.errorMessageFincasEncargado="";        
-        this.errorMessageFincasUsuario="";
-        this.fincasEncargadoSeleccionado=false;
-        this.fincasUsuarioSeleccionado=false;
 
-        this.homeFincaService.obtenerFincasEncargado()
-            .then(
+        this.homeFincaService.obtenerFincasUsuario()
+        .then(
                 response=>{
-                    
                     if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
                         this.errorMessageFincasEncargado="No existen fincas asociadas al usuario con el rol especificado.";
+                        this.errorMessageFincasDeshabilitadas="No existen fincas asociadas al usuario con el estado especificado.";
+                        this.errorMessageFincasPendientes="No existen fincas asociadas al usuario con el estado especificado.";
                     }
                     else{
-                        this.fincasEncargado=response.datos_operacion;
-                        this.obtenerIdFincaEncargados();
-                        this.fincasEncargadoSeleccionado=true;
+                        this.fincasUsuario=response.datos_operacion;
+                        //this.source = new LocalDataSource(this.fincasUsuario);                            
+                        this.obtenerFincasNoEncargado();                            
+                        
+
                     }
                 }
             )
-            .catch(
-                error=>{
-                    this.errorMessageFincasEncargado=error.error_description;
-                }
-            );
-
-        this.homeFincaService.obtenerFincasUsuario()
-            .then(
-                    response=>{
-                        if(response.detalle_operacion=="No hay datos"){
-                            this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
-                        }
-                        else{
-                            this.fincasUsuario=response.datos_operacion;
-                            //this.source = new LocalDataSource(this.fincasUsuario);                            
-                            this.obtenerFincasNoEncargado();                            
-                            this.fincasUsuarioSeleccionado=true;
-                            /*this.obtenerRoles();    
-                            if(this.rolesUnicos.length==0){
-                                this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
-                            }
-                            else{
-                                this.fincasUsuarioSeleccionado=true
-                            } */                                                   
-                            
-                        }
-                    }
-                )
-            .catch(
-                error=>{
-                    this.errorMessageFincasUsuario=error.error_description;
-                }
-            );
-             
-
-        
+        .catch(
+            error=>{
+                this.errorMessageFincasUsuario=error.error_description;
+            }
+        );
     }
 
     /*onSearch(query: string = '') {
@@ -167,66 +146,96 @@ export class HomeFincaComponent implements OnInit{
         return this.fincasUsuarioSeleccionado;
     }
 
+    getFincasPendientes(){
+        return this.fincasPendientesSeleccionado;
+    }
+
+    getFincasDeshabilitadas(){
+        return this.fincasDeshabilitadasSeleccionado;
+    }
 
     apretarNuevaFincaIcono(){
         console.log("apretamos crear nueva finca");
         this.router.navigate(['/crearFinca/']);
     }
 
-    obtenerRoles(){
-        let roles = new Array;
-        let longitud= Object.keys(this.fincasUsuario).length;
-        
-        //OBTENGO TODOS LOS ROLES DE LA PETICION
-        for(var i=0;i<longitud;i++){
-            roles.push(this.fincasUsuario[i]['nombreRol']);
-        }
+    obtenerFincasNoEncargado(){
+        let fincas=this.fincasUsuario;
+        let longitud=Object.keys(fincas).length;
+        console.log("logitud "+longitud);
 
-        //OBTENGO LOS ROLES UNICOS SIN TENER EN CUENTA EL ENCARGADO
-        for(var j=0;j<longitud;j++){
-            let actual = roles[j];
-            console.log("posicion "+j+ "valor: "+actual);
-            if(actual=="encargado"){
-                //no hago nada
-            }
-            else{
-                if(this.rolesUnicos.includes(actual)==true){
-                    console.log("roles unicos: "+this.rolesUnicos);
-                    console.log("el valor "+actual +" ya se encuentra en roles unicos. Intento "+j);
+        for(var i=0;i<longitud;i++){
+            let estadoActual= fincas[i]['estadoFinca'];
+            let rolActual= fincas[i]['nombreRol'];
+
+            if(estadoActual=="habilitado"){
+                if(rolActual=="encargado"){
+                    this.fincasEncargado.push(fincas[i]);
                 }
                 else{
-                    console.log("el valor "+actual+" no se encuentra. Posicion "+j);
-                    this.rolesUnicos.push(actual);
+                    this.fincasSinRolEncargado.push(fincas[i]);
+                }
+            }
+            else{
+                if(estadoActual=="deshabilitado"){
+                    this.fincasDeshabilitadas.push(fincas[i]);
+                }
+                else{
+                    if(estadoActual=="pendienteAprobacion"){
+                        this.fincasPendientesAprobacion.push(fincas[i]);
+                    }
                 }
             }
         }
-        console.log("roles unicos: "+this.rolesUnicos);
-   
+        //HABILITACION DE LA TABLA FINCAS ENCARGADO
+        if(this.fincasEncargado.length==0){
+            this.errorMessageFincasEncargado="No existen fincas asociadas al usuario con el rol especificado.";
+        }
+        else{
+            this.fincasEncargadoSeleccionado=true;            
+        }
+
+        //HABILITACION DE LA TABLA FINCAS USUARIOS
+        if(this.fincasSinRolEncargado.length==0){
+            this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
+        }
+        else{
+            this.fincasUsuarioSeleccionado=true;
+        }
+
+        //HABILITACION DE LA TABLA FINCAS PENDIENTES
+        if(this.fincasPendientesAprobacion.length==0){
+            this.errorMessageFincasPendientes="No existen fincas asociadas al usuario con el estado especificado.";
+        }
+        else{
+            this.fincasPendientesSeleccionado=true;    
+        }
+
+        //HABILITACION DE LA TABLA FINCAS DESHABILITADAS
+        if(this.fincasDeshabilitadas.length==0){
+            this.errorMessageFincasDeshabilitadas="No existen fincas asociadas al usuario con el estado especificado.";
+        }
+        else{
+            this.fincasDeshabilitadasSeleccionado=true;
+        }
     }
 
-    obtenerIdFincaEncargados(){
-        let longitud=Object.keys(this.fincasEncargado).length;
-        for(var i=0;i<longitud;i++){
-            let actual = this.fincasEncargado[i]['idFinca'];
-            this.idFincasEncargado.push(actual);
-        }
-        console.log("Fincas encargado: "+this.idFincasEncargado);
+    apretarHabilitarFinca(idFinca:number){
+        this.homeFincaService.habilitarFinca(idFinca)
+            .then(
+                response=>{
+                    this.refresh();
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageFincasDeshabilitadas=error.error_description;
+                }
+            );
     }
 
-    obtenerFincasNoEncargado(){
-        let longitud = Object.keys(this.fincasUsuario).length;
-        console.log("fincas: "+longitud);
-
-        for(var i=0;i<longitud;i++){
-            let actual=this.fincasUsuario[i]['idFinca'];
-            if(this.idFincasEncargado.includes(actual)==true){
-                //no hago nada
-            }
-            else{
-                this.fincasSinRolEncargado.push(this.fincasUsuario[i]);
-            }
-        }
-        console.log("Fincas sin rol encargado: "+this.fincasSinRolEncargado);
+    refresh(): void {
+        window.location.reload();
     }
 }
 

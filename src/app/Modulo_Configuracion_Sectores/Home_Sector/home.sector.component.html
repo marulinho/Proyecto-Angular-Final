@@ -1,39 +1,137 @@
 <!--SECCION HOME SECTOR-->
 <div *ngIf="getSectorSeleccionado()" class="page-content">
     <md-card class="page-card">
-      <md-card-title>
-        Resumen del Sector
-        <a class="example-tooltip-host" mdTooltip={{tooltipEditarSector}} [mdTooltipPosition]="position">
+        <md-card-title>
+            Resumen del Sector
+            <a class="example-tooltip-host" mdTooltip={{tooltipEditarSector}} [mdTooltipPosition]="position">
             <img src="assets/icons/editar.png" [routerLink]="['/gestionarSectorFinca/',idSector]">
         </a>
 
-        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarSector}} [mdTooltipPosition]="position" (click)="apretarEliminarIcono()">
+            <a class="example-tooltip-host" mdTooltip={{tooltipEliminarSector}} [mdTooltipPosition]="position" (click)="apretarEliminarIcono()">
             <img src="assets/icons/delete.png">
         </a>
-      </md-card-title>
-      <md-card-content>
-        <section *ngIf="errorMessageHomeSector" class="bs">
-            <div class="bd-example" data-example-id="">
-                <div class="alert alert-danger" role="alert">
-                    <strong>{{errorMessageHomeSector}}</strong>
-                </div>
-            </div><br>
-        </section>
-        
-        <h2>Datos Sector</h2>
+        </md-card-title>
+        <md-card-content>
+            <section *ngIf="errorMessageHomeSector" class="bs">
+                <div class="bd-example" data-example-id="">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{errorMessageHomeSector}}</strong>
+                    </div>
+                </div><br>
+            </section>
 
-        <label id="atributo" class="col-2">Nombre:</label>
-        <label class="col-3">{{sector.nombreSector}}</label><br>
+            <h2>Datos Sector</h2>
 
-        <label id=atributo class="col-2">Descripci&oacute;n:</label>
-        <label id=valor class="col-3">{{sector.descripcionSector}}</label><br>
+            <label id="atributo" class="col-2">Nombre:</label>
+            <label class="col-3">{{sector.nombreSector}}</label><br>
 
-        <label id=atributo class="col-2">N&uacute;mero:</label>
-        <label id=valor class="col-3">{{sector.numeroSector}}</label><br>
+            <label id=atributo class="col-2">Descripci&oacute;n:</label>
+            <label id=valor class="col-3">{{sector.descripcionSector}}</label><br>
 
-        <label id=atributo class="col-2">Superficie:</label>
-        <label id=valor class="col-3">{{sector.superficieSector}}</label><br>
-        
-      </md-card-content> 
+            <label id=atributo class="col-2">N&uacute;mero:</label>
+            <label id=valor class="col-3">{{sector.numeroSector}}</label><br>
+
+            <label id=atributo class="col-2">Superficie:</label>
+            <label id=valor class="col-3">{{sector.superficieSector}}</label><br>
+
+        </md-card-content>
+
+
+        <!--SECCION MECANISMO RIEGO SECTOR-->
+        <md-card class="page-card">
+            <md-card-title>
+                Mecanismo Riego 
+                <a *ngIf="!getMecanismoHabilitado()" class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismoSector}} [mdTooltipPosition]="position">
+                            <img src="assets/icons/nuevo.png" [routerLink]="['/asignarMecanismoSector/',idSector,idFinca]">
+                </a>
+
+            </md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessageMecanismoSector" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessageMecanismoSector}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+                <section *ngIf="getMecanismoSeleccionado()" class="bs">
+                    <table class="table table-striped table-hover table-card">
+                        <thead>
+                            <tr>
+                                <th style="width:37%;">Nombre</th>
+                                <th style="width:36%;">Presi&oacute;n</th>
+                                <th>Caudal</th>
+                                <th class="actions">Acci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{mecanismoRiego.nombreTipoMecanismo}}</td>
+                                <td>{{mecanismoRiego.presion}}</td>
+                                <td>{{mecanismoRiego.caudal}}</td>
+                                <td>
+
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarMecanismoSector}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarMecanismoIcono(mecanismoRiego.idMecanismoRiegoFincaSector)">                                                        
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </section>
+            </md-card-content>
+        </md-card>
+
+        <!--SECCION CULTIVO SECTOR-->
+        <md-card class="page-card">
+            <md-card-title>
+                Cultivo 
+                <a *ngIf="!getCultivoExistente()" class="example-tooltip-host" mdTooltip={{tooltipAsignarCultivoSector}} [mdTooltipPosition]="position">
+                            <img src="assets/icons/nuevo.png" [routerLink]="['/asignarCultivo/',idSector,idFinca]">
+                    </a>
+                <a *ngIf="getCultivoExistente()" class="example-tooltip-host" mdTooltip={{tooltipModificarCultivoSector}} [mdTooltipPosition]="position">
+                            <img src="assets/icons/editar.png" [routerLink]="['/gestionarCultivoSector/',idSector,idFinca,cultivosSector.idCultivo]"> 
+                    </a>
+
+            </md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessageCultivoSector" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessageCultivoSector}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+                <section *ngIf="getCultivoSectorSeleccionado()" class="bs">
+                    <table class="table table-striped table-hover table-card">
+                        <thead>
+                            <tr>
+                                <th style="width:37%;">Nombre</th>
+                                <th style="width:36%;">Descripci&oacute;n</th>
+                                <th>Fecha Plantaci&oacute;n</th>
+                                <th class="actions">Acci&oacute;n</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{cultivosSector.nombre}}</td>
+                                <td>{{cultivosSector.descripcion}}</td>
+                                <td>{{cultivosSector.fechaPlantacion.substring(0,10)}}</td>
+                                <td>
+
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarCultivoSector}} [mdTooltipPosition]="position">
+                                            <img src="assets/icons/deshabilitar.png"(click)="apretarDeshabilitarCultivo(cultivosSector.idCultivo)">
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </section>
+            </md-card-content>
+        </md-card>
+
     </md-card>
-  </div>
+</div>

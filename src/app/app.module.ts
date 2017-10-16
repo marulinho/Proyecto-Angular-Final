@@ -109,6 +109,8 @@ import { GestionarFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar
 import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.compontent';
 import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
 import { ModificarRolUsuarioComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/Modificar_Rol_Usuario_Finca/modificar.rol.usuario.component';
+import { AsignarMecanismoRiegoFincaService } from './Modulo_Configuracion_Finca/CU_Asignar_Mecanismo_Riego_Finca/asignar.mecanismo.riego.finca.service';
+import { AgregarMecanismoRiegoFincaComponent } from './Modulo_Configuracion_Finca/CU_Asignar_Mecanismo_Riego_Finca/Agregar_Mecanismo_Riego_Finca/agregar.mecanismo.riego.finca.component';
 
 
 //IMPORTS MODULO CONFIGURACION SECTORES
@@ -117,6 +119,14 @@ import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/C
 import { GestionarSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
 import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
 import { CrearSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.service';
+import { AsignarMecanismoRiegoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.component';
+import { AsignarMecanismoRiegoSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.service';
+import { AsignarCultivoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.component';
+import { AsignarCultivoSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.service';
+
+//IMPORTS MODULO CULTIVO
+import { GestionarCultivoSectorComponent } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.component';
+import { GestionarCultivoSectorService } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.service';
 
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
@@ -216,9 +226,15 @@ import { TablasComponent } from './tablas/tablas.component';
     HomeSectorComponent,
     GestionarSectorFincaComponent,
     CrearSectorFincaComponent,
+    AgregarMecanismoRiegoFincaComponent,
+    AsignarMecanismoRiegoSectorComponent,
+    AsignarCultivoSectorComponent,
     
 
     TablasComponent,
+
+    //COMPONENTS MODULO CULTIVO
+    GestionarCultivoSectorComponent,
 
     //COMPONENTS MODULO OBTENCION INFORMACION EXTERNA
     ModificarProveedorInformacionComponent,
@@ -279,10 +295,17 @@ import { TablasComponent } from './tablas/tablas.component';
     SolicitarCreacionFincaService,
     GestionarFincaService,
     GestionarUsuarioFincaService,
+    AsignarMecanismoRiegoFincaService,
 
     //LLAMADAS MODULO CONFIGURACION SECTORES
     GestionarSectorFincaService,
     CrearSectorFincaService,
+    AsignarMecanismoRiegoSectorService,
+    AsignarCultivoSectorService,
+    
+
+    //LLAMADAS MODULO CULTIVO
+    GestionarCultivoSectorService,
 
     //LLAMADAS MODULO OBTENCION INFORMACION EXTERNA
     GestionarProveedorInformacionService

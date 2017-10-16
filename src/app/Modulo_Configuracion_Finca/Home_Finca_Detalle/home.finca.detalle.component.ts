@@ -10,6 +10,7 @@ import { GestionarUsuarioFincaService, Usuario, Roles } from '../CU_Gestionar_Us
 import { GestionarUsuarioFincaComponent } from '../CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.component';
 import { GestionarSectorFincaService, Sector } from'../../Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
 import { GestionarProveedorInformacionService, ProveedorInformacion } from '../../Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
+import { AsignarMecanismoRiegoFincaService , MecanismoRiego } from '../CU_Asignar_Mecanismo_Riego_Finca/asignar.mecanismo.riego.finca.service';
 
 @Component({
     selector:'homeFincaDetalle',
@@ -21,8 +22,8 @@ import { GestionarProveedorInformacionService, ProveedorInformacion } from '../.
 export class HomeFincaDetalleComponent implements OnInit{
     //ATRIBUTOS GENERALES
         idFinca:number;
+        permisos=[];
         position = 'above';    
-        permisos = new Array;
         title:string="";
         description:string="";
         option1:string="";
@@ -45,6 +46,7 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipEditarUsuario='Editar Usuario';
         tooltipEliminarUsuario='Eliminar Usuario';    
         usuariosFincaSeleccionado:Boolean;
+        modificarUsuarioFincaSeleccionado:Boolean;
         usuariosFinca:Usuario;
         roles:Roles;
         nombreRol:string;
@@ -66,7 +68,14 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipEliminarProveedor='Eliminar Proveedor';    
         tooltipCambiarProveedor='Cambiar Proveedor';
     
-    
+    //ATRIBUTOS MECANISMOS RIEGO FINCA
+        mecanismosRiegoFinca:MecanismoRiego;
+        errorMessageMecanismosRiegoFinca="";
+        mecanismosRiegoFincaSeleccionado:Boolean;
+        tooltipAgregarMecanismo='Agregar Mecanismo';
+        tooltipHabilitarMecanismo='Habilitar Mecanismo';
+        tooltipDeshabilitarMecanismo='Deshabilitar Mecanismo';
+
     constructor(private router:Router,
                 private route:ActivatedRoute,
                 private homeFincaDetalleService:HomeFincaDetalleService,
@@ -74,6 +83,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                 private gestionarUsuarioFincaService:GestionarUsuarioFincaService,
                 private gestionarSectorFincaService:GestionarSectorFincaService,
                 private gestionarProveedorInformacionService:GestionarProveedorInformacionService,
+                private asignarMecanismoRiegoFincaService: AsignarMecanismoRiegoFincaService,
                 private appService:AppService,
                 private dialog: MdDialog){
 
@@ -85,8 +95,8 @@ export class HomeFincaDetalleComponent implements OnInit{
                 this.homeFincaDetalleService.buscarFinca(this.idFinca)
                 .then(
                     response=>{
-                        this.perfilFincaSeleccionada=true;
                         this.perfilFinca=response.datos_operacion;
+                        this.perfilFincaSeleccionada=true;
                     }
                 )
                 .catch(
@@ -168,7 +178,25 @@ export class HomeFincaDetalleComponent implements OnInit{
                 error=>{
                     this.errorMessageProveedor=error.error_description;
                 }
+            );
+        
+        this.asignarMecanismoRiegoFincaService.mostrarMecanismoRiegoFinca(this.idFinca)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageMecanismosRiegoFinca="No hay mecanismos de riego asociados a la finca.";
+                    }
+                    else{
+                        this.mecanismosRiegoFinca=response.datos_operacion;
+                        this.mecanismosRiegoFincaSeleccionado=true;
+                    }
+                }
             )
+            .catch(
+                error=>{
+                    this.errorMessageMecanismosRiegoFinca=error.error_description;
+                }
+            );
     }
 
     getPerfilFincaSeleccionada(){
@@ -185,6 +213,14 @@ export class HomeFincaDetalleComponent implements OnInit{
 
     getProveedorInformacionSeleccionado(){
         return this.proveedorInformacionSeleccionado;
+    }
+
+    getMecanismoRiegoFincaSeleccionado(){
+        return this.mecanismosRiegoFincaSeleccionado;
+    }
+
+    getModificarUsuarioFincaSeleccionado(){
+        return this.modificarUsuarioFincaSeleccionado;
     }
 
     apretarEliminarFincaIcono(){
@@ -212,6 +248,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                 response=>{
                         this.roles=response.datos_operacion;
                         this.perfilFincaSeleccionada=false;
+                        this.modificarUsuarioFincaSeleccionado=true;
                 }
             )
             .catch(
@@ -261,6 +298,78 @@ export class HomeFincaDetalleComponent implements OnInit{
         this.openDialogEliminarProveedorInformacion();
     }
 
+    apretarIconoDeshabilitarMecanismo(idMecanismoFinca:number){
+        this.title="Deshabilitar Mecanismo de Riego";
+        this.description="¿Desea deshabilitar el mecanismo?";
+        this.option1="Aceptar";
+        this.option2="Cancelar";
+        this.openDialogDeshabilitarMecanismo(idMecanismoFinca); 
+    }
+
+    apretarIconoHabilitarMecanismo(idMecanismoFinca:number){
+        this.title="Habilitar Mecanismo de Riego";
+        this.description="¿Desea habilitar el mecanismo?";
+        this.option1="Aceptar";
+        this.option2="Cancelar";
+        this.openDialogHabilitarMecanismo(idMecanismoFinca); 
+    }
+    openDialogDeshabilitarMecanismo(idMecanismoFinca:number){
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.componentInstance.title=this.title;
+        dialogRef.componentInstance.description=this.description;
+        dialogRef.componentInstance.option1=this.option1;
+        dialogRef.componentInstance.option2=this.option2;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                        this.selectedOption = result;
+                        if(this.selectedOption==="Aceptar"){
+                            this.asignarMecanismoRiegoFincaService.deshabilitarMecanismoFinca(idMecanismoFinca)
+                                .then(
+                                    response=>{
+                                        this.refresh();
+                                    }
+                                )
+                                .catch(
+                                    error=>{
+                                        this.errorMessageMecanismosRiegoFinca=error.error_description;
+                                    }
+                                )
+                        }
+                        this.title="";
+                        this.description="";
+                        this.option1="";
+                        this.option2="";
+            });
+    }
+
+    openDialogHabilitarMecanismo(idMecanismoFinca:number){
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.componentInstance.title=this.title;
+        dialogRef.componentInstance.description=this.description;
+        dialogRef.componentInstance.option1=this.option1;
+        dialogRef.componentInstance.option2=this.option2;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                        this.selectedOption = result;
+                        if(this.selectedOption==="Aceptar"){
+                            this.asignarMecanismoRiegoFincaService.habilitarMecanismoFinca(idMecanismoFinca)
+                                .then(
+                                    response=>{
+                                        this.refresh();
+                                    }
+                                )
+                                .catch(
+                                    error=>{
+                                        this.errorMessageMecanismosRiegoFinca=error.error_description;
+                                    }
+                                )
+                        }
+                        this.title="";
+                        this.description="";
+                        this.option1="";
+                        this.option2="";
+            });
+    }
     openDialogEliminarFinca(){
         let dialogRef = this.dialog.open(DialogExampleComponent);
         dialogRef.componentInstance.title=this.title;

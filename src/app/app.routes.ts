@@ -69,13 +69,17 @@ import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU
 import { GestionarFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.component';
 import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.compontent';
 import { ModificarRolUsuarioComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/Modificar_Rol_Usuario_Finca/modificar.rol.usuario.component';
-
+import { AgregarMecanismoRiegoFincaComponent } from './Modulo_Configuracion_Finca/CU_Asignar_Mecanismo_Riego_Finca/Agregar_Mecanismo_Riego_Finca/agregar.mecanismo.riego.finca.component';
 
 //IMPORTS MODULO CONFIGURACION SECTORES
 import { HomeSectorComponent } from './Modulo_Configuracion_Sectores/Home_Sector/home.sector.component';
 import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.component';
 import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
+import { AsignarMecanismoRiegoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.component';
+import { AsignarCultivoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.component';
 
+//IMPORTS MODULO CULTIVO
+import { GestionarCultivoSectorComponent } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.component';
 
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
@@ -139,18 +143,24 @@ export const ROUTES: Routes = [
    { path:'gestionarFinca/:idFinca', component: GestionarFincaComponent },
    { path:'gestionarUsuarioFinca/:idFinca', component: GestionarUsuarioFincaComponent},
    { path:'modificarRolUsuario/:idUsuarioFinca', component: ModificarRolUsuarioComponent},
+   { path:'agregarMecanismoFinca/:idFinca', component:AgregarMecanismoRiegoFincaComponent},
 
    //MODULO CONFIGURACION SECTORES
-   { path:'homeSector/:idSector' , component: HomeSectorComponent},
+   { path:'homeSector/:idSector/:idFinca' , component: HomeSectorComponent},
    { path:'crearSectorFinca/:idFinca', component: CrearSectorFincaComponent},
    { path:'gestionarSectorFinca/:idSector', component: GestionarSectorFincaComponent},
+   { path:'asignarMecanismoSector/:idSector/:idFinca', component: AsignarMecanismoRiegoSectorComponent},
+   { path:'asignarCultivo/:idSector/:idFinca', component:AsignarCultivoSectorComponent},
    
-
    {path:'tablas',component:TablasComponent},
 
    //MODULO OBTENCION INFORMACION EXTERNA
    {path:'gestionarProveedor/:idFinca', component:ModificarProveedorInformacionComponent},
    {path:'cambiarProveedor/:idFinca', component:CambiarProveedorInformacionComponent},
+
+
+   //MODULO CULTIVOS
+   {path:'gestionarCultivoSector/:idSector/:idFinca/:idCultivo', component: GestionarCultivoSectorComponent},
 
 
    {

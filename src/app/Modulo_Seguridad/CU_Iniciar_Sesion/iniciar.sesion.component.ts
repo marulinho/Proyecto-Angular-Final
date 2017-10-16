@@ -76,7 +76,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
           this.errorMessage="";
           this.usuarioLogeado=response.datos_operacion;
           this.inicioSesion=true;
-          this.router.navigate(['/dashboard/']);
+          this.router.navigate(['/homeFinca/']);
         } 
       )
       .catch(error => this.errorMessage=error.error_description);

@@ -19,7 +19,7 @@
     <!--SECCION FINCA ENCARGADO-->
     <md-card class="page-card">
       <md-card-title>
-        Finca con Rol Encargado
+        Fincas con Rol Encargado
       </md-card-title>
       <md-card-content>
         <section *ngIf="errorMessageFincasEncargado" class="bs">
@@ -41,8 +41,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let fincaEncargado of fincasEncargado">
-                <td>{{fincaEncargado.nombre}}</td>
-                <td>{{fincaEncargado.tamanio}}</td>
+                <td>{{fincaEncargado.nombreFinca}}</td>
+                <td>{{fincaEncargado.tamanio}} hect&aacute;reas</td>
                 <td>{{fincaEncargado.ubicacion}}</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
@@ -61,11 +61,11 @@
     <!--SECCION FINCA OTRO ROL-->
     <md-card class="page-card">
       <md-card-title>
-        Finca con otro Rol
+        Fincas con otro Roles
       </md-card-title>
 
       <md-card-content>
-       <!-- <section *ngIf="errorMessageFincasUsuario" class="bs">
+        <!-- <section *ngIf="errorMessageFincasUsuario" class="bs">
           <div class="bd-example" data-example-id="">
             <div class="alert alert-danger" role="alert">
               <strong>{{errorMessageFincasUsuario}}</strong>
@@ -81,39 +81,124 @@
         </section>
       -->
 
-      <section *ngIf="errorMessageFincasUsuario" class="bs">
-        <div class="bd-example" data-example-id="">
-          <div class="alert alert-danger" role="alert">
-            <strong>{{errorMessageFincasUsuario}}</strong>
-          </div>
-        </div><br>
-      </section>
-      <section *ngIf="getFincasUsuario()" class="bs">
-        <table class="table table-striped table-hover table-card">
-          <thead>
-            <tr>
-              <th style="width:37%;">Nombre</th>
-              <th style="width:36%;">Ubicaci&oacute;n</th>
-              <th>Rol</th>
-              <th class="actions">Acci&oacute;n</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let fincaSinRolEncargado of fincasSinRolEncargado">
-              <td>{{fincaSinRolEncargado.nombreFinca}}</td>
-              <td>{{fincaSinRolEncargado.ubicacion}}</td>
-              <td>{{fincaSinRolEncargado.nombreRol}}</td>
-              <td>
-                <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
+        <section *ngIf="errorMessageFincasUsuario" class="bs">
+          <div class="bd-example" data-example-id="">
+            <div class="alert alert-danger" role="alert">
+              <strong>{{errorMessageFincasUsuario}}</strong>
+            </div>
+          </div><br>
+        </section>
+        <section *ngIf="getFincasUsuario()" class="bs">
+          <table class="table table-striped table-hover table-card">
+            <thead>
+              <tr>
+                <th style="width:37%;">Nombre</th>
+                <th style="width:36%;">Ubicaci&oacute;n</th>
+                <th>Rol</th>
+                <th class="actions">Acci&oacute;n</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fincaSinRolEncargado of fincasSinRolEncargado">
+                <td>{{fincaSinRolEncargado.nombreFinca}}</td>
+                <td>{{fincaSinRolEncargado.ubicacion}}</td>
+                <td>{{fincaSinRolEncargado.nombreRol}}</td>
+                <td>
+                  <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
                 <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaSinRolEncargado.idFinca]">
                 
               </a>
-              </td>
-            </tr>
+                </td>
+              </tr>
 
-          </tbody>
-        </table>
-      </section>
+            </tbody>
+          </table>
+        </section>
+      </md-card-content>
+    </md-card>
+
+
+    <!--SECCION FINCA PENDIENTE -->
+    <md-card class="page-card">
+      <md-card-title>
+        Fincas Pendientes de Aprobaci&oacute;n
+      </md-card-title>
+      <md-card-content>
+        <section *ngIf="errorMessageFincasPendientes" class="bs">
+          <div class="bd-example" data-example-id="">
+            <div class="alert alert-danger" role="alert">
+              <strong>{{errorMessageFincasPendientes}}</strong>
+            </div>
+          </div><br>
+        </section>
+        <section *ngIf="getFincasPendientes()" class="bs">
+          <table class="table table-striped table-hover table-card">
+            <thead>
+              <tr>
+                <th style="width:37%;">Nombre</th>
+                <th style="width:36%;">Ubicaci&oacute;n</th>
+                <th>Tama&ntilde;o</th>
+                <th class="actions">Acci&oacute;n</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fincaPendientesAprobacion of fincasPendientesAprobacion">
+                <td>{{fincaPendientesAprobacion.nombreFinca}}</td>
+                <td>{{fincaPendientesAprobacion.ubicacion}}</td>
+                <td>{{fincaPendientesAprobacion.tamanio}} hect&aacute;reas</td>
+                <td>
+                  <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
+                    <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaPendientesAprobacion.idFinca]">
+                    
+                  </a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </section>
+      </md-card-content>
+    </md-card>
+
+    <!--SECCION FINCAS DESHABILITADAS -->
+    <md-card class="page-card">
+      <md-card-title>
+        Fincas Deshabilitadas
+      </md-card-title>
+      <md-card-content>
+        <section *ngIf="errorMessageFincasDeshabilitadas" class="bs">
+          <div class="bd-example" data-example-id="">
+            <div class="alert alert-danger" role="alert">
+              <strong>{{errorMessageFincasDeshabilitadas}}</strong>
+            </div>
+          </div><br>
+        </section>
+        <section *ngIf="getFincasDeshabilitadas()" class="bs">
+          <table class="table table-striped table-hover table-card">
+            <thead>
+              <tr>
+                <th style="width:37%;">Nombre</th>
+                <th style="width:36%;">Ubicaci&oacute;n</th>
+                <th>Rol</th>
+                <th class="actions">Acci&oacute;n</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fincaDeshabilitada of fincasDeshabilitadas">
+                <td>{{fincaDeshabilitada.nombreFinca}}</td>
+                <td>{{fincaDeshabilitada.ubicacion}}</td>
+                <td>{{fincaDeshabilitada.nombreRol}}</td>
+                <td>
+                  <a class="example-tooltip-host" mdTooltip={{tooltipHabilitarFinca}} [mdTooltipPosition]="position">
+                            <img src="assets/icons/habilitar.png" (click)="apretarHabilitarFinca(fincaDeshabilitada.idFinca)">
+                            
+                  </a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </section>
       </md-card-content>
     </md-card>
 

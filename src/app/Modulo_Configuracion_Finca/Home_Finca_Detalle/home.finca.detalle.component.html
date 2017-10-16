@@ -58,20 +58,20 @@
                                         </div><br>
                                 </section>
                                 <section *ngIf="getProveedorInformacionSeleccionado()" class="bs">
-                                        
-                                        <label id="atributo" >Nombre: </label>
-                                        <label >{{proveedores.nombreProveedor}}</label><br>
-                
-                                        <label id=atributo >Frecuencia m&aacute;xima de obtenci&oacute;n de mediciones: </label>
-                                        <label id=valor >{{proveedores.frecuenciaMaximaPosible}} minutos</label><br>
-                                        
-                                        <label id=atributo >Frecuencia actual de obtenci&oacute;n de mediciones: </label>
+
+                                        <label id="atributo">Nombre: </label>
+                                        <label>{{proveedores.nombreProveedor}}</label><br>
+
+                                        <label id=atributo>Frecuencia m&aacute;xima de obtenci&oacute;n de mediciones: </label>
+                                        <label id=valor>{{proveedores.frecuenciaMaximaPosible}} minutos</label><br>
+
+                                        <label id=atributo>Frecuencia actual de obtenci&oacute;n de mediciones: </label>
                                         <label id=valor>{{proveedores.frecuenciaActual}} minutos</label><br>
-        
+
                                         <label id=atributo>Direcci&oacute;n web: </label>
-                                        <label id=valor >{{proveedores.urlApi}}</label><br>
-        
-                                        <label id=atributo >Mediciones:</label>
+                                        <label id=valor>{{proveedores.urlApi}}</label><br>
+
+                                        <label id=atributo>Mediciones:</label>
                                         <!--<md-list>
                                                 <md-list-item *ngFor="let proveedor of proveedores['listaTipoMedicion']" class="example-md-item">
                                                         <p md-line>Medici&oacute;n: {{proveedor.nombreTipoMedicionClimatica}}</p>
@@ -117,8 +117,7 @@
                                                                 <td>{{usuarioFinca.apellido}}, {{usuarioFinca.nombre}}</td>
                                                                 <td>{{usuarioFinca.rol}}</td>
                                                                 <td>
-                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" 
-                                                                                (click)="apretarEditarUsuarioFincaIcono(usuarioFinca.idUsuarioFinca)">
+                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" (click)="apretarEditarUsuarioFincaIcono(usuarioFinca.idUsuarioFinca)">
                                                                                 <img src="assets/icons/editar.png">
                                                                                 
                                                                         </a>
@@ -169,8 +168,55 @@
                                                                 <td>
 
                                                                         <a class="example-tooltip-host" mdTooltip={{tooltipVerSector}} [mdTooltipPosition]="position">
-                                                                        <img src="assets/icons/ver.png" [routerLink]="['/homeSector/', sectorFinca.idSector]">
+                                                                        <img src="assets/icons/ver.png" [routerLink]="['/homeSector/', sectorFinca.idSector , idFinca]">
                                                                 </a>
+                                                                </td>
+                                                        </tr>
+
+                                                </tbody>
+                                        </table>
+                                </section>
+                        </md-card-content>
+                </md-card>
+
+                <!--SECCION MECANISMO RIEGO FINCA-->
+                <md-card class="page-card">
+                        <md-card-title>
+                                Mecanismos de Riego Finca
+                                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismo}} [mdTooltipPosition]="position">
+                                                <img src="assets/icons/nuevo.png" [routerLink]="['/agregarMecanismoFinca/', idFinca]">
+                                </a>
+                        </md-card-title>
+                        <md-card-content>
+                                <section *ngIf="errorMessageMecanismosRiegoFinca" class="bs">
+                                        <div class="bd-example" data-example-id="">
+                                                <div class="alert alert-danger" role="alert">
+                                                        <strong>{{errorMessageMecanismosRiegoFinca}}</strong>
+                                                </div>
+                                        </div><br>
+                                </section>
+                                <section *ngIf="getMecanismoRiegoFincaSeleccionado()" class="bs">
+                                        <table class="table table-striped table-hover table-card">
+                                                <thead>
+                                                        <tr>
+                                                                <th style="width:37%;">Nombre</th>
+                                                                <th style="width:36%;">Direcci&oacute;n de Conex&oacute;n</th>
+                                                                <th>Fecha Instalaci&oacute;n</th>
+                                                                <th class="actions">Acci&oacute;n</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody>
+                                                        <tr *ngFor="let mecanismoRiegoFinca of mecanismosRiegoFinca">
+                                                                <td>{{mecanismoRiegoFinca.tipoMecanismoRiego}}</td>
+                                                                <td>{{mecanismoRiegoFinca.direccionIP}}</td>
+                                                                <td>{{mecanismoRiegoFinca.fechaInstalacion.substring(0,10)}}</td>
+                                                                <td>
+                                                                        <a *ngIf="mecanismoRiegoFinca.habilitado==true"  class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarMecanismo}} [mdTooltipPosition]="position">
+                                                                                <img src="assets/icons/deshabilitar.png" (click)="apretarIconoDeshabilitarMecanismo(mecanismoRiegoFinca.idMecanismoRiegoFinca)" >
+                                                                        </a>   
+                                                                        <a *ngIf="mecanismoRiegoFinca.habilitado==false"  class="example-tooltip-host" mdTooltip={{tooltipHabilitarMecanismo}} [mdTooltipPosition]="position">
+                                                                                <img src="assets/icons/habilitar.png" (click)="apretarIconoHabilitarMecanismo(mecanismoRiegoFinca.idMecanismoRiegoFinca)">
+                                                                        </a>
                                                                 </td>
                                                         </tr>
 
@@ -184,7 +230,7 @@
 
 <!--SECCION MODIFICAR ROL USUARIO-->
 
-<div *ngIf="!getPerfilFincaSeleccionada()" class="sign-container">        
+<div *ngIf="getModificarUsuarioFincaSeleccionado()" class="sign-container">
         <md-card class="page-card">
                 <md-card-title>Modificar Rol Usuario</md-card-title>
                 <md-card-content>
@@ -213,5 +259,5 @@
                 </md-card-actions>
                 <md-card-footer></md-card-footer>
         </md-card>
-        
+
 </div>

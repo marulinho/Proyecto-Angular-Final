@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class HomeFincaService extends RestBaseService{
   private fincasUsuarioUrl = '/obtenerFincasPorUsuario/';
-  private fincasEncargadoUrl = '/mostrarFincasEncargado/';
+  private rehabilitarFincaUrl='/rehabilitarFinca/';
 
 
   constructor(private http: Http) {super();}
@@ -18,14 +18,18 @@ export class HomeFincaService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  obtenerFincasEncargado():Promise<Finca>{
-    return this.http.get(HomeFincaService.serverUrl + this.fincasEncargadoUrl, this.getRestHeader())
-    .toPromise()
-    .then(response => {return response.json() as Finca;})
-    .catch(this.handleError);
+  habilitarFinca(idFinca:number):Promise<any>{
+    const data = {
+      'idFinca': idFinca
+    };
+
+    return this.http.post(HomeFincaService.serverUrl +this.rehabilitarFincaUrl, JSON.stringify(data), this.getRestHeader())
+      .toPromise()
+      .then(response => {
+        return response.json() as any;
+      })
+      .catch(this.handleError);
   }
-
-
 
 }
 
