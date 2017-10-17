@@ -1,0 +1,156 @@
+<!--SECCION PERFIL AGREGAR USUARIO-->
+<div *ngIf="getperfilHomeComponenteSeleccionado()" class="sign-container">
+
+  <md-card class="page-card">
+    <md-card-title>Home Componente Sensor</md-card-title>
+    <md-card-subtitle>
+      En esta secci&oacute;n el Encargado de la Finca puede modificar, deshabilitar el componente sensor y asignar sensores a los componente sensor de la finca.
+    </md-card-subtitle>
+    <md-card-content>
+      <section *ngIf="errorMessageHomeComponente" class="bs">
+        <div class="bd-example" data-example-id="">
+          <div class="alert alert-danger" role="alert">
+            <strong>{{errorMessageHomeComponente}}</strong>
+          </div>
+        </div><br>
+      </section>
+
+      <section *ngIf="getPerfilComponenteSeleccionado()" class="bs">
+
+          <h4>
+            Datos Componente Sensor
+            <a *ngIf="componenteSensor.estado=='habilitado'" class="example-tooltip-host" mdTooltip={{tooltipEditarComponente}} [mdTooltipPosition]="position">
+                <img src="assets/icons/editar.png" [routerLink]="['/modificarComponenteSensorFinca/', idFinca, componenteSensor.idComponenteSensor]">
+            </a>
+            <a *ngIf="componenteSensor.estado=='habilitado'" class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarComponente}} [mdTooltipPosition]="position">
+                <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarComponenteSensor(componenteSensor.idComponenteSensor)">
+            </a>
+          </h4>
+
+        <label id="atributo">Modelo:</label>
+        <label >{{componenteSensor.modelo}}</label><br>
+
+        <label id=atributo >Descripci&oacute;n:</label>
+        <label id=valor >{{componenteSensor.descripcion}}</label><br>
+
+        <label id=atributo>Cantidad de sensores soportados:</label>
+        <label id=valor >{{componenteSensor.cantidadMaximaSensores}}</label><br>
+
+        <label id=atributo >Sensores asignados:</label>
+        <label id=valor >{{componenteSensor.cantidadSensoresAsignados}}</label><br>
+
+      </section>
+    </md-card-content>
+
+  
+
+  <!-- SECCION AGREGAR SENSORES COMPONENTE SENSOR -->
+  <md-card class="page-card">
+            <md-card-title>
+                Sensores
+                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
+                    <img src="assets/icons/nuevo.png">
+                </a>
+            </md-card-title>        
+            <md-card-content>         
+                    <section *ngIf="errorMessageSensor" class="bs">
+                            <div class="bd-example" data-example-id="">
+                                    <div class="alert alert-danger" role="alert">
+                                            <strong>{{errorMessageSensor}}</strong>
+                                    </div>
+                            </div><br>
+                    </section>
+
+                    <!--<section *ngIf="getPerfilSensorSeleccionado()" class="bs">-->
+                    <section class="bs">
+                    <table class="table table-striped table-hover table-card">
+                      <thead>
+                        <tr>
+                          <th style="width:37%;">Modelo</th>
+                          <th style="width:36%;">Tipo Medici&oacute;n</th>
+                          <th>Fecha Alta</th>
+                          <th class="actions">Acci&oacute;n</th>
+                        </tr>
+                      </thead>
+                      <!--<tbody>
+                        <tr *ngFor="let usuarioNoFinca of usuariosNoFinca">
+                          <td>{{usuarioNoFinca.usuario}}</td>
+                          <td>{{usuarioNoFinca.apellido}}, {{usuarioNoFinca.nombre}}</td>
+                          <td>{{usuarioNoFinca.domicilio}}</td>
+                          <td>
+                              <a class="example-tooltip-host" mdTooltip={{tooltipDesasignarSensor}} [mdTooltipPosition]="position" (click)="apretarAgregarIcono()"
+                                (click)="apretarIconoDeshabilitarSensor(usuarioNoFinca.usuario)">
+                                  <img src="assets/icons/deshabilitar.png">
+                              </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    -->
+                    </table>
+                    </section>
+            </md-card-content>
+
+    </md-card>
+  </md-card>
+    
+
+</div>
+
+
+<!--SECCION AGREGAR USUARIO FINCA
+<div *ngIf="getAgregarUsuariosFinca()" class="page-content">
+    <md-card><br>
+      <md-card-title>Registrar Usuario</md-card-title>
+      <md-card-content>
+        <md-tab-group selectedIndex="{{selectIndex}}">
+          <md-tab disabled label="Paso 1">
+            <div class="tab-body-content">
+              <h3>
+                <small>Datos Rol</small>
+              </h3>
+              <p>Los campos con (*) son obligatorios.</p>
+              <section *ngIf="errorMessageAgregarUsuarioNoFinca" class="bs">
+                <div class="bd-example" data-example-id="">
+                  <div class="alert alert-danger" role="alert">
+                    <strong>{{errorMessageAgregarUsuarioNoFinca}}</strong>
+                  </div>
+                </div><br>
+              </section>
+              <br><md-select placeholder="Seleccionar Rol" [(ngModel)]="rolSeleccionado" name="rolSeleccionado" requerid>
+                  <md-option *ngFor="let rol of roles" [value]="rol.nombreRol">
+                    {{rol.nombreRol}}
+                  </md-option>
+              </md-select>
+  
+  
+            </div>
+          </md-tab>
+          
+          <md-tab disabled label="Paso 2">
+            <div class="tab-body-content">
+              <h4>Resumen Registraci&oacute;n</h4>
+              <section *ngIf="errorMessageAgregarUsuarioNoFinca" class="bs">
+                  <div class="bd-example" data-example-id="">
+                    <div class="alert alert-danger" role="alert">
+                      <strong>{{errorMessageAgregarUsuarioNoFinca}}</strong>
+                    </div>
+                  </div><br>
+                </section>
+            <label>Usuario: {{usuario}}</label><br><br>
+            <label>Finca: {{idFinca}}</label><br><br>
+            <label>Rol: {{rolSeleccionado}}</label>
+          
+          </div>
+          </md-tab>
+        </md-tab-group>
+      </md-card-content>
+      <md-card-actions>
+        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
+        <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAgregar()" >NEXT</button>
+        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregarUsuario()">AGREGAR</button>
+        <button md-raised-button (click)="apretarSalir()">SALIR</button>
+      </md-card-actions>
+    </md-card>
+  
+  </div>
+  -->

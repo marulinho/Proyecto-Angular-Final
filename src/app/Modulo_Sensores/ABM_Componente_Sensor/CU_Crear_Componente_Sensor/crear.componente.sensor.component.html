@@ -1,0 +1,35 @@
+<!--SECCION CREAR COMPONENTE SENSOR-->
+<div class="sign-container">
+    <md-card class="page-card">
+        <md-card-title>Crear Componente Sensor</md-card-title>
+        <md-card-content>
+            <section *ngIf="errorMessageCrearComponente" class="bs">
+                <div class="bd-example" data-example-id="">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{errorMessageCrearComponente}}</strong>
+                    </div>
+                </div><br>
+            </section>                
+                <h2>Datos Componente Sensor</h2><br>
+
+                <md-input-container>
+                    <input mdInput placeholder="Modelo Componente" type="text" [(ngModel)]="modeloComponente" name="modeloComponente" required><br>
+                </md-input-container>
+
+                <md-input-container>
+                    <input mdInput placeholder="Descripci&oacute;n Componente" type="text" [(ngModel)]="descripcionComponente" name="descripcionComponente" required><br>
+                </md-input-container>
+
+                <md-input-container>
+                    <input mdInput placeholder="Cantidad M&aacute;xima de Sensores" type="number" [(ngModel)]="cantMaximaSensores" name="cantMaximaSensores" required><br>
+                </md-input-container>
+
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button (click)="apretarCrearComponente()">CREAR</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+        </md-card-actions>
+
+    </md-card>
+
+</div>

@@ -7,6 +7,7 @@ import { AppService } from '../../../app/app.service';
 import { GestionarSectorFincaService, Sector } from'../CU_Gestionar_Sector/gestionar.sector.service';
 import { AsignarMecanismoRiegoSectorService, MecanismoRiego } from '../CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.service';
 import { GestionarCultivoSectorService, Cultivo } from '../../Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.service';
+import { AsignarComponenteSensorSectorService, ComponenteSensor } from '../CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.service';
 
 @Component({
     selector:'homeSectorFinca',
@@ -45,12 +46,21 @@ export class HomeSectorComponent implements OnInit{
     tooltipModificarCultivoSector='Modificar Cultivo';
     cultivoSectorSeleccionado:Boolean;
     cultivoExistente:Boolean;
+
+    //ATRIBUTOS COMPONENTE SENSOR SECTOR
+    errorMessageComponenteSector="";
+    componenteSensor:ComponenteSensor;
+    componenteSensorSeleccionado:Boolean;
+    componenteSensorExistente:Boolean;
+    tooltipAsignarComponenteSector='Asignar Componente';
+    tooltipDeshabilitarComponenteSector='Deshabilitar Componente';
     
     constructor(private router:Router,
                 private route:ActivatedRoute,
                 private gestionarSectorFincaService:GestionarSectorFincaService,
                 private asignarMecanismoRiegoSectorService:AsignarMecanismoRiegoSectorService,
                 private gestionarCultivoSectorService: GestionarCultivoSectorService,
+                private asignarComponenteSensorSectorService:AsignarComponenteSensorSectorService,
                 private appService:AppService,
                 private dialog: MdDialog){
 
@@ -122,6 +132,26 @@ export class HomeSectorComponent implements OnInit{
                     this.errorMessageCultivoSector=error.error_description;
                 }
             );
+
+        this.asignarComponenteSensorSectorService.buscarComponenteSector(this.idSector)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageComponenteSector="No hay ningún componente sensor asignado al sector.";
+                        this.componenteSensorExistente=false;
+                    }
+                    else{
+                        this.componenteSensor=response.datos_operacion;
+                        this.componenteSensorSeleccionado=true;
+                        this.componenteSensorExistente=true;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageComponenteSector=error.error_description;
+                }
+            );
     }
 
    getSectorSeleccionado(){
@@ -142,6 +172,14 @@ export class HomeSectorComponent implements OnInit{
 
    getCultivoExistente(){
        return this.cultivoExistente;
+   }
+
+   getComponenteSensorSeleccionado(){
+       return this.componenteSensorSeleccionado;
+   }
+
+   getComponenteSensorExistente(){
+       return this.componenteSensorExistente;
    }
 
    apretarEliminarIcono(){
@@ -210,6 +248,19 @@ export class HomeSectorComponent implements OnInit{
         );
    }
 
+   apretarDeshabilitarComponenteSector(idComponenteSensor:number){
+        this.asignarComponenteSensorSectorService.desasignarComponenteSector(this.idFinca,idComponenteSensor,this.idSector)
+            .then(
+                response=>{
+                    this.refresh();
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageComponenteSector=error.error_description;
+                }
+            );    
+   }
 
 
    refresh(): void {

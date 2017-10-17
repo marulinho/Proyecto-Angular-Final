@@ -77,6 +77,14 @@ import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/C
 import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
 import { AsignarMecanismoRiegoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.component';
 import { AsignarCultivoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.component';
+import { AsignarComponenteSensorSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.component';
+
+//IMPORTS MODULO SENSORES
+import { CrearSensorComponent } from './Modulo_Sensores/ABM_Sensores/Crear_Sensor/crear.sensor.component';
+import { ModificarSensorComponent } from './Modulo_Sensores/ABM_Sensores/Modificar_Sensor/modificar.sensor.component';
+import { CrearComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Crear_Componente_Sensor/crear.componente.sensor.component';
+import { GestionarComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Gestionar_Componente_Sensor/gestionar.componente.sensor.component';
+import { HomeComponenteSensorComponent } from './Modulo_Sensores/Home_Componente_Sensor/home.componente.sensor.component';
 
 //IMPORTS MODULO CULTIVO
 import { GestionarCultivoSectorComponent } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.component';
@@ -151,9 +159,17 @@ export const ROUTES: Routes = [
    { path:'gestionarSectorFinca/:idSector', component: GestionarSectorFincaComponent},
    { path:'asignarMecanismoSector/:idSector/:idFinca', component: AsignarMecanismoRiegoSectorComponent},
    { path:'asignarCultivo/:idSector/:idFinca', component:AsignarCultivoSectorComponent},
-   
+   { path:'asignarComponenteSector/:idSector/:idFinca', component:AsignarComponenteSensorSectorComponent},
+
    {path:'tablas',component:TablasComponent},
 
+   //MODULO SENSORES
+   {path:'crearSensorFinca/:idFinca', component:CrearSensorComponent},
+   {path:'modificarSensorFinca/:idFinca/:idSensor', component:ModificarSensorComponent},
+   {path:'crearComponenteSensorFinca/:idFinca', component:CrearComponenteSensorComponent},
+   {path:'modificarComponenteSensorFinca/:idFinca/:idComponenteSensor', component:GestionarComponenteSensorComponent},
+   {path:'homeComponenteSensorFinca/:idFinca/:idComponenteSensor', component:HomeComponenteSensorComponent},
+   
    //MODULO OBTENCION INFORMACION EXTERNA
    {path:'gestionarProveedor/:idFinca', component:ModificarProveedorInformacionComponent},
    {path:'cambiarProveedor/:idFinca', component:CambiarProveedorInformacionComponent},

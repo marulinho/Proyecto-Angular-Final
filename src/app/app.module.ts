@@ -123,6 +123,17 @@ import { AsignarMecanismoRiegoSectorComponent } from './Modulo_Configuracion_Sec
 import { AsignarMecanismoRiegoSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.service';
 import { AsignarCultivoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.component';
 import { AsignarCultivoSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.service';
+import { AsignarComponenteSensorSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.component';
+import { AsignarComponenteSensorSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.service';
+
+//IMPORTS MODULO SENSORES
+import { CrearSensorComponent } from './Modulo_Sensores/ABM_Sensores/Crear_Sensor/crear.sensor.component';
+import { ModificarSensorComponent } from './Modulo_Sensores/ABM_Sensores/Modificar_Sensor/modificar.sensor.component';
+import { ABMSensorFincaService } from './Modulo_Sensores/ABM_Sensores/abm.sensores.service';
+import { CrearComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Crear_Componente_Sensor/crear.componente.sensor.component';
+import { GestionarComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Gestionar_Componente_Sensor/gestionar.componente.sensor.component';
+import { GestionarComponenteSensorService } from './Modulo_Sensores/ABM_Componente_Sensor/gestionar.componente.sensor.service';
+import { HomeComponenteSensorComponent } from './Modulo_Sensores/Home_Componente_Sensor/home.componente.sensor.component';
 
 //IMPORTS MODULO CULTIVO
 import { GestionarCultivoSectorComponent } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.component';
@@ -229,9 +240,17 @@ import { TablasComponent } from './tablas/tablas.component';
     AgregarMecanismoRiegoFincaComponent,
     AsignarMecanismoRiegoSectorComponent,
     AsignarCultivoSectorComponent,
+    HomeComponenteSensorComponent,
+    AsignarComponenteSensorSectorComponent,
     
 
     TablasComponent,
+
+    //COMPONENTS MODULO SENSORES
+    CrearSensorComponent,
+    ModificarSensorComponent,
+    CrearComponenteSensorComponent,
+    GestionarComponenteSensorComponent,
 
     //COMPONENTS MODULO CULTIVO
     GestionarCultivoSectorComponent,
@@ -302,7 +321,11 @@ import { TablasComponent } from './tablas/tablas.component';
     CrearSectorFincaService,
     AsignarMecanismoRiegoSectorService,
     AsignarCultivoSectorService,
+    AsignarComponenteSensorSectorService,
     
+    //LLAMADAS MODULO SENSORES
+    ABMSensorFincaService,
+    GestionarComponenteSensorService,
 
     //LLAMADAS MODULO CULTIVO
     GestionarCultivoSectorService,

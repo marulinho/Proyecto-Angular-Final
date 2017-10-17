@@ -32,7 +32,7 @@
             <label id=valor class="col-3">{{sector.numeroSector}}</label><br>
 
             <label id=atributo class="col-2">Superficie:</label>
-            <label id=valor class="col-3">{{sector.superficieSector}}</label><br>
+            <label id=valor class="col-3">{{sector.superficieSector}} hect&aacute;reas</label><br>
 
         </md-card-content>
 
@@ -132,6 +132,54 @@
                 </section>
             </md-card-content>
         </md-card>
+
+        <!--SECCION COMPONENTE SENSOR SECTOR-->
+        <md-card class="page-card">
+                <md-card-title>
+                    Componente Sensor Sector 
+                    <a *ngIf="!getComponenteSensorExistente()" class="example-tooltip-host" mdTooltip={{tooltipAsignarComponenteSector}} [mdTooltipPosition]="position">
+                                <img src="assets/icons/nuevo.png" [routerLink]="['/asignarComponenteSector/',idSector,idFinca]" >
+                        </a>
+
+                </md-card-title>
+                <md-card-content>
+                    <section *ngIf="errorMessageComponenteSector" class="bs">
+                        <div class="bd-example" data-example-id="">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{errorMessageComponenteSector}}</strong>
+                            </div>
+                        </div><br>
+                    </section>
+                    <section *ngIf="getComponenteSensorSeleccionado()" class="bs">
+                        <table class="table table-striped table-hover table-card">
+                            <thead>
+                                <tr>
+                                    <th style="width:37%;">Modelo</th>
+                                    <th style="width:36%;">Descripci&oacute;n</th>
+                                    <th>Sensores Asignados</th>
+                                    <th class="actions">Acci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{componenteSensor.modelo}}</td>
+                                    <td>{{componenteSensor.descripcion}}</td>
+                                    <td>{{componenteSensor.cantidadSensoresAsignados}}</td>
+                                    <td>
+    
+                                        <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarComponenteSector}} [mdTooltipPosition]="position">
+                                                <img src="assets/icons/deshabilitar.png"(click)="apretarDeshabilitarComponenteSector(componenteSensor.idComponenteSensor)">
+                                        </a>
+                                    </td>
+                                </tr>
+    
+                            </tbody>
+                        </table>
+                    </section>
+                </md-card-content>
+            </md-card>
+    
+
 
     </md-card>
 </div>

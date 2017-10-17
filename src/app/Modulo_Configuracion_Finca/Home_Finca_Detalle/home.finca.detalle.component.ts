@@ -11,6 +11,8 @@ import { GestionarUsuarioFincaComponent } from '../CU_Gestionar_Usuario_Finca/ge
 import { GestionarSectorFincaService, Sector } from'../../Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
 import { GestionarProveedorInformacionService, ProveedorInformacion } from '../../Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
 import { AsignarMecanismoRiegoFincaService , MecanismoRiego } from '../CU_Asignar_Mecanismo_Riego_Finca/asignar.mecanismo.riego.finca.service';
+import { ABMSensorFincaService, Sensor } from '../../Modulo_Sensores/ABM_Sensores/abm.sensores.service';
+import { GestionarComponenteSensorService, ComponenteSensor } from '../../Modulo_Sensores/ABM_Componente_Sensor/gestionar.componente.sensor.service';
 
 @Component({
     selector:'homeFincaDetalle',
@@ -76,6 +78,23 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipHabilitarMecanismo='Habilitar Mecanismo';
         tooltipDeshabilitarMecanismo='Deshabilitar Mecanismo';
 
+    //ATRIBUTOS SENSORES FINCA
+        errorMessageSensoresFinca:string="";
+        perfilSensoresFincaSeleccionado:Boolean;
+        sensoresFinca:Sensor;
+        tooltipAgregarSensor='Agregar Sensor';
+        tooltipDeshabilitarSensor='Deshabilitar Sensor';
+        tooltipModificarSensor='Modificar Sensor';
+
+    //ATRIBUTOS COMPONENTE SENSOR FINCA
+        errorMessageComponentSensorFinca:string="";
+        perfilComponenteSensorSeleccionado:Boolean;
+        componenteSensores:ComponenteSensor;
+        tooltipAgregarComponenteSensor='Crear Componente Sensor';
+        tooltipVerComponenteSensor='Ver Componente Sensor';
+        tooltipHabilitarComponenteSensor='Ver Componente Sensor';
+  
+
     constructor(private router:Router,
                 private route:ActivatedRoute,
                 private homeFincaDetalleService:HomeFincaDetalleService,
@@ -84,6 +103,8 @@ export class HomeFincaDetalleComponent implements OnInit{
                 private gestionarSectorFincaService:GestionarSectorFincaService,
                 private gestionarProveedorInformacionService:GestionarProveedorInformacionService,
                 private asignarMecanismoRiegoFincaService: AsignarMecanismoRiegoFincaService,
+                private abmSensorFincaService:ABMSensorFincaService,
+                private gestionarComponenteSensorService: GestionarComponenteSensorService,
                 private appService:AppService,
                 private dialog: MdDialog){
 
@@ -197,6 +218,42 @@ export class HomeFincaDetalleComponent implements OnInit{
                     this.errorMessageMecanismosRiegoFinca=error.error_description;
                 }
             );
+        
+        this.abmSensorFincaService.mostrarSensoresFinca(this.idFinca)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageSensoresFinca="No hay sensores asociados a la finca.";
+                    }
+                    else{
+                        this.sensoresFinca=response.datos_operacion;
+                        this.perfilSensoresFincaSeleccionado=true;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageSectoresFinca=error.error_description;
+                }
+            );
+
+        this.gestionarComponenteSensorService.buscarComponente(this.idFinca)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageComponentSensorFinca="No hay componentes sensores asociados a la finca.";
+                    }
+                    else{
+                        this.componenteSensores=response.datos_operacion;
+                        this.perfilComponenteSensorSeleccionado=true;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageComponentSensorFinca=error.error_description;
+                }
+            );
     }
 
     getPerfilFincaSeleccionada(){
@@ -221,6 +278,14 @@ export class HomeFincaDetalleComponent implements OnInit{
 
     getModificarUsuarioFincaSeleccionado(){
         return this.modificarUsuarioFincaSeleccionado;
+    }
+
+    getPerfilSensoresFincaSeleccionado(){
+        return this.perfilSensoresFincaSeleccionado;
+    }
+
+    getPerfilComponenteSensorSeleccionado(){
+        return this.perfilComponenteSensorSeleccionado;
     }
 
     apretarEliminarFincaIcono(){
@@ -313,6 +378,23 @@ export class HomeFincaDetalleComponent implements OnInit{
         this.option2="Cancelar";
         this.openDialogHabilitarMecanismo(idMecanismoFinca); 
     }
+
+    apretarIconoHabilitarComponenteSensor(idComponenteSensor:number){
+        this.title="Habilitar Componente Sensor";
+        this.description="¿Desea habilitar el componente sensor?";
+        this.option1="Aceptar";
+        this.option2="Cancelar";
+        this.openDialogHabilitarComponenteSensor(idComponenteSensor); 
+    }
+
+    apretarDeshabilitarSensorFinca(idSensor:number){
+        this.title="Deshabilitar Sensor";
+        this.description="¿Desea deshabilitar el sensor de la finca?";
+        this.option1="Aceptar";
+        this.option2="Cancelar";
+        this.openDialoDeshabilitarSensorFinca(idSensor);
+    }
+
     openDialogDeshabilitarMecanismo(idMecanismoFinca:number){
         let dialogRef = this.dialog.open(DialogExampleComponent);
         dialogRef.componentInstance.title=this.title;
@@ -334,6 +416,64 @@ export class HomeFincaDetalleComponent implements OnInit{
                                         this.errorMessageMecanismosRiegoFinca=error.error_description;
                                     }
                                 )
+                        }
+                        this.title="";
+                        this.description="";
+                        this.option1="";
+                        this.option2="";
+            });
+    }
+
+    openDialoDeshabilitarSensorFinca(idSensor:number){
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.componentInstance.title=this.title;
+        dialogRef.componentInstance.description=this.description;
+        dialogRef.componentInstance.option1=this.option1;
+        dialogRef.componentInstance.option2=this.option2;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                        this.selectedOption = result;
+                        if(this.selectedOption==="Aceptar"){
+                            this.abmSensorFincaService.deshabilitarSensor(idSensor)
+                            .then(
+                                response=>{
+                                    this.refresh();
+                                }
+                            )
+                            .catch(
+                                error=>{
+                                    this.errorMessageSensoresFinca=error.error_description;
+                                }
+                            );
+                        }
+                        this.title="";
+                        this.description="";
+                        this.option1="";
+                        this.option2="";
+            });
+    }
+
+    openDialogHabilitarComponenteSensor(idComponenteSensor:number){
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.componentInstance.title=this.title;
+        dialogRef.componentInstance.description=this.description;
+        dialogRef.componentInstance.option1=this.option1;
+        dialogRef.componentInstance.option2=this.option2;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                        this.selectedOption = result;
+                        if(this.selectedOption==="Aceptar"){
+                            this.gestionarComponenteSensorService.habilitarComponenteSensor(this.idFinca,idComponenteSensor)
+                            .then(
+                                response=>{
+                                    this.refresh();
+                                }
+                            )
+                            .catch(
+                                error=>{
+                                    this.errorMessageComponentSensorFinca=error.error_description;
+                                }
+                            );
                         }
                         this.title="";
                         this.description="";
@@ -370,6 +510,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                         this.option2="";
             });
     }
+    
     openDialogEliminarFinca(){
         let dialogRef = this.dialog.open(DialogExampleComponent);
         dialogRef.componentInstance.title=this.title;
