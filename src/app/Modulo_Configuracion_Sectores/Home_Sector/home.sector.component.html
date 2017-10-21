@@ -2,7 +2,7 @@
 <div *ngIf="getSectorSeleccionado()" class="page-content">
     <md-card class="page-card">
         <md-card-title>
-            Resumen del Sector
+            Resumen del Sector.
             <a class="example-tooltip-host" mdTooltip={{tooltipEditarSector}} [mdTooltipPosition]="position">
             <img src="assets/icons/editar.png" [routerLink]="['/gestionarSectorFinca/',idSector]">
         </a>
@@ -20,19 +20,19 @@
                 </div><br>
             </section>
 
-            <h2>Datos Sector</h2>
+            <h2>Datos Sector.</h2>
 
             <label id="atributo" class="col-2">Nombre:</label>
-            <label class="col-3">{{sector.nombreSector}}</label><br>
+            <label class="col-3">{{sector.nombreSector}}.</label><br>
 
             <label id=atributo class="col-2">Descripci&oacute;n:</label>
-            <label id=valor class="col-3">{{sector.descripcionSector}}</label><br>
+            <label id=valor class="col-3">{{sector.descripcionSector}}.</label><br>
 
             <label id=atributo class="col-2">N&uacute;mero:</label>
-            <label id=valor class="col-3">{{sector.numeroSector}}</label><br>
+            <label id=valor class="col-3">{{sector.numeroSector}}.</label><br>
 
             <label id=atributo class="col-2">Superficie:</label>
-            <label id=valor class="col-3">{{sector.superficieSector}} hect&aacute;reas</label><br>
+            <label id=valor class="col-3">{{sector.superficieSector}} hect&aacute;reas.</label><br>
 
         </md-card-content>
 
@@ -40,7 +40,7 @@
         <!--SECCION MECANISMO RIEGO SECTOR-->
         <md-card class="page-card">
             <md-card-title>
-                Mecanismo Riego 
+                Mecanismo Riego.
                 <a *ngIf="!getMecanismoHabilitado()" class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismoSector}} [mdTooltipPosition]="position">
                             <img src="assets/icons/nuevo.png" [routerLink]="['/asignarMecanismoSector/',idSector,idFinca]">
                 </a>
@@ -58,17 +58,17 @@
                     <table class="table table-striped table-hover table-card">
                         <thead>
                             <tr>
-                                <th style="width:37%;">Nombre</th>
-                                <th style="width:36%;">Presi&oacute;n</th>
-                                <th>Caudal</th>
-                                <th class="actions">Acci&oacute;n</th>
+                                <th style="width:37%;">Nombre.</th>
+                                <th style="width:36%;">Presi&oacute;n.</th>
+                                <th>Caudal.</th>
+                                <th class="actions">Acci&oacute;n.</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{mecanismoRiego.nombreTipoMecanismo}}</td>
-                                <td>{{mecanismoRiego.presion}}</td>
-                                <td>{{mecanismoRiego.caudal}}</td>
+                                <td>{{mecanismoRiego.nombreTipoMecanismo}}.</td>
+                                <td>{{mecanismoRiego.presion}}.</td>
+                                <td>{{mecanismoRiego.caudal}}.</td>
                                 <td>
 
                                     <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarMecanismoSector}} [mdTooltipPosition]="position">
@@ -87,7 +87,7 @@
         <!--SECCION CULTIVO SECTOR-->
         <md-card class="page-card">
             <md-card-title>
-                Cultivo 
+                Cultivo.
                 <a *ngIf="!getCultivoExistente()" class="example-tooltip-host" mdTooltip={{tooltipAsignarCultivoSector}} [mdTooltipPosition]="position">
                             <img src="assets/icons/nuevo.png" [routerLink]="['/asignarCultivo/',idSector,idFinca]">
                     </a>
@@ -108,16 +108,16 @@
                     <table class="table table-striped table-hover table-card">
                         <thead>
                             <tr>
-                                <th style="width:37%;">Nombre</th>
-                                <th style="width:36%;">Descripci&oacute;n</th>
-                                <th>Fecha Plantaci&oacute;n</th>
-                                <th class="actions">Acci&oacute;n</th>
+                                <th style="width:37%;">Nombre.</th>
+                                <th style="width:36%;">Descripci&oacute;n.</th>
+                                <th>Fecha Plantaci&oacute;n.</th>
+                                <th class="actions">Acci&oacute;n.</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{cultivosSector.nombre}}</td>
-                                <td>{{cultivosSector.descripcion}}</td>
+                                <td>{{cultivosSector.nombre}}.</td>
+                                <td>{{cultivosSector.descripcion}}.</td>
                                 <td>{{cultivosSector.fechaPlantacion.substring(0,10)}}</td>
                                 <td>
 
@@ -135,50 +135,152 @@
 
         <!--SECCION COMPONENTE SENSOR SECTOR-->
         <md-card class="page-card">
-                <md-card-title>
-                    Componente Sensor Sector 
-                    <a *ngIf="!getComponenteSensorExistente()" class="example-tooltip-host" mdTooltip={{tooltipAsignarComponenteSector}} [mdTooltipPosition]="position">
+            <md-card-title>
+                Componente Sensor Sector.
+                <a *ngIf="!getComponenteSensorExistente()" class="example-tooltip-host" mdTooltip={{tooltipAsignarComponenteSector}} [mdTooltipPosition]="position">
                                 <img src="assets/icons/nuevo.png" [routerLink]="['/asignarComponenteSector/',idSector,idFinca]" >
                         </a>
 
-                </md-card-title>
-                <md-card-content>
-                    <section *ngIf="errorMessageComponenteSector" class="bs">
-                        <div class="bd-example" data-example-id="">
-                            <div class="alert alert-danger" role="alert">
-                                <strong>{{errorMessageComponenteSector}}</strong>
-                            </div>
-                        </div><br>
-                    </section>
-                    <section *ngIf="getComponenteSensorSeleccionado()" class="bs">
-                        <table class="table table-striped table-hover table-card">
-                            <thead>
-                                <tr>
-                                    <th style="width:37%;">Modelo</th>
-                                    <th style="width:36%;">Descripci&oacute;n</th>
-                                    <th>Sensores Asignados</th>
-                                    <th class="actions">Acci&oacute;n</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{componenteSensor.modelo}}</td>
-                                    <td>{{componenteSensor.descripcion}}</td>
-                                    <td>{{componenteSensor.cantidadSensoresAsignados}}</td>
-                                    <td>
-    
-                                        <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarComponenteSector}} [mdTooltipPosition]="position">
+            </md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessageComponenteSector" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessageComponenteSector}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+                <section *ngIf="getComponenteSensorSeleccionado()" class="bs">
+                    <table class="table table-striped table-hover table-card">
+                        <thead>
+                            <tr>
+                                <th style="width:37%;">Modelo.</th>
+                                <th style="width:36%;">Descripci&oacute;n.</th>
+                                <th>Sensores Asignados.</th>
+                                <th class="actions">Acci&oacute;n.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{componenteSensor.modelo}}.</td>
+                                <td>{{componenteSensor.descripcion}}.</td>
+                                <td>{{componenteSensor.cantidadSensoresAsignados}}.</td>
+                                <td>
+
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarComponenteSector}} [mdTooltipPosition]="position">
                                                 <img src="assets/icons/deshabilitar.png"(click)="apretarDeshabilitarComponenteSector(componenteSensor.idComponenteSensor)">
                                         </a>
-                                    </td>
-                                </tr>
-    
-                            </tbody>
-                        </table>
-                    </section>
-                </md-card-content>
-            </md-card>
-    
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </section>
+            </md-card-content>
+        </md-card>
+
+        <!--SECCION CONFIGURACIONES DE RIEGO-->
+        <md-card class="page-card">
+            <md-card-title>
+                Configuraciones de Riego.
+                <a class="example-tooltip-host" mdTooltip={{tooltipCrearConfiguracionRiego}} [mdTooltipPosition]="position">
+                    <img src="assets/icons/nuevo.png" [routerLink]="['/crearConfiguracionRiego/',idFinca,idSector,idMecanismoRiegoFincaSector]">
+                </a>
+            </md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessageConfiguracionRiego" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessageConfiguracionRiego}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+                <section *ngIf="getConfiguracionRiegoSeleccionado()" class="bs">
+                    <table class="table table-striped table-hover table-card">
+                        <thead>
+                            <tr>
+                                <th style="width:37%;">Nombre.</th>
+                                <th style="width:36%;">Descripci&oacute;n.</th>
+                                <th>Tipo Configuraci&oacute;n.</th>
+                                <th class="actions">Acci&oacute;n.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let configuracionRiego of configuracionesRiego">
+                                <td>{{configuracionRiego.nombre}}.</td>
+                                <td>{{configuracionRiego.descripcion}}.</td>
+                                <td>{{configuracionRiego.tipoConfiguracionRiego}}.</td>
+                                <td>
+                                    <a *ngIf="configuracionRiego.estado_configuracion=='habilitado' && configuracionRiego.tipoConfiguracionRiego=='programado'" class="example-tooltip-host" mdTooltip={{tooltipVerConfiguracionRiego}}
+                                        [mdTooltipPosition]="position" [routerLink]="['/homeConfiguracionRiego/',idFinca,idMecanismoRiegoFincaSector,configuracionRiego.idConfiguracionRiego,idSector]">
+                                            <img src="assets/icons/ver.png">
+                                    </a>
+                                    <a *ngIf="configuracionRiego.estado_configuracion=='deshabilitado'" class="example-tooltip-host" mdTooltip={{tooltipHabilitarConfiguracionRiego}}
+                                        [mdTooltipPosition]="position">
+                                            <img src="assets/icons/habilitar.png" (click)="apretarHabilitarConfiguracionRiego(configuracionRiego.idConfiguracionRiego)">
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </section>
+            </md-card-content>
+        </md-card>
+
+        <!--SECCION RIEGO-->
+        <md-card class="page-card">
+            <md-card-title>
+                Riego Finca.
+                <a *ngIf="!getExisteRiegoEnEjecucion()" class="example-tooltip-host" mdTooltip={{tooltipIniciarRiego}} [mdTooltipPosition]="position">
+                    <img src="assets/icons/iniciar.png" (click)="apretarIniciarRiego()">
+                </a>
+            </md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessageRiego" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessageRiego}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+                <section *ngIf="getRiegoSeleccionado()" class="bs">
+                    <table class="table table-striped table-hover table-card">
+                        <thead>
+                            <tr>
+                                <th style="width:37%;">Configuraci&oacute;n Riego.</th>
+                                <th style="width:36%;">Inicio.</th>
+                                <th>Fin Programado.</th>
+                                <th class="actions">Acci&oacute;n.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{riegos.configuracion_riego}}</td>
+                                <td>{{riegos.fechaHoraInicio.substring(0,10)}} {{riegos.fechaHoraInicio.substring(12,19)}}</td>
+                                <td>{{riegos.fechaHoraFinalProgramada}}</td>
+                                <td>
+                                    <a *ngIf="riegos.estado_ejecucion_riego=='en_ejecucion'" class="example-tooltip-host" mdTooltip={{tooltipPausarRiego}}
+                                        [mdTooltipPosition]="position" (click)="apretarPausarRiego()">
+                                            <img src="assets/icons/pausar.png">
+                                    </a>
+                                    
+                                    <a *ngIf="riegos.estado_ejecucion_riego=='en_ejecucion' || riegos.estado_ejecucion_riego=='pausado'" class="example-tooltip-host" mdTooltip={{tooltipCancelarRiego}}
+                                    [mdTooltipPosition]="position" (click)="apretarCancelarRiego()">
+                                        <img src="assets/icons/cancelar.png">
+                                    </a>
+
+                                    <a *ngIf="riegos.estado_ejecucion_riego=='pausado'" class="example-tooltip-host" mdTooltip={{tooltipIniciarRiego}}
+                                        [mdTooltipPosition]="position">
+                                            <img src="assets/icons/iniciar.png" (click)="apretarIniciarRiego()">
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </md-card-content>
+        </md-card>
 
 
     </md-card>

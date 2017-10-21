@@ -24,14 +24,21 @@
                   <md-input-container>
                       <input mdInput placeholder="Direcci&oacute;n" type="text" [(ngModel)]="direccion" name="direccion" required><br>
                   </md-input-container>
-      
+                  
                   <md-input-container>
-                      <input mdInput placeholder="Ubicaci&oacute;n" type="text" [(ngModel)]="ubicacion" name="ubicacion" required><br>
-                  </md-input-container>
-      
-                  <md-input-container>
-                      <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas" type="number" [(ngModel)]="tamanio" name="tamanio" required><br>
-                  </md-input-container>
+                    <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas" type="number" [(ngModel)]="tamanio" name="tamanio" required><br>
+                </md-input-container>
+
+                  <!--UBICACION-->
+                    <md-input-container>
+                      <input mdInput placeholder="Buscar localidad" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+                        #search [formControl]="searchControl" requerid>
+                    </md-input-container>
+
+                  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                  </agm-map>
+                  
       
                 </div>
               </md-tab>

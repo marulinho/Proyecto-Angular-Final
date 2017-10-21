@@ -1,0 +1,121 @@
+<!--SECCION HOME SECTOR-->
+<div class="page-content">
+    <md-card class="page-card">
+        <md-card-title>
+            Home Configuraci&oacute;n de Riego.
+            <a class="example-tooltip-host" mdTooltip={{tooltipEditarConfiguracion}} [mdTooltipPosition]="position">
+                <img src="assets/icons/editar.png" [routerLink]="['/gestionarConfiguracionRiego/',idFinca,idMecanismoRiegoFincaSector,idConfiguracionRiego]">
+            </a>
+
+            <a class="example-tooltip-host" mdTooltip={{tooltipCambiarEstadoConfiguracion}} [mdTooltipPosition]="position">
+                <img src="assets/icons/cambiar.png" (click)="apretarCambiarEstadoConfiguracionRiego()">
+            </a>
+
+            <a class="example-tooltip-host" mdTooltip={{tooltipEliminarConfiguracion}} [mdTooltipPosition]="position">
+                <img src="assets/icons/delete.png" (click)="apretarEliminarConfiguracion()">
+            </a>
+        </md-card-title>
+        <md-card-content>
+                <section *ngIf="errorEliminarConfiguracionRiego" class="bs">
+                        <div class="bd-example" data-example-id="">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{errorEliminarConfiguracionRiego}}</strong>
+                            </div>
+                        </div><br>
+                </section>
+            <!--SECCION CRITERIO INICIAL-->
+            <md-card class="page-card">
+                <md-card-title>
+                    Criterio de Inicio.
+                    <a *ngIf="!getExisteCriterioInicial()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioInicial}} [mdTooltipPosition]="position">
+                            <img src="assets/icons/nuevo.png" [routerLink]="['/agregarCriterioInicial/',idFinca,idMecanismoRiegoFincaSector,idConfiguracionRiego,idSector]" >
+                </a>
+
+                </md-card-title>
+                <md-card-content>
+                    <section *ngIf="errorMessageCriterioInicialRiego" class="bs">
+                        <div class="bd-example" data-example-id="">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{errorMessageCriterioInicialRiego}}</strong>
+                            </div>
+                        </div><br>
+                    </section>
+                    <section *ngIf="getPerfilCriterioInicialSeleccionado()" class="bs">
+                        <table class="table table-striped table-hover table-card">
+                            <thead>
+                                <tr>
+                                    <th style="width:37%;">Nombre</th>
+                                    <th style="width:36%;">Presi&oacute;n</th>
+                                    <th>Caudal</th>
+                                    <th class="actions">Acci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <!--<tbody>
+                            <tr>
+                                <td>{{mecanismoRiego.nombreTipoMecanismo}}</td>
+                                <td>{{mecanismoRiego.presion}}</td>
+                                <td>{{mecanismoRiego.caudal}}</td>
+                                <td>
+
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarMecanismoSector}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarMecanismoIcono(mecanismoRiego.idMecanismoRiegoFincaSector)">                                                        
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    -->
+                        </table>
+
+                    </section>
+                </md-card-content>
+            </md-card>
+
+            <!--SECCION CRITERIO DE FINALIZACION-->
+            <md-card class="page-card">
+                <md-card-title>
+                    Criterio de Finalizaci&oacute;n.
+                    <a *ngIf="getExisteCriterioInicial()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioFinal}} [mdTooltipPosition]="position">
+                            <img src="assets/icons/nuevo.png">
+                </a>
+                </md-card-title>
+                <md-card-content>
+                    <section *ngIf="errorMessageCriterioFinalRiego" class="bs">
+                        <div class="bd-example" data-example-id="">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{errorMessageCriterioFinalRiego}}</strong>
+                            </div>
+                        </div><br>
+                    </section>
+                    <section *ngIf="getPerfilCriterioFinalSeleccionado()" class="bs">
+                        <table class="table table-striped table-hover table-card">
+                            <thead>
+                                <tr>
+                                    <th style="width:37%;">Nombre</th>
+                                    <th style="width:36%;">Descripci&oacute;n</th>
+                                    <th>Fecha Plantaci&oacute;n</th>
+                                    <th class="actions">Acci&oacute;n</th>
+                                </tr>
+                            </thead>
+                            <!--<tbody>
+                            <tr>
+                                <td>{{cultivosSector.nombre}}</td>
+                                <td>{{cultivosSector.descripcion}}</td>
+                                <td>{{cultivosSector.fechaPlantacion.substring(0,10)}}</td>
+                                <td>
+
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarCultivoSector}} [mdTooltipPosition]="position">
+                                            <img src="assets/icons/deshabilitar.png"(click)="apretarDeshabilitarCultivo(cultivosSector.idCultivo)">
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    -->
+                        </table>
+                    </section>
+                </md-card-content>
+            </md-card>
+        </md-card-content>
+    </md-card>
+</div>

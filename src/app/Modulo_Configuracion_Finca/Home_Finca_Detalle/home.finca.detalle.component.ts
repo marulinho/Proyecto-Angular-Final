@@ -13,6 +13,8 @@ import { GestionarProveedorInformacionService, ProveedorInformacion } from '../.
 import { AsignarMecanismoRiegoFincaService , MecanismoRiego } from '../CU_Asignar_Mecanismo_Riego_Finca/asignar.mecanismo.riego.finca.service';
 import { ABMSensorFincaService, Sensor } from '../../Modulo_Sensores/ABM_Sensores/abm.sensores.service';
 import { GestionarComponenteSensorService, ComponenteSensor } from '../../Modulo_Sensores/ABM_Componente_Sensor/gestionar.componente.sensor.service';
+import { ConstantesSistemas } from '../../Datos_Sistema/constantes.sistema';
+
 
 @Component({
     selector:'homeFincaDetalle',
@@ -30,7 +32,6 @@ export class HomeFincaDetalleComponent implements OnInit{
         description:string="";
         option1:string="";
         option2:string="";
-
     //ATRIBUTOS PERFIL FINCA
         errorMessagePerfilFinca="";
         perfilFinca: Finca;
@@ -126,6 +127,10 @@ export class HomeFincaDetalleComponent implements OnInit{
                     }
                 );
             }
+            let constantesSistema = new ConstantesSistemas();
+            constantesSistema.setIdFinca(this.idFinca);
+            console.log("pasamos el id finca y lo obtenemos get: "+constantesSistema.getIdFinca());
+
         });
 
     }

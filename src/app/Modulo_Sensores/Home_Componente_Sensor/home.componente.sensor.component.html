@@ -49,7 +49,7 @@
             <md-card-title>
                 Sensores
                 <a class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
-                    <img src="assets/icons/nuevo.png">
+                    <img src="assets/icons/nuevo.png" [routerLink]="['/asignarSensorComponenteSectorFinca/',idFinca,idComponenteSensor]">
                 </a>
             </md-card-title>        
             <md-card-content>         
@@ -61,8 +61,7 @@
                             </div><br>
                     </section>
 
-                    <!--<section *ngIf="getPerfilSensorSeleccionado()" class="bs">-->
-                    <section class="bs">
+                    <section *ngIf="getPerfilSensorSeleccionado()" class="bs">
                     <table class="table table-striped table-hover table-card">
                       <thead>
                         <tr>
@@ -72,20 +71,20 @@
                           <th class="actions">Acci&oacute;n</th>
                         </tr>
                       </thead>
-                      <!--<tbody>
-                        <tr *ngFor="let usuarioNoFinca of usuariosNoFinca">
-                          <td>{{usuarioNoFinca.usuario}}</td>
-                          <td>{{usuarioNoFinca.apellido}}, {{usuarioNoFinca.nombre}}</td>
-                          <td>{{usuarioNoFinca.domicilio}}</td>
+                      <tbody>
+                        <tr *ngFor="let sensor of sensores">
+                          <td>{{sensor.modelo}}</td>
+                          <td>{{sensor.tipoMedicion}}</td>
+                          <td>{{sensor.fechaAltaSensor.substring(0,10)}}</td>
                           <td>
-                              <a class="example-tooltip-host" mdTooltip={{tooltipDesasignarSensor}} [mdTooltipPosition]="position" (click)="apretarAgregarIcono()"
-                                (click)="apretarIconoDeshabilitarSensor(usuarioNoFinca.usuario)">
+                              <a class="example-tooltip-host" mdTooltip={{tooltipDesasignarSensor}} [mdTooltipPosition]="position"
+                                (click)="apretarIconoDeshabilitarSensorComponente(sensor.idSensor)">
                                   <img src="assets/icons/deshabilitar.png">
                               </a>
                           </td>
                         </tr>
                       </tbody>
-                    -->
+                    
                     </table>
                     </section>
             </md-card-content>

@@ -4,12 +4,12 @@
 export class MenuMock {
   static root = [
        
-    {
+    /*{
       name: 'perfil',
       title: 'Perfil',
       faIcon: 'fa-user',
       link: '/perfilUsuario/'
-    },
+    },*/
 
     {
       name: 'finca',
@@ -17,13 +17,13 @@ export class MenuMock {
       faIcon: 'fa-tachometer',
       link: '/homeFinca/'
     },
-    {
+    /*{
       name: 'tabla',
       title: 'Tabla',
       faIcon: 'fa-tachometer',
       link: '/tablas/'
-    },
-    {
+    },*/
+    /*{
       name: 'dashboard-edge',
       title: 'Dashboard Edge',
       faIcon: 'fa-window-maximize',
@@ -361,6 +361,6 @@ export class MenuMock {
           link: '/layout-fullscreen'
         },
       ]
-    },
+    },*/
   ];
 }

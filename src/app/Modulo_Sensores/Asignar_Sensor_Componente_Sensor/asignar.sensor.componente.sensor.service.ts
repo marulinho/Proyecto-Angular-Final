@@ -9,6 +9,7 @@ export class AsignarSensorComponenteSensorService extends RestBaseService {
     private asignarSensorComponenteUrl = "/asignarSensorAComponenteSensor/";
     private desasignarSensorComponenteUrl="/desasignarSensorDeComponenteSensor/";
     private buscarSensoresNoAsignadosUrl="/buscarSensoresNoAsignados/";
+    private buscarSensoresAsignadosUrl="/buscarSensoresComponente/";
     
     constructor(private http: Http) { super(); }
 
@@ -48,6 +49,19 @@ export class AsignarSensorComponenteSensorService extends RestBaseService {
         };
 
         return this.http.post(AsignarSensorComponenteSensorService.serverUrl + this.buscarSensoresNoAsignadosUrl, JSON.stringify(data), this.getRestHeader())
+            .toPromise()
+            .then(response => {
+                return response.json() as Sensor;
+            })
+            .catch(this.handleError);
+    }
+
+    buscarSensoresAsignadosComponente(idComponenteSensor:number):Promise<Sensor>{
+        const data = {
+            'idComponenteSensor': idComponenteSensor
+        };
+
+        return this.http.post(AsignarSensorComponenteSensorService.serverUrl + this.buscarSensoresAsignadosUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
             .then(response => {
                 return response.json() as Sensor;

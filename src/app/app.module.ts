@@ -2,8 +2,8 @@ import * as $ from 'jquery';
 import { ROUTES } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
@@ -12,7 +12,8 @@ import { Md2Module } from 'md2/module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule, NoPreloading } from '@angular/router';
 import { DialogExampleComponent } from './shared/dialog/dialog-example/dialog-example.component';
-import { AgmCoreModule } from 'angular2-google-maps/core';
+import { AgmCoreModule, MapsAPILoader} from 'angular2-google-maps/core';
+import {GoogleMapsAPIWrapper} from "angular2-google-maps/core/services/google-maps-api-wrapper";
 import { ComponentDialogComponent } from './pages/component-dialog/component-dialog.component';
 //import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -134,11 +135,23 @@ import { CrearComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente
 import { GestionarComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Gestionar_Componente_Sensor/gestionar.componente.sensor.component';
 import { GestionarComponenteSensorService } from './Modulo_Sensores/ABM_Componente_Sensor/gestionar.componente.sensor.service';
 import { HomeComponenteSensorComponent } from './Modulo_Sensores/Home_Componente_Sensor/home.componente.sensor.component';
+import { AsignarSensorComponenteSensorService } from './Modulo_Sensores/Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.service';
+import { AsignarSensorComponenteSensorComponent } from './Modulo_Sensores/Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.component';
 
 //IMPORTS MODULO CULTIVO
 import { GestionarCultivoSectorComponent } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.component';
 import { GestionarCultivoSectorService } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.service';
 
+//IMPORTS CONFIGURACION RIEGO
+import { GestionarConfiguracionRiegoService } from'./Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/gestionar.configuracion.riego.service';
+import { CrearConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Crear_Configuracion_Riego/crear.configuracion.riego.component';
+import { HomeConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Home_Configuracion_Riego/home.configuracion.riego.component';
+import { ModificarConfiguracionRiegoComponent }  from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Modificar_Configuracion_Riego/modificar.configuracion.riego.component';
+import { AgregarCriterioInicioComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Inicio/agregar.criterio.inicio.component';
+import { GestionarRiegoService } from './Modulo_Configuracion_Riego/Gestionar_Riego/gestionar.riego.service';
+
+//IMPORTS CONFIGURACION EVENTO PERSONALIZADO
+import { GestionarEventoPersonalizadoService } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
 import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
@@ -215,14 +228,12 @@ import { TablasComponent } from './tablas/tablas.component';
     QuillEditorComponent,
 
     //COMPONENTS MODULO SEGURIDAD
-
     IniciarSesionComponent,
     PerfilUsuarioComponent,
     ModificarUsuarioComponent,
     RegistrarUsuarioComponent,
     RecuperarCuentaComponent,
     ModificarContraseniaComponent,
-
 
     //COMPONENTS MODULO CONFIGURACION FINCA
     HomeFincaComponent,
@@ -231,7 +242,6 @@ import { TablasComponent } from './tablas/tablas.component';
     GestionarFincaComponent,
     GestionarUsuarioFincaComponent,
     ModificarRolUsuarioComponent,
-
 
     //COMPONENTS MODULO CONFIGURACION SECTORES
     HomeSectorComponent,
@@ -251,9 +261,16 @@ import { TablasComponent } from './tablas/tablas.component';
     ModificarSensorComponent,
     CrearComponenteSensorComponent,
     GestionarComponenteSensorComponent,
+    AsignarSensorComponenteSensorComponent,
 
     //COMPONENTS MODULO CULTIVO
     GestionarCultivoSectorComponent,
+
+    //COMPONETS MODULO CONFIGURACION RIEGO
+    CrearConfiguracionRiegoComponent,
+    HomeConfiguracionRiegoComponent,
+    ModificarConfiguracionRiegoComponent,
+    AgregarCriterioInicioComponent,
 
     //COMPONENTS MODULO OBTENCION INFORMACION EXTERNA
     ModificarProveedorInformacionComponent,
@@ -265,6 +282,7 @@ import { TablasComponent } from './tablas/tablas.component';
     BrowserAnimationsModule,
     MdTabsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     // Lokra Imports
     ScheduleModule,
@@ -288,13 +306,15 @@ import { TablasComponent } from './tablas/tablas.component';
     
     // Replace to your Google map API key.
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC4-U6Eo0eHV7UFGjAIO6ZRB4X5z7hWS-8'
+      //apiKey: 'AIzaSyC4-U6Eo0eHV7UFGjAIO6ZRB4X5z7hWS-8',
+      apiKey:'AIzaSyBXWWoArForOIKN1Ds43Daa7Mou7sfQCHU',
+      libraries:["places"]
     }),
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
       deps: [Http]
-    })
+    }),
   ],
   providers: [
     // Global service (Global state)
@@ -326,12 +346,23 @@ import { TablasComponent } from './tablas/tablas.component';
     //LLAMADAS MODULO SENSORES
     ABMSensorFincaService,
     GestionarComponenteSensorService,
+    AsignarSensorComponenteSensorService,
 
     //LLAMADAS MODULO CULTIVO
     GestionarCultivoSectorService,
 
+    //LLAMADAS CONFIGURACION RIEGO
+    GestionarConfiguracionRiegoService,
+
+    //LLAMADAS CONFIGURACION EVENTOS PERSONALIZADOS
+    GestionarEventoPersonalizadoService,
+    
+
     //LLAMADAS MODULO OBTENCION INFORMACION EXTERNA
-    GestionarProveedorInformacionService
+    GestionarProveedorInformacionService,
+    GestionarRiegoService,
+    
+    GoogleMapsAPIWrapper, 
     
   ],
   entryComponents: [
@@ -339,6 +370,7 @@ import { TablasComponent } from './tablas/tablas.component';
     DialogExampleComponent,
     DialogThemeComponent,
   ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

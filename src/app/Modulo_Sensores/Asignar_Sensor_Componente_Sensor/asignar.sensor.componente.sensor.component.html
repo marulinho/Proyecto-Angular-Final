@@ -1,0 +1,46 @@
+<!--SECCION PERFIL AGREGAR SENSOR COMPONENTE-->
+<div  class="sign-container">
+    <md-card class="page-card">
+        <md-card-title>
+            Sensores
+        </md-card-title>
+        <md-card-content>
+            <section *ngIf="errorMessageAgregarSensorComponente" class="bs">
+                <div class="bd-example" data-example-id="">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{errorMessageAgregarSensorComponente}}</strong>
+                    </div>
+                </div><br>
+            </section>
+
+            <section *ngIf="getPerfilAgregarSensorSeleccionado()" class="bs">
+                <table class="table table-striped table-hover table-card">
+                          <thead>
+                            <tr>
+                              <th style="width:37%;">Modelo</th>
+                              <th style="width:36%;">Tipo Medici&oacute;n</th>
+                              <th>Habilitado</th>
+                              <th class="actions">Acci&oacute;n</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let sensor of sensores">
+                              <td>{{sensor.modelo}}</td>
+                              <td>{{sensor.tipoMedicion}}</td>
+                              <td>{{sensor.habilitado}}</td>
+                              <td>
+                                  <a class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position" 
+                                    (click)="apretarIconoAsignarSensorComponente(sensor.idSensor)">
+                                      <img src="assets/icons/asignarSensor.png">
+                                  </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        
+                        </table>
+            </section>
+        </md-card-content>
+
+    </md-card>
+
+</div>

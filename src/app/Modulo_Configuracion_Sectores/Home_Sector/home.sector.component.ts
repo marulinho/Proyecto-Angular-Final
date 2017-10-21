@@ -8,6 +8,8 @@ import { GestionarSectorFincaService, Sector } from'../CU_Gestionar_Sector/gesti
 import { AsignarMecanismoRiegoSectorService, MecanismoRiego } from '../CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.service';
 import { GestionarCultivoSectorService, Cultivo } from '../../Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.service';
 import { AsignarComponenteSensorSectorService, ComponenteSensor } from '../CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.service';
+import { GestionarConfiguracionRiegoService, ConfiguracionRiego } from '../../Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/gestionar.configuracion.riego.service';
+import { GestionarRiegoService, Riego } from '../../Modulo_Configuracion_Riego/Gestionar_Riego/gestionar.riego.service';
 
 @Component({
     selector:'homeSectorFinca',
@@ -54,13 +56,32 @@ export class HomeSectorComponent implements OnInit{
     componenteSensorExistente:Boolean;
     tooltipAsignarComponenteSector='Asignar Componente';
     tooltipDeshabilitarComponenteSector='Deshabilitar Componente';
-    
+
+    //ATRIBUTOS CONFIGURACION DE RIEGO
+    errorMessageConfiguracionRiego="";
+    configuracionRiegoSeleccionado:Boolean;
+    tooltipCrearConfiguracionRiego='Crear Configuración';
+    tooltipVerConfiguracionRiego='Ver Configuración';
+    tooltipHabilitarConfiguracionRiego='Habilitar Configuración';
+    configuracionesRiego:ConfiguracionRiego;
+
+    //ATRIBUTOS RIEGO
+    errorMessageRiego="";
+    riegoSeleccionado:Boolean;
+    tooltipIniciarRiego='Iniciar Riego';
+    tooltipPausarRiego='Pausar Riego';
+    tooltipCancelarRiego='Cancelar Riego';
+    riegos:Riego;
+    existeRiego:Boolean;
+
     constructor(private router:Router,
                 private route:ActivatedRoute,
                 private gestionarSectorFincaService:GestionarSectorFincaService,
                 private asignarMecanismoRiegoSectorService:AsignarMecanismoRiegoSectorService,
                 private gestionarCultivoSectorService: GestionarCultivoSectorService,
                 private asignarComponenteSensorSectorService:AsignarComponenteSensorSectorService,
+                private gestionarConfiguracionRiegoService:GestionarConfiguracionRiegoService,
+                private gestionarRiegoService:GestionarRiegoService,
                 private appService:AppService,
                 private dialog: MdDialog){
 
@@ -68,6 +89,7 @@ export class HomeSectorComponent implements OnInit{
         this.route.params.subscribe(params => {
             this.idSector = +params['idSector'];
             this.idFinca=+params['idFinca'];
+            console.log("id FInca: "+this.idFinca);
             if (this.idSector) {
                 this.gestionarSectorFincaService.buscarSectorId(this.idSector)
                 .then(
@@ -98,9 +120,13 @@ export class HomeSectorComponent implements OnInit{
                         this.mecanismoRiego=response.datos_operacion;
                         if(this.mecanismoRiego['mecanismoRiegoFinca']!=null){
                             this.mecanismoHabilitado=true;
+                            this.idMecanismoRiegoFincaSector=this.mecanismoRiego['idMecanismoRiegoFincaSector'];
+                            this.buscarConfiguracionesRiego();
+                            this.buscarRiegoEnEjecucion();
                         }
                         else{
                             this.mecanismoHabilitado=false;
+                            this.errorMessageConfiguracionRiego="No existen configuraciones de riego asignadas al sector.";
                         }
                         
                         this.mecanismoSeleccionado=true;
@@ -152,7 +178,54 @@ export class HomeSectorComponent implements OnInit{
                     this.errorMessageComponenteSector=error.error_description;
                 }
             );
+
     }
+
+    buscarConfiguracionesRiego(){
+        this.gestionarConfiguracionRiegoService.obtenerConfiguracionesRiegoFincaMecanismoSector(this.idFinca,this.idMecanismoRiegoFincaSector)
+        .then(
+            response=>{
+                console.log(this.idFinca);
+                console.log(this.idMecanismoRiegoFincaSector)
+                if(response.detalle_operacion=="No hay datos"){
+                    this.errorMessageConfiguracionRiego="No hay configuraciones de riego asociadas al sector.";
+                }
+                else{
+                    this.configuracionesRiego=response.datos_operacion;
+                    this.configuracionRiegoSeleccionado=true;
+                }
+            }
+        )
+        .catch(
+            error=>{
+                this.errorMessageConfiguracionRiego=error.error_description;
+            }
+        );
+    }
+
+    buscarRiegoEnEjecucion(){
+        this.gestionarRiegoService.obtenerRiegoEnEjecucion(this.idFinca,this.idMecanismoRiegoFincaSector)
+        .then(
+            response=>{
+                if(response.detalle_operacion=="No hay riego activo"){
+                    this.errorMessageRiego="No hay riegos en ejecución asociados al sector.";
+                    this.existeRiego=false;
+                    this.riegoSeleccionado=false;
+                }
+                else{
+                    this.riegos=response.datos_operacion;
+                    this.existeRiego=true;
+                    this.riegoSeleccionado=true;
+                }
+            }
+        )
+        .catch(
+            error=>{
+                this.errorMessageRiego=error.error_description;
+            }
+        );
+    }
+
 
    getSectorSeleccionado(){
        return this.sectorSeleccionado;
@@ -180,6 +253,18 @@ export class HomeSectorComponent implements OnInit{
 
    getComponenteSensorExistente(){
        return this.componenteSensorExistente;
+   }
+
+   getConfiguracionRiegoSeleccionado(){
+       return this.configuracionRiegoSeleccionado;
+   }
+
+   getRiegoSeleccionado(){
+       return this.riegoSeleccionado;
+   }
+
+   getExisteRiegoEnEjecucion(){
+       return this.existeRiego;
    }
 
    apretarEliminarIcono(){
@@ -262,6 +347,61 @@ export class HomeSectorComponent implements OnInit{
             );    
    }
 
+   apretarHabilitarConfiguracionRiego(idConfiguracionRiego:number){
+       this.gestionarConfiguracionRiegoService.cambiarEstadoConfiguracionRiego(this.idFinca,this.idMecanismoRiegoFincaSector,idConfiguracionRiego)
+           .then(
+               response=>{
+                   this.refresh();
+               }
+           )
+           .catch(
+               error=>{
+                   this.errorMessageConfiguracionRiego=error.error_description;
+               }
+           );
+   }
+
+   apretarIniciarRiego(){
+       this.gestionarRiegoService.iniciarRiegoManualmente(this.idFinca,this.idMecanismoRiegoFincaSector)
+            .then(
+                response=>{
+                    this.refresh();
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageRiego=error.error_description;
+                }
+            );
+   }
+
+   apretarPausarRiego(){
+       this.gestionarRiegoService.pausarRiegoManualmente(this.idFinca,this.idMecanismoRiegoFincaSector)
+            .then(
+                response=>{
+                    this.refresh();
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageRiego=error.error_description;
+                }
+            );
+   }
+
+   apretarCancelarRiego(){
+       this.gestionarRiegoService.cancelarRiegoManualmente(this.idFinca,this.idMecanismoRiegoFincaSector)
+            .then(
+                response=>{
+                    this.refresh();
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageRiego=error.error_description;
+                }
+            );
+   }
 
    refresh(): void {
         window.location.reload();

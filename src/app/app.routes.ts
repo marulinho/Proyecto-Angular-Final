@@ -85,10 +85,16 @@ import { ModificarSensorComponent } from './Modulo_Sensores/ABM_Sensores/Modific
 import { CrearComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Crear_Componente_Sensor/crear.componente.sensor.component';
 import { GestionarComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Gestionar_Componente_Sensor/gestionar.componente.sensor.component';
 import { HomeComponenteSensorComponent } from './Modulo_Sensores/Home_Componente_Sensor/home.componente.sensor.component';
+import { AsignarSensorComponenteSensorComponent } from './Modulo_Sensores/Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.component';
 
 //IMPORTS MODULO CULTIVO
 import { GestionarCultivoSectorComponent } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.component';
 
+//IMPORTS MODULO CONFIGURACION RIEGO
+import { CrearConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Crear_Configuracion_Riego/crear.configuracion.riego.component';
+import { HomeConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Home_Configuracion_Riego/home.configuracion.riego.component';
+import { ModificarConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Modificar_Configuracion_Riego/modificar.configuracion.riego.component';
+import { AgregarCriterioInicioComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Inicio/agregar.criterio.inicio.component';
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
 import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
@@ -159,6 +165,7 @@ export const ROUTES: Routes = [
    { path:'gestionarSectorFinca/:idSector', component: GestionarSectorFincaComponent},
    { path:'asignarMecanismoSector/:idSector/:idFinca', component: AsignarMecanismoRiegoSectorComponent},
    { path:'asignarCultivo/:idSector/:idFinca', component:AsignarCultivoSectorComponent},
+   { path:'asignarSensorComponenteSectorFinca/:idFinca/:idComponenteSensor', component:AsignarSensorComponenteSensorComponent},
    { path:'asignarComponenteSector/:idSector/:idFinca', component:AsignarComponenteSensorSectorComponent},
 
    {path:'tablas',component:TablasComponent},
@@ -169,11 +176,18 @@ export const ROUTES: Routes = [
    {path:'crearComponenteSensorFinca/:idFinca', component:CrearComponenteSensorComponent},
    {path:'modificarComponenteSensorFinca/:idFinca/:idComponenteSensor', component:GestionarComponenteSensorComponent},
    {path:'homeComponenteSensorFinca/:idFinca/:idComponenteSensor', component:HomeComponenteSensorComponent},
-   
+   {path:'asignarSensorComponente/:idFinca/:idComponenteSensor', component:AsignarSensorComponenteSensorComponent },
+
    //MODULO OBTENCION INFORMACION EXTERNA
    {path:'gestionarProveedor/:idFinca', component:ModificarProveedorInformacionComponent},
    {path:'cambiarProveedor/:idFinca', component:CambiarProveedorInformacionComponent},
 
+
+   //MODULO CONFIGURACION RIEGO
+   {path:'crearConfiguracionRiego/:idFinca/:idSector/:idMecanismoRiegoFincaSector', component:CrearConfiguracionRiegoComponent},
+   {path:'homeConfiguracionRiego/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego/:idSector', component:HomeConfiguracionRiegoComponent},
+   {path:'gestionarConfiguracionRiego/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego', component:ModificarConfiguracionRiegoComponent},
+   {path:'agregarCriterioInicial/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego/:idSector',component:AgregarCriterioInicioComponent},
 
    //MODULO CULTIVOS
    {path:'gestionarCultivoSector/:idSector/:idFinca/:idCultivo', component: GestionarCultivoSectorComponent},

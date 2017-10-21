@@ -75,6 +75,7 @@ export class HomeFincaComponent implements OnInit{
     //ATRIBUTOS FINCA DESHABILITADAS
     errorMessageFincasDeshabilitadas:string="";
     fincasDeshabilitadas=[];   
+    idFincasDeshabilitadas=[];
     tooltipHabilitarFinca='Habilitar Finca';
     fincasDeshabilitadasSeleccionado:Boolean;
     
@@ -167,6 +168,7 @@ export class HomeFincaComponent implements OnInit{
         for(var i=0;i<longitud;i++){
             let estadoActual= fincas[i]['estadoFinca'];
             let rolActual= fincas[i]['nombreRol'];
+            let idFinca=fincas[i]['idFinca'];
 
             if(estadoActual=="habilitado"){
                 if(rolActual=="encargado"){
@@ -178,7 +180,14 @@ export class HomeFincaComponent implements OnInit{
             }
             else{
                 if(estadoActual=="deshabilitado"){
-                    this.fincasDeshabilitadas.push(fincas[i]);
+                    if(this.idFincasDeshabilitadas.includes(idFinca)){
+                        //no hago nada
+                    }
+                    else{
+                        this.idFincasDeshabilitadas.push(idFinca);
+                        this.fincasDeshabilitadas.push(fincas[i]);
+                    }
+                    
                 }
                 else{
                     if(estadoActual=="pendienteAprobacion"){
