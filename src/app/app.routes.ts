@@ -96,6 +96,9 @@ import { HomeConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Ho
 import { ModificarConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Modificar_Configuracion_Riego/modificar.configuracion.riego.component';
 import { AgregarCriterioInicioComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Inicio/agregar.criterio.inicio.component';
 
+//IMPORTS MODULO REPORTES
+import { AgregarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Agregar_Evento_Personalizado/agregar.evento.personalizado.component';
+
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
 import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
 import { CambiarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Cambiar_Proveedor_Informacion/cambiar.proveedor.component';
@@ -188,6 +191,9 @@ export const ROUTES: Routes = [
    {path:'homeConfiguracionRiego/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego/:idSector', component:HomeConfiguracionRiegoComponent},
    {path:'gestionarConfiguracionRiego/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego', component:ModificarConfiguracionRiegoComponent},
    {path:'agregarCriterioInicial/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego/:idSector',component:AgregarCriterioInicioComponent},
+
+   //MODULO REPORTES
+   {path:'crearEventoPersonalizado',component:AgregarEventoPersonalizadoComponent},
 
    //MODULO CULTIVOS
    {path:'gestionarCultivoSector/:idSector/:idFinca/:idCultivo', component: GestionarCultivoSectorComponent},

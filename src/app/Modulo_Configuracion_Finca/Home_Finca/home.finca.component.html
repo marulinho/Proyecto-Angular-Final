@@ -46,7 +46,7 @@
                 <td>{{fincaEncargado.ubicacion}}</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
-                  <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaEncargado.idFinca]">
+                  <img src="assets/icons/ver.png" (click)="apretarIconoVerFinca(fincaEncargado.idFinca,fincaEncargado.idUsuarioFinca)">
                   
                 </a>
                 </td>
@@ -105,7 +105,7 @@
                 <td>{{fincaSinRolEncargado.nombreRol}}</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
-                <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaSinRolEncargado.idFinca]">
+                <img src="assets/icons/ver.png" (click)="apretarIconoVerFinca(fincaSinRolEncargado.idFinca,fincaSinRolEncargado.idUsuarioFinca)">
                 
               </a>
                 </td>
@@ -148,7 +148,7 @@
                 <td>{{fincaPendientesAprobacion.tamanio}} hect&aacute;reas</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
-                    <img src="assets/icons/ver.png" [routerLink]="['/homeFincaDetalle/', fincaPendientesAprobacion.idFinca]">
+                    <img src="assets/icons/ver.png"  (click)="apretarIconoVerFinca(fincaPendientesAprobacion.idFinca,fincaPendientesAprobacion.idUsuarioFinca)">
                     
                   </a>
                 </td>

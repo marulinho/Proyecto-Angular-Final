@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Ng2SmartTableModule,LocalDataSource } from 'ng2-smart-table';
 import { HomeFincaService, Finca } from './home.finca.service';
 import { AppService } from '../../app.service';
+import { ConstantesSistemas } from '../../Datos_Sistema/constantes.sistema';
+
 
 @Component({
     selector:'homeFinca',
@@ -17,6 +19,7 @@ export class HomeFincaComponent implements OnInit{
     tooltipCrearFinca='Crear Finca';
     tooltipVer="Ver Finca";
 
+    constantes= new ConstantesSistemas();
 
     //ATRIBUTOS LLAMADA FINCAS USUARIO
     fincasUsuario=[];
@@ -241,6 +244,12 @@ export class HomeFincaComponent implements OnInit{
                     this.errorMessageFincasDeshabilitadas=error.error_description;
                 }
             );
+    }
+
+    apretarIconoVerFinca(idFinca:number,idUsuarioFinca:number){
+        localStorage.setItem('idFinca',JSON.stringify(idFinca));
+        localStorage.setItem('idUsuarioFinca',JSON.stringify(idUsuarioFinca));
+        this.router.navigate(['/homeFincaDetalle/'+idFinca]);
     }
 
     refresh(): void {

@@ -11,6 +11,7 @@ export class ConstantesSistemas{
 
     public setIdFinca(idFinca):void{
         this.idFinca=idFinca;
+        console.log("seteado: "+idFinca);
     }
 
     public setIdSector(idSector):void{
@@ -41,9 +42,9 @@ export class ConstantesSistemas{
         this.idConfiguracionRiego=idConfiguracionRiego;
     }
     
-
-
     public getIdFinca():number{
+        console.log("actual: "+this.idFinca);
+        console.log("ACAAAAAAAA");
         return this.idFinca;
     }
 

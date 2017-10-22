@@ -150,8 +150,9 @@ import { ModificarConfiguracionRiegoComponent }  from './Modulo_Configuracion_Ri
 import { AgregarCriterioInicioComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Inicio/agregar.criterio.inicio.component';
 import { GestionarRiegoService } from './Modulo_Configuracion_Riego/Gestionar_Riego/gestionar.riego.service';
 
-//IMPORTS CONFIGURACION EVENTO PERSONALIZADO
+//IMPORTS MODULO REPORTES
 import { GestionarEventoPersonalizadoService } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
+import { AgregarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Agregar_Evento_Personalizado/agregar.evento.personalizado.component';
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
 import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
@@ -271,6 +272,9 @@ import { TablasComponent } from './tablas/tablas.component';
     HomeConfiguracionRiegoComponent,
     ModificarConfiguracionRiegoComponent,
     AgregarCriterioInicioComponent,
+
+    //COMPONENTS MODULO REPORTES
+    AgregarEventoPersonalizadoComponent,
 
     //COMPONENTS MODULO OBTENCION INFORMACION EXTERNA
     ModificarProveedorInformacionComponent,

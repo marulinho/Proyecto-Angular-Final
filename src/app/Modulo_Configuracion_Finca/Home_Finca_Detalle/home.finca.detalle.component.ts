@@ -128,8 +128,10 @@ export class HomeFincaDetalleComponent implements OnInit{
                 );
             }
             let constantesSistema = new ConstantesSistemas();
-            constantesSistema.setIdFinca(this.idFinca);
-            console.log("pasamos el id finca y lo obtenemos get: "+constantesSistema.getIdFinca());
+            console.log("Finca Guardadada Globalmente: "+JSON.parse(localStorage.getItem("idFinca")));
+            console.log("UsuarioFinca Guardadada Globalmente: "+JSON.parse(localStorage.getItem("idUsuarioFinca")));
+            //constantesSistema.setIdFinca(this.idFinca);
+            //console.log("pasamos el id finca y lo obtenemos get: "+constantesSistema.getIdFinca());
 
         });
 

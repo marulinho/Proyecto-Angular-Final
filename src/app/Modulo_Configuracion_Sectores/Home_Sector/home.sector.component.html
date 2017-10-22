@@ -211,8 +211,9 @@
                                 <td>{{configuracionRiego.descripcion}}.</td>
                                 <td>{{configuracionRiego.tipoConfiguracionRiego}}.</td>
                                 <td>
-                                    <a *ngIf="configuracionRiego.estado_configuracion=='habilitado' && configuracionRiego.tipoConfiguracionRiego=='programado'" class="example-tooltip-host" mdTooltip={{tooltipVerConfiguracionRiego}}
-                                        [mdTooltipPosition]="position" [routerLink]="['/homeConfiguracionRiego/',idFinca,idMecanismoRiegoFincaSector,configuracionRiego.idConfiguracionRiego,idSector]">
+                                    <a *ngIf="configuracionRiego.estado_configuracion=='habilitado' && configuracionRiego.tipoConfiguracionRiego=='programado'"
+                                        class="example-tooltip-host" mdTooltip={{tooltipVerConfiguracionRiego}} [mdTooltipPosition]="position"
+                                        [routerLink]="['/homeConfiguracionRiego/',idFinca,idMecanismoRiegoFincaSector,configuracionRiego.idConfiguracionRiego,idSector]">
                                             <img src="assets/icons/ver.png">
                                     </a>
                                     <a *ngIf="configuracionRiego.estado_configuracion=='deshabilitado'" class="example-tooltip-host" mdTooltip={{tooltipHabilitarConfiguracionRiego}}
@@ -260,18 +261,17 @@
                                 <td>{{riegos.fechaHoraInicio.substring(0,10)}} {{riegos.fechaHoraInicio.substring(12,19)}}</td>
                                 <td>{{riegos.fechaHoraFinalProgramada}}</td>
                                 <td>
-                                    <a *ngIf="riegos.estado_ejecucion_riego=='en_ejecucion'" class="example-tooltip-host" mdTooltip={{tooltipPausarRiego}}
-                                        [mdTooltipPosition]="position" (click)="apretarPausarRiego()">
+                                    <a *ngIf="riegos.estado_ejecucion_riego=='en_ejecucion'" class="example-tooltip-host" mdTooltip={{tooltipPausarRiego}} [mdTooltipPosition]="position"
+                                        (click)="apretarPausarRiego()">
                                             <img src="assets/icons/pausar.png">
                                     </a>
-                                    
-                                    <a *ngIf="riegos.estado_ejecucion_riego=='en_ejecucion' || riegos.estado_ejecucion_riego=='pausado'" class="example-tooltip-host" mdTooltip={{tooltipCancelarRiego}}
-                                    [mdTooltipPosition]="position" (click)="apretarCancelarRiego()">
+
+                                    <a *ngIf="riegos.estado_ejecucion_riego=='en_ejecucion' || riegos.estado_ejecucion_riego=='pausado'" class="example-tooltip-host"
+                                        mdTooltip={{tooltipCancelarRiego}} [mdTooltipPosition]="position" (click)="apretarCancelarRiego()">
                                         <img src="assets/icons/cancelar.png">
                                     </a>
 
-                                    <a *ngIf="riegos.estado_ejecucion_riego=='pausado'" class="example-tooltip-host" mdTooltip={{tooltipIniciarRiego}}
-                                        [mdTooltipPosition]="position">
+                                    <a *ngIf="riegos.estado_ejecucion_riego=='pausado'" class="example-tooltip-host" mdTooltip={{tooltipIniciarRiego}} [mdTooltipPosition]="position">
                                             <img src="assets/icons/iniciar.png" (click)="apretarIniciarRiego()">
                                     </a>
                                 </td>
@@ -282,6 +282,55 @@
             </md-card-content>
         </md-card>
 
+
+        <!--SECCION EVENTO PERSONALIZADO-->
+        <md-card class="page-card">
+            <md-card-title>
+                Evento Personalizado Sector.
+                <a class="example-tooltip-host" mdTooltip={{tooltipCrearEvento}} [mdTooltipPosition]="position">
+                            <img src="assets/icons/nuevo.png" [routerLink]="['/crearEventoPersonalizado/']">
+                        </a>
+            </md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessageEventoPersonalizado" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessageEventoPersonalizado}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+                <section *ngIf="getEventoPersonalizadoSeleccionado()" class="bs">
+                    <table class="table table-striped table-hover table-card">
+                        <thead>
+                            <tr>
+                                <th style="width:37%;">Nombre.</th>
+                                <th>Mediciones Internas.</th>
+                                <th>Mediciones Externas.</th>
+                                <th class="actions">Acci&oacute;n.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let eventoPersonalizado of eventosPersonalizados">
+                                <td>{{eventoPersonalizado.nombre}}</td>
+                                <td>{{eventoPersonalizado.lista_mediciones_internas}}</td>
+                                <td>{{eventoPersonalizado.lista_mediciones_externas}}</td>
+                                <td>
+                                    <a *ngIf="eventoPersonalizado.activado=='false'" class="example-tooltip-host" mdTooltip={{tooltipHabilitarEvento}} [mdTooltipPosition]="position"
+                                        (click)="apretarHabilitarEvento(eventoPersonalizado.id_configuracion_evento)">
+                                                    <img src="assets/icons/habilitar.png">
+                                    </a>
+
+                                    <a *ngIf="eventoPersonalizado.activado=='true'" class="example-tooltip-host"
+                                        mdTooltip={{tooltipVerEvento}} [mdTooltipPosition]="position">
+                                                <img src="assets/icons/ver.png">
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </md-card-content>
+        </md-card>
 
     </md-card>
 </div>

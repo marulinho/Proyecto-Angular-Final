@@ -1,0 +1,101 @@
+<!--SECCION EVENTO PERSONALIZADO-->
+<div class="page-content">
+    <md-card>
+        <md-card-title>Crear Evento Personalizado.</md-card-title>
+        <md-card-content>
+            <md-tab-group selectedIndex="{{selectIndex}}">
+                <md-tab disabled label="Paso 1">
+                    <div class="tab-body-content">
+                        <h3>
+                            <small>Datos Configuraci&oacute;n Evento.</small>
+                        </h3>
+                        <p>Los campos con (*) son obligatorios.</p>
+                        <section *ngIf="errorMessageAgregarEvento" class="bs">
+                            <div class="bd-example" data-example-id="">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>{{errorMessageAgregarEvento}}</strong>
+                                </div>
+                            </div><br>
+                        </section>
+                        <md-input-container>
+                            <input mdInput placeholder="Nombre evento." type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcion" name="descripcion" required><br>
+                        </md-input-container>
+
+                        <br><br><md-select placeholder="Seleccione tipo medici&oacute;n interna." [(ngModel)]="tipoInterna"  name="tipoInterna" required>
+                            <md-option *ngFor="let tipoMedicionInterna of tiposMedicionInterna"[value]="tipoMedicionInterna.idTipoMedicion">
+                                {{tipoMedicionInterna.nombreTipoMedicion}}
+                            </md-option>
+                        </md-select>
+
+                        <br><br><md-input-container>
+                            <input mdInput placeholder="Valor m&iacute;nimo medici&oacute;n interna." type="number" [(ngModel)]="valorMinimoInterno" name="valorMinimoInterno" required><br>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <input mdInput placeholder="Valor m&aacute;ximo medici&oacute;n interna." type="number" [(ngModel)]="valorMaximoInterno" name="valorMaximoInterno" required><br>
+                        </md-input-container>
+
+                        <br><br><md-select placeholder="Seleccione tipo medici&oacute;n externa." [(ngModel)]="tipoExterna"  name="tipoInterna" required>
+                            <md-option *ngFor="let tipoMecicionExterna of tiposMecicionExterna"[value]="tipoMecicionExterna.idTipoMedicionClimatica">
+                                {{tipoMecicionExterna.nombreTipoMedicionClimatica}}
+                            </md-option>
+                        </md-select>
+
+                        <br><br><md-input-container>
+                            <input mdInput placeholder="Valor m&iacute;nimo medici&oacute;n externa." type="number" [(ngModel)]="valorMinimoExterno" name="valorMinimoExterno" required><br>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <input mdInput placeholder="Valor m&aacute;ximo medici&oacute;n externa." type="number" [(ngModel)]="valorMaximoExterno" name="valorMaximoExterno" required><br>
+                        </md-input-container>
+
+                        <md-checkbox class="example-margin" [(ngModel)]="notificacionActivada">Activar Notificaciones</md-checkbox><br><br>
+                        <md-checkbox class="example-margin" [(ngModel)]="configuracionActivada">Activar Configuraci&oacute;n </md-checkbox>
+                        
+
+                    </div>
+                </md-tab>
+                <md-tab disabled label="Paso 2">
+                    <div class="tab-body-content">
+                        <h4>Resumen Creaci&oacute;n.</h4>
+                        <section *ngIf="errorMessageAgregarEvento" class="bs">
+                            <div class="bd-example" data-example-id="">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>{{errorMessageAgregarEvento}}</strong>
+                                </div>
+                            </div><br>
+                        </section>
+                        <label id=atributo>Nombre: </label>
+                        <label>{{nombre}}.</label><br><br>
+
+                        <label id=atributo>Descripci&oacute;: </label>
+                        <label>{{descripcion}}.</label><br><br>                        
+
+                        <label id=atributo>Configuraci&oacute;n mediciones internas: </label>
+                        <label>{{configuracionInterna}}.</label><br><br>
+
+                        <label id=atributo>Configuraci&oacute;n mediciones externas: </label>
+                        <label>{{configuracionExterna}}.</label><br><br>
+
+                        <label id=atributo>Notificaci&oacute;n: </label>
+                        <label>{{notificacionActivada}}.</label><br><br>
+
+                        <label id=atributo>Configuraci&oacute;n: </label>
+                        <label>{{configuracionActivada}}</label><br><br>
+
+                    </div>
+                </md-tab>
+            </md-tab-group>
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
+            <button *ngIf="selectIndex <1" md-raised-button [disabled]="selectIndex == 1" (click)="apretarNextCrear()">NEXT</button>
+            <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarCrearConfiguracion()">CREAR</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+        </md-card-actions>
+    </md-card>
+</div>

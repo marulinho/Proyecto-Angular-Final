@@ -58,7 +58,7 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    crearConfiguracionEventoPersonalizado(configuracionMedicionInterna: number, configuracionMedicionExterna:number, idUsuarioFinca:number,
+    crearConfiguracionEventoPersonalizado(configuracionMedicionInterna, configuracionMedicionExterna, idUsuarioFinca:number,
         nombreConfiguracionEvento:string, descripcionConfiguracionEvento:string, notificacionActivada:boolean,
         configuracionActivada:boolean, idSector:number): Promise<any> {
         const data = {

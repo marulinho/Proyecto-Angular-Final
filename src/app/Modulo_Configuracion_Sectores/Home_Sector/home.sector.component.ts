@@ -10,6 +10,7 @@ import { GestionarCultivoSectorService, Cultivo } from '../../Modulo_Cultivo/CU_
 import { AsignarComponenteSensorSectorService, ComponenteSensor } from '../CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.service';
 import { GestionarConfiguracionRiegoService, ConfiguracionRiego } from '../../Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/gestionar.configuracion.riego.service';
 import { GestionarRiegoService, Riego } from '../../Modulo_Configuracion_Riego/Gestionar_Riego/gestionar.riego.service';
+import { GestionarEventoPersonalizadoService, ConfiguracionEvento } from '../../Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
 
 @Component({
     selector:'homeSectorFinca',
@@ -26,16 +27,16 @@ export class HomeSectorComponent implements OnInit{
     sector:Sector;
     errorMessageHomeSector="";
     sectorSeleccionado:Boolean;
-    tooltipEditarSector='Editar Sector';
-    tooltipEliminarSector='Eliminar Sector';
+    tooltipEditarSector='Editar Sector.';
+    tooltipEliminarSector='Eliminar Sector.';
     position='above';
     selectedOption:string;
 
     //ATRIBUTOS MECANISMO RIEGO SECTOR
     errorMessageMecanismoSector="";
     mecanismoSeleccionado:Boolean;
-    tooltipAgregarMecanismoSector='Asignar Mecanismo';
-    tooltipDeshabilitarMecanismoSector='Deshabilitar Mecanismo';
+    tooltipAgregarMecanismoSector='Asignar Mecanismo.';
+    tooltipDeshabilitarMecanismoSector='Deshabilitar Mecanismo.';
     mecanismoRiego:MecanismoRiego;
     mecanismoHabilitado:boolean;
     idMecanismoRiegoFincaSector:number;
@@ -43,9 +44,9 @@ export class HomeSectorComponent implements OnInit{
     //ATRIBUTOS CULTIVO SECTOR
     errorMessageCultivoSector="";
     cultivosSector:Cultivo;
-    tooltipAsignarCultivoSector='Asignar Cultivo';
-    tooltipDeshabilitarCultivoSector='Deshabilitar Cultivo';
-    tooltipModificarCultivoSector='Modificar Cultivo';
+    tooltipAsignarCultivoSector='Asignar Cultivo.';
+    tooltipDeshabilitarCultivoSector='Deshabilitar Cultivo.';
+    tooltipModificarCultivoSector='Modificar Cultivo.';
     cultivoSectorSeleccionado:Boolean;
     cultivoExistente:Boolean;
 
@@ -54,25 +55,36 @@ export class HomeSectorComponent implements OnInit{
     componenteSensor:ComponenteSensor;
     componenteSensorSeleccionado:Boolean;
     componenteSensorExistente:Boolean;
-    tooltipAsignarComponenteSector='Asignar Componente';
-    tooltipDeshabilitarComponenteSector='Deshabilitar Componente';
+    tooltipAsignarComponenteSector='Asignar Componente.';
+    tooltipDeshabilitarComponenteSector='Deshabilitar Componente.';
 
     //ATRIBUTOS CONFIGURACION DE RIEGO
     errorMessageConfiguracionRiego="";
     configuracionRiegoSeleccionado:Boolean;
-    tooltipCrearConfiguracionRiego='Crear Configuración';
-    tooltipVerConfiguracionRiego='Ver Configuración';
-    tooltipHabilitarConfiguracionRiego='Habilitar Configuración';
+    tooltipCrearConfiguracionRiego='Crear Configuración.';
+    tooltipVerConfiguracionRiego='Ver Configuración.';
+    tooltipHabilitarConfiguracionRiego='Habilitar Configuración.';
     configuracionesRiego:ConfiguracionRiego;
 
     //ATRIBUTOS RIEGO
     errorMessageRiego="";
     riegoSeleccionado:Boolean;
-    tooltipIniciarRiego='Iniciar Riego';
-    tooltipPausarRiego='Pausar Riego';
-    tooltipCancelarRiego='Cancelar Riego';
+    tooltipIniciarRiego='Iniciar Riego.';
+    tooltipPausarRiego='Pausar Riego.';
+    tooltipCancelarRiego='Cancelar Riego.';
     riegos:Riego;
     existeRiego:Boolean;
+
+    //ATRIBUTOS EVENTO PERSONALIZADO
+    idUsuarioFinca:number=JSON.parse(localStorage.getItem("idUsuarioFinca"));
+    errorMessageEventoPersonalizado="";
+    eventoPersonalizadoSeleccionado:Boolean;
+    tooltipCrearEvento='Crear Evento.';
+    tooltipVerEvento='Ver Evento.';
+    tooltipHabilitarEvento='Habilitar Evento.';
+    tooltipDeshabilitarEvento='Deshabilitar Evento.';
+    eventosPersonalizados:ConfiguracionEvento;
+
 
     constructor(private router:Router,
                 private route:ActivatedRoute,
@@ -82,6 +94,7 @@ export class HomeSectorComponent implements OnInit{
                 private asignarComponenteSensorSectorService:AsignarComponenteSensorSectorService,
                 private gestionarConfiguracionRiegoService:GestionarConfiguracionRiegoService,
                 private gestionarRiegoService:GestionarRiegoService,
+                private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
                 private appService:AppService,
                 private dialog: MdDialog){
 
@@ -89,7 +102,7 @@ export class HomeSectorComponent implements OnInit{
         this.route.params.subscribe(params => {
             this.idSector = +params['idSector'];
             this.idFinca=+params['idFinca'];
-            console.log("id FInca: "+this.idFinca);
+            localStorage.setItem('idSector',JSON.stringify(this.idSector));
             if (this.idSector) {
                 this.gestionarSectorFincaService.buscarSectorId(this.idSector)
                 .then(
@@ -178,7 +191,23 @@ export class HomeSectorComponent implements OnInit{
                     this.errorMessageComponenteSector=error.error_description;
                 }
             );
-
+        this.gestionarEventoPersonalizadoService.buscarConfiguracionesEventosPersonalizados(this.idUsuarioFinca)
+            .then(
+                response=>{
+                    if(response.datos_operacion=="No hay datos"){
+                        this.errorMessageEventoPersonalizado="No hay eventos personalizados asociados al sector.";
+                    }
+                    else{
+                        this.eventosPersonalizados=response.datos_operacion;
+                        this.eventoPersonalizadoSeleccionado=true;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageEventoPersonalizado=error.error_description;
+                }
+            );
     }
 
     buscarConfiguracionesRiego(){
@@ -265,6 +294,10 @@ export class HomeSectorComponent implements OnInit{
 
    getExisteRiegoEnEjecucion(){
        return this.existeRiego;
+   }
+
+   getEventoPersonalizadoSeleccionado(){
+       return this.eventoPersonalizadoSeleccionado;
    }
 
    apretarEliminarIcono(){
@@ -402,6 +435,22 @@ export class HomeSectorComponent implements OnInit{
                 }
             );
    }
+
+
+   apretarHabilitarEvento(idCondifuracionEventoPersonalizado:number){
+        this.gestionarEventoPersonalizadoService.activarConfiguracionEventoPersonalizado(idCondifuracionEventoPersonalizado)
+            .then(
+                response=>{
+                    this.refresh();
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageEventoPersonalizado=error.error_description;
+                }
+            );
+   }
+
 
    refresh(): void {
         window.location.reload();
