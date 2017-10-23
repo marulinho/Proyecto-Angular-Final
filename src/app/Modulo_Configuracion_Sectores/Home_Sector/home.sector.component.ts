@@ -80,7 +80,7 @@ export class HomeSectorComponent implements OnInit{
     errorMessageEventoPersonalizado="";
     eventoPersonalizadoSeleccionado:Boolean;
     tooltipCrearEvento='Crear Evento.';
-    tooltipVerEvento='Ver Evento.';
+    tooltipEditarEvento='Editar Evento.';
     tooltipHabilitarEvento='Habilitar Evento.';
     tooltipDeshabilitarEvento='Deshabilitar Evento.';
     eventosPersonalizados:ConfiguracionEvento;
@@ -139,7 +139,10 @@ export class HomeSectorComponent implements OnInit{
                         }
                         else{
                             this.mecanismoHabilitado=false;
+                            this.riegoSeleccionado=false;
+                            this.configuracionRiegoSeleccionado=false;
                             this.errorMessageConfiguracionRiego="No existen configuraciones de riego asignadas al sector.";
+                            this.errorMessageRiego="No existen mecanismos de riego asociados al sector.";
                         }
                         
                         this.mecanismoSeleccionado=true;
@@ -437,8 +440,8 @@ export class HomeSectorComponent implements OnInit{
    }
 
 
-   apretarHabilitarEvento(idCondifuracionEventoPersonalizado:number){
-        this.gestionarEventoPersonalizadoService.activarConfiguracionEventoPersonalizado(idCondifuracionEventoPersonalizado)
+   apretarHabilitarEvento(idConfiguracionEvento:number){
+        this.gestionarEventoPersonalizadoService.activarConfiguracionEventoPersonalizado(idConfiguracionEvento)
             .then(
                 response=>{
                     this.refresh();
@@ -451,6 +454,44 @@ export class HomeSectorComponent implements OnInit{
             );
    }
 
+   apretarModificarEvento(idConfiguracionEvento:number){
+        localStorage.setItem('idConfiguracionEvento',JSON.stringify(idConfiguracionEvento));
+        this.router.navigate(['/gestionarEventoPersonalizado/']);
+    
+   }
+
+   apretarDeshabilitarEvento(idConfiguracionEvento:number){
+        let title="Deshabilitar Evento.";
+        let description="¿Desea deshabilitar el evento del sector?";
+        let option1="Aceptar";
+        let option2="Cancelar";
+        this.openDialogDeshabilitarEvento(title,description,option1,option2,idConfiguracionEvento);
+   }
+
+   openDialogDeshabilitarEvento(title:string,description:string,option1:string,option2:string,idConfiguracionEvento:number){
+    let dialogRef = this.dialog.open(DialogExampleComponent);
+    dialogRef.componentInstance.title=title;
+    dialogRef.componentInstance.description=description;
+    dialogRef.componentInstance.option1=option1;
+    dialogRef.componentInstance.option2=option2;
+    dialogRef.afterClosed().subscribe(
+        result => {
+                    this.selectedOption = result;
+                    if(this.selectedOption==="Aceptar"){
+                        this.gestionarEventoPersonalizadoService.desactivarConfiguracionEventoPersonalizado(idConfiguracionEvento)
+                            .then(
+                                response=>{
+                                    this.refresh();
+                                }
+                            )
+                            .catch(
+                                error=>{
+                                    this.errorMessageEventoPersonalizado=error.error_description;
+                                }
+                            )
+                    }
+        });
+    }
 
    refresh(): void {
         window.location.reload();

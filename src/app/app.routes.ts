@@ -95,9 +95,14 @@ import { CrearConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/G
 import { HomeConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Home_Configuracion_Riego/home.configuracion.riego.component';
 import { ModificarConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Modificar_Configuracion_Riego/modificar.configuracion.riego.component';
 import { AgregarCriterioInicioComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Inicio/agregar.criterio.inicio.component';
+import { AgregarCriterioFinComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Fin/agregar.criterio.fin.component';
+import { ModificarCriterioInicialFinalComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Modificar_Criterio_Inicial_Final/modificar.criterio.inicial.fincal.component';
 
 //IMPORTS MODULO REPORTES
 import { AgregarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Agregar_Evento_Personalizado/agregar.evento.personalizado.component';
+import { ModificarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Modificar_Evento_Personalizado/modificar.evento.personalizado.component';
+import { HomeReporteComponent } from './Modulo_Reportes/Home_Reporte/home.reporte.component';
+
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
 import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
@@ -191,10 +196,15 @@ export const ROUTES: Routes = [
    {path:'homeConfiguracionRiego/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego/:idSector', component:HomeConfiguracionRiegoComponent},
    {path:'gestionarConfiguracionRiego/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego', component:ModificarConfiguracionRiegoComponent},
    {path:'agregarCriterioInicial/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego/:idSector',component:AgregarCriterioInicioComponent},
-
+   {path:'agregarCriterioFinal',component:AgregarCriterioFinComponent},
+   {path:'gestionarCriterioRiego',component:ModificarCriterioInicialFinalComponent},
+   
+   
    //MODULO REPORTES
    {path:'crearEventoPersonalizado',component:AgregarEventoPersonalizadoComponent},
-
+   {path:'gestionarEventoPersonalizado',component:ModificarEventoPersonalizadoComponent},
+   {path:'homeReportes' , component:HomeReporteComponent},
+   
    //MODULO CULTIVOS
    {path:'gestionarCultivoSector/:idSector/:idFinca/:idCultivo', component: GestionarCultivoSectorComponent},
 

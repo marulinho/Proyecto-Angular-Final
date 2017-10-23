@@ -18,6 +18,7 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
     idFinca:number;
     idMecanismoRiegoFincaSector:number;
     idConfiguracionRiego:number;
+    idSector:number;
     errorMessageModificarConfiguracionRiego="";
     selectIndex:number=0;
     nombreConfiguracion:string;        
@@ -36,6 +37,7 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
             this.idMecanismoRiegoFincaSector = +params['idMecanismoRiegoFincaSector'];
             this.idFinca=+params['idFinca'];
             this.idConfiguracionRiego=+params['idConfiguracionRiego'];
+            this.idSector=JSON.parse(localStorage.getItem('idSector'));
 
         });
 
@@ -63,7 +65,7 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
                 this.idConfiguracionRiego,this.nombreConfiguracion,this.descripcionConfiguracionRiego,this.duracionMaximaConfiguracionRiego)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego]);
+                        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
                     }
                 )
                 .catch(
@@ -75,6 +77,6 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego]);
+        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
     }
 }

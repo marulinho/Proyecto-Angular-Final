@@ -14,6 +14,14 @@ export class SearchMock {
       faIcon: 'fa-tachometer',
       link: '/finca'
     },
+
+    {
+      name: 'reportes',
+      title: 'Reportes',
+      faIcon: 'fa-line-chart',
+      link: '/homeReportes/'
+    },
+
     {
       name: 'tabla',
       title: 'Tabla',

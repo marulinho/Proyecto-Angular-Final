@@ -1,0 +1,46 @@
+<!--SECCION HOME REPORTE-->
+<div class="page-content">
+    <md-card class="page-card">
+        <md-card-title>Home Reporte.</md-card-title>
+        <md-card-content>
+
+            <br>
+            <md-select placeholder="Seleccione reporte." [(ngModel)]="reporteSeleccionado" name="reporteSeleccionado" required>
+                <md-option *ngFor="let nombresReporte of nombresReportes" [value]="nombresReporte.id">
+                    {{nombresReporte.nombre}}
+                </md-option>
+            </md-select>
+            <br><br>
+            <div *ngIf="reporteSeleccionado=='1'">
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionesReportes[0]}}</label>
+            </div>
+
+            <div *ngIf="reporteSeleccionado=='2'">
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionesReportes[1]}}</label>
+            </div>
+            <div *ngIf="reporteSeleccionado=='3'">
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionesReportes[2]}}</label>
+            </div>
+            <div *ngIf="reporteSeleccionado=='4'">
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionesReportes[3]}}</label>
+            </div>
+            <div *ngIf="reporteSeleccionado=='5'">
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionesReportes[4]}}</label>
+            </div>
+            <div *ngIf="reporteSeleccionado=='6'">
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionesReportes[5]}}</label>
+            </div>
+            <div *ngIf="reporteSeleccionado=='7'">
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionesReportes[6]}}</label>
+            </div>
+
+        </md-card-content>
+    </md-card>
+</div>

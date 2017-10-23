@@ -312,17 +312,31 @@
                         <tbody>
                             <tr *ngFor="let eventoPersonalizado of eventosPersonalizados">
                                 <td>{{eventoPersonalizado.nombre}}</td>
-                                <td>{{eventoPersonalizado.lista_mediciones_internas}}</td>
-                                <td>{{eventoPersonalizado.lista_mediciones_externas}}</td>
                                 <td>
-                                    <a *ngIf="eventoPersonalizado.activado=='false'" class="example-tooltip-host" mdTooltip={{tooltipHabilitarEvento}} [mdTooltipPosition]="position"
-                                        (click)="apretarHabilitarEvento(eventoPersonalizado.id_configuracion_evento)">
-                                                    <img src="assets/icons/habilitar.png">
+                                    <ul *ngFor="let evento of eventoPersonalizado.lista_mediciones_internas">
+                                        <li>Tipo: {{evento.tipo_medicion}}.</li>
+                                        <li>Valor M&iacute;nimo: {{evento.valor_minimo}} {{evento.unidad_medicion}}.</li>
+                                        <li>Valor M&aacute;ximo: {{evento.valor_maximo}} {{evento.unidad_medicion}}.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul *ngFor="let evento of eventoPersonalizado.lista_mediciones_externas">
+                                        <li>Tipo: {{evento.tipo_medicion}}.</li>
+                                        <li>Valor M&iacute;nimo: {{evento.valor_minimo}} {{evento.unidad_medicion}}.</li>
+                                        <li>Valor M&aacute;ximo: {{evento.valor_maximo}} {{evento.unidad_medicion}}.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <a *ngIf="eventoPersonalizado.activado==false" class="example-tooltip-host" mdTooltip={{tooltipHabilitarEvento}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/habilitar.png" (click)="apretarHabilitarEvento(eventoPersonalizado.id_configuracion_evento)">
                                     </a>
 
-                                    <a *ngIf="eventoPersonalizado.activado=='true'" class="example-tooltip-host"
-                                        mdTooltip={{tooltipVerEvento}} [mdTooltipPosition]="position">
-                                                <img src="assets/icons/ver.png">
+                                    <a *ngIf="eventoPersonalizado.activado==true" class="example-tooltip-host" mdTooltip={{tooltipEditarEvento}} [mdTooltipPosition]="position">
+                                            <img src="assets/icons/editar.png" (click)="apretarModificarEvento(eventoPersonalizado.id_configuracion_evento)">
+                                    </a>
+
+                                    <a *ngIf="eventoPersonalizado.activado==true" class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarEvento}} [mdTooltipPosition]="position">
+                                            <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarEvento(eventoPersonalizado.id_configuracion_evento)">
                                     </a>
                                 </td>
                             </tr>

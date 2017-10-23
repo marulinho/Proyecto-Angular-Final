@@ -1,7 +1,7 @@
 <!--SECCION PERFIL FINCA-->
 <div *ngIf="getPerfilFincaSeleccionada()" class="sign-container">
         <md-card class="page-card">
-                <md-card-title>Perfil Finca
+                <md-card-title>Perfil Finca.
                         <a class="example-tooltip-host" mdTooltip={{tooltipEditarFinca}} [mdTooltipPosition]="position">
                                 <img src="assets/icons/editar.png" [routerLink]="['/gestionarFinca/', idFinca]">
                         </a>
@@ -21,16 +21,16 @@
                         <h2>Datos Finca</h2>
 
                         <label id="atributo" class="col-2">Nombre: </label>
-                        <label class="col-3">{{perfilFinca.nombre}}</label><br>
+                        <label class="col-3">{{perfilFinca.nombre}}.</label><br>
 
                         <label id=atributo class="col-2">Direcci&oacute;n: </label>
-                        <label id=valor class="col-3">{{perfilFinca.direccionLegal}}</label><br>
+                        <label id=valor class="col-3">{{perfilFinca.direccionLegal}}.</label><br>
 
                         <label id=atributo class="col-2">Ubicaci&oacute;n: </label>
-                        <label id=valor class="col-3">{{perfilFinca.ubicacion}}</label><br>
+                        <label id=valor class="col-3">{{perfilFinca.ubicacion}}.</label><br>
 
                         <label id=atributo class="col-2">Tama&ntilde;o: </label>
-                        <label id=valor class="col-3">{{perfilFinca.tamanio }} hect&aacute;reas</label><br>
+                        <label id=valor class="col-3">{{perfilFinca.tamanio }} hect&aacute;reas.</label><br>
 
 
                 </md-card-content>
@@ -38,7 +38,7 @@
                 <!--SECCION PROVEEDOR INFORMACION FINCA-->
                 <md-card class="page-card">
                         <md-card-title>
-                                Proveedor Informaci&oacute;n
+                                Proveedor Informaci&oacute;n.
                                 <a class="example-tooltip-host" mdTooltip={{tooltipEditarProveedor}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/editar.png" [routerLink]="['/gestionarProveedor/', idFinca]">
                                 </a>
@@ -60,16 +60,16 @@
                                 <section *ngIf="getProveedorInformacionSeleccionado()" class="bs">
 
                                         <label id="atributo">Nombre: </label>
-                                        <label>{{proveedores.nombreProveedor}}</label><br>
+                                        <label>{{proveedores.nombreProveedor}}.</label><br>
 
                                         <label id=atributo>Frecuencia m&aacute;xima de obtenci&oacute;n de mediciones: </label>
-                                        <label id=valor>{{proveedores.frecuenciaMaximaPosible}} minutos</label><br>
+                                        <label id=valor>{{proveedores.frecuenciaMaximaPosible}} minutos.</label><br>
 
                                         <label id=atributo>Frecuencia actual de obtenci&oacute;n de mediciones: </label>
-                                        <label id=valor>{{proveedores.frecuenciaActual}} minutos</label><br>
+                                        <label id=valor>{{proveedores.frecuenciaActual}} minutos.</label><br>
 
                                         <label id=atributo>Direcci&oacute;n web: </label>
-                                        <label id=valor>{{proveedores.urlApi}}</label><br>
+                                        <label id=valor>{{proveedores.urlApi}}.</label><br>
 
                                         <label id=atributo>Mediciones:</label>
                                         <!--<md-list>
@@ -79,7 +79,7 @@
                                                 </md-list-item>
                                         </md-list>-->
                                         <label *ngFor="let proveedor of proveedores['listaTipoMedicion']">
-                                                        {{proveedor.nombreTipoMedicionClimatica}}({{proveedor.unidadMedicion}})
+                                                        {{proveedor.nombreTipoMedicionClimatica}}({{proveedor.unidadMedicion}}.)
                                         </label>
                                 </section>
                         </md-card-content>
@@ -105,17 +105,17 @@
                                         <table class="table table-striped table-hover table-card">
                                                 <thead>
                                                         <tr>
-                                                                <th style="width:37%;">Usuario</th>
-                                                                <th style="width:36%;">Apellido y Nombre</th>
-                                                                <th>Rol</th>
-                                                                <th class="actions">Acci&oacute;n</th>
+                                                                <th style="width:37%;">Usuario.</th>
+                                                                <th style="width:36%;">Apellido y Nombre.</th>
+                                                                <th>Rol.</th>
+                                                                <th class="actions">Acci&oacute;n.</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                         <tr *ngFor="let usuarioFinca of usuariosFinca">
-                                                                <td>{{usuarioFinca.usuario}}</td>
-                                                                <td>{{usuarioFinca.apellido}}, {{usuarioFinca.nombre}}</td>
-                                                                <td>{{usuarioFinca.rol}}</td>
+                                                                <td>{{usuarioFinca.usuario}}.</td>
+                                                                <td>{{usuarioFinca.apellido}}, {{usuarioFinca.nombre}}.</td>
+                                                                <td>{{usuarioFinca.rol}}.</td>
                                                                 <td>
                                                                         <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" (click)="apretarEditarUsuarioFincaIcono(usuarioFinca.idUsuarioFinca)">
                                                                                 <img src="assets/icons/editar.png">
@@ -154,17 +154,17 @@
                                         <table class="table table-striped table-hover table-card">
                                                 <thead>
                                                         <tr>
-                                                                <th style="width:37%;">Nombre</th>
-                                                                <th style="width:36%;">Descripci&oacute;n</th>
-                                                                <th>Superficie</th>
-                                                                <th class="actions">Acci&oacute;n</th>
+                                                                <th style="width:37%;">Nombre.</th>
+                                                                <th style="width:36%;">Descripci&oacute;n.</th>
+                                                                <th>Superficie.</th>
+                                                                <th class="actions">Acci&oacute;n.</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                         <tr *ngFor="let sectorFinca of sectoresFinca">
-                                                                <td>{{sectorFinca.nombreSector}}</td>
-                                                                <td>{{sectorFinca.descripcionSector}}</td>
-                                                                <td>{{sectorFinca.superficieSector}}</td>
+                                                                <td>{{sectorFinca.nombreSector}}.</td>
+                                                                <td>{{sectorFinca.descripcionSector}}.</td>
+                                                                <td>{{sectorFinca.superficieSector}} hect&aacute;reas.</td>
                                                                 <td>
 
                                                                         <a class="example-tooltip-host" mdTooltip={{tooltipVerSector}} [mdTooltipPosition]="position">
@@ -199,15 +199,15 @@
                                         <table class="table table-striped table-hover table-card">
                                                 <thead>
                                                         <tr>
-                                                                <th style="width:37%;">Nombre</th>
-                                                                <th style="width:36%;">Direcci&oacute;n de Conex&oacute;n</th>
-                                                                <th>Fecha Instalaci&oacute;n</th>
-                                                                <th class="actions">Acci&oacute;n</th>
+                                                                <th style="width:37%;">Nombre.</th>
+                                                                <th style="width:36%;">Direcci&oacute;n de Conex&oacute;n.</th>
+                                                                <th>Fecha Instalaci&oacute;n.</th>
+                                                                <th class="actions">Acci&oacute;n.</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                         <tr *ngFor="let mecanismoRiegoFinca of mecanismosRiegoFinca">
-                                                                <td>{{mecanismoRiegoFinca.tipoMecanismoRiego}}</td>
+                                                                <td>{{mecanismoRiegoFinca.tipoMecanismoRiego}}.</td>
                                                                 <td>{{mecanismoRiegoFinca.direccionIP}}</td>
                                                                 <td>{{mecanismoRiegoFinca.fechaInstalacion.substring(0,10)}}</td>
                                                                 <td>
@@ -246,16 +246,16 @@
                                         <table class="table table-striped table-hover table-card">
                                                 <thead>
                                                         <tr>
-                                                                <th style="width:37%;">Modelo</th>
-                                                                <th style="width:36%;">Tipo Medici&oacute;n</th>
-                                                                <th>Fecha Alta</th>
-                                                                <th class="actions">Acci&oacute;n</th>
+                                                                <th style="width:37%;">Modelo.</th>
+                                                                <th style="width:36%;">Tipo Medici&oacute;n.</th>
+                                                                <th>Fecha Alta.</th>
+                                                                <th class="actions">Acci&oacute;n.</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
                                                         <tr *ngFor="let sensorFinca of sensoresFinca">
-                                                                <td>{{sensorFinca.modelo}}</td>
-                                                                <td>{{sensorFinca.tipoMedicion}}</td>
+                                                                <td>{{sensorFinca.modelo}}.</td>
+                                                                <td>{{sensorFinca.tipoMedicion}}.</td>
                                                                 <td>{{sensorFinca.fechaAltaSensor.substring(0,10)}}</td>
                                                                 <td>
                                                                         <a class="example-tooltip-host" mdTooltip={{tooltipModificarSensor}} [mdTooltipPosition]="position">
@@ -273,8 +273,8 @@
                         </md-card-content>
                 </md-card>
 
-                 <!--SECCION COMPONENTES SENSORES FINCA-->
-                 <md-card class="page-card">
+                <!--SECCION COMPONENTES SENSORES FINCA-->
+                <md-card class="page-card">
                         <md-card-title>
                                 Componente Sensores Finca
                                 <a class="example-tooltip-host" mdTooltip={{tooltipAgregarComponenteSensor}} [mdTooltipPosition]="position">
@@ -308,7 +308,8 @@
                                                                         <a *ngIf="componenteSensor.estado=='habilitado'" class="example-tooltip-host" mdTooltip={{tooltipVerComponenteSensor}} [mdTooltipPosition]="position">
                                                                                 <img src="assets/icons/ver.png" [routerLink]="['/homeComponenteSensorFinca/', idFinca, componenteSensor.idComponenteSensor]">
                                                                         </a>
-                                                                        <a *ngIf="componenteSensor.estado=='deshabilitado'"class="example-tooltip-host" mdTooltip={{tooltipHabilitarComponenteSensor}} [mdTooltipPosition]="position">
+                                                                        <a *ngIf="componenteSensor.estado=='deshabilitado'" class="example-tooltip-host" mdTooltip={{tooltipHabilitarComponenteSensor}}
+                                                                                [mdTooltipPosition]="position">
                                                                                 <img src="assets/icons/habilitar.png" (click)="apretarIconoHabilitarComponenteSensor(componenteSensor.idComponenteSensor)">
                                                                         </a>
                                                                 </td>

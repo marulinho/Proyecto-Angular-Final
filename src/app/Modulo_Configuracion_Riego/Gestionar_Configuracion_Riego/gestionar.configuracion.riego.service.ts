@@ -67,7 +67,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
     agregarCriterioInicialRiegoFinca(idFinca: number, idMecanismoRiegoFincaSector: number, idConfiguracionRiego: number,
         tipoCriterioRiego: string, nombreCriterioRiego: string, descripcionCriterioRiego:string,
         idTipoMedicion:number, valorMedicionCriterioRiego:number,
-        horaInicioCriterioRiego:string, diaInicioCriterioRiego:string): Promise<any> {
+        horaInicioCriterioRiego:string, diaInicioCriterioRiego:number): Promise<any> {
         const data = {
             'idFinca': idFinca,
             'idMecanismoRiegoFincaSector': idMecanismoRiegoFincaSector,
@@ -90,7 +90,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
     agregarCriterioFinalRiegoFinca(idFinca: number, idMecanismoRiegoFincaSector: number, idConfiguracionRiego: number,
         tipoCriterioRiego: string, nombreCriterioRiego: string, descripcionCriterioRiego:string,
         idTipoMedicion:number, valorMedicionCriterioRiego:number, volumenAguaCriterioRiego:number,
-        horaInicioCriterioRiego:string, diaInicioCriterioRiego:string): Promise<any> {
+        horaInicioCriterioRiego:string, diaInicioCriterioRiego:number): Promise<any> {
         const data = {
             'idFinca': idFinca,
             'idMecanismoRiegoFincaSector': idMecanismoRiegoFincaSector,
@@ -181,7 +181,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
     }
 
     eliminarCriterioConfiguracionRiego(idFinca: number, idMecanismoRiegoFincaSector: number, 
-        idConfiguracionRiego: number, idCriterioRiego:number): Promise<any> {
+        idConfiguracionRiego: number, idCriterioRiego:number): Promise<Boolean> {
         const data = {
             'idFinca': idFinca,
             'idMecanismoRiegoFincaSector': idMecanismoRiegoFincaSector,
@@ -191,7 +191,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
         };
         return this.http.post(GestionarConfiguracionRiegoService.serverUrl + this.eliminarCriterioConfiguracionRiegoMecanismoRiegoFincaSectorUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
-            .then(response => { return response.json() as any; })
+            .then(response => { return response.json() as Boolean; })
             .catch(this.handleError);
     }
 

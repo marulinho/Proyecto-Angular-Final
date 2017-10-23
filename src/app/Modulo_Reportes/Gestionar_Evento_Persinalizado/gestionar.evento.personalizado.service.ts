@@ -78,7 +78,7 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    modificarConfiguracionEventoPersonalizado(idConfiguracionEvento:number, configuracionMedicionInterna: number, configuracionMedicionExterna:number,
+    modificarConfiguracionEventoPersonalizado(idConfiguracionEvento:number, configuracionMedicionInterna, configuracionMedicionExterna,
         idUsuarioFinca:number, nombreConfiguracionEvento:string, descripcionConfiguracionEvento:string, notificacionActivada:boolean,
         configuracionActivada:boolean, idSector:number): Promise<any> {
         const data = {
@@ -113,7 +113,7 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
         const data = {
             'idConfiguracionEvento':idConfiguracionEvento
         };
-        return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.activarConfiguracionEventoPersonalizado, JSON.stringify(data), this.getRestHeader())
+        return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.activarConfiguracionEventoPersonalizadoUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
             .then(response => { return response.json() as any; })
             .catch(this.handleError);

@@ -17,6 +17,12 @@ export class MenuMock {
       faIcon: 'fa-tachometer',
       link: '/homeFinca/'
     },
+    {
+      name: 'reportes',
+      title: 'Reportes',
+      faIcon: 'fa-line-chart',
+      link: '/homeReportes/'
+    },
     /*{
       name: 'tabla',
       title: 'Tabla',

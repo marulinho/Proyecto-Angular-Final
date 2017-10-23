@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams, RequestOptions } from '@angular/http';
-import { RestBaseService } from '../../tools/rest.tools';
+import { RestBaseService } from '../tools/rest.tools';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()

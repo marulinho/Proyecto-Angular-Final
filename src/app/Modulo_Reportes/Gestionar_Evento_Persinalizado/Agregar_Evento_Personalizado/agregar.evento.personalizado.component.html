@@ -76,10 +76,18 @@
                         <label>{{descripcion}}.</label><br><br>                        
 
                         <label id=atributo>Configuraci&oacute;n mediciones internas: </label>
-                        <label>{{configuracionInterna}}.</label><br><br>
+                        <ul *ngFor="let configuracion of configuracionInterna">
+                                <li>Tipo Medici&oacute;n: {{configuracion.idTipoMedicion}}.</li>
+                                <li>Valor M&iacute;nimo: {{configuracion.valorMinimo}}.</li>
+                                <li>Valor M&aacute;ximo: {{configuracion.valorMaximo}}.</li>
+                        </ul>
 
                         <label id=atributo>Configuraci&oacute;n mediciones externas: </label>
-                        <label>{{configuracionExterna}}.</label><br><br>
+                        <ul *ngFor="let configuracion of configuracionExterna">
+                            <li>Tipo Medici&oacute;n: {{configuracion.idTipoMedicionClimatica}}.</li>
+                            <li>Valor M&iacute;nimo: {{configuracion.valorMinimo}}.</li>
+                            <li>Valor M&aacute;ximo: {{configuracion.valorMaximo}}.</li>
+                        </ul>
 
                         <label id=atributo>Notificaci&oacute;n: </label>
                         <label>{{notificacionActivada}}.</label><br><br>

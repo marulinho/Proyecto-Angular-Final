@@ -40,31 +40,34 @@
                             </div>
                         </div><br>
                     </section>
-                    <section *ngIf="getPerfilCriterioInicialSeleccionado()" class="bs">
+                    <section *ngIf="getExisteCriterioInicial()" class="bs">
                         <table class="table table-striped table-hover table-card">
                             <thead>
                                 <tr>
-                                    <th style="width:37%;">Nombre</th>
-                                    <th style="width:36%;">Presi&oacute;n</th>
-                                    <th>Caudal</th>
-                                    <th class="actions">Acci&oacute;n</th>
+                                    <th style="width:37%;">Nombre.</th>
+                                    <th style="width:30%;">Tipo Criterio.</th>
+                                    <th>Activaci&oacute;n.</th>
+                                    <th class="actions">Acci&oacute;n.</th>
                                 </tr>
                             </thead>
-                            <!--<tbody>
-                            <tr>
-                                <td>{{mecanismoRiego.nombreTipoMecanismo}}</td>
-                                <td>{{mecanismoRiego.presion}}</td>
-                                <td>{{mecanismoRiego.caudal}}</td>
+                            <tbody>
+                            <tr *ngFor="let criterio of criterioInicialRiego">
+                                <td>{{criterio.nombre}}.</td>
+                                <td>{{tipoCriterioEncontrado}}</td>
+                                <td *ngIf="tipoCriterioEncontrado=='Medición.'">{{criterio.tipoMedicion}}= {{criterio.valor}} {{criterio.unidadMedicion}}.</td>
+                                <td *ngIf="tipoCriterioEncontrado=='Hora.'">D&iacute;a= {{criterio.numeroDia}} Hora:{{criterio.v}}.</td>
                                 <td>
 
-                                    <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarMecanismoSector}} [mdTooltipPosition]="position">
-                                        <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarMecanismoIcono(mecanismoRiego.idMecanismoRiegoFincaSector)">                                                        
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipModificarCriterioInicial}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/editar.png" (click)="apretarEditarCriterioRiego(criterio.id_criterio_riego,criterio.tipo_criterio_riego)">                                                        
+                                    </a>
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipEliminarCriterioInicial}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/delete.png" (click)="apretarEliminarCriterioRiego(criterio.id_criterio_riego,'inicio')">                                                        
                                     </a>
                                 </td>
                             </tr>
 
                         </tbody>
-                    -->
                         </table>
 
                     </section>
@@ -75,8 +78,8 @@
             <md-card class="page-card">
                 <md-card-title>
                     Criterio de Finalizaci&oacute;n.
-                    <a *ngIf="getExisteCriterioInicial()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioFinal}} [mdTooltipPosition]="position">
-                            <img src="assets/icons/nuevo.png">
+                    <a *ngIf="!getExisteCriterioFinal()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioFinal}} [mdTooltipPosition]="position">
+                            <img src="assets/icons/nuevo.png" [routerLink]="['/agregarCriterioFinal/']" >
                 </a>
                 </md-card-title>
                 <md-card-content>
@@ -91,27 +94,30 @@
                         <table class="table table-striped table-hover table-card">
                             <thead>
                                 <tr>
-                                    <th style="width:37%;">Nombre</th>
-                                    <th style="width:36%;">Descripci&oacute;n</th>
-                                    <th>Fecha Plantaci&oacute;n</th>
+                                    <th style="width:37%;">Nombre.</th>
+                                    <th style="width:30%;">Tipo Criterio.</th>
+                                    <th>Activaci&oacute;n.</th>
                                     <th class="actions">Acci&oacute;n</th>
                                 </tr>
                             </thead>
-                            <!--<tbody>
-                            <tr>
-                                <td>{{cultivosSector.nombre}}</td>
-                                <td>{{cultivosSector.descripcion}}</td>
-                                <td>{{cultivosSector.fechaPlantacion.substring(0,10)}}</td>
+                            <tbody>
+                            <tr *ngFor="let criterioFinal of criterioFinalRiego">
+                                <td>{{criterioFinal.nombre}}.</td>
+                                <td>{{tipoCriterioFinalEncontrado}}</td>
+                                <td *ngIf="tipoCriterioFinalEncontrado=='Medición.'">{{criterioFinal.tipoMedicion}}= {{criterioFinal.valor}} {{criterioFinal.unidadMedicion}}.</td>
+                                <td *ngIf="tipoCriterioFinalEncontrado=='Por hora.'">D&iacute;a= {{criterioFinal.numeroDia}} Hora:{{criterioFinal.hora.substring(0,8)}}.</td>
+                                <td *ngIf="tipoCriterioFinalEncontrado=='Por volumen de agua.'">Volumen= {{criterioFinal.volumen}} litros.</td>
                                 <td>
-
-                                    <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarCultivoSector}} [mdTooltipPosition]="position">
-                                            <img src="assets/icons/deshabilitar.png"(click)="apretarDeshabilitarCultivo(cultivosSector.idCultivo)">
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipModificarCriterioFinal}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/editar.png" (click)="apretarEditarCriterioRiego(criterioFinal.id_criterio_riego,criterioFinal.tipo_criterio_riego)">                                                        
+                                    </a>
+                                    <a class="example-tooltip-host" mdTooltip={{tooltipEliminarCriterioFinal}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/delete.png" (click)="apretarEliminarCriterioRiego(criterioFinal.id_criterio_riego,'fin')">                                                        
                                     </a>
                                 </td>
                             </tr>
 
                         </tbody>
-                    -->
                         </table>
                     </section>
                 </md-card-content>

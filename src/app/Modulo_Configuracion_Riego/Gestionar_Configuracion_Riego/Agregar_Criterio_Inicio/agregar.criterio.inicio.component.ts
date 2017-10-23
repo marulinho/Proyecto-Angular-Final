@@ -38,7 +38,7 @@ export class AgregarCriterioInicioComponent implements OnInit{
     horaInicioCriterioRiego:string;
     diaInicioCriterioRiego:string;
     numeroDiaInicioCriterioRiego:number;    
-    diasCriterio=['Lunes.','Martes.','Miércoles.','Jueves','Viernes','Sábado','Domingo']; 
+    diasCriterio=['Lunes.','Martes.','Miércoles.','Jueves.','Viernes.','Sábado.','Domingo.']; 
     
 
     constructor(private router: Router,
@@ -117,10 +117,11 @@ export class AgregarCriterioInicioComponent implements OnInit{
                         if(this.diaInicioCriterioRiego=="Sábado."){
                             this.numeroDiaInicioCriterioRiego=6;
                         }
-                        if(this.diaInicioCriterioRiego=="Doming."){
+                        if(this.diaInicioCriterioRiego=="Domingo."){
                             this.numeroDiaInicioCriterioRiego=7;
                         }
                         this.errorMessageAgregarCriterioInicial=="";
+                        this.selectIndex+=1;
                     }
                 }
             }
@@ -136,7 +137,7 @@ export class AgregarCriterioInicioComponent implements OnInit{
         }
         this.gestionarConfiguracionRiegoService.agregarCriterioInicialRiegoFinca(this.idFinca,this.idMecanismoRiegoFincaSector,
             this.idConfiguracionRiego,this.tipoSeleccionado,this.nombreCriterio,this.descripcionCriterio,this.tipoMedicion,
-            this.valorMedicionCriterioRiego,this.horaInicioCriterioRiego,this.diaInicioCriterioRiego)
+            this.valorMedicionCriterioRiego,this.horaInicioCriterioRiego,this.numeroDiaInicioCriterioRiego)
             .then(
                 reponse=>{
                     this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);

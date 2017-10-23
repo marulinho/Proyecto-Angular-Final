@@ -1,0 +1,115 @@
+<!--SECCION MODIFICAR CRITERIO RIEGO -->
+<div class="page-content">
+    <md-card>
+        <md-card-title>Criterio de Riego.</md-card-title>
+        <md-card-content>
+            <md-tab-group selectedIndex="{{selectIndex}}">
+                <md-tab disabled label="Paso 1">
+                    <div class="tab-body-content">
+                        <h3>
+                            <small>Datos Criterio de Riego.</small>
+                        </h3>
+                        <p>Los campos con (*) son obligatorios.</p>
+                        <section *ngIf="errorMessageAgregarCriterioInicial" class="bs">
+                            <div class="bd-example" data-example-id="">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>{{errorMessageAgregarCriterioInicial}}</strong>
+                                </div>
+                            </div><br>
+                        </section>
+
+                        <md-input-container>
+                            <input mdInput placeholder="Nombre criterio." type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcion" name="descripcion" required><br>
+                        </md-input-container>
+                        
+                        <div *ngIf="tipoCriterio=='criterio_riego_medicion'">
+                            
+                            <br><br><md-select placeholder="Seleccione tipo medici&oacute;n." [(ngModel)]="medicionSeleccionada"  name="medicionSeleccionada" required>
+                                <md-option *ngFor="let tipoMedicion of tiposMediciones"[value]="tipoMedicion.idTipoMedicion">
+                                    {{tipoMedicion.nombreTipoMedicion}}
+                                </md-option>
+                            </md-select>
+
+                            <br><br>
+                            <md-input-container>
+                                <input mdInput placeholder="Valor medici&oacute;n." type="number" [(ngModel)]="valorMedicion" name="valorMedicion" required><br>
+                            </md-input-container>
+                        </div>
+
+                        <div *ngIf="tipoCriterio=='criterio_riego_hora'">
+
+                            <br><br>
+                            <md-select placeholder="Seleccione n&uacute;mero d&iacute;a." [(ngModel)]="diaInicioCriterioRiego" name="diaInicioCriterioRiego" required>
+                                <md-option *ngFor="let diaCriterio of diasCriterio" [value]="diaCriterio">
+                                    {{diaCriterio}}
+                                </md-option>
+                            </md-select>
+                            
+                            <br><br>
+                            <md2-datepicker [(ngModel)]="horaInicioCriterioRiego" type="time" placeholder="Hora inicio." format="HH:mm:ss"></md2-datepicker>
+
+                        </div>
+
+                        <div *ngIf="tipoCriterio=='criterio_riego_volumen_agua'">
+                            <md-input-container>
+                                <input mdInput placeholder="Volumen de agua." type="number" [(ngModel)]="volumenAgua" name="volumenAgua" required><br>
+                            </md-input-container>
+
+                        </div>
+
+                    </div>
+                </md-tab>
+                <md-tab disabled label="Paso 2">
+                    <div class="tab-body-content">
+                        <h4>Resumen Modificaci&oacute;n.</h4>
+                        <section *ngIf="errorMessageModificarCriterio" class="bs">
+                            <div class="bd-example" data-example-id="">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>{{errorMessageModificarCriterio}}</strong>
+                                </div>
+                            </div><br>
+                        </section>
+                        <label id=atributo>Nombre: </label>
+                        <label>{{nombre}}.</label><br><br>
+
+                        <label id=atributo>Descripci&oacute;n: </label>
+                        <label>{{descripcion}}.</label><br><br>                        
+
+                        <div *ngIf="tipoCriterio=='criterio_riego_medicion'">
+                            <label id=atributo>Medici&oacute;n: </label>
+                            <label>{{medicionSeleccionada}}.</label><br><br>
+    
+                            <label id=atributo>Valor: </label>
+                            <label>{{valorMedicion}}.</label><br><br>
+    
+                        </div>
+                        
+                        <div *ngIf="tipoCriterio=='criterio_riego_hora'">
+                            <label id=atributo>D&iacute;a: </label>
+                            <label>{{diaInicioCriterioRiego}}</label><br><br>
+    
+                            <label id=atributo>Hora inicio: </label>
+                            <label>{{horaInicioCriterioRiego}}</label><br><br>
+                        </div>
+
+                        <div *ngIf="tipoCriterio=='criterio_riego_volumen_agua'">
+                            <label id=atributo>Volumen de agua: </label>
+                            <label>{{volumenAgua}}</label><br><br>
+                        </div>
+
+                    </div>
+                </md-tab>
+            </md-tab-group>
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
+            <button *ngIf="selectIndex <1" md-raised-button [disabled]="selectIndex == 1" (click)="apretarNextModificar()">NEXT</button>
+            <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarModificarCriterioRiego()">MODIFICAR</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+        </md-card-actions>
+    </md-card>
+</div>

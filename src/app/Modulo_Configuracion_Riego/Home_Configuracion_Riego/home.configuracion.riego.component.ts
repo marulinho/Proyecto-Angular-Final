@@ -20,9 +20,9 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
     idMecanismoRiegoFincaSector: number;
     idSector:number;
     position = 'above';
-    tooltipEditarConfiguracion = 'Editar Configuración';
-    tooltipEliminarConfiguracion = 'Eliminar Configuración';
-    tooltipCambiarEstadoConfiguracion ='Cambiar Estado Configuración';
+    tooltipEditarConfiguracion = 'Editar Configuración.';
+    tooltipEliminarConfiguracion = 'Eliminar Configuración.';
+    tooltipCambiarEstadoConfiguracion ='Cambiar Estado Configuración.';
     selectedOption:string;
     errorEliminarConfiguracionRiego="";
 
@@ -30,14 +30,23 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
     criterioInicialRiego: CriterioRiego;
     errorMessageCriterioInicialRiego = "";
     perfilCriterioInicialSeleccionado: Boolean;
-    tooltipAgregarCriterioInicial = 'Agregar Criterio Inicial';
+    tooltipAgregarCriterioInicial = 'Agregar Criterio Inicial.';
+    tooltipModificarCriterioInicial = 'Modificar Criterio Inicial.';
+    tooltipEliminarCriterioInicial = 'Eliminar Criterio Inicial.';
     existeCriterioInicial: Boolean;
+    tipoCriterioEncontrado:string;
+    tipoCriterioInicio:string;
 
     //CRITERIO FINAL
     criterioFinalRiego: CriterioRiego;
     errorMessageCriterioFinalRiego = "";
     perfilCriterioFinalSeleccionado: Boolean;
-    tooltipAgregarCriterioFinal = 'Agregar Criterio Final';
+    tooltipAgregarCriterioFinal = 'Agregar Criterio Final.';
+    tooltipModificarCriterioFinal = 'Modificar Criterio Final.';
+    tooltipEliminarCriterioFinal = 'Eliminar Criterio Final.';
+    tipoCriterioFinalEncontrado:string;
+    existeCriterioFinal:Boolean;
+    tipoCriterioFinal:string;
 
 
     constructor(private router: Router,
@@ -68,6 +77,22 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
                 }
                 else {
                     this.criterioInicialRiego = response.datos_operacion;
+                    this.tipoCriterioEncontrado=this.criterioInicialRiego[0]['tipo_criterio_riego'];
+                    if(this.tipoCriterioEncontrado=="criterio_riego_medicion"){
+                        this.tipoCriterioInicio=this.tipoCriterioEncontrado;
+                        this.tipoCriterioEncontrado="Medición.";
+                    }
+                    else{
+                        if(this.tipoCriterioEncontrado=="criterio_riego_hora"){
+                            this.tipoCriterioInicio=this.tipoCriterioEncontrado;
+                            this.tipoCriterioEncontrado="Por hora.";
+                        }
+                        else{
+                            this.tipoCriterioInicio=this.tipoCriterioEncontrado;
+                            this.tipoCriterioEncontrado="Por volumen de agua.";
+                        }
+                    }
+                    localStorage.setItem('criterioInicial',JSON.stringify(this.tipoCriterioEncontrado));
                     this.existeCriterioInicial = true;
                     this.perfilCriterioInicialSeleccionado = true;
                 }
@@ -81,22 +106,31 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
 
         this.gestionarConfiguracionRiegoService.obtenerCriterioFinalRiegoFinca(this.idFinca, this.idMecanismoRiegoFincaSector, this.idConfiguracionRiego)
             .then(
-            response => {
-                if (response.detalle_operacion == "No hay datos") {
-                    this.errorMessageCriterioFinalRiego = "No hay criterios finales de riego asignados a la configuración de riego.";
-                }
-                else {
-                    this.criterioFinalRiego = response.datos_operacion;
-                    if (this.existeCriterioInicial == true) {
-                        this.perfilCriterioFinalSeleccionado = true;
+                response => {
+                    if (response.detalle_operacion == "No hay datos") {
+                        this.errorMessageCriterioFinalRiego = "No hay criterios finales de riego asignados a la configuración de riego.";
                     }
                     else {
-                        this.errorMessageCriterioFinalRiego = "No puede crear un criterio de finalizaci&oacute;n hasta que cree uno de inicio.";
+                        this.criterioFinalRiego = response.datos_operacion;
+                        this.tipoCriterioFinalEncontrado=this.criterioFinalRiego[0]['tipo_criterio_riego'];                    
+                        if(this.tipoCriterioFinalEncontrado=="criterio_riego_medicion"){
+                            this.tipoCriterioFinal=this.tipoCriterioFinalEncontrado;
+                            this.tipoCriterioFinalEncontrado="Medición.";
+                        }
+                        else{
+                            if(this.tipoCriterioFinalEncontrado=="criterio_riego_hora"){
+                                this.tipoCriterioFinal=this.tipoCriterioFinalEncontrado;
+                                this.tipoCriterioFinalEncontrado="Por hora.";
+                            }
+                            else{
+                                this.tipoCriterioFinal=this.tipoCriterioFinalEncontrado;
+                                this.tipoCriterioFinalEncontrado="Por volumen de agua.";
+                            }
+                        }
+                        this.perfilCriterioFinalSeleccionado=true;
+                        this.existeCriterioFinal=true;
                     }
-
-
                 }
-            }
             )
             .catch(
             error => {
@@ -115,6 +149,10 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
 
     getExisteCriterioInicial() {
         return this.existeCriterioInicial;
+    }
+
+    getExisteCriterioFinal(){
+        return this.existeCriterioFinal;
     }
 
     apretarEliminarConfiguracion() {
@@ -158,4 +196,39 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
                 }
             )
     }
+
+    apretarEditarCriterioRiego(idCriterioRiego:number,tipoCriterioRiego:string){
+        localStorage.setItem('idMecanismoRiegoFincaSector',JSON.stringify(this.idMecanismoRiegoFincaSector));
+        localStorage.setItem('idConfiguracionRiego',JSON.stringify(this.idConfiguracionRiego));
+        localStorage.setItem('tipoCriterioRiego',JSON.stringify(tipoCriterioRiego));
+        localStorage.setItem('idCriterioRiego',JSON.stringify(idCriterioRiego));
+        this.router.navigate(['/gestionarCriterioRiego/']);
+    }
+
+    apretarEliminarCriterioRiego(idCriterio:number,tipo:string){
+        this.gestionarConfiguracionRiegoService.eliminarCriterioConfiguracionRiego(this.idFinca,this.idMecanismoRiegoFincaSector,
+            this.idConfiguracionRiego,idCriterio)
+            .then(
+                response=>{
+                    this.refresh();
+                }
+            )
+            .catch(
+                error=>{
+                    if(tipo=="inicio"){
+                        this.errorMessageCriterioInicialRiego=error.error_description;
+                    }
+                    else{
+                        this.errorMessageCriterioFinalRiego=error.error_description;
+                    }
+                }
+            );       
+    }
+
+
+    
+    refresh(): void {
+        window.location.reload();
+    }   
+
 }   

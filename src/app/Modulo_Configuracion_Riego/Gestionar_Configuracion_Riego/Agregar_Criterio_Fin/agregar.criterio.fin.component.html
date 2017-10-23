@@ -1,0 +1,124 @@
+<!--SECCION AGREGAR CRITERIO FIN RIEGO -->
+<div class="page-content">
+    <md-card>
+        <md-card-title>Criterio Fin de Riego.</md-card-title>
+        <md-card-content>
+            <md-tab-group selectedIndex="{{selectIndex}}">
+                <md-tab disabled label="Paso 1">
+                    <div class="tab-body-content">
+                        <h3>
+                            <small>Datos Criterio Fin.</small>
+                        </h3>
+                        <p>Los campos con (*) son obligatorios.</p>
+                        <section *ngIf="errorMessageAgregarCriterioFinal" class="bs">
+                            <div class="bd-example" data-example-id="">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>{{errorMessageAgregarCriterioFinal}}</strong>
+                                </div>
+                            </div><br>
+                        </section>
+
+                        <md-input-container>
+                            <input mdInput placeholder="Nombre criterio." type="text" [(ngModel)]="nombreCriterio" name="nombreCriterio" required><br>
+                        </md-input-container>
+
+                        <md-input-container>
+                            <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcionCriterio" name="descripcionConfiguracionRiego" required><br>
+                        </md-input-container>
+
+                        <br><br><md-select placeholder="Seleccione tipo criterio." [(ngModel)]="tipoSeleccionado"  name="tipoSeleccionado" required>
+                            <md-option *ngFor="let criterioTipo of criteriosTipo"[value]="criterioTipo">
+                                {{criterioTipo}}
+                            </md-option>
+                        </md-select>
+                        
+                        <div *ngIf="tipoSeleccionado=='Medición.'">
+                            
+                            <br><br><md-select placeholder="Seleccione tipo medici&oacute;n." [(ngModel)]="tipoMedicion"  name="tipoMedicion" required>
+                                <md-option *ngFor="let tipoMed of tipoMediciones"[value]="tipoMed.idTipoMedicion">
+                                    {{tipoMed.nombreTipoMedicion}}
+                                </md-option>
+                            </md-select>
+
+                            <br><br>
+                            <md-input-container>
+                                <input mdInput placeholder="Valor medici&oacute;n." type="number" [(ngModel)]="valorMedicionCriterioRiego" name="valorMedicionCriterioRiego" required><br>
+                            </md-input-container>
+                        </div>
+
+                        <div *ngIf="tipoSeleccionado=='Hora.'">
+
+                            <br><br>
+                            <md-select placeholder="Seleccione n&uacute;mero d&iacute;a." [(ngModel)]="diaInicioCriterioRiego" name="diaInicioCriterioRiego" required>
+                                <md-option *ngFor="let diaCriterio of diasCriterio" [value]="diaCriterio">
+                                    {{diaCriterio}}
+                                </md-option>
+                            </md-select>
+                            
+                            <br><br>
+                            <md2-datepicker [(ngModel)]="horaInicioCriterioRiego" type="time" placeholder="Hora inicio." format="HH:mm:ss"></md2-datepicker>
+
+                        </div>
+
+                        <div *ngIf="tipoSeleccionado=='Volumen Agua.'">
+                            <md-input-container>
+                                <input mdInput placeholder="Volumen de agua." type="number" [(ngModel)]="volumenAgua" name="volumenAgua" required><br>
+                            </md-input-container>
+                        </div>
+
+                    </div>
+                </md-tab>
+                <md-tab disabled label="Paso 2">
+                    <div class="tab-body-content">
+                        <h4>Resumen Creaci&oacute;n.</h4>
+                        <section *ngIf="errorMessageAgregarCriterioFinal" class="bs">
+                            <div class="bd-example" data-example-id="">
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>{{errorMessageAgregarCriterioFinal}}</strong>
+                                </div>
+                            </div><br>
+                        </section>
+                        <label id=atributo>Nombre: </label>
+                        <label>{{nombreCriterio}}.</label><br><br>
+
+                        <label id=atributo>Descripci&oacute;n: </label>
+                        <label>{{descripcionCriterio}}.</label><br><br>                        
+
+                        <label id=atributo>Tipo: </label>
+                        <label>{{tipoSeleccionado}}</label><br><br>
+
+                        <div *ngIf="tipoSeleccionado=='Medición.'">
+                            <label id=atributo>Medici&oacute;n: </label>
+                            <label>{{tipoMedicion}}.</label><br><br>
+    
+                            <label id=atributo>Valor: </label>
+                            <label>{{valorMedicionCriterioRiego}} minutos.</label><br><br>
+    
+                        </div>
+                        
+                        <div *ngIf="tipoSeleccionado=='Hora.'">
+                            <label id=atributo>D&iacute;a: </label>
+                            <label>{{diaInicioCriterioRiego}}</label><br><br>
+    
+                            <label id=atributo>Hora inicio: </label>
+                            <label>{{horaInicioCriterioRiego}}</label><br><br>
+                        </div>
+
+                        <div *ngIf="tipoSeleccionado=='Volumen Agua.'">
+                            <label id=atributo>Volumen: </label>
+                            <label>{{volumenAgua}} litros</label><br><br>
+                        </div>
+
+
+                    </div>
+                </md-tab>
+            </md-tab-group>
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
+            <button *ngIf="selectIndex <1" md-raised-button [disabled]="selectIndex == 1" (click)="apretarNextCrear()">NEXT</button>
+            <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarCrearCriterioFinalRiego()">CREAR</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+        </md-card-actions>
+    </md-card>
+</div>
