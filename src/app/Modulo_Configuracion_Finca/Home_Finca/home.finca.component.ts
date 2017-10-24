@@ -172,12 +172,17 @@ export class HomeFincaComponent implements OnInit{
             let estadoActual= fincas[i]['estadoFinca'];
             let rolActual= fincas[i]['nombreRol'];
             let idFinca=fincas[i]['idFinca'];
+            let ubicacion=[];
 
             if(estadoActual=="habilitado"){
                 if(rolActual=="encargado"){
+                    ubicacion=fincas[i]['ubicacion'].split(";");
+                    fincas[i]['ubicacion']=ubicacion;
                     this.fincasEncargado.push(fincas[i]);
                 }
                 else{
+                    ubicacion=fincas[i]['ubicacion'].split(";");
+                    fincas[i]['ubicacion']=ubicacion;
                     this.fincasSinRolEncargado.push(fincas[i]);
                 }
             }
@@ -187,6 +192,8 @@ export class HomeFincaComponent implements OnInit{
                         //no hago nada
                     }
                     else{
+                        ubicacion=fincas[i]['ubicacion'].split(";");
+                        fincas[i]['ubicacion']=ubicacion;
                         this.idFincasDeshabilitadas.push(idFinca);
                         this.fincasDeshabilitadas.push(fincas[i]);
                     }
@@ -194,6 +201,8 @@ export class HomeFincaComponent implements OnInit{
                 }
                 else{
                     if(estadoActual=="pendienteAprobacion"){
+                        ubicacion=fincas[i]['ubicacion'].split(";");
+                        fincas[i]['ubicacion']=ubicacion;
                         this.fincasPendientesAprobacion.push(fincas[i]);
                     }
                 }

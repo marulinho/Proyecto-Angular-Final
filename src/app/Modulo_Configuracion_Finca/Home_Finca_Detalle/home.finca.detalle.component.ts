@@ -36,6 +36,7 @@ export class HomeFincaDetalleComponent implements OnInit{
         errorMessagePerfilFinca="";
         perfilFinca: Finca;
         perfilFincaSeleccionada:Boolean;
+        ubicacion=[];
         tooltipEditarFinca='Editar Finca';
         
     //ATRIBUTOS ELIMINAR FINCA
@@ -118,6 +119,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                 .then(
                     response=>{
                         this.perfilFinca=response.datos_operacion;
+                        this.ubicacion=this.perfilFinca['ubicacion'].split(";");
                         this.perfilFincaSeleccionada=true;
                     }
                 )

@@ -194,7 +194,7 @@ export class HomeSectorComponent implements OnInit{
                     this.errorMessageComponenteSector=error.error_description;
                 }
             );
-        this.gestionarEventoPersonalizadoService.buscarConfiguracionesEventosPersonalizados(this.idUsuarioFinca)
+        this.gestionarEventoPersonalizadoService.buscarConfiguracionesEventosPersonalizados(this.idUsuarioFinca,this.idFinca)
             .then(
                 response=>{
                     if(response.datos_operacion=="No hay datos"){
@@ -441,7 +441,7 @@ export class HomeSectorComponent implements OnInit{
 
 
    apretarHabilitarEvento(idConfiguracionEvento:number){
-        this.gestionarEventoPersonalizadoService.activarConfiguracionEventoPersonalizado(idConfiguracionEvento)
+        this.gestionarEventoPersonalizadoService.activarConfiguracionEventoPersonalizado(idConfiguracionEvento,this.idFinca)
             .then(
                 response=>{
                     this.refresh();
@@ -478,7 +478,7 @@ export class HomeSectorComponent implements OnInit{
         result => {
                     this.selectedOption = result;
                     if(this.selectedOption==="Aceptar"){
-                        this.gestionarEventoPersonalizadoService.desactivarConfiguracionEventoPersonalizado(idConfiguracionEvento)
+                        this.gestionarEventoPersonalizadoService.desactivarConfiguracionEventoPersonalizado(idConfiguracionEvento,this.idFinca)
                             .then(
                                 response=>{
                                     this.refresh();

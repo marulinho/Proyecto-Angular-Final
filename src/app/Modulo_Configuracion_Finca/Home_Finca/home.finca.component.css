@@ -31,3 +31,7 @@ select{
     border: 1px solid;
     border-color: #D8D1D0;
 }
+ul{
+    list-style: none;
+    margin-left: -35px;
+}

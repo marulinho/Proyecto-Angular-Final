@@ -17,9 +17,10 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
 
     constructor(private http: Http) { super(); }
 
-    buscarConfiguracionesEventosPersonalizados(idUsuarioFinca: number): Promise<ConfiguracionEvento> {
+    buscarConfiguracionesEventosPersonalizados(idUsuarioFinca: number, idFinca:number): Promise<ConfiguracionEvento> {
         const data = {
-            'idUsuarioFinca': idUsuarioFinca
+            'idUsuarioFinca': idUsuarioFinca,
+            'idFinca':idFinca
         };
         return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.buscarConfiguracionesEventosPersonalizadosUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
@@ -60,7 +61,7 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
 
     crearConfiguracionEventoPersonalizado(configuracionMedicionInterna, configuracionMedicionExterna, idUsuarioFinca:number,
         nombreConfiguracionEvento:string, descripcionConfiguracionEvento:string, notificacionActivada:boolean,
-        configuracionActivada:boolean, idSector:number): Promise<any> {
+        configuracionActivada:boolean, idSector:number,idFinca:number): Promise<any> {
         const data = {
             'configuracionMedicionInterna': configuracionMedicionInterna,
             'configuracionMedicionExterna':configuracionMedicionExterna,
@@ -69,7 +70,8 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
             'descripcionConfiguracionEvento':descripcionConfiguracionEvento,
             'notificacionActivada':notificacionActivada,
             'configuracionActivada':configuracionActivada,
-            'idSector':idSector
+            'idSector':idSector,
+            'idFinca':idFinca
 
         };
         return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.crearConfiguracionEventoPersonalizadoUrl, JSON.stringify(data), this.getRestHeader())
@@ -80,7 +82,7 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
 
     modificarConfiguracionEventoPersonalizado(idConfiguracionEvento:number, configuracionMedicionInterna, configuracionMedicionExterna,
         idUsuarioFinca:number, nombreConfiguracionEvento:string, descripcionConfiguracionEvento:string, notificacionActivada:boolean,
-        configuracionActivada:boolean, idSector:number): Promise<any> {
+        configuracionActivada:boolean, idSector:number,idFinca:number): Promise<any> {
         const data = {
             'idConfiguracionEvento':idConfiguracionEvento,
             'configuracionMedicionInterna': configuracionMedicionInterna,
@@ -90,7 +92,8 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
             'descripcionConfiguracionEvento':descripcionConfiguracionEvento,
             'notificacionActivada':notificacionActivada,
             'configuracionActivada':configuracionActivada,
-            'idSector':idSector
+            'idSector':idSector,
+            'idFinca':idFinca
 
         };
         return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.modificarConfiguracionEventoPersonalizadoUrl, JSON.stringify(data), this.getRestHeader())
@@ -99,9 +102,10 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    desactivarConfiguracionEventoPersonalizado(idConfiguracionEvento:number): Promise<any> {
+    desactivarConfiguracionEventoPersonalizado(idConfiguracionEvento:number,idFinca:number): Promise<any> {
         const data = {
-            'idConfiguracionEvento':idConfiguracionEvento
+            'idConfiguracionEvento':idConfiguracionEvento,
+            'idFinca':idFinca
         };
         return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.desactivarConfiguracionEventoPersonalizadoUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
@@ -109,9 +113,10 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    activarConfiguracionEventoPersonalizado(idConfiguracionEvento:number): Promise<any> {
+    activarConfiguracionEventoPersonalizado(idConfiguracionEvento:number,idFinca:number): Promise<any> {
         const data = {
-            'idConfiguracionEvento':idConfiguracionEvento
+            'idConfiguracionEvento':idConfiguracionEvento,
+            'idFinca':idFinca
         };
         return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.activarConfiguracionEventoPersonalizadoUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()

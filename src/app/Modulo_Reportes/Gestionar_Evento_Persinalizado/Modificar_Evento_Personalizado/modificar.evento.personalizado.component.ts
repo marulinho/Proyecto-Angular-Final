@@ -51,6 +51,7 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
     }
 
     ngOnInit(){
+        console.log("evento Personalizado:"+ this.idConfiguracionEvento);
         this.gestionarEventoPersonalizadoService.mostrarTipoMedicionInternaFinca(this.idFinca)
             .then(
                 response=>{
@@ -138,7 +139,7 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
     apretarModificarConfiguracion(){
         this.gestionarEventoPersonalizadoService.modificarConfiguracionEventoPersonalizado(this.idConfiguracionEvento,this.configuracionInterna,
             this.configuracionExterna,this.idUsuarioFinca,this.nombre,this.descripcion,this.notificacionActivada,this.configuracionActivada,
-            this.idSector)
+            this.idSector,this.idFinca)
                 .then(
                     response=>{
                         this.router.navigate(['/homeSector/'+this.idFinca+"/"+this.idSector]);

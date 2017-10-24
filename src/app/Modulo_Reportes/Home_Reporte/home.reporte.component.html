@@ -3,44 +3,70 @@
     <md-card class="page-card">
         <md-card-title>Home Reporte.</md-card-title>
         <md-card-content>
+            <section *ngIf="errorMessageReporte" class="bs">
+                <div class="bd-example" data-example-id="">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{errorMessageReporte}}</strong>
+                    </div>
+                </div><br>
+            </section>
 
-            <br>
-            <md-select placeholder="Seleccione reporte." [(ngModel)]="reporteSeleccionado" name="reporteSeleccionado" required>
-                <md-option *ngFor="let nombresReporte of nombresReportes" [value]="nombresReporte.id">
-                    {{nombresReporte.nombre}}
-                </md-option>
-            </md-select>
-            <br><br>
-            <div *ngIf="reporteSeleccionado=='1'">
-                <label id="atributo">Descripci&oacute;n: </label>
-                <label>{{descripcionesReportes[0]}}</label>
-            </div>
+            <section *ngIf="getFincasHabilitadas()" class="bs">
 
-            <div *ngIf="reporteSeleccionado=='2'">
-                <label id="atributo">Descripci&oacute;n: </label>
-                <label>{{descripcionesReportes[1]}}</label>
-            </div>
-            <div *ngIf="reporteSeleccionado=='3'">
-                <label id="atributo">Descripci&oacute;n: </label>
-                <label>{{descripcionesReportes[2]}}</label>
-            </div>
-            <div *ngIf="reporteSeleccionado=='4'">
-                <label id="atributo">Descripci&oacute;n: </label>
-                <label>{{descripcionesReportes[3]}}</label>
-            </div>
-            <div *ngIf="reporteSeleccionado=='5'">
-                <label id="atributo">Descripci&oacute;n: </label>
-                <label>{{descripcionesReportes[4]}}</label>
-            </div>
-            <div *ngIf="reporteSeleccionado=='6'">
-                <label id="atributo">Descripci&oacute;n: </label>
-                <label>{{descripcionesReportes[5]}}</label>
-            </div>
-            <div *ngIf="reporteSeleccionado=='7'">
-                <label id="atributo">Descripci&oacute;n: </label>
-                <label>{{descripcionesReportes[6]}}</label>
-            </div>
+                <br>
+                <md-select placeholder="Seleccione finca." [(ngModel)]="fincaSeleccionada" name="fincaSeleccionada" required>
+                    <md-option *ngFor="let finca of fincasHabilitadas" [value]="finca.idFinca" (click)="seleccionarFinca()">
+                        {{finca.nombreFinca}}
+                    </md-option>
+                </md-select>
+                <div *ngIf="getSectorSeleccionado()">
+                    <br><br>
+                <md-select  placeholder="Seleccione sector." [(ngModel)]="sectorSeleccionado" name="sectorSeleccionado" required>
+                    <md-option *ngFor="let sector of sectores" [value]="sector.idSector">
+                        {{sector.nombreSector}}
+                    </md-option>
+                </md-select>
+                </div>
+                <br><br>
+                <md-select placeholder="Seleccione reporte." [(ngModel)]="reporteSeleccionado" name="reporteSeleccionado" required>
+                    <md-option *ngFor="let nombresReporte of nombresReportes" [value]="nombresReporte.id">
+                        {{nombresReporte.nombre}}
+                    </md-option>
+                </md-select>
+                <br><br>
+                <div *ngIf="reporteSeleccionado=='1'">
+                    <label id="atributo">Descripci&oacute;n: </label>
+                    <label>{{descripcionesReportes[0]}}</label>
+                </div>
 
+                <div *ngIf="reporteSeleccionado=='2'">
+                    <label id="atributo">Descripci&oacute;n: </label>
+                    <label>{{descripcionesReportes[1]}}</label>
+                </div>
+                <div *ngIf="reporteSeleccionado=='3'">
+                    <label id="atributo">Descripci&oacute;n: </label>
+                    <label>{{descripcionesReportes[2]}}</label>
+                </div>
+                <div *ngIf="reporteSeleccionado=='4'">
+                    <label id="atributo">Descripci&oacute;n: </label>
+                    <label>{{descripcionesReportes[3]}}</label>
+                </div>
+                <div *ngIf="reporteSeleccionado=='5'">
+                    <label id="atributo">Descripci&oacute;n: </label>
+                    <label>{{descripcionesReportes[4]}}</label>
+                </div>
+                <div *ngIf="reporteSeleccionado=='6'">
+                    <label id="atributo">Descripci&oacute;n: </label>
+                    <label>{{descripcionesReportes[5]}}</label>
+                </div>
+                <div *ngIf="reporteSeleccionado=='7'">
+                    <label id="atributo">Descripci&oacute;n: </label>
+                    <label>{{descripcionesReportes[6]}}</label>
+                </div>
+            </section>
         </md-card-content>
+        <md-card-actions>
+                <button md-raised-button *ngIf="fincaSeleccionada!=null && sectorSeleccionado!=null && reporteSeleccionado!=null" (click)="apretarBuscarReporte()">IR A REPORTE</button>
+        </md-card-actions>
     </md-card>
 </div>

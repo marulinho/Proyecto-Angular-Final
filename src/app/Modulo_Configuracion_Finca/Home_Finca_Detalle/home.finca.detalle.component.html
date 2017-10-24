@@ -27,7 +27,11 @@
                         <label id=valor class="col-3">{{perfilFinca.direccionLegal}}.</label><br>
 
                         <label id=atributo class="col-2">Ubicaci&oacute;n: </label>
-                        <label id=valor class="col-3">{{perfilFinca.ubicacion}}.</label><br>
+                        <!--<label id=valor class="col-3">{{perfilFinca.ubicacion}}.</label><br>-->
+                        <ul>
+                                <li>Latitud: {{ubicacion[0]}}</li>
+                                <li>Longitud: {{ubicacion[1]}}</li>
+                        </ul>
 
                         <label id=atributo class="col-2">Tama&ntilde;o: </label>
                         <label id=valor class="col-3">{{perfilFinca.tamanio }} hect&aacute;reas.</label><br>
@@ -38,7 +42,7 @@
                 <!--SECCION PROVEEDOR INFORMACION FINCA-->
                 <md-card class="page-card">
                         <md-card-title>
-                                Proveedor Informaci&oacute;n.
+                                Proveedor Informaci&oacute;n Clim&aacute;tica.
                                 <a class="example-tooltip-host" mdTooltip={{tooltipEditarProveedor}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/editar.png" [routerLink]="['/gestionarProveedor/', idFinca]">
                                 </a>
@@ -63,24 +67,28 @@
                                         <label>{{proveedores.nombreProveedor}}.</label><br>
 
                                         <label id=atributo>Frecuencia m&aacute;xima de obtenci&oacute;n de mediciones: </label>
-                                        <label id=valor>{{proveedores.frecuenciaMaximaPosible}} minutos.</label><br>
+                                        <label id=valor>{{proveedores.frecuenciaMaximaPosible}} por hora.</label><br>
 
                                         <label id=atributo>Frecuencia actual de obtenci&oacute;n de mediciones: </label>
-                                        <label id=valor>{{proveedores.frecuenciaActual}} minutos.</label><br>
+                                        <label id=valor>{{proveedores.frecuenciaActual}} por hora.</label><br>
 
                                         <label id=atributo>Direcci&oacute;n web: </label>
                                         <label id=valor>{{proveedores.urlApi}}.</label><br>
 
                                         <label id=atributo>Mediciones:</label>
+                                        <ul *ngFor="let proveedor of proveedores['listaTipoMedicion']">
+                                                <li>Nombre: {{proveedor.nombreTipoMedicionClimatica}}, Unidad: {{proveedor.unidadMedicion}}</li>
+                                        </ul>
                                         <!--<md-list>
                                                 <md-list-item *ngFor="let proveedor of proveedores['listaTipoMedicion']" class="example-md-item">
                                                         <p md-line>Medici&oacute;n: {{proveedor.nombreTipoMedicionClimatica}}</p>
                                                         <p md-line>Unidad: {{proveedor.unidadMedicion}}</p>
                                                 </md-list-item>
                                         </md-list>-->
-                                        <label *ngFor="let proveedor of proveedores['listaTipoMedicion']">
+                                        <!--<label *ngFor="let proveedor of proveedores['listaTipoMedicion']">
                                                         {{proveedor.nombreTipoMedicionClimatica}}({{proveedor.unidadMedicion}}.)
                                         </label>
+                                -->
                                 </section>
                         </md-card-content>
                 </md-card>
@@ -303,7 +311,7 @@
                                                         <tr *ngFor="let componenteSensor of componenteSensores">
                                                                 <td>{{componenteSensor.modelo}}</td>
                                                                 <td>{{componenteSensor.descripcion}}</td>
-                                                                <td>{{componenteSensor.cantidadMaximaSensores}} sensores</td>
+                                                                <td>{{componenteSensor.cantidadSensoresAsignados}} sensores</td>
                                                                 <td>
                                                                         <a *ngIf="componenteSensor.estado=='habilitado'" class="example-tooltip-host" mdTooltip={{tooltipVerComponenteSensor}} [mdTooltipPosition]="position">
                                                                                 <img src="assets/icons/ver.png" [routerLink]="['/homeComponenteSensorFinca/', idFinca, componenteSensor.idComponenteSensor]">

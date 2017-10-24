@@ -155,9 +155,12 @@ import { ModificarCriterioInicialFinalComponent } from './Modulo_Configuracion_R
 
 //IMPORTS MODULO REPORTES
 import { GestionarEventoPersonalizadoService } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
+import { GenerarReportesService } from './Modulo_Reportes/generar.repotes.service';
 import { AgregarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Agregar_Evento_Personalizado/agregar.evento.personalizado.component';
 import { ModificarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Modificar_Evento_Personalizado/modificar.evento.personalizado.component';
 import { HomeReporteComponent } from './Modulo_Reportes/Home_Reporte/home.reporte.component';
+import { ReporteRiegoEjecucionComponent } from './Modulo_Reportes/Reporte_Riego_Ejecucion/reporte.riego.ejecucion.component';
+
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
 import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
@@ -284,6 +287,7 @@ import { TablasComponent } from './tablas/tablas.component';
     AgregarEventoPersonalizadoComponent,
     ModificarEventoPersonalizadoComponent,
     HomeReporteComponent,
+    ReporteRiegoEjecucionComponent,
 
     //COMPONENTS MODULO OBTENCION INFORMACION EXTERNA
     ModificarProveedorInformacionComponent,
@@ -367,8 +371,9 @@ import { TablasComponent } from './tablas/tablas.component';
     //LLAMADAS CONFIGURACION RIEGO
     GestionarConfiguracionRiegoService,
 
-    //LLAMADAS CONFIGURACION EVENTOS PERSONALIZADOS
+    //LLAMADAS REPORTES
     GestionarEventoPersonalizadoService,
+    GenerarReportesService,
     
 
     //LLAMADAS MODULO OBTENCION INFORMACION EXTERNA

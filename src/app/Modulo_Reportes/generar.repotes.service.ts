@@ -16,9 +16,10 @@ export class GenerarReportesService extends RestBaseService {
 
     constructor(private http: Http) { super(); }
 
-    obtenerEstadoActualSector(idSector: number): Promise<EstadoActualSector> {
+    obtenerEstadoActualSector(idSector: number, idFinca:number): Promise<EstadoActualSector> {
         const data = {
-            'idSector': idSector
+            'idSector': idSector,
+            'idFinca':idFinca
         };
         return this.http.post(GenerarReportesService.serverUrl + this.obtenerEstadoActualSectorUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
@@ -26,9 +27,10 @@ export class GenerarReportesService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    obtenerInformeRiegoEjecucionSector(idSector: number): Promise<RiegoSector> {
+    obtenerInformeRiegoEjecucionSector(idSector: number,idFinca:number): Promise<RiegoSector> {
         const data = {
-            'idSector': idSector
+            'idSector': idSector,
+            'idFinca':idFinca
         };
         return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformeRiegoEjecucionSectorUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
@@ -62,9 +64,10 @@ export class GenerarReportesService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    obtenerInformeEventosPersonalizados(idConfiguracionEvento: number): Promise<InformeEvento> {
+    obtenerInformeEventosPersonalizados(idConfiguracionEvento: number,idFinca:number): Promise<InformeEvento> {
         const data = {
-            'idConfiguracionEvento': idConfiguracionEvento
+            'idConfiguracionEvento': idConfiguracionEvento,
+            'idFinca':idFinca
         };
         return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformeEventosPersonalizadosUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()

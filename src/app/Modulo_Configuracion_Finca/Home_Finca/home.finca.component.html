@@ -34,7 +34,7 @@
             <thead>
               <tr>
                 <th style="width:37%;">Nombre</th>
-                <th style="width:36%;">Tama&ntilde;o</th>
+                <th style="width:30%;">Tama&ntilde;o</th>
                 <th>Ubicaci&oacute;n</th>
                 <th class="actions">Acci&oacute;n</th>
               </tr>
@@ -43,7 +43,12 @@
               <tr *ngFor="let fincaEncargado of fincasEncargado">
                 <td>{{fincaEncargado.nombreFinca}}</td>
                 <td>{{fincaEncargado.tamanio}} hect&aacute;reas</td>
-                <td>{{fincaEncargado.ubicacion}}</td>
+                <td>
+                  <ul>
+                    <li>Latitud: {{fincaEncargado.ubicacion[0]}}</li>
+                    <li>Longitud: {{fincaEncargado.ubicacion[1]}}</li>
+                  </ul>
+                </td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
                   <img src="assets/icons/ver.png" (click)="apretarIconoVerFinca(fincaEncargado.idFinca,fincaEncargado.idUsuarioFinca)">
@@ -101,7 +106,12 @@
             <tbody>
               <tr *ngFor="let fincaSinRolEncargado of fincasSinRolEncargado">
                 <td>{{fincaSinRolEncargado.nombreFinca}}</td>
-                <td>{{fincaSinRolEncargado.ubicacion}}</td>
+                <td>
+                  <ul>
+                    <li>Latitud: {{fincaSinRolEncargado.ubicacion[0]}}</li>
+                    <li>Longitud: {{fincaSinRolEncargado.ubicacion[1]}}</li>
+                  </ul>
+                </td>
                 <td>{{fincaSinRolEncargado.nombreRol}}</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
@@ -144,7 +154,12 @@
             <tbody>
               <tr *ngFor="let fincaPendientesAprobacion of fincasPendientesAprobacion">
                 <td>{{fincaPendientesAprobacion.nombreFinca}}</td>
-                <td>{{fincaPendientesAprobacion.ubicacion}}</td>
+                <td>
+                  <ul>
+                    <li>Latitud: {{fincaPendientesAprobacion.ubicacion[0]}}</li>
+                    <li>Longitud: {{fincaPendientesAprobacion.ubicacion[1]}}</li>
+                  </ul>
+                </td>
                 <td>{{fincaPendientesAprobacion.tamanio}} hect&aacute;reas</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
@@ -186,7 +201,12 @@
             <tbody>
               <tr *ngFor="let fincaDeshabilitada of fincasDeshabilitadas">
                 <td>{{fincaDeshabilitada.nombreFinca}}</td>
-                <td>{{fincaDeshabilitada.ubicacion}}</td>
+                <td>
+                  <ul>
+                    <li>Latitud: {{fincaDeshabilitada.ubicacion[0]}}</li>
+                    <li>Longitud: {{fincaDeshabilitada.ubicacion[1]}}</li>
+                  </ul>
+                </td>
                 <td>{{fincaDeshabilitada.nombreRol}}</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipHabilitarFinca}} [mdTooltipPosition]="position">

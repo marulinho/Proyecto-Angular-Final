@@ -4,27 +4,38 @@ import { ActivatedRoute } from '@angular/router';
 import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialog-example.component';
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
+import { HomeFincaService, Finca } from '../../Modulo_Configuracion_Finca/Home_Finca/home.finca.service';
+import { GestionarSectorFincaService, Sector } from '../../Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
 
 @Component({
-    selector:'home-reporte',
+    selector: 'home-reporte',
     templateUrl: './home.reporte.component.html',
-    styleUrls:['./home.reporte.component.css']
-    
+    styleUrls: ['./home.reporte.component.css']
+
 })
 
-export class HomeReporteComponent implements OnInit{
-    
-    nombresReportes=[
-        {nombre:'Informe Estado Actual Sector.',id:1},
-        {nombre:'Informe Riego en Ejecución.',id:2},
-        {nombre:'Informe Estado Histórico Sector.',id:3},
-        {nombre:'Informe Riego Histórico Sector.',id:4},
-        {nombre:'Informe Heladas Histórico.',id:5},
-        {nombre:'Informe Eventos Personalizados.',id:6},
-        {nombre:'Informe Cruzado Riego-Medición.',id:7}
-       
+export class HomeReporteComponent implements OnInit {
+
+    errorMessageReporte = "";
+    fincasUsuario = [];
+    fincasHabilitadas = [];
+    fincasHabilitadasSeleccionado:Boolean;
+    fincaSeleccionada:number;
+    sectores:Sector;
+    sectorSeleccionado:number;
+    sectoresSeleccionado:Boolean;
+    reporteSeleccionado: string;    
+    nombresReportes = [
+        { nombre: 'Informe Estado Actual Sector.', id: 1 },
+        { nombre: 'Informe Riego en Ejecución.', id: 2 },
+        { nombre: 'Informe Estado Histórico Sector.', id: 3 },
+        { nombre: 'Informe Riego Histórico Sector.', id: 4 },
+        { nombre: 'Informe Heladas Histórico.', id: 5 },
+        { nombre: 'Informe Eventos Personalizados.', id: 6 },
+        { nombre: 'Informe Cruzado Riego-Medición.', id: 7 }
+
     ];
-    descripcionesReportes=[
+    descripcionesReportes = [
         "Mediante este reporte se puede observar el estado actual del sector, incluyendo entre otras cosas la configuración de riego actual.",
         "Mediante este reporte se puede observar los datos relativos al riego en ejecución de un determinado sector.",
         "Mediante este reporte se puede observar el estado histórico del sector, incluyendo entre otras cosas las condifuraciones de riego históricas.",
@@ -34,23 +45,119 @@ export class HomeReporteComponent implements OnInit{
         "Mediante este reporte se puede observar las ejecuciones de riego y las mediciones llevadas a cabo por los sensores de un determinado sector."
     ];
 
-    reporteSeleccionado:string;
-
-    dia=new Date().getDay();
-    mes=new Date().getMonth()+1;
-    anio=new Date().getFullYear();
-    fechaActual:string=this.dia+"-"+this.mes+"-"+this.anio;
-    hora;
-    
-    
 
 
-    constructor(private router:Router,
-                private route:ActivatedRoute,
-                private appService:AppService,
-                private dialog: MdDialog){
-        appService.getState().topnavTitle="Home Reportes.";
+    constructor(private router: Router,
+        private route: ActivatedRoute,
+        private appService: AppService,
+        private homeFincaService: HomeFincaService,
+        private gestionarSectorFincaService:GestionarSectorFincaService,
+        private dialog: MdDialog) {
+        appService.getState().topnavTitle = "Home Reportes.";
     }
 
-    ngOnInit(){}
+    ngOnInit() {
+        this.homeFincaService.obtenerFincasUsuario()
+            .then(
+                response => {
+                    if (response.detalle_operacion == "No hay datos") {
+                        this.errorMessageReporte = "No hay fincas asociadas al usuario.";
+                    }
+                    else {
+                        this.fincasUsuario = response.datos_operacion;
+                        this.obtenerFincasHabilitadas();
+                    }
+                }
+            )
+            .catch(
+                error => {
+                    this.errorMessageReporte = error.error_description;
+                }
+            );
+    }
+
+    getFincasHabilitadas(){
+        return this.fincasHabilitadasSeleccionado;
+    }
+
+    getSectorSeleccionado(){
+        return this.sectoresSeleccionado;
+    }
+
+    obtenerFincasHabilitadas() {
+        let fincas = this.fincasUsuario;
+        let longitud = Object.keys(fincas).length;
+        console.log("logitud " + longitud);
+
+        for (var i = 0; i < longitud; i++) {
+            let estadoActual = fincas[i]['estadoFinca'];
+            let ubicacion = [];
+
+            if (estadoActual == "habilitado") {
+                ubicacion = fincas[i]['ubicacion'].split(";");
+                fincas[i]['ubicacion'] = ubicacion;
+                this.fincasHabilitadas.push(fincas[i]);
+            }
+
+            //HABILITACION DE LA TABLA FINCAS ENCARGADO
+            if (this.fincasHabilitadas.length == 0) {
+                this.errorMessageReporte = "No existen fincas habilitadas para el usuario.";
+            }
+            else {
+                this.fincasHabilitadasSeleccionado = true;
+            }
+
+        }
+    }
+
+    seleccionarFinca(){
+        this.gestionarSectorFincaService.buscarSectoresFinca(this.fincaSeleccionada)
+            .then(
+                response=>{
+                    if(response.datos_operacion=="No hay datos"){
+                        this.errorMessageReporte="No hay sectores asociadas a las fincas.";
+                    }
+                    else{
+                        this.sectores=response.datos_operacion;
+                        this.sectoresSeleccionado=true;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageReporte=error.error_description;
+                }
+            );
+    }
+
+    apretarBuscarReporte(){
+        localStorage.setItem('idFinca',JSON.stringify(this.fincaSeleccionada));
+        localStorage.setItem('idSector',JSON.stringify(this.sectorSeleccionado));
+        let nombre=this.nombresReportes.find(x => x.id == parseInt(this.reporteSeleccionado))['nombre'];
+        localStorage.setItem('nombreReporte',JSON.stringify(nombre));
+        localStorage.setItem('descripcionReporte',JSON.stringify(this.descripcionesReportes[this.reporteSeleccionado]));
+        
+        if(this.reporteSeleccionado=='1'){
+            this.router.navigate(['/reporteEstadoActualSector/']);
+        }
+        if(this.reporteSeleccionado=='2'){
+            this.router.navigate(['/reporteRiegoEjecucion/']);
+        }
+        if(this.reporteSeleccionado=='3'){
+            this.router.navigate(['/reporteEstadoHistoricoSector/']);
+        }
+        if(this.reporteSeleccionado=='4'){
+            this.router.navigate(['/reporteRiegoHistoricoSector/']);
+        }
+        if(this.reporteSeleccionado=='5'){
+            this.router.navigate(['/reporteHistoricoHeladas/']);
+        }
+        if(this.reporteSeleccionado=='6'){
+            this.router.navigate(['/reporteEventosPersonalizados/']);
+        }
+        if(this.reporteSeleccionado=='7'){
+            this.router.navigate(['/reporteCruzado/']);
+        }
+    }
+    
 }

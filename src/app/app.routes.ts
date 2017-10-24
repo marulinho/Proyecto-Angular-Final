@@ -102,7 +102,7 @@ import { ModificarCriterioInicialFinalComponent } from './Modulo_Configuracion_R
 import { AgregarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Agregar_Evento_Personalizado/agregar.evento.personalizado.component';
 import { ModificarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Modificar_Evento_Personalizado/modificar.evento.personalizado.component';
 import { HomeReporteComponent } from './Modulo_Reportes/Home_Reporte/home.reporte.component';
-
+import { ReporteRiegoEjecucionComponent } from './Modulo_Reportes/Reporte_Riego_Ejecucion/reporte.riego.ejecucion.component';
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
 import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
@@ -204,6 +204,7 @@ export const ROUTES: Routes = [
    {path:'crearEventoPersonalizado',component:AgregarEventoPersonalizadoComponent},
    {path:'gestionarEventoPersonalizado',component:ModificarEventoPersonalizadoComponent},
    {path:'homeReportes' , component:HomeReporteComponent},
+   {path:'reporteRiegoEjecucion',component:ReporteRiegoEjecucionComponent},
    
    //MODULO CULTIVOS
    {path:'gestionarCultivoSector/:idSector/:idFinca/:idCultivo', component: GestionarCultivoSectorComponent},

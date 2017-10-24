@@ -139,7 +139,7 @@ export class AgregarEventoPersonalizadoComponent implements OnInit{
         console.log("valor medicion interna: "+this.configuracionInterna[0]['valorMaximo']);
         console.log("valor medicion interna: "+this.configuracionInterna[0]['idTipoMedicion']);
         this.gestionarEventoPersonalizadoService.crearConfiguracionEventoPersonalizado(this.configuracionInterna,this.configuracionExterna,
-            this.idUsuarioFinca,this.nombre,this.descripcion,this.notificacionActivada,this.configuracionActivada,this.idSector)
+            this.idUsuarioFinca,this.nombre,this.descripcion,this.notificacionActivada,this.configuracionActivada,this.idSector,this.idFinca)
                 .then(
                     response=>{
                         this.router.navigate(['/homeSector/'+this.idFinca+"/"+this.idSector]);

@@ -1,0 +1,53 @@
+<!--SECCION REPORTE RIEGO EJECUCION-->
+<div class="page-content">
+        <md-card class="page-card">
+            <md-card-title>Reporte Riego en Ejecuci&oacute;n.</md-card-title>
+            <md-card-content>
+                <section *ngIf="errorMessageReporte" class="bs">
+                    <div class="bd-example" data-example-id="">
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{errorMessageReporte}}</strong>
+                        </div>
+                    </div><br>
+                </section>
+    
+                <section *ngIf="getRiegoSeleccionado()" class="bs">
+                    <h5>Informaci&oacute;n General Reporte.</h5>
+                        <label id="atributo">Nombre: </label>
+                        <label>{{nombreReporte}}</label><br>
+
+                        <label id="atributo">Descripci&oacute;n: </label>
+                        <label>{{descripcionReporte}}</label><br>
+                        
+                        <label id="atributo">Fecha creaci&oacute;n: </label>
+                        <label>{{fechaActual}}.</label><br>
+
+                        <label id="atributo">Hora creaci&oacute;n: </label>
+                        <label>{{horaActual}}.</label><br>
+                    
+                    <h5>Detalle Reporte</h5>
+                        <label id="atributo">Fecha inicio programada: </label>
+                        <label>{{riegoActual.ejecucion_riego['fechaHoraInicioProgramada']}}.</label><br>
+                        
+                        <label id="atributo">Fecha inicio real: </label>
+                        <label>{{riegoActual.ejecucion_riego['fechaHoraInicio']}}.</label><br>
+
+                        <label id="atributo">Fecha fin programada: </label>
+                        <label>{{riegoActual.ejecucion_riego['fechaHoraFinalProgramada']}}.</label><br>
+
+                        <label id="atributo">Agua utilizada: </label>
+                        <label>{{riegoActual.ejecucion_riego['cantidadAguaUtilizadaLitros']}} litros.</label><br>
+
+                        <label id="atributo">Criterio de riego: </label>
+                        <label>{{riegoActual.ejecucion_riego['detalle']}}</label><br>
+
+                        <label id="atributo">Progreso: </label>
+                        <label>{{riegoActual.ejecucion_riego['estado_ejecucion_riego']}}</label><br>
+                    
+                </section>
+            </md-card-content>
+            <md-card-actions>
+                    <button md-raised-button (click)="apretarSalir()">SALIR</button>
+            </md-card-actions>
+        </md-card>
+    </div>
