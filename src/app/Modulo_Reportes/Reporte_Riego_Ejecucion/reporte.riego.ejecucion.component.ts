@@ -27,8 +27,15 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
     mes = new Date().getMonth() + 1;
     anio = new Date().getFullYear();
     fechaActual: string = this.dia + "-" + this.mes + "-" + this.anio;
-    horaActual = new Date();
+    hora=new Date().getHours();
+    minutos=new Date().getMinutes();
+    segundos = new Date().getSeconds();
+    horaActual = this.hora+":"+this.minutos+":"+this.segundos;
 
+    progreso:string;
+    fechaInicioProgramada:string;
+    fechaInicioReal:string;
+    fechaFinProgramada:string;
 
 
 
@@ -52,7 +59,42 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
                 }
                 else{
                     this.riegoActual=response.datos_operacion;
+                    
+                    //estado
+                    this.progreso=this.riegoActual['ejecucion_riego']['estado_ejecucion_riego'];
+                    if(this.progreso=="en_ejecucion"){
+                        this.progreso="En ejecución.";
+                    }
+
+                    //hora inicio programada
+                    this.fechaInicioProgramada=this.riegoActual['ejecucion_riego']['fechaHoraInicioProgramada'];
+                    if(this.fechaInicioProgramada==null){
+                        this.fechaInicioProgramada="No ha sido determinada";
+                    }
+                    else{
+                        this.fechaInicioProgramada=this.fechaInicioProgramada.substring(0,10) +" "+this.fechaInicioProgramada.substring(12,19) ;
+                    }
+
+                    //hora final programada
+                    this.fechaFinProgramada=this.riegoActual['ejecucion_riego']['fechaHoraFinalProgramada'];
+                    if(this.fechaFinProgramada==null){
+                        this.fechaFinProgramada="No ha sido determinada";
+                    }
+                    else{
+                        this.fechaFinProgramada=this.fechaFinProgramada.substring(0,10)+" "+this.fechaFinProgramada.substring(12,19);
+                    }
+
+                    //hora inicio real
+                    this.fechaActual=this.riegoActual['ejecucion_riego']['fechaHoraInicio'];
+                    if(this.fechaActual==null){
+                        this.fechaActual="No ha sido determinada";
+                    }
+                    else{
+                        this.fechaActual=this.fechaActual.substring(0,10)+" "+this.fechaActual.substring(12,19);
+                    }
+
                     this.riegoSeleccionado=true;
+                    
                 }
             }
         )

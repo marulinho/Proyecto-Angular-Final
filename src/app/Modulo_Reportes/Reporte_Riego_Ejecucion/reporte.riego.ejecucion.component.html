@@ -27,23 +27,22 @@
                     
                     <h5>Detalle Reporte</h5>
                         <label id="atributo">Fecha inicio programada: </label>
-                        <label>{{riegoActual.ejecucion_riego['fechaHoraInicioProgramada']}}.</label><br>
+                        <label>{{fechaInicioProgramada}}.</label><br>
                         
                         <label id="atributo">Fecha inicio real: </label>
-                        <label>{{riegoActual.ejecucion_riego['fechaHoraInicio']}}.</label><br>
+                        <label>{{fechaActual}}.</label><br>
 
                         <label id="atributo">Fecha fin programada: </label>
-                        <label>{{riegoActual.ejecucion_riego['fechaHoraFinalProgramada']}}.</label><br>
+                        <label>{{fechaFinProgramada}}.</label><br>
 
                         <label id="atributo">Agua utilizada: </label>
                         <label>{{riegoActual.ejecucion_riego['cantidadAguaUtilizadaLitros']}} litros.</label><br>
 
                         <label id="atributo">Criterio de riego: </label>
-                        <label>{{riegoActual.ejecucion_riego['detalle']}}</label><br>
+                        <label>{{riegoActual.ejecucion_riego['detalle']}}.</label><br>
 
                         <label id="atributo">Progreso: </label>
-                        <label>{{riegoActual.ejecucion_riego['estado_ejecucion_riego']}}</label><br>
-                    
+                        <label>{{progreso}}</label>
                 </section>
             </md-card-content>
             <md-card-actions>
