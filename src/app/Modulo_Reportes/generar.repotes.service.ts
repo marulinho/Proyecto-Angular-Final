@@ -9,10 +9,10 @@ export class GenerarReportesService extends RestBaseService {
     private obtenerEstadoActualSectorUrl = "/obtenerEstadoActualSector/";
     private obtenerInformeRiegoEjecucionSectorUrl = "/obtenerInformeRiegoEjecucionSector/";
     private obtenerInformeHistoricoSectorUrl = "/obtenerInformeHistoricoSector/";
-    private obtenerInformeRiegoHistoricoSector = "/obtenerInformeRiegoHistoricoSector /";
+    private obtenerInformeRiegoHistoricoSectorUrl = "/obtenerInformeRiegoHistoricoSector/";
     private obtenerInformeEventosPersonalizadosUrl="/obtenerInformeEventosPersonalizados/";
-    private recibirMedicionUrl="/recibirMedicion/";
-
+    private obtenerInformaHistoricoHeladasUrl="/obtenerInformeHistoricoHeladas/";
+    private obtenerInformaMedicionCruzadaUrl="/obtenerInformeCruzadoRiegoMediciones/";
 
     constructor(private http: Http) { super(); }
 
@@ -38,7 +38,7 @@ export class GenerarReportesService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    obtenerInformeComponentesHistoricoSector(idSector: number, idFinca:number, fechaInicioSector:string, fechaFinSector:string): Promise<ComponenteSector> {
+    obtenerInformeHistoricoSector(idSector: number, idFinca:number, fechaInicioSector:string, fechaFinSector:string): Promise<ComponenteSector> {
         const data = {
             'idSector': idSector,
             'idFinca':idFinca,
@@ -58,7 +58,7 @@ export class GenerarReportesService extends RestBaseService {
             'fechaInicioSector':fechaInicioSector,
             'fechaFinSector':fechaFinSector
         };
-        return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformeRiegoEjecucionSectorUrl, JSON.stringify(data), this.getRestHeader())
+        return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformeRiegoHistoricoSectorUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
             .then(response => { return response.json() as RiegoSector; })
             .catch(this.handleError);
@@ -75,15 +75,32 @@ export class GenerarReportesService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    /*recibirMedicion(idConfiguracionEvento: number): Promise<InformeEvento> {
+    obtenerInformeHeladasHistorico(idFinca:number,idSector: number,fechaInicioSector:string,fechaFinSector:string): Promise<Helada> {
         const data = {
-            'idConfiguracionEvento': idConfiguracionEvento
+            'idFinca': idFinca,
+            'idSector':idSector,
+            'fechaInicioSector':fechaInicioSector,
+            'fechaFinSector':fechaFinSector
         };
-        return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformeEventosPersonalizadosUrl, JSON.stringify(data), this.getRestHeader())
+        return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformaHistoricoHeladasUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
             .then(response => { return response.json() as InformeEvento; })
             .catch(this.handleError);
-    }*/
+    }
+
+    obtenerInformeMedicionCruzada(idFinca:number,idSector: number,fechaInicioSector:string,fechaFinSector:string): Promise<MedicionCruzada> {
+        const data = {
+            'idFinca': idFinca,
+            'idSector':idSector,
+            'fechaInicioSector':fechaInicioSector,
+            'fechaFinSector':fechaFinSector
+        };
+        return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformaMedicionCruzadaUrl, JSON.stringify(data), this.getRestHeader())
+            .toPromise()
+            .then(response => { return response.json() as MedicionCruzada; })
+            .catch(this.handleError);
+    }
+
 }
 
 export interface EstadoActualSector {
@@ -105,6 +122,18 @@ export interface ComponenteSector {
 }
 
 export interface InformeEvento {
+    resultado: boolean;
+    datos_operacion;
+    detalle_operacion;
+}
+
+export interface Helada{
+    resultado: boolean;
+    datos_operacion;
+    detalle_operacion;
+}
+
+export interface MedicionCruzada{
     resultado: boolean;
     datos_operacion;
     detalle_operacion;

@@ -21,6 +21,8 @@ export class GestionarSectorFincaComponent implements OnInit{
     nombre:string;
     descripcion:string;
     superficie:number;
+
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
     
     constructor(private router:Router,
                 private route:ActivatedRoute,
@@ -50,10 +52,10 @@ export class GestionarSectorFincaComponent implements OnInit{
                 this.errorMessageGestionarSectorFinca="Debe completar todos los campos obligatorios (*).";
         }
         else{
-            this.gestionarSectorFincaService.modificarSector(this.idSector,this.nombre,this.descripcion,this.superficie)
+            this.gestionarSectorFincaService.modificarSector(this.idSector,this.nombre,this.descripcion,this.superficie,this.idFinca)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeSector/'+this.idSector]);
+                        this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);
                     }
                 )
                 .catch(
@@ -66,6 +68,6 @@ export class GestionarSectorFincaComponent implements OnInit{
    }
 
    apretarSalir(){
-        this.router.navigate(['/homeSector/'+this.idSector]);
+        this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);
    }
 }

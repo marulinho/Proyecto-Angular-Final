@@ -160,7 +160,12 @@ import { AgregarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar
 import { ModificarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Modificar_Evento_Personalizado/modificar.evento.personalizado.component';
 import { HomeReporteComponent } from './Modulo_Reportes/Home_Reporte/home.reporte.component';
 import { ReporteRiegoEjecucionComponent } from './Modulo_Reportes/Reporte_Riego_Ejecucion/reporte.riego.ejecucion.component';
-
+import { ReporteEstadoActualEstadoSector } from './Modulo_Reportes/Reporte_Estado_Actual_Sector/reporte.estado.actual.sector.component';
+import { ReporteRiegoHistoricoSectorComponent } from './Modulo_Reportes/Reporte_Riego_Historico_Sector/reporte.riego.historico.sector.component';
+import { ReporteHistoricoHeladaComponent } from './Modulo_Reportes/Reporte_Historico_Heladas/reporte.historico.heladas.component';
+import { ReporteEstadoHistoricoSectorComponent } from './Modulo_Reportes/Reporte_Historico_Sector/reporte.estado.historico.sector.component';
+import { ReporteMedicionCruzadaComponent } from './Modulo_Reportes/Reporte_Medicion_Cruzada/reporte.medicion.cruzada.component';
+import { ReporteEventoPersonalizadoComponent } from './Modulo_Reportes/Reporte_Evento_Personalizado/reporte.evento.personalizado.component';
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
 import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
@@ -288,6 +293,12 @@ import { TablasComponent } from './tablas/tablas.component';
     ModificarEventoPersonalizadoComponent,
     HomeReporteComponent,
     ReporteRiegoEjecucionComponent,
+    ReporteEstadoActualEstadoSector,
+    ReporteRiegoHistoricoSectorComponent,
+    ReporteHistoricoHeladaComponent,
+    ReporteEstadoHistoricoSectorComponent,
+    ReporteMedicionCruzadaComponent,
+    ReporteEventoPersonalizadoComponent,
 
     //COMPONENTS MODULO OBTENCION INFORMACION EXTERNA
     ModificarProveedorInformacionComponent,

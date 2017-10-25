@@ -128,6 +128,8 @@ export class HomeSectorComponent implements OnInit{
                     if(response.detalle_operacion=="No hay datos"){
                         this.errorMessageMecanismoSector="No hay mecanismos de riego asociados al sector.";
                         this.mecanismoHabilitado=false;
+                        this.errorMessageConfiguracionRiego="Debe asignar un mecanismo de riego al sector.";
+                        this.errorMessageRiego="Debe asignar un mecanismo de riego al sector.";
                     }
                     else{
                         this.mecanismoRiego=response.datos_operacion;
@@ -141,8 +143,8 @@ export class HomeSectorComponent implements OnInit{
                             this.mecanismoHabilitado=false;
                             this.riegoSeleccionado=false;
                             this.configuracionRiegoSeleccionado=false;
-                            this.errorMessageConfiguracionRiego="No existen configuraciones de riego asignadas al sector.";
-                            this.errorMessageRiego="No existen mecanismos de riego asociados al sector.";
+                            this.errorMessageConfiguracionRiego="Debe asignar un mecanismo de riego al sector.";
+                            this.errorMessageRiego="Debe asignar un mecanismo de riego al sector.";
                         }
                         
                         this.mecanismoSeleccionado=true;
@@ -342,7 +344,7 @@ export class HomeSectorComponent implements OnInit{
 
    apretarDeshabilitarMecanismoIcono(idMecanismo:number){
         this.idMecanismoRiegoFincaSector=idMecanismo;
-        this.asignarMecanismoRiegoSectorService.deshabilitarMecanismoSector(this.idMecanismoRiegoFincaSector)
+        this.asignarMecanismoRiegoSectorService.deshabilitarMecanismoSector(this.idMecanismoRiegoFincaSector,this.idFinca)
             .then(
                 response=>{
                     this.refresh();
@@ -356,7 +358,7 @@ export class HomeSectorComponent implements OnInit{
    }
 
    apretarDeshabilitarCultivo(idCultivo:number){
-    this.gestionarCultivoSectorService.deshabilitarCultivoSector(idCultivo)
+    this.gestionarCultivoSectorService.deshabilitarCultivoSector(idCultivo,this.idFinca)
         .then(
             response=>{
                 this.refresh();

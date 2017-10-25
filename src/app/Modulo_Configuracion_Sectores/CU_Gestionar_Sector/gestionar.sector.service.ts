@@ -33,12 +33,13 @@ export class GestionarSectorFincaService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  modificarSector(id:number,nombre:string,descripcion:string,superficie:number):Promise<any> {
+  modificarSector(id:number,nombre:string,descripcion:string,superficie:number,idFinca:number):Promise<any> {
     const data = {
       'idSector':id,
       'nombreSector':nombre,
       'descripcionSector':descripcion,
-      'superficieSector':superficie
+      'superficieSector':superficie,
+      'idFinca':idFinca
     };
     return this.http.post(GestionarSectorFincaService.serverUrl + this.modificarSectorUrl, JSON.stringify(data), this.getRestHeader())
     .toPromise()

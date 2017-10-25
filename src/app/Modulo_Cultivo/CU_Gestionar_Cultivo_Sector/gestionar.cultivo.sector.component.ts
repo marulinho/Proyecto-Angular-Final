@@ -59,7 +59,7 @@ export class GestionarCultivoSectorComponent implements OnInit{
     }
 
     apretarModificarCultivo(){
-        this.gestionarCultivoSectorService.modificarCultivoSector(this.idCultivo,this.descripcion,this.nombreCultivo,this.fechaPlantacion)
+        this.gestionarCultivoSectorService.modificarCultivoSector(this.idCultivo,this.descripcion,this.nombreCultivo,this.fechaPlantacion,this.idFinca)
             .then(
                 response=>{
                     this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);

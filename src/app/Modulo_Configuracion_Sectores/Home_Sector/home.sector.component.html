@@ -183,7 +183,7 @@
         <md-card class="page-card">
             <md-card-title>
                 Configuraciones de Riego.
-                <a class="example-tooltip-host" mdTooltip={{tooltipCrearConfiguracionRiego}} [mdTooltipPosition]="position">
+                <a *ngIf="getMecanismoHabilitado()" class="example-tooltip-host" mdTooltip={{tooltipCrearConfiguracionRiego}} [mdTooltipPosition]="position">
                     <img src="assets/icons/nuevo.png" [routerLink]="['/crearConfiguracionRiego/',idFinca,idSector,idMecanismoRiegoFincaSector]">
                 </a>
             </md-card-title>
@@ -233,7 +233,7 @@
         <md-card class="page-card">
             <md-card-title>
                 Riego Finca.
-                <a *ngIf="!getExisteRiegoEnEjecucion()" class="example-tooltip-host" mdTooltip={{tooltipIniciarRiego}} [mdTooltipPosition]="position">
+                <a *ngIf="!getExisteRiegoEnEjecucion() && getMecanismoHabilitado()" class="example-tooltip-host" mdTooltip={{tooltipIniciarRiego}} [mdTooltipPosition]="position">
                     <img src="assets/icons/iniciar.png" (click)="apretarIniciarRiego()">
                 </a>
             </md-card-title>

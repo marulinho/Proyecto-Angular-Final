@@ -96,7 +96,7 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
     }
 
     apretarAgregaMecanismo(){
-        this.asignarMecanismoRiegoSectorService.asignarMecanismoSector(this.idSector,this.idMecanismoRiegoFinca,this.caudal,this.presion)
+        this.asignarMecanismoRiegoSectorService.asignarMecanismoSector(this.idSector,this.idMecanismoRiegoFinca,this.caudal,this.presion,this.idFinca)
             .then(
                 response=>{
                     this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);

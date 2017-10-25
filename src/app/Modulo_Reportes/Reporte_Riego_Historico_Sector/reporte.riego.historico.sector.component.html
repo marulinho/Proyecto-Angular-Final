@@ -1,0 +1,75 @@
+<!--SECCION REPORTE RIEGO EJECUCION-->
+<div class="page-content">
+    <md-card class="page-card">
+        <md-card-title>Reporte Hist&oacute;rico Riego.</md-card-title>
+        <md-card-content>
+            <section *ngIf="errorMessageReporte" class="bs">
+                <div class="bd-example" data-example-id="">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{errorMessageReporte}}</strong>
+                    </div>
+                </div><br>
+            </section>
+
+            <section *ngIf="!getRiegosSeleccionado()" >
+                <md-input-container  >
+                    <input mdInput placeholder="Fecha Inicio" type="date" [(ngModel)]="fechaInicioReporte" name="fechaInicioReporte" required><br>
+                </md-input-container>
+                <md-input-container   >
+                    <input  mdInput placeholder="Fecha Fin" type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
+                </md-input-container>
+                <button md-raised-button (click)="apretarGenerarReporte()">Generar.</button>
+            </section>
+
+            <section *ngIf="getRiegosSeleccionado()" class="bs">
+                <h5>Informaci&oacute;n General Reporte.</h5>
+                <label id="atributo">Nombre: </label>
+                <label>{{nombreReporte}}</label><br>
+
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionReporte}}</label><br>
+
+                <label id="atributo">Fecha creaci&oacute;n: </label>
+                <label>{{fechaActual}}.</label><br>
+
+                <label id="atributo">Hora creaci&oacute;n: </label>
+                <label>{{horaActual}}.</label><br><br>
+
+                <h5>Detalle Reporte</h5>
+                <label id="atributo">Fecha inicio: </label>
+                <label>{{fechaInicioReporte}}.</label><br>
+
+                <label id="atributo">Fecha fin: </label>
+                <label>{{fechaFinReporte}}.</label><br><br>
+
+                <table class="table table-striped table-hover table-card">
+                    <thead>
+                        <tr>
+                            <th>Fecha-Hora Inicio.</th>
+                            <th>Fecha-Hora Fin.</th>
+                            <th>Agua utilizada.</th>
+                            <th>Criterio riego.</th>
+                            <th>Duraci&oacute;n.</th>
+                            <th>Mecanismos riego.</th>
+                            <th>Estado riego.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let riego of riegosHistoricos">
+                            <td>{{riego['fechaInicio']}}    {{riego.horaInicio}}.</td>
+                            <td>{{riego.fechaFin}}    {{riego.horaFin}}.</td>
+                            <td>{{riego.aguaUtilizada}} litros.</td>
+                            <td>{{riego.criterioRiego}}.</td>
+                            <td>{{riego.duracion}} minutos.</td>
+                            <td>{{riego.mecanismoRiego}}.</td>
+                            <td>{{riego.ejecucion}}.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button *ngIf="getRiegosSeleccionado()" (click)="apretarSalir()">SALIR</button>
+        </md-card-actions>
+    </md-card>
+</div>

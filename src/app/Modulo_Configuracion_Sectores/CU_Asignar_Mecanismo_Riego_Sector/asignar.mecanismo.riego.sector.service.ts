@@ -21,9 +21,10 @@ export class AsignarMecanismoRiegoSectorService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  deshabilitarMecanismoSector(idMecanismoRiegoFincaSector:number):Promise<any> {
+  deshabilitarMecanismoSector(idMecanismoRiegoFincaSector:number,idFinca:number):Promise<any> {
     const data = {
-      'idMecanismoRiegoFincaSector':idMecanismoRiegoFincaSector
+      'idMecanismoRiegoFincaSector':idMecanismoRiegoFincaSector,
+      'idFinca':idFinca
     };
     return this.http.post(AsignarMecanismoRiegoSectorService.serverUrl + this.deshabilitarMecanismoRiegoSectorUrl, JSON.stringify(data), this.getRestHeader())
     .toPromise()
@@ -31,12 +32,13 @@ export class AsignarMecanismoRiegoSectorService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  asignarMecanismoSector(idSector:number,idMecanismoRiegoFinca:number,caudalMecanismoRiego:number,presionMecanismoRiego:number): Promise<any> {
+  asignarMecanismoSector(idSector:number,idMecanismoRiegoFinca:number,caudalMecanismoRiego:number,presionMecanismoRiego:number,idFinca:number): Promise<any> {
     const data = {
       'idSector': idSector,
       'idMecanismoRiegoFinca': idMecanismoRiegoFinca,
       'caudalMecanismoRiego':caudalMecanismoRiego,
-      'presionMecanismoRiego':presionMecanismoRiego
+      'presionMecanismoRiego':presionMecanismoRiego,
+      'idFinca':idFinca
     };
 
     return this.http.put(AsignarMecanismoRiegoSectorService.serverUrl +this.asignarMecanismoASectorUrl, JSON.stringify(data), this.getRestHeader())

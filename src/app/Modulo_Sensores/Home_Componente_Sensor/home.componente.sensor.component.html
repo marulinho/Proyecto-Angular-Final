@@ -2,7 +2,7 @@
 <div *ngIf="getperfilHomeComponenteSeleccionado()" class="sign-container">
 
   <md-card class="page-card">
-    <md-card-title>Home Componente Sensor</md-card-title>
+    <md-card-title>Home Componente Sensor.</md-card-title>
     <md-card-subtitle>
       En esta secci&oacute;n el Encargado de la Finca puede modificar, deshabilitar el componente sensor y asignar sensores a los componente sensor de la finca.
     </md-card-subtitle>
@@ -27,17 +27,20 @@
             </a>
           </h4>
 
+        <label id="atributo">Identificador componente:</label>
+        <label >{{componenteSensor.idComponenteSensor}}.</label><br>
+
         <label id="atributo">Modelo:</label>
-        <label >{{componenteSensor.modelo}}</label><br>
+        <label >{{componenteSensor.modelo}}.</label><br>
 
         <label id=atributo >Descripci&oacute;n:</label>
-        <label id=valor >{{componenteSensor.descripcion}}</label><br>
+        <label id=valor >{{componenteSensor.descripcion}}.</label><br>
 
         <label id=atributo>Cantidad de sensores soportados:</label>
-        <label id=valor >{{componenteSensor.cantidadMaximaSensores}}</label><br>
+        <label id=valor >{{componenteSensor.cantidadMaximaSensores}}.</label><br>
 
         <label id=atributo >Sensores asignados:</label>
-        <label id=valor >{{componenteSensor.cantidadSensoresAsignados}}</label><br>
+        <label id=valor >{{componenteSensor.cantidadSensoresAsignados}}.</label><br>
 
       </section>
     </md-card-content>
@@ -65,17 +68,17 @@
                     <table class="table table-striped table-hover table-card">
                       <thead>
                         <tr>
-                          <th style="width:37%;">Modelo</th>
-                          <th style="width:36%;">Tipo Medici&oacute;n</th>
-                          <th>Fecha Alta</th>
-                          <th class="actions">Acci&oacute;n</th>
+                          <th style="width:37%;">Modelo.</th>
+                          <th style="width:36%;">Tipo Medici&oacute;n.</th>
+                          <th>Fecha Alta.</th>
+                          <th class="actions">Acci&oacute;n.</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let sensor of sensores">
-                          <td>{{sensor.modelo}}</td>
-                          <td>{{sensor.tipoMedicion}}</td>
-                          <td>{{sensor.fechaAltaSensor.substring(0,10)}}</td>
+                          <td>{{sensor.modelo}}.</td>
+                          <td>{{sensor.tipoMedicion}}.</td>
+                          <td>{{sensor.fechaAltaSensor.substring(0,10)}}.</td>
                           <td>
                               <a class="example-tooltip-host" mdTooltip={{tooltipDesasignarSensor}} [mdTooltipPosition]="position"
                                 (click)="apretarIconoDeshabilitarSensorComponente(sensor.idSensor)">
