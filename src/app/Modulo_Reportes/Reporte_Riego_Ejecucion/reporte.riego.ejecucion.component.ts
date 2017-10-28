@@ -54,7 +54,7 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
         this.generarReportesService.obtenerInformeRiegoEjecucionSector(this.idSector,this.idFinca)
         .then(
             response=>{
-                if(response.datos_operacion=="No hay datos" || response.datos_operacion['ejecucion_riego']==""){
+                if(response.detalle_operacion=="No hay datos" || response.datos_operacion['ejecucion_riego']==""){
                     this.errorMessageReporte="No hay riegos en ejecución.";
                 }
                 else{

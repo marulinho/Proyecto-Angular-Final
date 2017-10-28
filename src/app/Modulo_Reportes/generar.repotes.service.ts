@@ -38,7 +38,7 @@ export class GenerarReportesService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    obtenerInformeHistoricoSector(idSector: number, idFinca:number, fechaInicioSector:string, fechaFinSector:string): Promise<ComponenteSector> {
+    obtenerInformeHistoricoSector(idSector: number, idFinca:number, fechaInicioSector:string, fechaFinSector:string): Promise<HistoricoSector> {
         const data = {
             'idSector': idSector,
             'idFinca':idFinca,
@@ -47,7 +47,7 @@ export class GenerarReportesService extends RestBaseService {
         };
         return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformeHistoricoSectorUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
-            .then(response => { return response.json() as ComponenteSector; })
+            .then(response => { return response.json() as HistoricoSector; })
             .catch(this.handleError);
     }
 
@@ -115,7 +115,7 @@ export interface RiegoSector {
     detalle_operacion;
 }
 
-export interface ComponenteSector {
+export interface HistoricoSector {
     resultado: boolean;
     datos_operacion;
     detalle_operacion;

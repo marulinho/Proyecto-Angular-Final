@@ -46,7 +46,7 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
         this.generarReportesService.obtenerEstadoActualSector(this.idSector,this.idFinca)
         .then(
             response=>{
-                if(response.datos_operacion=="No hay datos"){
+                if(response.datos_operacion['ultima_medicion']==""){
                     this.errorMessageReporte="No hay mediciones asociadas al sector seleccionado.";
                 }
                 else{

@@ -31,6 +31,11 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
     segundos = new Date().getSeconds();
     horaActual = this.hora+":"+this.minutos+":"+this.segundos;
 
+    heladas:Helada;
+    heladasExistentes:Boolean;
+    fechaInicioReporte;
+    fechaFinReporte;
+
     constructor(private router: Router,
         private route: ActivatedRoute,
         private appService: AppService,
@@ -41,4 +46,65 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
     }
 
     ngOnInit(){}
+
+    getHeladasExistentes(){
+        return this.heladasExistentes;
+    }
+
+    apretarGenerarReporte(){
+        let resultado=this.compararFechas();
+        if(resultado){
+            this.generarReportesService.obtenerInformeHeladasHistorico(this.idFinca,this.idSector,this.fechaInicioReporte,this.fechaFinReporte)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageReporte="No se han registrados heladas durante ese periodo de días.";
+                    }
+                    else{
+                        this.heladas=response.datos_operacion;
+                        this.heladasExistentes=true;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessageReporte=error.error_description;
+                }
+            );
+        }
+    }
+
+    compararFechas(){
+        let resultado:boolean;
+        if( this.fechaInicioReporte==null || this.fechaInicioReporte=="" ||
+            this.fechaFinReporte==null || this.fechaFinReporte==null){
+            this.errorMessageReporte="Debe completar todos los campos obligatorios (*).";
+            resultado=false;
+        }
+        else{ 
+            let fechaInicializacion=[];
+            let fechaInicial;
+            fechaInicializacion=this.fechaInicioReporte.split("-");
+            fechaInicial=parseInt(fechaInicializacion[0]+""+fechaInicializacion[1]+""+fechaInicializacion[2]);
+
+            let fechaFinalizacion=[];
+            let fechaFinal;
+            fechaFinalizacion=this.fechaFinReporte.split("-");
+            fechaFinal=parseInt(fechaFinalizacion[0]+""+fechaFinalizacion[1]+""+fechaFinalizacion[2]);
+
+            if(fechaInicial>fechaFinal){
+                this.errorMessageReporte="La fecha inicial no puede ser mayor que la fecha final.";
+                resultado=false;
+            }
+            else{
+                this.errorMessageReporte="";
+                resultado=true;
+            }
+        }
+        return resultado;
+    }
+
+    apretarSalir(){
+        this.router.navigate(['/homeReportes/']);
+    }
 }

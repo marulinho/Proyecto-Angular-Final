@@ -36,6 +36,7 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
     existeCriterioInicial: Boolean;
     tipoCriterioEncontrado:string;
     tipoCriterioInicio:string;
+    operadorInicial;
 
     //CRITERIO FINAL
     criterioFinalRiego: CriterioRiego;
@@ -47,6 +48,7 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
     tipoCriterioFinalEncontrado:string;
     existeCriterioFinal:Boolean;
     tipoCriterioFinal:string;
+    operadorFinal;
 
 
     constructor(private router: Router,
@@ -81,6 +83,17 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
                     if(this.tipoCriterioEncontrado=="criterio_riego_medicion"){
                         this.tipoCriterioInicio=this.tipoCriterioEncontrado;
                         this.tipoCriterioEncontrado="Medición.";
+                        this.operadorInicial=this.criterioInicialRiego[0]['operador'];
+                        if(this.operadorInicial=="Menor o igual"){
+                            this.operadorInicial="<=";
+                            console.log("estamos aca"+this.operadorInicial);
+                            
+                        }
+                        else{
+                            this.operadorInicial=">=";
+                            console.log("estamos aca"+this.operadorInicial);
+                            
+                        }
                     }
                     else{
                         if(this.tipoCriterioEncontrado=="criterio_riego_hora"){
@@ -116,6 +129,13 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
                         if(this.tipoCriterioFinalEncontrado=="criterio_riego_medicion"){
                             this.tipoCriterioFinal=this.tipoCriterioFinalEncontrado;
                             this.tipoCriterioFinalEncontrado="Medición.";
+                            this.operadorFinal=this.criterioFinalRiego[0]['operador'];
+                            if(this.operadorFinal=="Menor o igual"){
+                                this.operadorFinal="<=";
+                            }
+                            else{
+                                this.operadorFinal=">=";
+                            }
                         }
                         else{
                             if(this.tipoCriterioFinalEncontrado=="criterio_riego_hora"){

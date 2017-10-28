@@ -26,13 +26,13 @@ export class HomeReporteComponent implements OnInit {
     sectoresSeleccionado:Boolean;
     reporteSeleccionado: string;    
     nombresReportes = [
-        { nombre: 'Informe Estado Actual Sector.', id: 1 },
-        { nombre: 'Informe Riego en Ejecución.', id: 2 },
-        { nombre: 'Informe Estado Histórico Sector.', id: 3 },
-        { nombre: 'Informe Riego Histórico Sector.', id: 4 },
-        { nombre: 'Informe Heladas Histórico.', id: 5 },
-        { nombre: 'Informe Eventos Personalizados.', id: 6 },
-        { nombre: 'Informe Cruzado Riego-Medición.', id: 7 }
+        { nombre: 'Informe Estado Actual Sector.', id: 0 },
+        { nombre: 'Informe Riego en Ejecución.', id: 1 },
+        { nombre: 'Informe Estado Histórico Sector.', id: 2 },
+        { nombre: 'Informe Riego Histórico Sector.', id: 3 },
+        { nombre: 'Informe Heladas Histórico.', id: 4 },
+        { nombre: 'Informe Eventos Personalizados.', id: 5 },
+        { nombre: 'Informe Cruzado Riego-Medición.', id: 6 }
 
     ];
     descripcionesReportes = [
@@ -135,27 +135,29 @@ export class HomeReporteComponent implements OnInit {
         localStorage.setItem('idSector',JSON.stringify(this.sectorSeleccionado));
         let nombre=this.nombresReportes.find(x => x.id == parseInt(this.reporteSeleccionado))['nombre'];
         localStorage.setItem('nombreReporte',JSON.stringify(nombre));
+        console.log("nombreReporte: "+nombre);
         localStorage.setItem('descripcionReporte',JSON.stringify(this.descripcionesReportes[this.reporteSeleccionado]));
-        
-        if(this.reporteSeleccionado=='1'){
+        console.log("nombreReporte: "+this.descripcionesReportes[this.reporteSeleccionado]);
+
+        if(this.reporteSeleccionado=='0'){
             this.router.navigate(['/reporteEstadoActualSector/']);
         }
-        if(this.reporteSeleccionado=='2'){
+        if(this.reporteSeleccionado=='1'){
             this.router.navigate(['/reporteRiegoEjecucion/']);
         }
-        if(this.reporteSeleccionado=='3'){
+        if(this.reporteSeleccionado=='2'){
             this.router.navigate(['/reporteEstadoHistoricoSector/']);
         }
-        if(this.reporteSeleccionado=='4'){
+        if(this.reporteSeleccionado=='3'){
             this.router.navigate(['/reporteRiegoHistoricoSector/']);
         }
-        if(this.reporteSeleccionado=='5'){
+        if(this.reporteSeleccionado=='4'){
             this.router.navigate(['/reporteHistoricoHeladas/']);
         }
-        if(this.reporteSeleccionado=='6'){
+        if(this.reporteSeleccionado=='5'){
             this.router.navigate(['/reporteEventosPersonalizados/']);
         }
-        if(this.reporteSeleccionado=='7'){
+        if(this.reporteSeleccionado=='6'){
             this.router.navigate(['/reporteCruzado/']);
         }
     }

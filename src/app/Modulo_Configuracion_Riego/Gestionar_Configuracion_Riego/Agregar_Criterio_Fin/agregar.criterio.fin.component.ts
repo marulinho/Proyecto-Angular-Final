@@ -35,6 +35,9 @@ export class AgregarCriterioFinComponent implements OnInit{
     tipoMediciones:TipoMedicion;
     tipoMedicion:number;
     valorMedicionCriterioRiego:number;
+    operadoresMedicion=['<=','>='];
+    operadorSeleccionado:string;
+    operadorEnviar:string;
 
     //CRITERIO HORA
     horaInicioCriterioRiego:string;
@@ -84,7 +87,8 @@ export class AgregarCriterioFinComponent implements OnInit{
             }
             else{
                 if(this.tipoSeleccionado=='Medición.'){
-                    if(this.tipoMedicion==null || this.valorMedicionCriterioRiego==null){
+                    if( this.operadorSeleccionado=="" || this.operadorSeleccionado==null ||
+                        this.tipoMedicion==null || this.valorMedicionCriterioRiego==null){
                         this.errorMessageAgregarCriterioFinal="Debe completar todos los campos obligatorios (*).";
                     }
                     else{
@@ -92,6 +96,12 @@ export class AgregarCriterioFinComponent implements OnInit{
                             this.errorMessageAgregarCriterioFinal="No puede asignar valores negativos.";
                         }
                         else{
+                            if(this.operadorSeleccionado==">="){
+                                this.operadorEnviar="1";
+                            }
+                            else{
+                                this.operadorEnviar="0";
+                            }
                             this.errorMessageAgregarCriterioFinal="";
                             this.selectIndex +=1;
                         }
@@ -163,7 +173,7 @@ export class AgregarCriterioFinComponent implements OnInit{
         }
         this.gestionarConfiguracionRiegoService.agregarCriterioFinalRiegoFinca(this.idFinca,this.idMecanismoRiegoFincaSector,this.idConfiguracionRiego,
                 this.tipoSeleccionado,this.nombreCriterio,this.descripcionCriterio,this.tipoMedicion,this.valorMedicionCriterioRiego,this.volumenAgua,
-                this.horaInicioCriterioRiego,this.numeroDiaInicioCriterioRiego)
+                this.horaInicioCriterioRiego,this.numeroDiaInicioCriterioRiego,this.operadorEnviar)
                     .then(
                         reponse=>{
                             this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);

@@ -29,6 +29,9 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
     medicionSeleccionada:number;
     valorMedicion:number;
     tiposMediciones:TipoMedicion;
+    operadoresMedicion=['<=','>='];
+    operadorSeleccionado:string;
+    operadorEnviar:string;
     
     //CRITERIO HORA
     horaInicioCriterioRiego:string;
@@ -81,6 +84,12 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
                             this.errorMessageModificarCriterio="No puede asignar valores negativos.";
                         }
                         else{
+                            if(this.operadorSeleccionado==">="){
+                                this.operadorEnviar="1";
+                            }
+                            else{
+                                this.operadorEnviar="0";
+                            }
                             this.errorMessageModificarCriterio="";
                             this.selectIndex +=1;
                         }
@@ -140,7 +149,7 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
     apretarModificarCriterioRiego(){
         this.gestionarConfiguracionRiegoService.modificarCriterioConfiguracionRiego(this.idFinca,this.idMecanismoRiegoFincaSector,this.idConfiguracionRiego,
             this.tipoCriterio,this.idCriterioRiego,this.nombre,this.descripcion,this.medicionSeleccionada,this.valorMedicion,this.volumenAgua,
-            this.horaInicioCriterioRiego,this.diaInicioCriterioRiego)
+            this.horaInicioCriterioRiego,this.diaInicioCriterioRiego,this.operadorEnviar)
             .then(
                 reponse=>{
                     this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);

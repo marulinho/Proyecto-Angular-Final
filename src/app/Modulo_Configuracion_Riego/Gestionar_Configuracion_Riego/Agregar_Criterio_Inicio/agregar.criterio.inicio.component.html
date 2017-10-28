@@ -40,6 +40,12 @@
                                 </md-option>
                             </md-select>
 
+                            <br><br><md-select placeholder="Seleccione operador." [(ngModel)]="operadorSeleccionado"  name="operadorSeleccionado" required>
+                                <md-option *ngFor="let operador of operadoresMedicion"[value]="operador">
+                                    {{operador}}
+                                </md-option>
+                            </md-select>
+
                             <br><br>
                             <md-input-container>
                                 <input mdInput placeholder="Valor medici&oacute;n." type="number" [(ngModel)]="valorMedicionCriterioRiego" name="valorMedicionCriterioRiego" required><br>
@@ -84,6 +90,9 @@
                             <label id=atributo>Medici&oacute;n: </label>
                             <label>{{tipoMedicion}}.</label><br><br>
     
+                            <label id=atributo>Operador: </label>
+                            <label>{{operadorSeleccionado}}.</label><br><br>
+
                             <label id=atributo>Valor: </label>
                             <label>{{valorMedicionCriterioRiego}} minutos.</label><br><br>
     

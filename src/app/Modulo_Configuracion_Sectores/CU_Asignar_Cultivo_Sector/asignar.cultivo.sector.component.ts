@@ -101,7 +101,7 @@ export class AsignarCultivoSectorComponent implements OnInit{
     }
 
     apretarAgregaCultivo(){
-        this.asignarCultivoSectorService.asignarCultivoSector(this.idSector,this.nombreSubtipoCultivo,this.nombreCultivo,this.descripcion,this.fechaPlantacion)
+        this.asignarCultivoSectorService.asignarCultivoSector(this.idSector,this.nombreSubtipoCultivo,this.nombreCultivo,this.descripcion,this.fechaPlantacion,this.idFinca)
             .then(
                 response=>{
                     this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);

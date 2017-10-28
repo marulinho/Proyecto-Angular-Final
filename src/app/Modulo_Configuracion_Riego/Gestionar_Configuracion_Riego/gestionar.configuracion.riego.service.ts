@@ -67,7 +67,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
     agregarCriterioInicialRiegoFinca(idFinca: number, idMecanismoRiegoFincaSector: number, idConfiguracionRiego: number,
         tipoCriterioRiego: string, nombreCriterioRiego: string, descripcionCriterioRiego:string,
         idTipoMedicion:number, valorMedicionCriterioRiego:number,
-        horaInicioCriterioRiego:string, diaInicioCriterioRiego:number): Promise<any> {
+        horaInicioCriterioRiego:string, diaInicioCriterioRiego:number,operador:string): Promise<any> {
         const data = {
             'idFinca': idFinca,
             'idMecanismoRiegoFincaSector': idMecanismoRiegoFincaSector,
@@ -78,7 +78,8 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
             'idTipoMedicion':idTipoMedicion,
             'valorMedicionCriterioRiego':valorMedicionCriterioRiego,
             'horaInicioCriterioRiego':horaInicioCriterioRiego,
-            'diaInicioCriterioRiego':diaInicioCriterioRiego
+            'diaInicioCriterioRiego':diaInicioCriterioRiego,
+            'operador':operador
 
         };
         return this.http.post(GestionarConfiguracionRiegoService.serverUrl + this.agregarCriterioInicialConfiguracionRiegoUrl, JSON.stringify(data), this.getRestHeader())
@@ -90,7 +91,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
     agregarCriterioFinalRiegoFinca(idFinca: number, idMecanismoRiegoFincaSector: number, idConfiguracionRiego: number,
         tipoCriterioRiego: string, nombreCriterioRiego: string, descripcionCriterioRiego:string,
         idTipoMedicion:number, valorMedicionCriterioRiego:number, volumenAguaCriterioRiego:number,
-        horaInicioCriterioRiego:string, diaInicioCriterioRiego:number): Promise<any> {
+        horaInicioCriterioRiego:string, diaInicioCriterioRiego:number,operador:string): Promise<any> {
         const data = {
             'idFinca': idFinca,
             'idMecanismoRiegoFincaSector': idMecanismoRiegoFincaSector,
@@ -102,7 +103,8 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
             'valorMedicionCriterioRiego':valorMedicionCriterioRiego,
             'volumenAguaCriterioRiego':volumenAguaCriterioRiego,
             'horaInicioCriterioRiego':horaInicioCriterioRiego,
-            'diaInicioCriterioRiego':diaInicioCriterioRiego
+            'diaInicioCriterioRiego':diaInicioCriterioRiego,
+            'operador':operador
 
         };
         return this.http.post(GestionarConfiguracionRiegoService.serverUrl + this.agregarCriterioFinalConfiguracionRiegoUrl, JSON.stringify(data), this.getRestHeader())
@@ -198,7 +200,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
     modificarCriterioConfiguracionRiego(idFinca: number, idMecanismoRiegoFincaSector: number, idConfiguracionRiego: number,
         tipoCriterioRiego:string, idCriterioRiego:number, nombreCriterioRiego:string, descripcionCriterioRiego:string,
         idTipoMedicion:number, valorMedicionCriterioRiego:number, volumenAguaCriterioRiego:number, horaInicioCriterioRiego:string,
-        diaInicioCriterioRiego:string): Promise<any> {
+        diaInicioCriterioRiego:string,operador:string): Promise<any> {
         const data = {
             'idFinca': idFinca,
             'idMecanismoRiegoFincaSector': idMecanismoRiegoFincaSector,
@@ -211,7 +213,8 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
             'valorMedicionCriterioRiego':valorMedicionCriterioRiego,
             'volumenAguaCriterioRiego':volumenAguaCriterioRiego,
             'horaInicioCriterioRiego':horaInicioCriterioRiego,
-            'diaInicioCriterioRiego':diaInicioCriterioRiego
+            'diaInicioCriterioRiego':diaInicioCriterioRiego,
+            'operador':operador
 
         };
         return this.http.post(GestionarConfiguracionRiegoService.serverUrl + this.modificarCriterioConfiguracionRiegoMecanismoRiegoFincaSectorUrl, JSON.stringify(data), this.getRestHeader())

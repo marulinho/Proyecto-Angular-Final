@@ -40,9 +40,10 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
         private generarReportesService:GenerarReportesService,
         private dialog: MdDialog) {
         appService.getState().topnavTitle = "Reporte Medición Cruzada.";
-
+        console.log(this.idFinca);
+        console.log(this.idSector);
 
     }
 
-    ngOnInit(){}
+    ngOnInit(){    }
 }

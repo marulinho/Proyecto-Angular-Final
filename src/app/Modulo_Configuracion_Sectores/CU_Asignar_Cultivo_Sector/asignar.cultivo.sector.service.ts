@@ -19,13 +19,14 @@ export class AsignarCultivoSectorService extends RestBaseService{
         .catch(this.handleError);
     }
 
-    asignarCultivoSector(idSector:number,nombreSubtipoCultivo:string,nombreCultivo:string,descripcionCultivo:string,fechaPlantacion:string):Promise<any>{
+    asignarCultivoSector(idSector:number,nombreSubtipoCultivo:string,nombreCultivo:string,descripcionCultivo:string,fechaPlantacion:string,idFinca:number):Promise<any>{
         const data = {
             'idSector': idSector,
             'nombreSubtipoCultivo': nombreSubtipoCultivo,
             'nombreCultivo':nombreCultivo,
             'descripcionCultivo':descripcionCultivo,
-            'fechaPlantacion':fechaPlantacion
+            'fechaPlantacion':fechaPlantacion,
+            'idFinca':idFinca
           };
       
           return this.http.put(AsignarCultivoSectorService.serverUrl +this.asignarCultivoUrl, JSON.stringify(data), this.getRestHeader())

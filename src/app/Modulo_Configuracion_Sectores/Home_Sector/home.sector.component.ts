@@ -203,7 +203,7 @@ export class HomeSectorComponent implements OnInit{
                         this.errorMessageEventoPersonalizado="No hay eventos personalizados asociados al sector.";
                     }
                     else{
-                        this.eventosPersonalizados=response.datos_operacion;
+                        this.eventosPersonalizados=response.datos_operacion['dto_evento_lista'];
                         this.eventoPersonalizadoSeleccionado=true;
                     }
                 }
