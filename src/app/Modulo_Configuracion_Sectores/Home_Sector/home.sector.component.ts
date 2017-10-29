@@ -323,7 +323,7 @@ export class HomeSectorComponent implements OnInit{
         result => {
                     this.selectedOption = result;
                     if(this.selectedOption==="Aceptar"){
-                        this.gestionarSectorFincaService.eliminarSectorFinca(this.idSector)
+                        this.gestionarSectorFincaService.eliminarSectorFinca(this.idSector,this.idFinca)
                             .then(
                                 response=>{
                                     this.router.navigate(['/homeFinca/']);

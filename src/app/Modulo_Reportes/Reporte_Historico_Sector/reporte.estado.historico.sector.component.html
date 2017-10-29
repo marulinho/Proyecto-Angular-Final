@@ -1,7 +1,7 @@
 <!--SECCION REPORTE RIEGO EJECUCION-->
 <div class="page-content">
     <md-card class="page-card">
-        <md-card-title>Reporte Hist&oacute;rico Riego.</md-card-title>
+        <md-card-title>Reporte Hist&oacute;rico Sector.</md-card-title>
         <md-card-content>
             <section *ngIf="errorMessageReporte" class="bs">
                 <div class="bd-example" data-example-id="">
@@ -42,31 +42,40 @@
                 <label id="atributo">Fecha fin: </label>
                 <label>{{fechaFinReporte}}.</label><br><br>
 
-                <!--<table class="table table-striped table-hover table-card">
-                    <thead>
-                        <tr>
-                            <th>Fecha-Hora Inicio.</th>
-                            <th>Fecha-Hora Fin.</th>
-                            <th>Agua utilizada.</th>
-                            <th>Criterio riego.</th>
-                            <th>Duraci&oacute;n.</th>
-                            <th>Mecanismos riego.</th>
-                            <th>Estado riego.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let riego of riegosHistoricos">
-                            <td>{{riego['fechaInicio']}}    {{riego.horaInicio}}.</td>
-                            <td>{{riego.fechaFin}}    {{riego.horaFin}}.</td>
-                            <td>{{riego.aguaUtilizada}} litros.</td>
-                            <td>{{riego.criterioRiego}}.</td>
-                            <td>{{riego.duracion}} minutos.</td>
-                            <td>{{riego.mecanismoRiego}}.</td>
-                            <td>{{riego.ejecucion}}.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            -->
+           <!--SECCION TEMPERATURA-->
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                <md-card class="page-card" fxFlex>
+                    <md-card-title>Temperatura.</md-card-title>
+                    <md-card-content>
+                        <ng2-smart-table [settings]="settingsTemperatura" [source]="sourceTemperatura"></ng2-smart-table>
+                    </md-card-content>
+                  </md-card>
+                <md-card class="page-card" fxFlex>
+                  <md-card-title>Temperatura.</md-card-title>
+                  <md-card-content>
+                    <lk-chart-js [type]="mock.bar.type" [options]="mock.bar.options" [data]="mock.bar.data"
+                                 [height]="320"></lk-chart-js>
+                  </md-card-content>
+                </md-card>
+            </div>
+
+            <!--SECCION HUMEDAD-->
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                <md-card class="page-card" fxFlex>
+                    <md-card-title>Humedad.</md-card-title>
+                    <md-card-content>
+                        <ng2-smart-table [settings]="settingsHumedad" [source]="sourceHumedad"></ng2-smart-table>
+                    </md-card-content>
+                  </md-card>
+                <md-card class="page-card" fxFlex>
+                  <md-card-title>Humedad.</md-card-title>
+                  <md-card-content>
+                    <lk-chart-js [type]="mockHumedad.bar.type" [options]="mockHumedad.bar.options" [data]="mockHumedad.bar.data"
+                                 [height]="320"></lk-chart-js>
+                  </md-card-content>
+                </md-card>
+            </div>
+
             </section>
         </md-card-content>
         <md-card-actions>

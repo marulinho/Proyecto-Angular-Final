@@ -314,7 +314,7 @@ import { TablasComponent } from './tablas/tablas.component';
     HttpModule,
     // Lokra Imports
     ScheduleModule,
-    ChartModule,
+    ChartModule,    
     MapModule,
     MediaModule,
     WidgetModule,

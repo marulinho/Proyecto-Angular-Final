@@ -31,6 +31,9 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
     segundos = new Date().getSeconds();
     horaActual = this.hora+":"+this.minutos+":"+this.segundos;
 
+    fechaInicioReporte:string;
+    fechaFinReporte:string;
+    medicionCruzada=[];
 
 
 
@@ -40,10 +43,69 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
         private generarReportesService:GenerarReportesService,
         private dialog: MdDialog) {
         appService.getState().topnavTitle = "Reporte Medición Cruzada.";
-        console.log(this.idFinca);
-        console.log(this.idSector);
 
     }
 
-    ngOnInit(){    }
+    ngOnInit(){
+        this.generarReportesService.obtenerInformeMedicionCruzada(this.idFinca,this.idSector,this.fechaInicioReporte,this.fechaFinReporte)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageReporte="No hay registros en el plazo de tiempo establecido.";
+                    }
+                    else{
+                        this.medicionCruzada=response.datos_operacion;
+                        this.obtenerTablas();
+                    }
+                }
+            )
+    }
+
+    compararFechas(){
+        let resultado:boolean;
+        if( this.fechaInicioReporte==null || this.fechaInicioReporte=="" ||
+            this.fechaFinReporte==null || this.fechaFinReporte==null){
+            this.errorMessageReporte="Debe completar todos los campos obligatorios (*).";
+            resultado=false;
+        }
+        else{ 
+            let fechaInicializacion=[];
+            let fechaInicial;
+            fechaInicializacion=this.fechaInicioReporte.split("-");
+            fechaInicial=parseInt(fechaInicializacion[0]+""+fechaInicializacion[1]+""+fechaInicializacion[2]);
+
+            let fechaFinalizacion=[];
+            let fechaFinal;
+            fechaFinalizacion=this.fechaFinReporte.split("-");
+            fechaFinal=parseInt(fechaFinalizacion[0]+""+fechaFinalizacion[1]+""+fechaFinalizacion[2]);
+
+            if(fechaInicial>fechaFinal){
+                this.errorMessageReporte="La fecha inicial no puede ser mayor que la fecha final.";
+                resultado=false;
+            }
+            else{
+                this.errorMessageReporte="";
+                resultado=true;
+            }
+        }
+        return resultado;
+    }
+
+    obtenerTablas(){
+        let mediciones = this.medicionCruzada['ejecucion'];
+        let longitud = Object.keys(this.medicionCruzada).length;
+        let diasRiego=[];
+
+        for(var i=0;i<longitud;i++){
+            let fechaInicio = mediciones['fechaHoraInicio'].substring(0,10);
+            let horaInicio = mediciones['fechaHoraInicio'].substring(12,19);
+            let fechaFinal = mediciones['fechaHoraFinalizacion'].substring(0,10);
+            let horaFinal = mediciones['fechaHoraFinalizacion'].substring(12,19);
+        }
+    }
+
+}
+
+export class diasRiego{
+    
 }

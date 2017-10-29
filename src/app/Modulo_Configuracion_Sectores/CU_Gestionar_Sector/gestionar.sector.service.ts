@@ -47,9 +47,10 @@ export class GestionarSectorFincaService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  eliminarSectorFinca(idSector:number): Promise<any> {
+  eliminarSectorFinca(idSector:number, idFinca:number): Promise<any> {
     const data = {
-      'idSector':idSector
+      'idSector':idSector,
+      'idFinca':idFinca
     };
       return this.http.post(GestionarSectorFincaService.serverUrl + this.eliminarSectorUrl,JSON.stringify(data),this.getRestHeader())
       .toPromise()

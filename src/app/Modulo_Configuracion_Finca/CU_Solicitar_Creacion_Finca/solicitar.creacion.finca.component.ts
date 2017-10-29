@@ -116,7 +116,7 @@ export class SolicitarCreacionFincaComponent implements OnInit {
         if (this.selectIndex == 0) {
             if (this.nombre == "" || this.nombre == null ||
                 this.direccion == "" || this.direccion == null ||
-                this.tamanio == null) {
+                this.tamanio == null || this.ubicacion=="" || this.ubicacion==null) {
                 this.errorMessage = "Debe completar todos los campos obligatorios (*)";
             }
             else {
