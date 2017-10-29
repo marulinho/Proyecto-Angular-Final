@@ -140,7 +140,7 @@ export class HomeFincaDetalleComponent implements OnInit{
     }
 
     ngOnInit(){
-        /*this.homeFincaDetalleService.devolverPermisos(this.idFinca)
+        this.homeFincaDetalleService.devolverPermisos(this.idFinca)
             .then(
                 response=>{
 
@@ -150,7 +150,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                 error=>{
                     this.errorMessagePerfilFinca=error.error_description;
                 }
-            );*/
+        );
         this.gestionarUsuarioFincaService.buscarUsuarioFinca(this.idFinca)
             .then(
                 response=>{
@@ -588,7 +588,7 @@ export class HomeFincaDetalleComponent implements OnInit{
             result => {
                         this.selectedOption = result;
                         if(this.selectedOption==="Aceptar"){
-                            this.gestionarSectorFincaService.eliminarSectorFinca(this.idSector)
+                            this.gestionarSectorFincaService.eliminarSectorFinca(this.idSector,this.idFinca)
                                 .then(
                                     response=>{
                                         this.refresh();

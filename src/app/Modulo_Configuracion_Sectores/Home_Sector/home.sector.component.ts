@@ -196,10 +196,10 @@ export class HomeSectorComponent implements OnInit{
                     this.errorMessageComponenteSector=error.error_description;
                 }
             );
-        this.gestionarEventoPersonalizadoService.buscarConfiguracionesEventosPersonalizados(this.idUsuarioFinca,this.idFinca)
+        this.gestionarEventoPersonalizadoService.buscarConfiguracionesEventosPersonalizadosSector(this.idUsuarioFinca,this.idFinca,this.idSector)
             .then(
                 response=>{
-                    if(response.datos_operacion=="No hay datos"){
+                    if(response.detalle_operacion=="No hay datos"){
                         this.errorMessageEventoPersonalizado="No hay eventos personalizados asociados al sector.";
                     }
                     else{

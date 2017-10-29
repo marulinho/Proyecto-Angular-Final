@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 export class GestionarEventoPersonalizadoService extends RestBaseService {
 
     private buscarConfiguracionesEventosPersonalizadosUrl = "/buscarConfiguracionesEventosPersonalizados/";
+    private buscarConfiguracionesEventosPersonalizadosSectorUrl = "/buscarConfiguracionesEventosPersonalizadosSector/";
     private mostrarConfiguracionEventoPersonalizadoUrl = "/mostrarConfiguracionEventoPersonalizado/";
     private mostrarTipoMedicionInternaFincaUrl = "/mostrarTipoMedicionInternaFinca/";
     private mostrarTipoMedicionClimaticaFincaUrl= "/mostrarTipoMedicionClimaticaFinca/";
@@ -17,12 +18,25 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
 
     constructor(private http: Http) { super(); }
 
-    buscarConfiguracionesEventosPersonalizados(idUsuarioFinca: number, idFinca:number): Promise<ConfiguracionEvento> {
+    buscarConfiguracionesEventosPersonalizados(idUsuarioFinca: number, idFinca:number,idSector:number): Promise<ConfiguracionEvento> {
         const data = {
             'idUsuarioFinca': idUsuarioFinca,
-            'idFinca':idFinca
+            'idFinca':idFinca,
+            'idSector':idSector
         };
         return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.buscarConfiguracionesEventosPersonalizadosUrl, JSON.stringify(data), this.getRestHeader())
+            .toPromise()
+            .then(response => { return response.json() as ConfiguracionEvento; })
+            .catch(this.handleError);
+    }
+
+    buscarConfiguracionesEventosPersonalizadosSector(idUsuarioFinca: number, idFinca:number,idSector:number): Promise<ConfiguracionEvento> {
+        const data = {
+            'idUsuarioFinca': idUsuarioFinca,
+            'idFinca':idFinca,
+            'idSector':idSector
+        };
+        return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.buscarConfiguracionesEventosPersonalizadosSectorUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()
             .then(response => { return response.json() as ConfiguracionEvento; })
             .catch(this.handleError);

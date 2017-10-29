@@ -10,6 +10,7 @@ import { AppService } from './app.service';
 import { MaterialModule, MdTabsModule } from '@angular/material';
 import { Md2Module } from 'md2/module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Ng2Permission } from 'angular2-permission';
 import { RouterModule, NoPreloading } from '@angular/router';
 import { DialogExampleComponent } from './shared/dialog/dialog-example/dialog-example.component';
 import { AgmCoreModule, MapsAPILoader} from 'angular2-google-maps/core';
@@ -306,6 +307,7 @@ import { TablasComponent } from './tablas/tablas.component';
   ],
   imports: [
     // Angular Imports
+    Ng2Permission,
     BrowserModule,
     BrowserAnimationsModule,
     MdTabsModule,
