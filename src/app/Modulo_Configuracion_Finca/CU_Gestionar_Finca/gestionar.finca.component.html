@@ -25,11 +25,11 @@
             <!--UBICACION-->
             <md-input-container>
                 <input mdInput placeholder="Buscar localidad." autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
-                  #search [formControl]="searchControl" requerid>
-              </md-input-container>
+                    #search [formControl]="searchControl" requerid>
+            </md-input-container>
 
             <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-              <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
             </agm-map>
 
             <md-input-container>

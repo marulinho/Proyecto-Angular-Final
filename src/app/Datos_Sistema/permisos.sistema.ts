@@ -146,13 +146,12 @@ export class PermisosSistema{
             }
 
         //ASGINAR MECANISMO SECTOR
-        if(permisos['puedeAsignarMecRiegoAFinca']){
-            localStorage.setItem('puedeAsignarMecRiegoAFinca',JSON.stringify(true));
-        }
-        else{
-            localStorage.setItem('puedeAsignarMecRiegoAFinca',JSON.stringify(false));
-        }
-
+            if(permisos['puedeAsignarMecRiegoAFinca']){
+                localStorage.setItem('puedeAsignarMecRiegoAFinca',JSON.stringify(true));
+            }
+            else{
+                localStorage.setItem('puedeAsignarMecRiegoAFinca',JSON.stringify(false));
+            }
         //INFORME EVENTO PERSONALIZADO
             if(permisos['puedeGenerarInformeEventoPersonalizado']){
                 localStorage.setItem('puedeGenerarInformeEventoPersonalizado',JSON.stringify(true));
@@ -184,7 +183,14 @@ export class PermisosSistema{
             else{
                 localStorage.setItem('puedeGestionarSector',JSON.stringify(false));
             }
-        console.log("estamos aca");
+
+        //INFOME ACTUAL SECTOR
+            if(permisos['puedeGenerarInformeEstadoActualSectores']){
+                localStorage.setItem('puedeGenerarInformeEstadoActualSectores',JSON.stringify(true));
+            }
+            else{
+                localStorage.setItem('puedeGenerarInformeEstadoActualSectores',JSON.stringify(false));
+            }
         
         
     }

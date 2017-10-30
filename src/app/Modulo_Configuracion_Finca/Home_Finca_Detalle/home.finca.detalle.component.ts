@@ -27,7 +27,6 @@ import { PermisosSistema } from '../../Datos_Sistema/permisos.sistema';
 export class HomeFincaDetalleComponent implements OnInit{
     //ATRIBUTOS GENERALES
         idFinca:number;
-        permisos=[];
         position = 'above';    
         title:string="";
         description:string="";
@@ -41,18 +40,19 @@ export class HomeFincaDetalleComponent implements OnInit{
         perfilFinca: Finca;
         perfilFincaSeleccionada:Boolean;
         ubicacion=[];
-        tooltipEditarFinca='Editar Finca';
+        tooltipEditarFinca='Editar Finca.';
+        tooltipAtras = 'Volver HomeFinca.';
         permisoGestionarFinca;
     //ATRIBUTOS ELIMINAR FINCA
-        tooltipEliminarFinca='Eliminar Finca';
+        tooltipEliminarFinca='Eliminar Finca.';
         selectedOption:string;
 
     //ATRIBUTOS USUARIO FINCA
         idUsuarioFinca:number;
         errorMessageUsuarioFinca:string;
-        tooltipAgregarUsuario='Agregar Usuario';
-        tooltipEditarUsuario='Editar Usuario';
-        tooltipEliminarUsuario='Eliminar Usuario';    
+        tooltipAgregarUsuario='Agregar Usuario.';
+        tooltipEditarUsuario='Editar Usuario.';
+        tooltipEliminarUsuario='Eliminar Usuario.';    
         usuariosFincaSeleccionado:Boolean;
         modificarUsuarioFincaSeleccionado:Boolean;
         usuariosFinca:Usuario;
@@ -62,8 +62,8 @@ export class HomeFincaDetalleComponent implements OnInit{
 
     //ATRIBUTOS SECTORES FINCA
         errorMessageSectoresFinca="";
-        tooltipVerSector='Ver Sector';
-        tooltipAgregarSector='Agregar Sector';    
+        tooltipVerSector='Ver Sector.';
+        tooltipAgregarSector='Agregar Sector.';    
         sectoresFincaSeleccionado:Boolean;
         sectoresFinca:Sector;
         idSector:number;
@@ -75,36 +75,36 @@ export class HomeFincaDetalleComponent implements OnInit{
         errorMessageProveedor="";
         nombreProveedor:string;
         proveedorInformacionSeleccionado:Boolean;
-        tooltipEditarProveedor='Editar Proveedor';
-        tooltipEliminarProveedor='Eliminar Proveedor';    
-        tooltipCambiarProveedor='Cambiar Proveedor';
+        tooltipEditarProveedor='Editar Proveedor.';
+        tooltipEliminarProveedor='Eliminar Proveedor.';    
+        tooltipCambiarProveedor='Cambiar Proveedor.';
         permisoConfigurarObtencionInformacion;
     
     //ATRIBUTOS MECANISMOS RIEGO FINCA
         mecanismosRiegoFinca:MecanismoRiego;
         errorMessageMecanismosRiegoFinca="";
         mecanismosRiegoFincaSeleccionado:Boolean;
-        tooltipAgregarMecanismo='Agregar Mecanismo';
-        tooltipHabilitarMecanismo='Habilitar Mecanismo';
-        tooltipDeshabilitarMecanismo='Deshabilitar Mecanismo';
+        tooltipAgregarMecanismo='Agregar Mecanismo.';
+        tooltipHabilitarMecanismo='Habilitar Mecanismo.';
+        tooltipDeshabilitarMecanismo='Deshabilitar Mecanismo.';
         permisoAsignarMecanismoFinca;
 
     //ATRIBUTOS SENSORES FINCA
         errorMessageSensoresFinca:string="";
         perfilSensoresFincaSeleccionado:Boolean;
         sensoresFinca:Sensor;
-        tooltipAgregarSensor='Agregar Sensor';
-        tooltipDeshabilitarSensor='Deshabilitar Sensor';
-        tooltipModificarSensor='Modificar Sensor';
+        tooltipAgregarSensor='Agregar Sensor.';
+        tooltipDeshabilitarSensor='Deshabilitar Sensor.';
+        tooltipModificarSensor='Modificar Sensor.';
         permisoGestionarSensores;
 
     //ATRIBUTOS COMPONENTE SENSOR FINCA
         errorMessageComponentSensorFinca:string="";
         perfilComponenteSensorSeleccionado:Boolean;
         componenteSensores:ComponenteSensor;
-        tooltipAgregarComponenteSensor='Crear Componente Sensor';
-        tooltipVerComponenteSensor='Ver Componente Sensor';
-        tooltipHabilitarComponenteSensor='Ver Componente Sensor';
+        tooltipAgregarComponenteSensor='Crear Componente Sensor.';
+        tooltipVerComponenteSensor='Ver Componente Sensor.';
+        tooltipHabilitarComponenteSensor='Ver Componente Sensor.';
         permisoGestionarComponenteSensor;
         permisoCrearComponenteSensor;
 
@@ -121,7 +121,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Home Finca Detalle";
+        appService.getState().topnavTitle="Home Finca Detalle.";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
         });
@@ -133,15 +133,17 @@ export class HomeFincaDetalleComponent implements OnInit{
             .then(
                 response=>{
                     let permisos = new PermisosSistema(response.datos_operacion);
-                    console.log(this.permisoGestionarFinca=JSON.parse(localStorage.getItem('puedeGestionarFinca')));
-                    console.log(this.permisoGestionarUsuario=JSON.parse(localStorage.getItem('puedeGestionarUsuariosFinca')));
-                    console.log(this.permisoGestionarSector=JSON.parse(localStorage.getItem('puedeGestionarSector')));
-                    console.log(this.permisoCrearSector=JSON.parse(localStorage.getItem('puedeCrearSector')));
-                    console.log(this.permisoConfigurarObtencionInformacion=JSON.parse(localStorage.getItem('puedeConfigurarObtencionInfoExterna')));
-                    console.log(this.permisoAsignarMecanismoFinca=JSON.parse(localStorage.getItem('puedeAsignarMecRiegoAFinca')));
-                    console.log(this.permisoGestionarSensores=JSON.parse(localStorage.getItem('puedeGestionarSensores')));
-                    console.log(this.permisoGestionarComponenteSensor=JSON.parse(localStorage.getItem('puedeGestionarComponenteSensor')));
-                    console.log(this.permisoCrearComponenteSensor=JSON.parse(localStorage.getItem('puedeCrearComponenteSensor')));
+                    
+                    this.permisoGestionarFinca=JSON.parse(localStorage.getItem('puedeGestionarFinca'));
+                    this.permisoGestionarUsuario=JSON.parse(localStorage.getItem('puedeGestionarUsuariosFinca'));
+                    this.permisoGestionarSector=JSON.parse(localStorage.getItem('puedeGestionarSector'));
+                    this.permisoCrearSector=JSON.parse(localStorage.getItem('puedeCrearSector'));
+                    this.permisoConfigurarObtencionInformacion=JSON.parse(localStorage.getItem('puedeConfigurarObtencionInfoExterna'));
+                    this.permisoAsignarMecanismoFinca=JSON.parse(localStorage.getItem('puedeAsignarMecRiegoAFinca'));
+                    this.permisoGestionarSensores=JSON.parse(localStorage.getItem('puedeGestionarSensores'));
+                    this.permisoGestionarComponenteSensor=JSON.parse(localStorage.getItem('puedeGestionarComponenteSensor'));
+                    this.permisoCrearComponenteSensor=JSON.parse(localStorage.getItem('puedeCrearComponenteSensor'));
+                    
                 }
             )
             .catch(
@@ -722,5 +724,8 @@ export class HomeFincaDetalleComponent implements OnInit{
     
     refresh(): void {
         window.location.reload();
+    }
+    apretarAtras(){
+        this.router.navigate(['/homeFinca/']);
     }
 }

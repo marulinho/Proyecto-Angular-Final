@@ -337,7 +337,7 @@ import { TablasComponent } from './tablas/tablas.component';
     // Replace to your Google map API key.
     AgmCoreModule.forRoot({
       //apiKey: 'AIzaSyC4-U6Eo0eHV7UFGjAIO6ZRB4X5z7hWS-8',
-      apiKey:'AIzaSyBXWWoArForOIKN1Ds43Daa7Mou7sfQCHU',
+      apiKey:'AIzaSyCB2vwsiaHEhNKBNAKTdrvLIu7cks8iG40',
       libraries:["places"]
     }),
     TranslateModule.forRoot({

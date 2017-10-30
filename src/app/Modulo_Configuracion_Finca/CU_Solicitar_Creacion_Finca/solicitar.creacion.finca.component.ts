@@ -6,8 +6,8 @@ import { } from 'googlemaps';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { SolicitarCreacionFincaService, FincaCreada } from './solicitar.creacion.finca.service';
 import { GestionarProveedorInformacionService, ProveedorInformacion } from '../../Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
-import { LoginComponent } from '../../Modulo_Seguridad/CU_Iniciar_Sesion/login.component';
 import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+import { AppService } from '../../app.service';
 
 @Component({
     selector: 'app-solicitar.creacion.finca',
@@ -42,7 +42,10 @@ export class SolicitarCreacionFincaComponent implements OnInit {
     constructor(private router: Router,
         private solicitarCreacionFincaService: SolicitarCreacionFincaService,
         private mapsAPILoader: MapsAPILoader,
-        private ngZone: NgZone) {
+        private ngZone: NgZone,
+        private appService:AppService) {
+            
+            this.appService.getState().topnavTitle = "Crear Finca.";
 
     }
 
@@ -66,8 +69,8 @@ export class SolicitarCreacionFincaComponent implements OnInit {
 
         //set google maps defaults
         this.zoom = 4;
-        this.latitude = -32.8969744;
-        this.longitude = -68.85284739999997;
+        //this.latitude = -32.8969744;
+        //this.longitude = -68.85284739999997;
 
         //create search FormControl
         this.searchControl = new FormControl();

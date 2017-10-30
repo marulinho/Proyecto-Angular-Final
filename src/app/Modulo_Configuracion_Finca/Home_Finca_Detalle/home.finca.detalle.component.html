@@ -1,107 +1,348 @@
 <!--SECCION PERFIL FINCA-->
 <div *ngIf="getCargarTodo()">
-<div *ngIf="getPerfilFincaSeleccionada()" class="sign-container">
-        <md-card class="page-card">
-                <md-card-title>Perfil Finca.
-                        <a *ngIf="getPermisosGestionarFinca()" class="example-tooltip-host" mdTooltip={{tooltipEditarFinca}} [mdTooltipPosition]="position">
+        <div *ngIf="getPerfilFincaSeleccionada()" class="sign-container">
+                <md-card class="page-card">
+                        <md-card-title>Perfil Finca.
+                                <a *ngIf="getPermisosGestionarFinca()" class="example-tooltip-host" mdTooltip={{tooltipEditarFinca}} [mdTooltipPosition]="position">
                                 <img src="assets/icons/editar.png" [routerLink]="['/gestionarFinca/', idFinca]">
                         </a>
-                        <a *ngIf="getPermisosGestionarFinca()" class="example-tooltip-host" mdTooltip={{tooltipEliminarFinca}} [mdTooltipPosition]="position" (click)="apretarEliminarFincaIcono()"><img src="assets/icons/delete.png">
+                                <a *ngIf="getPermisosGestionarFinca()" class="example-tooltip-host" mdTooltip={{tooltipEliminarFinca}} [mdTooltipPosition]="position"
+                                        (click)="apretarEliminarFincaIcono()"><img src="assets/icons/delete.png">
                                 
                         </a>
-                </md-card-title>
-                <md-card-content>
-                        <section *ngIf="errorMessagePerfilFinca" class="bs">
-                                <div class="bd-example" data-example-id="">
-                                        <div class="alert alert-danger" role="alert">
-                                                <strong>{{errorMessagePerfilFinca}}</strong>
-                                        </div>
-                                </div><br>
-                        </section>
-
-                        <h2>Datos Finca</h2>
-
-                        <label id="atributo" class="col-2">Nombre: </label>
-                        <label class="col-3">{{perfilFinca.nombre}}.</label><br>
-
-                        <label id=atributo class="col-2">Direcci&oacute;n: </label>
-                        <label id=valor class="col-3">{{perfilFinca.direccionLegal}}.</label><br>
-
-                        <label id=atributo class="col-2">Ubicaci&oacute;n: </label>
-                        <ul>
-                                <li>Latitud: {{ubicacion[0]}}</li>
-                                <li>Longitud: {{ubicacion[1]}}</li>
-                        </ul>
-
-                        <label id=atributo class="col-2">Tama&ntilde;o: </label>
-                        <label id=valor class="col-3">{{perfilFinca.tamanio }} hect&aacute;reas.</label><br>
-
-
-                </md-card-content>
-
-                <!--SECCION PROVEEDOR INFORMACION FINCA-->
-                <md-card *ngIf="getPermisoConfigurarObtencionInformacion()" class="page-card">
-                        <md-card-title>
-                                Proveedor Informaci&oacute;n Clim&aacute;tica.
-                                <a class="example-tooltip-host" mdTooltip={{tooltipEditarProveedor}} [mdTooltipPosition]="position">
-                                        <img src="assets/icons/editar.png" [routerLink]="['/gestionarProveedor/', idFinca]">
-                                </a>
-                        <!--    <a class="example-tooltip-host" mdTooltip={{tooltipEliminarProveedor}} [mdTooltipPosition]="position" (click)="apretarEliminarProveedorIcono()">
-                                        <img src="assets/icons/delete.png">                                                        
-                                </a>
-                        -->
-                                <a class="example-tooltip-host" mdTooltip={{tooltipCambiarProveedor}} [mdTooltipPosition]="position">
-                                        <img src="assets/icons/cambiar.png" [routerLink]="['/cambiarProveedor/', idFinca]">                                                        
-                                </a>
+                        <a id="botonVolver" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
+                                <img src="assets/icons/atras.png">
+                        </a>
                         </md-card-title>
                         <md-card-content>
-                                <section *ngIf="errorMessageProveedor" class="bs">
+                                <section *ngIf="errorMessagePerfilFinca" class="bs">
                                         <div class="bd-example" data-example-id="">
                                                 <div class="alert alert-danger" role="alert">
-                                                        <strong>{{errorMessageProveedor}}</strong>
+                                                        <strong>{{errorMessagePerfilFinca}}</strong>
                                                 </div>
                                         </div><br>
                                 </section>
-                                <section *ngIf="getProveedorInformacionSeleccionado()" class="bs">
 
-                                        <label id="atributo">Nombre: </label>
-                                        <label>{{proveedores.nombreProveedor}}.</label><br>
+                                <h2>Datos Finca</h2>
 
-                                        <label id=atributo>Frecuencia m&aacute;xima de obtenci&oacute;n de mediciones: </label>
-                                        <label id=valor>{{proveedores.frecuenciaMaximaPosible}} por hora.</label><br>
+                                <label id="atributo" class="col-2">Nombre: </label>
+                                <label class="col-3">{{perfilFinca.nombre}}.</label><br>
 
-                                        <label id=atributo>Frecuencia actual de obtenci&oacute;n de mediciones: </label>
-                                        <label id=valor>{{proveedores.frecuenciaActual}} por hora.</label><br>
+                                <label id=atributo class="col-2">Direcci&oacute;n: </label>
+                                <label id=valor class="col-3">{{perfilFinca.direccionLegal}}.</label><br>
 
-                                        <label id=atributo>Direcci&oacute;n web: </label>
-                                        <label id=valor>{{proveedores.urlApi}}.</label><br>
+                                <label id=atributo class="col-2">Ubicaci&oacute;n: </label>
+                                <ul>
+                                        <li>Latitud: {{ubicacion[0]}}</li>
+                                        <li>Longitud: {{ubicacion[1]}}</li>
+                                </ul>
 
-                                        <label id=atributo>Mediciones:</label>
-                                        <ul *ngFor="let proveedor of proveedores['listaTipoMedicion']">
-                                                <li>Nombre: {{proveedor.nombreTipoMedicionClimatica}}, Unidad: {{proveedor.unidadMedicion}}</li>
-                                        </ul>
-                                        <!--<md-list>
+                                <label id=atributo class="col-2">Tama&ntilde;o: </label>
+                                <label id=valor class="col-3">{{perfilFinca.tamanio }} hect&aacute;reas.</label><br>
+
+
+                        </md-card-content>
+
+                        <!--SECCION PROVEEDOR INFORMACION FINCA-->
+                        <md-card *ngIf="getPermisoConfigurarObtencionInformacion()" class="page-card">
+                                <md-card-title>
+                                        Proveedor Informaci&oacute;n Clim&aacute;tica.
+                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarProveedor}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/editar.png" [routerLink]="['/gestionarProveedor/', idFinca]">
+                                </a>
+                                        <!--    <a class="example-tooltip-host" mdTooltip={{tooltipEliminarProveedor}} [mdTooltipPosition]="position" (click)="apretarEliminarProveedorIcono()">
+                                        <img src="assets/icons/delete.png">                                                        
+                                </a>
+                        -->
+                                        <a class="example-tooltip-host" mdTooltip={{tooltipCambiarProveedor}} [mdTooltipPosition]="position">
+                                        <img src="assets/icons/cambiar.png" [routerLink]="['/cambiarProveedor/', idFinca]">                                                        
+                                </a>
+                                </md-card-title>
+                                <md-card-content>
+                                        <section *ngIf="errorMessageProveedor" class="bs">
+                                                <div class="bd-example" data-example-id="">
+                                                        <div class="alert alert-danger" role="alert">
+                                                                <strong>{{errorMessageProveedor}}</strong>
+                                                        </div>
+                                                </div><br>
+                                        </section>
+                                        <section *ngIf="getProveedorInformacionSeleccionado()" class="bs">
+
+                                                <label id="atributo">Nombre: </label>
+                                                <label>{{proveedores.nombreProveedor}}.</label><br>
+
+                                                <label id=atributo>Frecuencia m&aacute;xima de obtenci&oacute;n de mediciones: </label>
+                                                <label id=valor>{{proveedores.frecuenciaMaximaPosible}} por hora.</label><br>
+
+                                                <label id=atributo>Frecuencia actual de obtenci&oacute;n de mediciones: </label>
+                                                <label id=valor>{{proveedores.frecuenciaActual}} por hora.</label><br>
+
+                                                <label id=atributo>Direcci&oacute;n web: </label>
+                                                <label id=valor>{{proveedores.urlApi}}.</label><br>
+
+                                                <label id=atributo>Mediciones:</label>
+                                                <ul *ngFor="let proveedor of proveedores['listaTipoMedicion']">
+                                                        <li>Nombre: {{proveedor.nombreTipoMedicionClimatica}}, Unidad: {{proveedor.unidadMedicion}}</li>
+                                                </ul>
+                                                <!--<md-list>
                                                 <md-list-item *ngFor="let proveedor of proveedores['listaTipoMedicion']" class="example-md-item">
                                                         <p md-line>Medici&oacute;n: {{proveedor.nombreTipoMedicionClimatica}}</p>
                                                         <p md-line>Unidad: {{proveedor.unidadMedicion}}</p>
                                                 </md-list-item>
                                         </md-list>-->
-                                        <!--<label *ngFor="let proveedor of proveedores['listaTipoMedicion']">
+                                                <!--<label *ngFor="let proveedor of proveedores['listaTipoMedicion']">
                                                         {{proveedor.nombreTipoMedicionClimatica}}({{proveedor.unidadMedicion}}.)
                                         </label>
                                 -->
-                                </section>
-                        </md-card-content>
-                </md-card>
+                                        </section>
+                                </md-card-content>
+                        </md-card>
 
-                <!--SECCION USUARIOS FINCA-->
-                <md-card *ngIf="getPermisoGestionarUsuario()" class="page-card">
-                        <md-card-title>
-                                Usuarios Finca
-                                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarUsuario}} [mdTooltipPosition]="position">
+                        <!--SECCION USUARIOS FINCA-->
+                        <md-card *ngIf="getPermisoGestionarUsuario()" class="page-card">
+                                <md-card-title>
+                                        Usuarios Finca
+                                        <a class="example-tooltip-host" mdTooltip={{tooltipAgregarUsuario}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/nuevoUsuario.png" [routerLink]="['/gestionarUsuarioFinca/', idFinca]">
                                 </a>
-                        </md-card-title>
+                                </md-card-title>
+                                <md-card-content>
+                                        <section *ngIf="errorMessageUsuarioFinca" class="bs">
+                                                <div class="bd-example" data-example-id="">
+                                                        <div class="alert alert-danger" role="alert">
+                                                                <strong>{{errorMessageUsuarioFinca}}</strong>
+                                                        </div>
+                                                </div><br>
+                                        </section>
+                                        <section *ngIf="getUsuariosFincaSeleccionado()" class="bs">
+                                                <table class="table table-striped table-hover table-card">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th style="width:37%;">Usuario.</th>
+                                                                        <th style="width:36%;">Apellido y Nombre.</th>
+                                                                        <th>Rol.</th>
+                                                                        <th class="actions">Acci&oacute;n.</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr *ngFor="let usuarioFinca of usuariosFinca">
+                                                                        <td>{{usuarioFinca.usuario}}.</td>
+                                                                        <td>{{usuarioFinca.apellido}}, {{usuarioFinca.nombre}}.</td>
+                                                                        <td>{{usuarioFinca.rol}}.</td>
+                                                                        <td>
+                                                                                <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" (click)="apretarEditarUsuarioFincaIcono(usuarioFinca.idUsuarioFinca)">
+                                                                                <img src="assets/icons/editar.png">
+                                                                                
+                                                                        </a>
+
+                                                                                <a class="example-tooltip-host" mdTooltip={{tooltipEliminarUsuario}} [mdTooltipPosition]="position" (click)="apretarEliminarUsuarioIcono(usuarioFinca.idUsuarioFinca)">
+                                                                                <img src="assets/icons/delete.png">
+                                                                        </a>
+                                                                        </td>
+                                                                </tr>
+
+                                                        </tbody>
+                                                </table>
+                                        </section>
+                                </md-card-content>
+                        </md-card>
+
+                        <!--SECCION SECTORES FINCA-->
+                        <md-card *ngIf="getPermisoGestionarSector()" class="page-card">
+                                <md-card-title>
+                                        Sectores Finca
+                                        <a *ngIf="getPermisoCrearSector()" class="example-tooltip-host" mdTooltip={{tooltipAgregarSector}} [mdTooltipPosition]="position">
+                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSectorFinca/', idFinca]">
+                        </a>
+                                </md-card-title>
+                                <md-card-content>
+                                        <section *ngIf="errorMessageSectoresFinca" class="bs">
+                                                <div class="bd-example" data-example-id="">
+                                                        <div class="alert alert-danger" role="alert">
+                                                                <strong>{{errorMessageSectoresFinca}}</strong>
+                                                        </div>
+                                                </div><br>
+                                        </section>
+                                        <section *ngIf="getSectoresFincaSeleccionado()" class="bs">
+                                                <table class="table table-striped table-hover table-card">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th style="width:37%;">Nombre.</th>
+                                                                        <th style="width:36%;">Descripci&oacute;n.</th>
+                                                                        <th>Superficie.</th>
+                                                                        <th class="actions">Acci&oacute;n.</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr *ngFor="let sectorFinca of sectoresFinca">
+                                                                        <td>{{sectorFinca.nombreSector}}.</td>
+                                                                        <td>{{sectorFinca.descripcionSector}}.</td>
+                                                                        <td>{{sectorFinca.superficieSector}} hect&aacute;reas.</td>
+                                                                        <td>
+
+                                                                                <a *ngIf="getPermisoGestionarSector()" class="example-tooltip-host" mdTooltip={{tooltipVerSector}} [mdTooltipPosition]="position">
+                                                                        <img src="assets/icons/ver.png" [routerLink]="['/homeSector/', sectorFinca.idSector , idFinca]">
+                                                                </a>
+                                                                        </td>
+                                                                </tr>
+
+                                                        </tbody>
+                                                </table>
+                                        </section>
+                                </md-card-content>
+                        </md-card>
+
+                        <!--SECCION MECANISMO RIEGO FINCA-->
+                        <md-card *ngIf="getPermisoAsignarMecanismoFinca()" class="page-card">
+                                <md-card-title>
+                                        Mecanismos de Riego Finca
+                                        <a class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismo}} [mdTooltipPosition]="position">
+                                                <img src="assets/icons/nuevo.png" [routerLink]="['/agregarMecanismoFinca/', idFinca]">
+                                </a>
+                                </md-card-title>
+                                <md-card-content>
+                                        <section *ngIf="errorMessageMecanismosRiegoFinca" class="bs">
+                                                <div class="bd-example" data-example-id="">
+                                                        <div class="alert alert-danger" role="alert">
+                                                                <strong>{{errorMessageMecanismosRiegoFinca}}</strong>
+                                                        </div>
+                                                </div><br>
+                                        </section>
+                                        <section *ngIf="getMecanismoRiegoFincaSeleccionado()" class="bs">
+                                                <table class="table table-striped table-hover table-card">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th style="width:37%;">Nombre.</th>
+                                                                        <th style="width:36%;">Direcci&oacute;n de Conex&oacute;n.</th>
+                                                                        <th>Fecha Instalaci&oacute;n.</th>
+                                                                        <th class="actions">Acci&oacute;n.</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr *ngFor="let mecanismoRiegoFinca of mecanismosRiegoFinca">
+                                                                        <td>{{mecanismoRiegoFinca.tipoMecanismoRiego}}.</td>
+                                                                        <td>{{mecanismoRiegoFinca.direccionIP}}</td>
+                                                                        <td>{{mecanismoRiegoFinca.fechaInstalacion.substring(0,10)}}</td>
+                                                                        <td>
+                                                                                <a *ngIf="mecanismoRiegoFinca.habilitado==true" class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarMecanismo}} [mdTooltipPosition]="position">
+                                                                                <img src="assets/icons/deshabilitar.png" (click)="apretarIconoDeshabilitarMecanismo(mecanismoRiegoFinca.idMecanismoRiegoFinca)" >
+                                                                        </a>
+                                                                                <a *ngIf="mecanismoRiegoFinca.habilitado==false" class="example-tooltip-host" mdTooltip={{tooltipHabilitarMecanismo}} [mdTooltipPosition]="position">
+                                                                                <img src="assets/icons/habilitar.png" (click)="apretarIconoHabilitarMecanismo(mecanismoRiegoFinca.idMecanismoRiegoFinca)">
+                                                                        </a>
+                                                                        </td>
+                                                                </tr>
+
+                                                        </tbody>
+                                                </table>
+                                        </section>
+                                </md-card-content>
+                        </md-card>
+
+                        <!--SECCION SENSORES FINCA-->
+                        <md-card *ngIf="getPermisoGestionarSensores()" class="page-card">
+                                <md-card-title>
+                                        Sensores Finca
+                                        <a class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
+                                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSensorFinca/', idFinca]">
+                                </a>
+                                </md-card-title>
+                                <md-card-content>
+                                        <section *ngIf="errorMessageSensoresFinca" class="bs">
+                                                <div class="bd-example" data-example-id="">
+                                                        <div class="alert alert-danger" role="alert">
+                                                                <strong>{{errorMessageSensoresFinca}}</strong>
+                                                        </div>
+                                                </div><br>
+                                        </section>
+                                        <section *ngIf="getPerfilSensoresFincaSeleccionado()" class="bs">
+                                                <table class="table table-striped table-hover table-card">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th style="width:37%;">Modelo.</th>
+                                                                        <th style="width:36%;">Tipo Medici&oacute;n.</th>
+                                                                        <th>Fecha Alta.</th>
+                                                                        <th class="actions">Acci&oacute;n.</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr *ngFor="let sensorFinca of sensoresFinca">
+                                                                        <td>{{sensorFinca.modelo}}.</td>
+                                                                        <td>{{sensorFinca.tipoMedicion}}.</td>
+                                                                        <td>{{sensorFinca.fechaAltaSensor.substring(0,10)}}</td>
+                                                                        <td>
+                                                                                <a class="example-tooltip-host" mdTooltip={{tooltipModificarSensor}} [mdTooltipPosition]="position">
+                                                                                <img src="assets/icons/editar.png" [routerLink]="['/modificarSensorFinca/', idFinca,sensorFinca.idSensor]" >
+                                                                        </a>
+                                                                                <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarSensor}} [mdTooltipPosition]="position">
+                                                                                <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarSensorFinca(sensorFinca.idSensor)" >
+                                                                        </a>
+                                                                        </td>
+                                                                </tr>
+
+                                                        </tbody>
+                                                </table>
+                                        </section>
+                                </md-card-content>
+                        </md-card>
+
+                        <!--SECCION COMPONENTES SENSORES FINCA-->
+                        <md-card *ngIf="getPermisoGestionarComponenteSensor()" class="page-card">
+                                <md-card-title>
+                                        Componente Sensores Finca
+                                        <a *ngIf="getPermisoCrearComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipAgregarComponenteSensor}} [mdTooltipPosition]="position">
+                                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearComponenteSensorFinca/', idFinca]">
+                                </a>
+                                </md-card-title>
+                                <md-card-content>
+                                        <section *ngIf="errorMessageComponentSensorFinca" class="bs">
+                                                <div class="bd-example" data-example-id="">
+                                                        <div class="alert alert-danger" role="alert">
+                                                                <strong>{{errorMessageComponentSensorFinca}}</strong>
+                                                        </div>
+                                                </div><br>
+                                        </section>
+                                        <section *ngIf="getPerfilComponenteSensorSeleccionado()" class="bs">
+                                                <table class="table table-striped table-hover table-card">
+                                                        <thead>
+                                                                <tr>
+                                                                        <th style="width:37%;">Modelo</th>
+                                                                        <th style="width:36%;">Descripci&oacute;n</th>
+                                                                        <th>Sensores Asignados</th>
+                                                                        <th class="actions">Acci&oacute;n</th>
+                                                                </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr *ngFor="let componenteSensor of componenteSensores">
+                                                                        <td>{{componenteSensor.modelo}}</td>
+                                                                        <td>{{componenteSensor.descripcion}}</td>
+                                                                        <td>{{componenteSensor.cantidadSensoresAsignados}} sensores</td>
+                                                                        <td>
+                                                                                <a *ngIf="componenteSensor.estado=='habilitado' && getPermisoGestionarComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipVerComponenteSensor}}
+                                                                                        [mdTooltipPosition]="position">
+                                                                                <img src="assets/icons/ver.png" [routerLink]="['/homeComponenteSensorFinca/', idFinca, componenteSensor.idComponenteSensor]">
+                                                                        </a>
+                                                                                <a *ngIf="componenteSensor.estado=='deshabilitado' && getPermisoGestionarComponenteSensor()" class="example-tooltip-host"
+                                                                                        mdTooltip={{tooltipHabilitarComponenteSensor}}
+                                                                                        [mdTooltipPosition]="position">
+                                                                                <img src="assets/icons/habilitar.png" (click)="apretarIconoHabilitarComponenteSensor(componenteSensor.idComponenteSensor)">
+                                                                        </a>
+                                                                        </td>
+                                                                </tr>
+
+                                                        </tbody>
+                                                </table>
+                                        </section>
+                                </md-card-content>
+                        </md-card>
+                </md-card>
+        </div>
+
+        <!--SECCION MODIFICAR ROL USUARIO-->
+
+        <div *ngIf="getModificarUsuarioFincaSeleccionado() && getPermisoGestionarUsuario()" class="sign-container">
+                <md-card class="page-card">
+                        <md-card-title>Modificar Rol Usuario</md-card-title>
                         <md-card-content>
                                 <section *ngIf="errorMessageUsuarioFinca" class="bs">
                                         <div class="bd-example" data-example-id="">
@@ -110,259 +351,24 @@
                                                 </div>
                                         </div><br>
                                 </section>
-                                <section *ngIf="getUsuariosFincaSeleccionado()" class="bs">
-                                        <table class="table table-striped table-hover table-card">
-                                                <thead>
-                                                        <tr>
-                                                                <th style="width:37%;">Usuario.</th>
-                                                                <th style="width:36%;">Apellido y Nombre.</th>
-                                                                <th>Rol.</th>
-                                                                <th class="actions">Acci&oacute;n.</th>
-                                                        </tr>
-                                                </thead>
-                                                <tbody>
-                                                        <tr *ngFor="let usuarioFinca of usuariosFinca">
-                                                                <td>{{usuarioFinca.usuario}}.</td>
-                                                                <td>{{usuarioFinca.apellido}}, {{usuarioFinca.nombre}}.</td>
-                                                                <td>{{usuarioFinca.rol}}.</td>
-                                                                <td>
-                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" (click)="apretarEditarUsuarioFincaIcono(usuarioFinca.idUsuarioFinca)">
-                                                                                <img src="assets/icons/editar.png">
-                                                                                
-                                                                        </a>
 
-                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipEliminarUsuario}} [mdTooltipPosition]="position" (click)="apretarEliminarUsuarioIcono(usuarioFinca.idUsuarioFinca)">
-                                                                                <img src="assets/icons/delete.png">
-                                                                        </a>
-                                                                </td>
-                                                        </tr>
+                                <h2>Datos Roles</h2>
 
-                                                </tbody>
-                                        </table>
-                                </section>
+                                <md-select placeholder="Seleccionar Rol" [(ngModel)]="nombreRol" name="nombreRol">
+                                        <md-option *ngFor="let rol of roles" [value]="rol.nombreRol" requerid>
+                                                {{rol.nombreRol}}
+                                        </md-option>
+                                </md-select>
+                                <br><br>
+
+
                         </md-card-content>
+                        <md-card-actions>
+                                <button md-raised-button (click)="apretarCambiarRol()">CAMBIAR</button>
+                                <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                        </md-card-actions>
+                        <md-card-footer></md-card-footer>
                 </md-card>
 
-                <!--SECCION SECTORES FINCA-->
-                <md-card *ngIf="getPermisoGestionarSector()" class="page-card">
-                        <md-card-title>
-                                Sectores Finca
-                                <a *ngIf="getPermisoCrearSector()" class="example-tooltip-host" mdTooltip={{tooltipAgregarSector}} [mdTooltipPosition]="position">
-                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSectorFinca/', idFinca]">
-                        </a>
-                        </md-card-title>
-                        <md-card-content>
-                                <section *ngIf="errorMessageSectoresFinca" class="bs">
-                                        <div class="bd-example" data-example-id="">
-                                                <div class="alert alert-danger" role="alert">
-                                                        <strong>{{errorMessageSectoresFinca}}</strong>
-                                                </div>
-                                        </div><br>
-                                </section>
-                                <section *ngIf="getSectoresFincaSeleccionado()" class="bs">
-                                        <table class="table table-striped table-hover table-card">
-                                                <thead>
-                                                        <tr>
-                                                                <th style="width:37%;">Nombre.</th>
-                                                                <th style="width:36%;">Descripci&oacute;n.</th>
-                                                                <th>Superficie.</th>
-                                                                <th class="actions">Acci&oacute;n.</th>
-                                                        </tr>
-                                                </thead>
-                                                <tbody>
-                                                        <tr *ngFor="let sectorFinca of sectoresFinca">
-                                                                <td>{{sectorFinca.nombreSector}}.</td>
-                                                                <td>{{sectorFinca.descripcionSector}}.</td>
-                                                                <td>{{sectorFinca.superficieSector}} hect&aacute;reas.</td>
-                                                                <td>
-
-                                                                        <a *ngIf="getPermisoGestionarSector()" class="example-tooltip-host" mdTooltip={{tooltipVerSector}} [mdTooltipPosition]="position">
-                                                                        <img src="assets/icons/ver.png" [routerLink]="['/homeSector/', sectorFinca.idSector , idFinca]">
-                                                                </a>
-                                                                </td>
-                                                        </tr>
-
-                                                </tbody>
-                                        </table>
-                                </section>
-                        </md-card-content>
-                </md-card>
-
-                <!--SECCION MECANISMO RIEGO FINCA-->
-                <md-card *ngIf="getPermisoAsignarMecanismoFinca()" class="page-card">
-                        <md-card-title>
-                                Mecanismos de Riego Finca
-                                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismo}} [mdTooltipPosition]="position">
-                                                <img src="assets/icons/nuevo.png" [routerLink]="['/agregarMecanismoFinca/', idFinca]">
-                                </a>
-                        </md-card-title>
-                        <md-card-content>
-                                <section *ngIf="errorMessageMecanismosRiegoFinca" class="bs">
-                                        <div class="bd-example" data-example-id="">
-                                                <div class="alert alert-danger" role="alert">
-                                                        <strong>{{errorMessageMecanismosRiegoFinca}}</strong>
-                                                </div>
-                                        </div><br>
-                                </section>
-                                <section *ngIf="getMecanismoRiegoFincaSeleccionado()" class="bs">
-                                        <table class="table table-striped table-hover table-card">
-                                                <thead>
-                                                        <tr>
-                                                                <th style="width:37%;">Nombre.</th>
-                                                                <th style="width:36%;">Direcci&oacute;n de Conex&oacute;n.</th>
-                                                                <th>Fecha Instalaci&oacute;n.</th>
-                                                                <th class="actions">Acci&oacute;n.</th>
-                                                        </tr>
-                                                </thead>
-                                                <tbody>
-                                                        <tr *ngFor="let mecanismoRiegoFinca of mecanismosRiegoFinca">
-                                                                <td>{{mecanismoRiegoFinca.tipoMecanismoRiego}}.</td>
-                                                                <td>{{mecanismoRiegoFinca.direccionIP}}</td>
-                                                                <td>{{mecanismoRiegoFinca.fechaInstalacion.substring(0,10)}}</td>
-                                                                <td>
-                                                                        <a *ngIf="mecanismoRiegoFinca.habilitado==true" class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarMecanismo}} [mdTooltipPosition]="position">
-                                                                                <img src="assets/icons/deshabilitar.png" (click)="apretarIconoDeshabilitarMecanismo(mecanismoRiegoFinca.idMecanismoRiegoFinca)" >
-                                                                        </a>
-                                                                        <a *ngIf="mecanismoRiegoFinca.habilitado==false" class="example-tooltip-host" mdTooltip={{tooltipHabilitarMecanismo}} [mdTooltipPosition]="position">
-                                                                                <img src="assets/icons/habilitar.png" (click)="apretarIconoHabilitarMecanismo(mecanismoRiegoFinca.idMecanismoRiegoFinca)">
-                                                                        </a>
-                                                                </td>
-                                                        </tr>
-
-                                                </tbody>
-                                        </table>
-                                </section>
-                        </md-card-content>
-                </md-card>
-
-                <!--SECCION SENSORES FINCA-->
-                <md-card *ngIf="getPermisoGestionarSensores()" class="page-card">
-                        <md-card-title>
-                                Sensores Finca
-                                <a class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
-                                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSensorFinca/', idFinca]">
-                                </a>
-                        </md-card-title>
-                        <md-card-content>
-                                <section *ngIf="errorMessageSensoresFinca" class="bs">
-                                        <div class="bd-example" data-example-id="">
-                                                <div class="alert alert-danger" role="alert">
-                                                        <strong>{{errorMessageSensoresFinca}}</strong>
-                                                </div>
-                                        </div><br>
-                                </section>
-                                <section *ngIf="getPerfilSensoresFincaSeleccionado()" class="bs">
-                                        <table class="table table-striped table-hover table-card">
-                                                <thead>
-                                                        <tr>
-                                                                <th style="width:37%;">Modelo.</th>
-                                                                <th style="width:36%;">Tipo Medici&oacute;n.</th>
-                                                                <th>Fecha Alta.</th>
-                                                                <th class="actions">Acci&oacute;n.</th>
-                                                        </tr>
-                                                </thead>
-                                                <tbody>
-                                                        <tr *ngFor="let sensorFinca of sensoresFinca">
-                                                                <td>{{sensorFinca.modelo}}.</td>
-                                                                <td>{{sensorFinca.tipoMedicion}}.</td>
-                                                                <td>{{sensorFinca.fechaAltaSensor.substring(0,10)}}</td>
-                                                                <td>
-                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipModificarSensor}} [mdTooltipPosition]="position">
-                                                                                <img src="assets/icons/editar.png" [routerLink]="['/modificarSensorFinca/', idFinca,sensorFinca.idSensor]" >
-                                                                        </a>
-                                                                        <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarSensor}} [mdTooltipPosition]="position">
-                                                                                <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarSensorFinca(sensorFinca.idSensor)" >
-                                                                        </a>
-                                                                </td>
-                                                        </tr>
-
-                                                </tbody>
-                                        </table>
-                                </section>
-                        </md-card-content>
-                </md-card>
-
-                <!--SECCION COMPONENTES SENSORES FINCA-->
-                <md-card *ngIf="getPermisoGestionarComponenteSensor()" class="page-card">
-                        <md-card-title>
-                                Componente Sensores Finca
-                                <a *ngIf="getPermisoCrearComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipAgregarComponenteSensor}} [mdTooltipPosition]="position">
-                                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearComponenteSensorFinca/', idFinca]">
-                                </a>
-                        </md-card-title>
-                        <md-card-content>
-                                <section *ngIf="errorMessageComponentSensorFinca" class="bs">
-                                        <div class="bd-example" data-example-id="">
-                                                <div class="alert alert-danger" role="alert">
-                                                        <strong>{{errorMessageComponentSensorFinca}}</strong>
-                                                </div>
-                                        </div><br>
-                                </section>
-                                <section *ngIf="getPerfilComponenteSensorSeleccionado()" class="bs">
-                                        <table class="table table-striped table-hover table-card">
-                                                <thead>
-                                                        <tr>
-                                                                <th style="width:37%;">Modelo</th>
-                                                                <th style="width:36%;">Descripci&oacute;n</th>
-                                                                <th>Sensores Asignados</th>
-                                                                <th class="actions">Acci&oacute;n</th>
-                                                        </tr>
-                                                </thead>
-                                                <tbody>
-                                                        <tr *ngFor="let componenteSensor of componenteSensores">
-                                                                <td>{{componenteSensor.modelo}}</td>
-                                                                <td>{{componenteSensor.descripcion}}</td>
-                                                                <td>{{componenteSensor.cantidadSensoresAsignados}} sensores</td>
-                                                                <td>
-                                                                        <a *ngIf="componenteSensor.estado=='habilitado' && getPermisoGestionarComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipVerComponenteSensor}} [mdTooltipPosition]="position">
-                                                                                <img src="assets/icons/ver.png" [routerLink]="['/homeComponenteSensorFinca/', idFinca, componenteSensor.idComponenteSensor]">
-                                                                        </a>
-                                                                        <a *ngIf="componenteSensor.estado=='deshabilitado' && getPermisoGestionarComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipHabilitarComponenteSensor}}
-                                                                                [mdTooltipPosition]="position">
-                                                                                <img src="assets/icons/habilitar.png" (click)="apretarIconoHabilitarComponenteSensor(componenteSensor.idComponenteSensor)">
-                                                                        </a>
-                                                                </td>
-                                                        </tr>
-
-                                                </tbody>
-                                        </table>
-                                </section>
-                        </md-card-content>
-                </md-card>
-        </md-card>
-</div>
-
-<!--SECCION MODIFICAR ROL USUARIO-->
-
-<div *ngIf="getModificarUsuarioFincaSeleccionado() && getPermisoGestionarUsuario()" class="sign-container">
-        <md-card class="page-card">
-                <md-card-title>Modificar Rol Usuario</md-card-title>
-                <md-card-content>
-                        <section *ngIf="errorMessageUsuarioFinca" class="bs">
-                                <div class="bd-example" data-example-id="">
-                                        <div class="alert alert-danger" role="alert">
-                                                <strong>{{errorMessageUsuarioFinca}}</strong>
-                                        </div>
-                                </div><br>
-                        </section>
-
-                        <h2>Datos Roles</h2>
-
-                        <md-select placeholder="Seleccionar Rol" [(ngModel)]="nombreRol" name="nombreRol">
-                                <md-option *ngFor="let rol of roles" [value]="rol.nombreRol" requerid>
-                                        {{rol.nombreRol}}
-                                </md-option>
-                        </md-select>
-                        <br><br>
-
-
-                </md-card-content>
-                <md-card-actions>
-                        <button md-raised-button (click)="apretarCambiarRol()">CAMBIAR</button>
-                        <button md-raised-button (click)="apretarSalir()">SALIR</button>
-                </md-card-actions>
-                <md-card-footer></md-card-footer>
-        </md-card>
-
-</div>
+        </div>
 </div>

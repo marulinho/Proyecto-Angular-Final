@@ -75,7 +75,7 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
                         this.fechaInicioProgramada="No ha sido determinada";
                     }
                     else{
-                        this.fechaInicioProgramada=this.fechaInicioProgramada.substring(0,10) +" "+this.fechaInicioProgramada.substring(12,19) ;
+                        this.fechaInicioProgramada=this.fechaInicioProgramada.substring(0,10) +" "+this.fechaInicioProgramada.substring(11,19) ;
                     }
 
                     //hora final programada
@@ -84,16 +84,16 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
                         this.fechaFinProgramada="No ha sido determinada";
                     }
                     else{
-                        this.fechaFinProgramada=this.fechaFinProgramada.substring(0,10)+" "+this.fechaFinProgramada.substring(12,19);
+                        this.fechaFinProgramada=this.fechaFinProgramada.substring(0,10)+" "+this.fechaFinProgramada.substring(11,19);
                     }
 
                     //hora inicio real
-                    this.fechaActual=this.riegoActual['ejecucion_riego']['fechaHoraInicio'];
-                    if(this.fechaActual==null){
-                        this.fechaActual="No ha sido determinada";
+                    this.fechaInicioReal=this.riegoActual['ejecucion_riego']['fechaHoraInicio'];
+                    if(this.fechaInicioReal==null){
+                        this.fechaInicioReal="No ha sido determinada";
                     }
                     else{
-                        this.fechaActual=this.fechaActual.substring(0,10)+" "+this.fechaActual.substring(12,19);
+                        this.fechaInicioReal=this.fechaInicioReal.substring(0,10)+" "+this.fechaActual.substring(11,19);
                     }
 
                     this.riegoSeleccionado=true;

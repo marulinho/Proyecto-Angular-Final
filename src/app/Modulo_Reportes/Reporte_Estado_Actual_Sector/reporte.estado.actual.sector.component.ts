@@ -47,6 +47,7 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
     }
 
     ngOnInit(){
+        console.log("estado :" +this.permisoGenerarReporteEstadoActual);
         this.generarReportesService.obtenerEstadoActualSector(this.idSector,this.idFinca)
         .then(
             response=>{
