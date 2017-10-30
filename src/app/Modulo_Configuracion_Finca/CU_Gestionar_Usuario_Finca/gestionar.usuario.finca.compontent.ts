@@ -21,6 +21,7 @@ export class GestionarUsuarioFincaComponent implements OnInit{
     usuariosNoFinca:Usuario;
     usuariosNoFincaSeleccionado:Boolean;
     perfilUsuariosNoFinca:Boolean=true;
+    permisoGestionarUsuario=JSON.parse(localStorage.getItem('puedeGestionarUsuariosFinca'));
 
     //ATRIBUTOS AGREGAR USUARIO 
     agregarUsuariosFinca:Boolean;

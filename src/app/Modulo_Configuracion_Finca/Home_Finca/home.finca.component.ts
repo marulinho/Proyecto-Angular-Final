@@ -200,7 +200,7 @@ export class HomeFincaComponent implements OnInit{
                     
                 }
                 else{
-                    if(estadoActual=="pendienteAprobacion"){
+                    if(estadoActual=="pendiente_aprobacion"){
                         ubicacion=fincas[i]['ubicacion'].split(";");
                         fincas[i]['ubicacion']=ubicacion;
                         this.fincasPendientesAprobacion.push(fincas[i]);

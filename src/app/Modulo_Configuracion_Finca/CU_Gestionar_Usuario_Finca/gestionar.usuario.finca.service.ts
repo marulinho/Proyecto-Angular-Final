@@ -42,9 +42,10 @@ export class GestionarUsuarioFincaService extends RestBaseService{
       .catch(this.handleError);
   }
 
-  eliminarUsuarioFinca(usuarioFincaId: number): Promise<any> {
+  eliminarUsuarioFinca(usuarioFincaId: number,idFinca): Promise<any> {
     const data = {
       'idUsuarioFinca': usuarioFincaId,
+      'idFinca':idFinca
       
     };
     return this.http.post(GestionarUsuarioFincaService.serverUrl + this.eliminarUsuarioFincaUrl,JSON.stringify(data), this.getRestHeader())

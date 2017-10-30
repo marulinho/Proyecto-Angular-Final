@@ -13,7 +13,8 @@ import { GestionarProveedorInformacionService, ProveedorInformacion } from '../.
 import { AsignarMecanismoRiegoFincaService , MecanismoRiego } from '../CU_Asignar_Mecanismo_Riego_Finca/asignar.mecanismo.riego.finca.service';
 import { ABMSensorFincaService, Sensor } from '../../Modulo_Sensores/ABM_Sensores/abm.sensores.service';
 import { GestionarComponenteSensorService, ComponenteSensor } from '../../Modulo_Sensores/ABM_Componente_Sensor/gestionar.componente.sensor.service';
-import { ConstantesSistemas } from '../../Datos_Sistema/constantes.sistema';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+import { PermisosSistema } from '../../Datos_Sistema/permisos.sistema';
 
 
 @Component({
@@ -32,13 +33,16 @@ export class HomeFincaDetalleComponent implements OnInit{
         description:string="";
         option1:string="";
         option2:string="";
+        erroresSistema = new ErroresSistema();
+        cargarTodo:Boolean=false;
+
     //ATRIBUTOS PERFIL FINCA
         errorMessagePerfilFinca="";
         perfilFinca: Finca;
         perfilFincaSeleccionada:Boolean;
         ubicacion=[];
         tooltipEditarFinca='Editar Finca';
-        
+        permisoGestionarFinca;
     //ATRIBUTOS ELIMINAR FINCA
         tooltipEliminarFinca='Eliminar Finca';
         selectedOption:string;
@@ -54,6 +58,7 @@ export class HomeFincaDetalleComponent implements OnInit{
         usuariosFinca:Usuario;
         roles:Roles;
         nombreRol:string;
+        permisoGestionarUsuario;
 
     //ATRIBUTOS SECTORES FINCA
         errorMessageSectoresFinca="";
@@ -62,6 +67,8 @@ export class HomeFincaDetalleComponent implements OnInit{
         sectoresFincaSeleccionado:Boolean;
         sectoresFinca:Sector;
         idSector:number;
+        permisoGestionarSector;
+        permisoCrearSector;
     
     //ATRIBUTOS PROVEEDORES
         proveedores:ProveedorInformacion;
@@ -71,6 +78,7 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipEditarProveedor='Editar Proveedor';
         tooltipEliminarProveedor='Eliminar Proveedor';    
         tooltipCambiarProveedor='Cambiar Proveedor';
+        permisoConfigurarObtencionInformacion;
     
     //ATRIBUTOS MECANISMOS RIEGO FINCA
         mecanismosRiegoFinca:MecanismoRiego;
@@ -79,6 +87,7 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipAgregarMecanismo='Agregar Mecanismo';
         tooltipHabilitarMecanismo='Habilitar Mecanismo';
         tooltipDeshabilitarMecanismo='Deshabilitar Mecanismo';
+        permisoAsignarMecanismoFinca;
 
     //ATRIBUTOS SENSORES FINCA
         errorMessageSensoresFinca:string="";
@@ -87,6 +96,7 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipAgregarSensor='Agregar Sensor';
         tooltipDeshabilitarSensor='Deshabilitar Sensor';
         tooltipModificarSensor='Modificar Sensor';
+        permisoGestionarSensores;
 
     //ATRIBUTOS COMPONENTE SENSOR FINCA
         errorMessageComponentSensorFinca:string="";
@@ -95,7 +105,8 @@ export class HomeFincaDetalleComponent implements OnInit{
         tooltipAgregarComponenteSensor='Crear Componente Sensor';
         tooltipVerComponenteSensor='Ver Componente Sensor';
         tooltipHabilitarComponenteSensor='Ver Componente Sensor';
-  
+        permisoGestionarComponenteSensor;
+        permisoCrearComponenteSensor;
 
     constructor(private router:Router,
                 private route:ActivatedRoute,
@@ -113,28 +124,6 @@ export class HomeFincaDetalleComponent implements OnInit{
         appService.getState().topnavTitle="Home Finca Detalle";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
-            console.log("idFinca: "+this.idFinca);
-            if (this.idFinca) {
-                this.homeFincaDetalleService.buscarFinca(this.idFinca)
-                .then(
-                    response=>{
-                        this.perfilFinca=response.datos_operacion;
-                        this.ubicacion=this.perfilFinca['ubicacion'].split(";");
-                        this.perfilFincaSeleccionada=true;
-                    }
-                )
-                .catch(
-                    error=>{
-                        this.errorMessagePerfilFinca=error.error_description;
-                    }
-                );
-            }
-            let constantesSistema = new ConstantesSistemas();
-            console.log("Finca Guardadada Globalmente: "+JSON.parse(localStorage.getItem("idFinca")));
-            console.log("UsuarioFinca Guardadada Globalmente: "+JSON.parse(localStorage.getItem("idUsuarioFinca")));
-            //constantesSistema.setIdFinca(this.idFinca);
-            //console.log("pasamos el id finca y lo obtenemos get: "+constantesSistema.getIdFinca());
-
         });
 
     }
@@ -143,14 +132,47 @@ export class HomeFincaDetalleComponent implements OnInit{
         this.homeFincaDetalleService.devolverPermisos(this.idFinca)
             .then(
                 response=>{
-
+                    let permisos = new PermisosSistema(response.datos_operacion);
+                    console.log(this.permisoGestionarFinca=JSON.parse(localStorage.getItem('puedeGestionarFinca')));
+                    console.log(this.permisoGestionarUsuario=JSON.parse(localStorage.getItem('puedeGestionarUsuariosFinca')));
+                    console.log(this.permisoGestionarSector=JSON.parse(localStorage.getItem('puedeGestionarSector')));
+                    console.log(this.permisoCrearSector=JSON.parse(localStorage.getItem('puedeCrearSector')));
+                    console.log(this.permisoConfigurarObtencionInformacion=JSON.parse(localStorage.getItem('puedeConfigurarObtencionInfoExterna')));
+                    console.log(this.permisoAsignarMecanismoFinca=JSON.parse(localStorage.getItem('puedeAsignarMecRiegoAFinca')));
+                    console.log(this.permisoGestionarSensores=JSON.parse(localStorage.getItem('puedeGestionarSensores')));
+                    console.log(this.permisoGestionarComponenteSensor=JSON.parse(localStorage.getItem('puedeGestionarComponenteSensor')));
+                    console.log(this.permisoCrearComponenteSensor=JSON.parse(localStorage.getItem('puedeCrearComponenteSensor')));
                 }
             )
             .catch(
                 error=>{
-                    this.errorMessagePerfilFinca=error.error_description;
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessagePerfilFinca=error.error_description;
+                    }
+                    
                 }
-        );
+            );
+        this.homeFincaDetalleService.buscarFinca(this.idFinca)
+            .then(
+                response=>{
+                    this.perfilFinca=response.datos_operacion;
+                    this.ubicacion=this.perfilFinca['ubicacion'].split(";");
+                    this.perfilFincaSeleccionada=true;
+                }
+            )
+            .catch(
+                error=>{
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessagePerfilFinca=error.error_description;
+                    }
+                }
+            );
         this.gestionarUsuarioFincaService.buscarUsuarioFinca(this.idFinca)
             .then(
                 response=>{
@@ -166,7 +188,12 @@ export class HomeFincaDetalleComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageUsuarioFinca=error.error_description;
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageUsuarioFinca=error.error_description;
+                    }
                 }
             );
 
@@ -185,7 +212,12 @@ export class HomeFincaDetalleComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageSectoresFinca=error.error_description;
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageSectoresFinca=error.error_description;
+                    }
                 }
             );
 
@@ -206,7 +238,12 @@ export class HomeFincaDetalleComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageProveedor=error.error_description;
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageProveedor=error.error_description;
+                    }
                 }
             );
         
@@ -224,7 +261,12 @@ export class HomeFincaDetalleComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageMecanismosRiegoFinca=error.error_description;
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageMecanismosRiegoFinca=error.error_description;
+                    }
                 }
             );
         
@@ -242,7 +284,12 @@ export class HomeFincaDetalleComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageSectoresFinca=error.error_description;
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageSectoresFinca=error.error_description;
+                    }
                 }
             );
 
@@ -260,10 +307,49 @@ export class HomeFincaDetalleComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageComponentSensorFinca=error.error_description;
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageComponentSensorFinca=error.error_description;
+                    }
                 }
             );
+        this.cargarTodo=true;
     }
+    getCargarTodo(){
+        return this.cargarTodo;
+    }
+
+    getPermisosGestionarFinca(){
+        return this.permisoGestionarFinca;
+    }
+    getPermisoGestionarUsuario(){
+        return this.permisoGestionarUsuario;
+    }
+    getPermisoGestionarSector(){
+        return this.permisoGestionarSector;
+    }
+    getPermisoCrearSector(){
+        return this.permisoCrearSector;
+    }
+    getPermisoConfigurarObtencionInformacion(){
+        return this.permisoConfigurarObtencionInformacion;
+    }
+    getPermisoAsignarMecanismoFinca(){
+        return this.permisoAsignarMecanismoFinca;
+    }
+    getPermisoGestionarSensores(){
+        return this.permisoGestionarSensores;
+    }
+    getPermisoGestionarComponenteSensor(){
+        return this.permisoGestionarComponenteSensor;
+    }
+    getPermisoCrearComponenteSensor(){
+        return this.permisoCrearComponenteSensor;
+    }
+
+
 
     getPerfilFincaSeleccionada(){
         return this.perfilFincaSeleccionada;
@@ -559,7 +645,7 @@ export class HomeFincaDetalleComponent implements OnInit{
             result => {
                         this.selectedOption = result;
                         if(this.selectedOption==="Aceptar"){
-                            this.gestionarUsuarioFincaService.eliminarUsuarioFinca(this.idUsuarioFinca)
+                            this.gestionarUsuarioFincaService.eliminarUsuarioFinca(this.idUsuarioFinca,this.idFinca)
                                 .then(
                                     response=>{
                                         this.refresh();

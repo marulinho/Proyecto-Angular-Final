@@ -1,8 +1,8 @@
 <!--SECCION MODIFICAR FINCA-->
-<div class="sign-container">
+<div *ngIf="permisoGestionarFinca" class="sign-container">
 
     <md-card class="page-card">
-        <md-card-title>Modificar Finca</md-card-title>
+        <md-card-title>Modificar Finca.</md-card-title>
         <md-card-content>
             <section *ngIf="errorMessage" class="bs">
                 <div class="bd-example" data-example-id="">
@@ -12,19 +12,19 @@
                 </div><br>
             </section>
 
-            <h2>Datos Finca</h2>
+            <h2>Datos Finca.</h2>
 
             <md-input-container>
-                <input mdInput placeholder="Nombre" type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Direcci&oacute;n" type="text" [(ngModel)]="direccion" name="direccion" required><br>
+                <input mdInput placeholder="Direcci&oacute;n." type="text" [(ngModel)]="direccion" name="direccion" required><br>
             </md-input-container>
 
             <!--UBICACION-->
             <md-input-container>
-                <input mdInput placeholder="Buscar localidad" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+                <input mdInput placeholder="Buscar localidad." autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
                   #search [formControl]="searchControl" requerid>
               </md-input-container>
 
@@ -33,7 +33,7 @@
             </agm-map>
 
             <md-input-container>
-                <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas" type="number" [(ngModel)]="tamanio" name="tamanio" required><br>
+                <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas." type="number" [(ngModel)]="tamanio" name="tamanio" required><br>
             </md-input-container>
 
 

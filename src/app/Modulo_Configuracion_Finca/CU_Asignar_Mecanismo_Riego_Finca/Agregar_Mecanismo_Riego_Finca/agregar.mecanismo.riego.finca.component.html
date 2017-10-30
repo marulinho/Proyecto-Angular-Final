@@ -1,5 +1,5 @@
 <!--SECCION PERFIL AGREGAR USUARIO-->
-<div *ngIf="getperfilMecanismoRiegoSeleccionado()"class="sign-container">
+<div *ngIf="getperfilMecanismoRiegoSeleccionado() && permisoAsignarMecanismoFinca=='true'" class="sign-container">
     <md-card class="page-card">
             <md-card-title>Mecanismo de Riego no pertenecientes a la Finca</md-card-title>
             <md-card-subtitle>
@@ -47,10 +47,10 @@
 </div>
 
 <!--SECCION AGREGAR MECANISMO FINCA-->
-<div *ngIf="getAgregarMecanismoFinca()" class="sign-container">
+<div *ngIf="getAgregarMecanismoFinca() && permisoAsignarMecanismoFinca=='true'" class="sign-container">
     
         <md-card class="page-card">
-            <md-card-title>Agregar Mecanismo</md-card-title>
+            <md-card-title>Agregar Mecanismo.</md-card-title>
             <md-card-content>
                 <section *ngIf="errorMessageAgregarMecanismoFinca" class="bs">
                     <div class="bd-example" data-example-id="">
@@ -60,16 +60,16 @@
                     </div><br>
                 </section>
     
-                <h2>Datos Mecanismo</h2>
+                <h2>Datos Mecanismo.</h2>
                 
                 <label id=atributo class="col-2">Finca: </label>
-                <label id=valor class="col-3">{{idFinca}}</label><br><br>
+                <label id=valor class="col-3">{{idFinca}}.</label><br><br>
 
                 <label id=atributo class="col-2">Mecanismo de Riego: </label>
-                <label id=valor class="col-3">{{nombreMecanismo}}</label><br><br>             
+                <label id=valor class="col-3">{{nombreMecanismo}}.</label><br><br>             
 
                 <md-input-container>
-                    <input mdInput placeholder="Direcci&oacute;n IP Mecanismo" type="text" [(ngModel)]="ip" name="ip" required><br>
+                    <input mdInput placeholder="Direcci&oacute;n IP Mecanismo." type="text" [(ngModel)]="ip" name="ip" required><br>
                 </md-input-container>
       
     

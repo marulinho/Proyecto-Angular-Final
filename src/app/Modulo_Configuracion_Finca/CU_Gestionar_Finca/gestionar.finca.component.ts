@@ -22,6 +22,8 @@ export class GestionarFincaComponent implements OnInit{
     direccion:string;
     tamanio:number;
 
+    permisoGestionarFinca=JSON.parse(localStorage.getItem('puedeGestionarFinca'));
+
     //UBICACION
     ubicacion: string;
     public latitude: number;
@@ -41,7 +43,7 @@ export class GestionarFincaComponent implements OnInit{
         this.appService.getState().topnavTitle="Gestionar Finca";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
-            console.log("idFinca: "+this.idFinca);
+            
         });
     }
 

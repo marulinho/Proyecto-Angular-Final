@@ -1,7 +1,7 @@
 <!--SECCION PERFIL AGREGAR USUARIO-->
-<div *ngIf="getPerfilUsuariosNoFinca()"class="sign-container">
+<div *ngIf="getPerfilUsuariosNoFinca() && permisoGestionarUsuario" class="sign-container">
     <md-card class="page-card">
-            <md-card-title>Usuario no pertencientes a la Finca</md-card-title>
+            <md-card-title>Usuario no pertencientes a la Finca.</md-card-title>
             <md-card-subtitle>
                 En esta secci&oacute;n el Encargado de la Finca puede agregar usuarios a su finca.
             </md-card-subtitle>            
@@ -19,17 +19,17 @@
                     <table class="table table-striped table-hover table-card">
                       <thead>
                         <tr>
-                          <th style="width:37%;">Usuario</th>
-                          <th style="width:36%;">Apellido y Nombre</th>
-                          <th>Domicilio</th>
-                          <th class="actions">Acci&oacute;n</th>
+                          <th style="width:37%;">Usuario.</th>
+                          <th style="width:36%;">Apellido y Nombre.</th>
+                          <th>Domicilio.</th>
+                          <th class="actions">Acci&oacute;n.</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let usuarioNoFinca of usuariosNoFinca">
-                          <td>{{usuarioNoFinca.usuario}}</td>
-                          <td>{{usuarioNoFinca.apellido}}, {{usuarioNoFinca.nombre}}</td>
-                          <td>{{usuarioNoFinca.domicilio}}</td>
+                          <td>{{usuarioNoFinca.usuario}}.</td>
+                          <td>{{usuarioNoFinca.apellido}}, {{usuarioNoFinca.nombre}}.</td>
+                          <td>{{usuarioNoFinca.domicilio}}.</td>
                           <td>
                               <a class="example-tooltip-host" mdTooltip={{tooltipAgregarUsuario}} [mdTooltipPosition]="position" (click)="apretarAgregarIcono()"
                                 (click)="apretarAgregarIcono(usuarioNoFinca.usuario)">
@@ -48,15 +48,15 @@
 
 
 <!--SECCION AGREGAR USUARIO FINCA-->
-<div *ngIf="getAgregarUsuariosFinca()" class="page-content">
+<div *ngIf="getAgregarUsuariosFinca() && permisoGestionarUsuario" class="page-content">
     <md-card><br>
-      <md-card-title>Registrar Usuario</md-card-title>
+      <md-card-title>Registrar Usuario.</md-card-title>
       <md-card-content>
         <md-tab-group selectedIndex="{{selectIndex}}">
           <md-tab disabled label="Paso 1">
             <div class="tab-body-content">
               <h3>
-                <small>Datos Rol</small>
+                <small>Datos Rol.</small>
               </h3>
               <p>Los campos con (*) son obligatorios.</p>
               <section *ngIf="errorMessageAgregarUsuarioNoFinca" class="bs">
@@ -68,7 +68,7 @@
               </section>
               <br><md-select placeholder="Seleccionar Rol" [(ngModel)]="rolSeleccionado" name="rolSeleccionado" requerid>
                   <md-option *ngFor="let rol of roles" [value]="rol.nombreRol">
-                    {{rol.nombreRol}}
+                    {{rol.nombreRol}}.
                   </md-option>
               </md-select>
   
@@ -78,7 +78,7 @@
           
           <md-tab disabled label="Paso 2">
             <div class="tab-body-content">
-              <h4>Resumen Registraci&oacute;n</h4>
+              <h4>Resumen Registraci&oacute;n.</h4>
               <section *ngIf="errorMessageAgregarUsuarioNoFinca" class="bs">
                   <div class="bd-example" data-example-id="">
                     <div class="alert alert-danger" role="alert">
@@ -86,17 +86,17 @@
                     </div>
                   </div><br>
                 </section>
-            <label>Usuario: {{usuario}}</label><br><br>
-            <label>Finca: {{idFinca}}</label><br><br>
-            <label>Rol: {{rolSeleccionado}}</label>
+            <label>Usuario: {{usuario}}.</label><br><br>
+            <label>Finca: {{idFinca}}.</label><br><br>
+            <label>Rol: {{rolSeleccionado}}.</label>
           
           </div>
           </md-tab>
         </md-tab-group>
       </md-card-content>
       <md-card-actions>
-        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-        <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAgregar()" >NEXT</button>
+        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATRAS</button>
+        <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAgregar()" >SIGUIENTE</button>
         <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregarUsuario()">AGREGAR</button>
         <button md-raised-button (click)="apretarSalir()">SALIR</button>
       </md-card-actions>

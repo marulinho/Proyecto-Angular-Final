@@ -20,8 +20,7 @@ export class ModificarRolUsuarioComponent implements OnInit{
             this.appService.getState().topnavTitle="Usuarios";
             this.route.params.subscribe(params => {
                 this.idFincaUsuarioFinca = +params['idUsuarioFinca'];
-                //console.log("idUsuarioFinca: "+this.idFincaUsuarioFinca);
-                //console.log("idFinca: "+this.idFinca);
+                
             });
     }
 

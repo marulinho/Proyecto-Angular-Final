@@ -13,6 +13,7 @@ import { AsignarMecanismoRiegoFincaService, MecanismoRiego } from '../asignar.me
 export class AgregarMecanismoRiegoFincaComponent implements OnInit{
     
     idFinca:number;
+    permisoAsignarMecanismoFinca=JSON.parse(localStorage.getItem('puedeAsignarMecRiegoAFinca'));
     
     //ATRIBUTOS PERFIL AGREGAR MECANISMO
     tooltipAgregarMecanismo='Agregar Mecanismo';
