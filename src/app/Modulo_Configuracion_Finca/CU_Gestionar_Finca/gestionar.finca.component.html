@@ -1,5 +1,5 @@
 <!--SECCION MODIFICAR FINCA-->
-<div *ngIf="permisoGestionarFinca" class="sign-container">
+<div *ngIf="getPermisoGestionarFinca()" class="sign-container">
 
     <md-card class="page-card">
         <md-card-title>Modificar Finca.</md-card-title>
@@ -39,8 +39,8 @@
 
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button (click)="apretarModificarFinca()">MODIFICAR</button>
-            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+            <button md-raised-button (click)="apretarModificarFinca()">MODIFICAR.</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR.</button>
         </md-card-actions>
         <md-card-footer></md-card-footer>
     </md-card>

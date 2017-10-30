@@ -1,5 +1,5 @@
 <!--SECCION PERFIL AGREGAR USUARIO-->
-<div *ngIf="getPerfilUsuariosNoFinca() && permisoGestionarUsuario" class="sign-container">
+<div *ngIf="getPerfilUsuariosNoFinca() && getPermisoGestionarUsuario()" class="sign-container">
     <md-card class="page-card">
             <md-card-title>Usuario no pertencientes a la Finca.</md-card-title>
             <md-card-subtitle>
@@ -48,7 +48,7 @@
 
 
 <!--SECCION AGREGAR USUARIO FINCA-->
-<div *ngIf="getAgregarUsuariosFinca() && permisoGestionarUsuario" class="page-content">
+<div *ngIf="getAgregarUsuariosFinca() && getPermisoGestionarUsuario()" class="page-content">
     <md-card><br>
       <md-card-title>Registrar Usuario.</md-card-title>
       <md-card-content>
@@ -66,7 +66,7 @@
                   </div>
                 </div><br>
               </section>
-              <br><md-select placeholder="Seleccionar Rol" [(ngModel)]="rolSeleccionado" name="rolSeleccionado" requerid>
+              <br><md-select placeholder="Seleccionar Rol." [(ngModel)]="rolSeleccionado" name="rolSeleccionado" requerid>
                   <md-option *ngFor="let rol of roles" [value]="rol.nombreRol">
                     {{rol.nombreRol}}.
                   </md-option>
@@ -86,19 +86,24 @@
                     </div>
                   </div><br>
                 </section>
-            <label>Usuario: {{usuario}}.</label><br><br>
-            <label>Finca: {{idFinca}}.</label><br><br>
-            <label>Rol: {{rolSeleccionado}}.</label>
+            <label id="atributo">Usuario: </label>
+            <label>{{usuario}}.</label><br><br>
+
+            <label id="atributo">Finca: </label>
+            <label>{{idFinca}}.</label><br><br>
+
+            <label id="atributo">Rol: </label>
+            <label>{{rolSeleccionado}}.</label>
           
           </div>
           </md-tab>
         </md-tab-group>
       </md-card-content>
       <md-card-actions>
-        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATRAS</button>
-        <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAgregar()" >SIGUIENTE</button>
-        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregarUsuario()">AGREGAR</button>
-        <button md-raised-button (click)="apretarSalir()">SALIR</button>
+        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
+        <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAgregar()" >SIGUIENTE.</button>
+        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregarUsuario()">AGREGAR.</button>
+        <button md-raised-button (click)="apretarSalir()">SALIR.</button>
       </md-card-actions>
     </md-card>
   

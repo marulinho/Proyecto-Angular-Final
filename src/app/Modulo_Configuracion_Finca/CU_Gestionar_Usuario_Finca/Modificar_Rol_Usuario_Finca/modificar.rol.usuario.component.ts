@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../../../app.service';
 import { GestionarUsuarioFincaService, Usuario,Roles } from './gestionar.usuario.finca.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'modificar-rol-usuario',
@@ -17,7 +18,7 @@ export class ModificarRolUsuarioComponent implements OnInit{
     constructor(private router: Router,
                 private route:ActivatedRoute,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Usuarios";
+            this.appService.getState().topnavTitle="Usuarios.";
             this.route.params.subscribe(params => {
                 this.idFincaUsuarioFinca = +params['idUsuarioFinca'];
                 

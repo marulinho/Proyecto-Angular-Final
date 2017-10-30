@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../../../app.service';
 import { AsignarMecanismoRiegoFincaService, MecanismoRiego } from '../asignar.mecanismo.riego.finca.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'agregar-mecanismo-finca',
@@ -15,6 +16,8 @@ export class AgregarMecanismoRiegoFincaComponent implements OnInit{
     idFinca:number;
     permisoAsignarMecanismoFinca=JSON.parse(localStorage.getItem('puedeAsignarMecRiegoAFinca'));
     
+    erroresSistema = new ErroresSistema();
+
     //ATRIBUTOS PERFIL AGREGAR MECANISMO
     tooltipAgregarMecanismo='Agregar Mecanismo';
     position='above';
@@ -39,7 +42,6 @@ export class AgregarMecanismoRiegoFincaComponent implements OnInit{
                 
                 this.idFinca = +params['idFinca'];
                 if (this.idFinca) {
-                  console.log("idFinca: "+this.idFinca);
                     this.asginarMecanismoRiegoFincaService.mostrarMecanismoRiegoNuevosFinca(this.idFinca)
                     .then(
                         response=>{
@@ -54,7 +56,12 @@ export class AgregarMecanismoRiegoFincaComponent implements OnInit{
                     )
                     .catch(
                         error=>{
-                            this.errorMessagePerfilMecanismo=error.error_description;
+                            if(error.error_description==this.erroresSistema.getInicioSesion()){
+                                this.router.navigate(['/login/']);
+                            }
+                            else{
+                                this.errorMessagePerfilMecanismo=error.error_description;
+                            }
                         }
                     );
                 }
@@ -63,6 +70,9 @@ export class AgregarMecanismoRiegoFincaComponent implements OnInit{
 
     ngOnInit(){}
 
+    getPermisoAsignarMecanismoFinca(){
+        return this.permisoAsignarMecanismoFinca;
+    }
     getperfilMecanismoRiegoSeleccionado(){
         return this.perfilMecanismoRiegoSeleccionado;
     }
@@ -94,7 +104,12 @@ export class AgregarMecanismoRiegoFincaComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageAgregarMecanismoFinca=error.error_description;
+                        if(error.error_description==this.erroresSistema.getInicioSesion()){
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageAgregarMecanismoFinca=error.error_description;
+                        }
                     }
                 );
         }

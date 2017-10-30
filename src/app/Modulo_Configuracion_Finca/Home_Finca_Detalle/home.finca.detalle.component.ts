@@ -349,8 +349,6 @@ export class HomeFincaDetalleComponent implements OnInit{
         return this.permisoCrearComponenteSensor;
     }
 
-
-
     getPerfilFincaSeleccionada(){
         return this.perfilFincaSeleccionada;
     }

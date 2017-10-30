@@ -7,7 +7,7 @@ import { MapsAPILoader } from 'angular2-google-maps/core';
 import { SolicitarCreacionFincaService, FincaCreada } from './solicitar.creacion.finca.service';
 import { GestionarProveedorInformacionService, ProveedorInformacion } from '../../Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
 import { LoginComponent } from '../../Modulo_Seguridad/CU_Iniciar_Sesion/login.component';
-
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector: 'app-solicitar.creacion.finca',
@@ -28,6 +28,7 @@ export class SolicitarCreacionFincaComponent implements OnInit {
     tamanio: number;
     frecuencia: number;
 
+    erroresSistema = new ErroresSistema();
     //UBICACION
     ubicacion:string;
     public latitude: number;
@@ -48,14 +49,19 @@ export class SolicitarCreacionFincaComponent implements OnInit {
     ngOnInit() {
         this.solicitarCreacionFincaService.obtenerProveedores()
             .then(
-            response => {
-                this.llenarProveedores(response);
-            }
+                response => {
+                    this.llenarProveedores(response);
+                }
             )
             .catch(
-            error => {
-                this.errorMessage = error.error_description;
-            }
+                error => {
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessage = error.error_description;
+                    }
+                }
             );
 
         //set google maps defaults
@@ -150,10 +156,15 @@ export class SolicitarCreacionFincaComponent implements OnInit {
             }
             )
             .catch(
-            error => {
-                this.errorMessage = error.error_description;
-            }
-            )
+                error => {
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessage = error.error_description;
+                    }
+                }
+            );
     }
 
 }

@@ -431,7 +431,7 @@ export class HomeSectorComponent implements OnInit{
        this.gestionarRiegoService.cancelarRiegoManualmente(this.idFinca,this.idMecanismoRiegoFincaSector)
             .then(
                 response=>{
-                    this.refresh();
+                    //this.refresh();
                 }
             )
             .catch(

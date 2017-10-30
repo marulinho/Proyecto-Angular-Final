@@ -1,13 +1,13 @@
 <!--SECCION CREAR FINCA-->
 <div  class="page-content">
         <md-card><br>
-          <md-card-title>Crear Finca</md-card-title>
+          <md-card-title>Crear Finca.</md-card-title>
           <md-card-content>
             <md-tab-group selectedIndex="{{selectIndex}}">
               <md-tab disabled label="Paso 1">
                 <div class="tab-body-content">
                   <h3>
-                    <small>Datos de la Finca</small>
+                    <small>Datos de la Finca.</small>
                   </h3>
                   <p>Los campos con (*) son obligatorios.</p>
                   <section *ngIf="errorMessage" class="bs">
@@ -18,20 +18,20 @@
                       </div><br>
                   </section>
                   <md-input-container>
-                    <input mdInput placeholder="Nombre" type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                    <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required><br>
                   </md-input-container>
       
                   <md-input-container>
-                      <input mdInput placeholder="Direcci&oacute;n" type="text" [(ngModel)]="direccion" name="direccion" required><br>
+                      <input mdInput placeholder="Direcci&oacute;n." type="text" [(ngModel)]="direccion" name="direccion" required><br>
                   </md-input-container>
                   
                   <md-input-container>
-                    <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas" type="number" [(ngModel)]="tamanio" name="tamanio" required><br>
+                    <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas." type="number" [(ngModel)]="tamanio" name="tamanio" required><br>
                 </md-input-container>
 
                   <!--UBICACION-->
                     <md-input-container>
-                      <input mdInput placeholder="Buscar localidad" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+                      <input mdInput placeholder="Buscar localidad." autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
                         #search [formControl]="searchControl" requerid>
                     </md-input-container>
 
@@ -45,7 +45,7 @@
 
               <md-tab disabled label="Paso 2">
                   <div class="tab-body-content">
-                    <h4>Proveedores de informaci&oacute;n externa</h4>
+                    <h4>Proveedores de informaci&oacute;n externa.</h4>
                     <section *ngIf="errorMessage" class="bs">
                         <div class="bd-example" data-example-id="">
                           <div class="alert alert-danger" role="alert">
@@ -53,13 +53,13 @@
                           </div>
                         </div><br>
                     </section>
-                    <md-select placeholder="Seleccionar Proveedor" [(ngModel)]="proveedor" name="proveedor">
+                    <md-select placeholder="Seleccionar Proveedor." [(ngModel)]="proveedor" name="proveedor">
                         <md-option *ngFor="let proveedorInformacion of proveedoresInformacion" [value]="proveedorInformacion">
-                          {{proveedorInformacion}}
+                          {{proveedorInformacion}}.
                         </md-option>
                     </md-select>  
                     <br><br><md-input-container>
-                        <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones por hora" type="number" [(ngModel)]="frecuencia" name="frecuencia" required><br>
+                        <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones por hora." type="number" [(ngModel)]="frecuencia" name="frecuencia" required><br>
                     </md-input-container>
                                                       
          
@@ -69,7 +69,7 @@
 
               <md-tab disabled label="Paso 3">
                 <div class="tab-body-content">
-                  <h4>Resumen Creaci&oacute;n</h4>
+                  <h4>Resumen Creaci&oacute;n.</h4>
                   <section *ngIf="errorMessage" class="bs">
                       <div class="bd-example" data-example-id="">
                         <div class="alert alert-danger" role="alert">
@@ -78,12 +78,23 @@
                       </div><br>
                     </section>
                 
-                  <label>Nombre: {{nombre}}</label><br><br>
-                  <label>Direcci&oacute;n: {{direccion}}</label><br><br>
-                  <label>Ubicaci&oacute;n: {{ubicacion}}</label><br><br>
-                  <label>Tama&ntilde;o: {{tamanio }} hect&aacute;reas</label><br><br>
-                  <label>Proveedor de Mediciones: {{proveedor}}</label><br><br>
-                  <label>Frecuencia obtenci&oacute;n: {{frecuencia }} por hora</label><br><br>
+                  <label id="atributo">Nombre: <label>
+                  </label>{{nombre}}.</label><br><br>
+
+                  <label id="atributo">Direcci&oacute;n:</label>
+                  <label>{{direccion}}.</label><br><br>
+
+                  <label id="atributo">Ubicaci&oacute;n: </label>
+                  <label> {{ubicacion}}.</label><br><br>
+
+                  <label id="atributo">Tama&ntilde;o: </label>
+                  <label>{{tamanio }} hect&aacute;reas.</label><br><br>
+
+                  <label id="atributo">Proveedor de Mediciones: </label>
+                  <label>{{proveedor}}.</label><br><br>
+
+                  <label id="atributo">Frecuencia obtenci&oacute;n: </label>
+                  <label>{{frecuencia }} por hora.</label><br><br>
                 
 
               </div>
@@ -91,10 +102,10 @@
             </md-tab-group>
           </md-card-content>
           <md-card-actions>
-            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-            <button *ngIf="selectIndex >=0 && selectIndex <=1" md-raised-button (click)="apretarNextCrear()">NEXT</button>
-            <button *ngIf="selectIndex == 2" md-raised-button (click)="apretarCrearFinca()">CREAR FINCA</button>
-            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
+            <button *ngIf="selectIndex >=0 && selectIndex <=1" md-raised-button (click)="apretarNextCrear()">SIGUIENTE.</button>
+            <button *ngIf="selectIndex == 2" md-raised-button (click)="apretarCrearFinca()">CREAR FINCA.</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR.</button>
           </md-card-actions>
           <md-card-footer></md-card-footer>
         </md-card>

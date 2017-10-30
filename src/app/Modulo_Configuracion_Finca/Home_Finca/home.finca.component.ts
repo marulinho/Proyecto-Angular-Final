@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Ng2SmartTableModule,LocalDataSource } from 'ng2-smart-table';
 import { HomeFincaService, Finca } from './home.finca.service';
 import { AppService } from '../../app.service';
-import { ConstantesSistemas } from '../../Datos_Sistema/constantes.sistema';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class HomeFincaComponent implements OnInit{
     tooltipCrearFinca='Crear Finca';
     tooltipVer="Ver Finca";
 
-    constantes= new ConstantesSistemas();
+    erroresSistema= new ErroresSistema();
 
     //ATRIBUTOS LLAMADA FINCAS USUARIO
     fincasUsuario=[];
@@ -95,28 +95,31 @@ export class HomeFincaComponent implements OnInit{
     ngOnInit(){
 
         this.homeFincaService.obtenerFincasUsuario()
-        .then(
-                response=>{
-                    if(response.detalle_operacion=="No hay datos"){
-                        this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
-                        this.errorMessageFincasEncargado="No existen fincas asociadas al usuario con el rol especificado.";
-                        this.errorMessageFincasDeshabilitadas="No existen fincas asociadas al usuario con el estado especificado.";
-                        this.errorMessageFincasPendientes="No existen fincas asociadas al usuario con el estado especificado.";
+            .then(
+                    response=>{
+                        if(response.detalle_operacion=="No hay datos"){
+                            this.errorMessageFincasUsuario="No existen fincas asociadas al usuario con el rol especificado.";
+                            this.errorMessageFincasEncargado="No existen fincas asociadas al usuario con el rol especificado.";
+                            this.errorMessageFincasDeshabilitadas="No existen fincas asociadas al usuario con el estado especificado.";
+                            this.errorMessageFincasPendientes="No existen fincas asociadas al usuario con el estado especificado.";
+                        }
+                        else{
+                            this.fincasUsuario=response.datos_operacion;
+                            //this.source = new LocalDataSource(this.fincasUsuario);                            
+                            this.obtenerFincasNoEncargado();                            
+                        }
+                    }
+                )
+            .catch(
+                error=>{
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
                     }
                     else{
-                        this.fincasUsuario=response.datos_operacion;
-                        //this.source = new LocalDataSource(this.fincasUsuario);                            
-                        this.obtenerFincasNoEncargado();                            
-                        
-
+                        this.errorMessageFincasUsuario=error.error_description;
                     }
                 }
-            )
-        .catch(
-            error=>{
-                this.errorMessageFincasUsuario=error.error_description;
-            }
-        );
+            );
     }
 
     /*onSearch(query: string = '') {
@@ -159,7 +162,6 @@ export class HomeFincaComponent implements OnInit{
     }
 
     apretarNuevaFincaIcono(){
-        console.log("apretamos crear nueva finca");
         this.router.navigate(['/crearFinca/']);
     }
 

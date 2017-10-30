@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../../app.service';
 import { GestionarUsuarioFincaService, Usuario,Roles } from './gestionar.usuario.finca.service';
-
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 @Component({
     selector:'gestionar-usuario-finca',
     templateUrl: './gestionar.usuario.finca.component.html',
@@ -13,7 +13,7 @@ import { GestionarUsuarioFincaService, Usuario,Roles } from './gestionar.usuario
 export class GestionarUsuarioFincaComponent implements OnInit{
     
     idFinca:number;
-    
+    erroresSistema = new ErroresSistema();
     //ATRIBUTOS PERFIL AGREGAR USUARIO
     tooltipAgregarUsuario='Agregar Usuario';
     position='above';
@@ -37,12 +37,11 @@ export class GestionarUsuarioFincaComponent implements OnInit{
                 private route:ActivatedRoute,
                 private gestionarUsuarioFincaService: GestionarUsuarioFincaService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Usuarios";
+            this.appService.getState().topnavTitle="Gestionar Usuarios.";
             this.route.params.subscribe(params => {
                 
                 this.idFinca = +params['idFinca'];
                 if (this.idFinca) {
-                  console.log("idFinca: "+this.idFinca);
                     this.gestionarUsuarioFincaService.buscarUsuarioNoFinca(this.idFinca)
                     .then(
                         response=>{
@@ -57,7 +56,12 @@ export class GestionarUsuarioFincaComponent implements OnInit{
                     )
                     .catch(
                         error=>{
+                          if(error.error_description==this.erroresSistema.getInicioSesion()){
+                            this.router.navigate(['/login/']);
+                          }
+                          else{
                             this.errorMessageUsuariosFinca=error.error_description;
+                          }
                         }
                     );
                 }
@@ -77,7 +81,21 @@ export class GestionarUsuarioFincaComponent implements OnInit{
               
             }
           )
+          .catch(
+            error=>{
+              if(error.error_description==this.erroresSistema.getInicioSesion()){
+                this.router.navigate(['/login/']);
+              }
+              else{
+                this.errorMessageAgregarUsuarioNoFinca=error.error_description;
+              }
+            }
+          )
   
+    }
+
+    getPermisoGestionarUsuario(){
+      return this.permisoGestionarUsuario;
     }
 
     getPerfilUsuariosNoFinca(){
@@ -94,7 +112,6 @@ export class GestionarUsuarioFincaComponent implements OnInit{
 
     apretarAgregarIcono(usuario:string){
       this.usuario=usuario;
-      console.log("usuario recibido: "+this.usuario);
       this.selectIndex=0;
       this.rolSeleccionado="";
       this.agregarUsuariosFinca=true;

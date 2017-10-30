@@ -6,6 +6,7 @@ import { } from 'googlemaps';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { AppService } from '../../app.service';
 import { GestionarFincaService, Finca } from './gestionar.finca.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'app-gestionar.finca',
@@ -21,6 +22,8 @@ export class GestionarFincaComponent implements OnInit{
     nombre:string;
     direccion:string;
     tamanio:number;
+
+    erroresSistema=new ErroresSistema();
 
     permisoGestionarFinca=JSON.parse(localStorage.getItem('puedeGestionarFinca'));
 
@@ -86,6 +89,9 @@ export class GestionarFincaComponent implements OnInit{
         
     }
 
+    getPermisoGestionarFinca(){
+        return this.permisoGestionarFinca;
+    }
     
     private setCurrentPosition() {
         if ("geolocation" in navigator) {
@@ -114,7 +120,12 @@ export class GestionarFincaComponent implements OnInit{
                     )
                     .catch(
                         error=>{
-                            this.errorMessage=error.error_description;
+                            if(error.error_description==this.erroresSistema.getInicioSesion()){
+                                this.router.navigate(['/login/']);
+                            }
+                            else{
+                                this.errorMessage=error.error_description;
+                            }
                         }
                     );
         }
