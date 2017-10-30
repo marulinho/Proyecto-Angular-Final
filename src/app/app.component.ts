@@ -7,6 +7,7 @@ import { MdDialog, MdSnackBar } from '@angular/material';
 import { DialogThemeComponent } from './shared/dialog/dialog-theme/dialog-theme.component';
 import { TranslateService } from 'ng2-translate';
 import { FinalizarSesionService } from '../app/Modulo_Seguridad/CU_Finalizar_Sesion/finalizar.sesion.service';
+import { ErroresSistema } from './Datos_Sistema/errores.sistema';
 
 @Component({
   selector: 'lk-app',
@@ -16,6 +17,7 @@ import { FinalizarSesionService } from '../app/Modulo_Seguridad/CU_Finalizar_Ses
 })
 export class AppComponent implements OnInit {
 
+  erroresSistema = new ErroresSistema();
   // Mock Menu
   mainMenu = MenuMock.root;
   // Mock search item
@@ -178,7 +180,12 @@ export class AppComponent implements OnInit {
       )
       .catch(
         error=>{
-          this.errroMessage=error.error_description;
+          if(error.error_description==this.erroresSistema.getInicioSesion()){
+            this.router.navigate(['/login/']);
+          }
+          else{
+            this.errroMessage=error.error_description;
+          }
         }
       );
   }

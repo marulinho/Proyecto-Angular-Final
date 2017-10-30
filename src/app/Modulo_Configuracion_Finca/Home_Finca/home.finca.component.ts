@@ -16,8 +16,8 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 export class HomeFincaComponent implements OnInit{
     
     position = 'above';
-    tooltipCrearFinca='Crear Finca';
-    tooltipVer="Ver Finca";
+    tooltipCrearFinca='Crear Finca.';
+    tooltipVer="Ver Finca.";
 
     erroresSistema= new ErroresSistema();
 
@@ -79,7 +79,7 @@ export class HomeFincaComponent implements OnInit{
     errorMessageFincasDeshabilitadas:string="";
     fincasDeshabilitadas=[];   
     idFincasDeshabilitadas=[];
-    tooltipHabilitarFinca='Habilitar Finca';
+    tooltipHabilitarFinca='Habilitar Finca.';
     fincasDeshabilitadasSeleccionado:Boolean;
     
     
@@ -87,13 +87,12 @@ export class HomeFincaComponent implements OnInit{
                 private homeFincaService:HomeFincaService,
                 private appService:AppService ){
                     
-           appService.getState().topnavTitle = 'Home Finca';
+           appService.getState().topnavTitle = 'Home Finca.';
                     
 
     }
 
     ngOnInit(){
-
         this.homeFincaService.obtenerFincasUsuario()
             .then(
                     response=>{
@@ -168,7 +167,6 @@ export class HomeFincaComponent implements OnInit{
     obtenerFincasNoEncargado(){
         let fincas=this.fincasUsuario;
         let longitud=Object.keys(fincas).length;
-        console.log("logitud "+longitud);
 
         for(var i=0;i<longitud;i++){
             let estadoActual= fincas[i]['estadoFinca'];
@@ -252,7 +250,12 @@ export class HomeFincaComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageFincasDeshabilitadas=error.error_description;
+                    if(error.error_description==this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageFincasDeshabilitadas=error.error_description;
+                    }
                 }
             );
     }

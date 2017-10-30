@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../../app.service';
 import { IniciarSesionService, Usuario } from './iniciar.sesion.service';
@@ -13,7 +13,7 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
     './iniciar.sesion.component.scss'
   ]
 })
-export class IniciarSesionComponent implements OnInit {
+export class IniciarSesionComponent implements OnInit, OnDestroy {
 
   erroresSistema = new ErroresSistema();
 
@@ -60,6 +60,9 @@ export class IniciarSesionComponent implements OnInit {
     this.recuperarSeleccionado = false;
     this.errorMessage = "";
   }
+  ngOnDestroy(){
+    this.appService.getState().pageFullscreen = false;
+}
 
   //EMPIEZA INICIAR SESION
 
@@ -253,7 +256,7 @@ export class IniciarSesionComponent implements OnInit {
           );
       }
     }
-
+    
   }
 
   //TERMINA RECUPERAR CUENTA

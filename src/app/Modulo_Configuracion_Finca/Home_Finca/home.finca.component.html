@@ -1,5 +1,6 @@
 <!--SECCION HOME FINCA-->
 <div class="page-content">
+  
   <md-card class="page-card">
     <md-card-title>
       Resumen de Fincas.
@@ -210,21 +211,14 @@
                 <td>{{fincaDeshabilitada.nombreRol}}</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipHabilitarFinca}} [mdTooltipPosition]="position">
-                            <img src="assets/icons/habilitar.png" (click)="apretarHabilitarFinca(fincaDeshabilitada.idFinca)">
-                            
+                            <img src="assets/icons/habilitar.png" (click)="apretarHabilitarFinca(fincaDeshabilitada.idFinca)">          
                   </a>
                 </td>
               </tr>
-
             </tbody>
           </table>
         </section>
       </md-card-content>
     </md-card>
-
-
   </md-card>
-
-
-
 </div>
