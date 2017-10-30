@@ -44,15 +44,15 @@
 </div>
 
 <!--SECCION AGREGAR CULTIVO SECTOR-->
-<div *ngIf="getPerfilAgregarCultivo()" class="page-content">
+<div *ngIf="getPerfilAgregarCultivo() && getPermisoAsignarCultivo()" class="page-content">
   <md-card><br>
-    <md-card-title>Agregar Cultivo</md-card-title>
+    <md-card-title>Agregar Cultivo.</md-card-title>
     <md-card-content>
       <md-tab-group selectedIndex="{{selectIndex}}">
         <md-tab disabled label="Paso 1">
           <div class="tab-body-content">
             <h3>
-              <small>Datos Cultivo</small>
+              <small>Datos Cultivo.</small>
             </h3>
             <p>Los campos con (*) son obligatorios.</p>
             <section *ngIf="errorMessageAgregarCultivo" class="bs">
@@ -64,15 +64,15 @@
             </section>
             
             <md-input-container>  
-              <input mdInput placeholder="Nombre cultivo" type="text" [(ngModel)]="nombreCultivo" name="nombreCultivo" required>
+              <input mdInput placeholder="Nombre cultivo." type="text" [(ngModel)]="nombreCultivo" name="nombreCultivo" required>
             </md-input-container>
 
             <md-input-container>  
-              <input mdInput placeholder="Descripci&oacute;n cultivo" type="text" [(ngModel)]="descripcion" name="descripcion" required>
+              <input mdInput placeholder="Descripci&oacute;n cultivo." type="text" [(ngModel)]="descripcion" name="descripcion" required>
             </md-input-container>
             
             <md-input-container>
-              <input mdInput placeholder="Fecha Plantaci&oacute;n" type="date" [(ngModel)]="fechaPlantacion" name="fechaPlantacion" required>
+              <input mdInput placeholder="Fecha Plantaci&oacute;n." type="date" [(ngModel)]="fechaPlantacion" name="fechaPlantacion" required>
             </md-input-container>
 
 
@@ -81,7 +81,7 @@
         
         <md-tab disabled label="Paso 2">
           <div class="tab-body-content">
-            <h4>Resumen Registraci&oacute;n</h4>
+            <h4>Resumen Registraci&oacute;n.</h4>
             <section *ngIf="errorMessageAgregarCultivo" class="bs">
                 <div class="bd-example" data-example-id="">
                   <div class="alert alert-danger" role="alert">
@@ -90,25 +90,25 @@
                 </div><br>
               </section>
           <label id="atributo">Sector: </label>
-          <label> {{idSector}}</label><br><br>
+          <label> {{idSector}}.</label><br><br>
           <label id="atributo">Nombre Cultivo: </label>
-          <label>{{nombreCultivo}}</label><br><br>
+          <label>{{nombreCultivo}}.</label><br><br>
           <label id="atributo">SubTipo: </label>
-          <label>{{nombreSubtipoCultivo}}</label><br><br>
+          <label>{{nombreSubtipoCultivo}}.</label><br><br>
           <label id="atributo">Descripci&oacute;n: </label>
-          <label>{{descripcion}}</label><br><br>
+          <label>{{descripcion}}.</label><br><br>
           <label id="atributo">Fecha Plantaci&oacute;n: </label>
-          <label>{{fechaPlantacion}}</label><br><br>
+          <label>{{fechaPlantacion}}.</label><br><br>
         
         </div>
         </md-tab>
       </md-tab-group>
     </md-card-content>
     <md-card-actions>
-      <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-      <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAsignar()" >NEXT</button>
-      <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregaCultivo()">ASIGNAR</button>
-      <button md-raised-button (click)="apretarSalir()">SALIR</button>
+      <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
+      <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAsignar()" >SIGUIENTE.</button>
+      <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregaCultivo()">ASIGNAR.</button>
+      <button md-raised-button (click)="apretarSalir()">SALIR.</button>
     </md-card-actions>
   </md-card>
 

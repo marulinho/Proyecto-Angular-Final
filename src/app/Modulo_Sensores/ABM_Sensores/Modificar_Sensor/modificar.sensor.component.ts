@@ -5,6 +5,7 @@ import { AppService } from '../../../app.service';
 import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialog-example.component';
 import { MdDialog } from '@angular/material';
 import { ABMSensorFincaService, TipoMediciones } from '../abm.sensores.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'modificar-sensor-finca',
@@ -14,6 +15,9 @@ import { ABMSensorFincaService, TipoMediciones } from '../abm.sensores.service';
 })
 
 export class ModificarSensorComponent implements OnInit{
+
+    erroresSistema = new ErroresSistema();
+    permisoGestionarSensor = JSON.parse(localStorage.getItem('puedeGestionarSensores'));
 
     idFinca:number;
     idSensor:number;
@@ -30,7 +34,7 @@ export class ModificarSensorComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Modificar Sensor";
+        appService.getState().topnavTitle="Modificar Sensor.";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
             this.idSensor = +params['idSensor'];
@@ -48,7 +52,12 @@ export class ModificarSensorComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageModificarSensor=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageModificarSensor=error.error_description;
+                        }
                     }
                 );
         });
@@ -56,6 +65,10 @@ export class ModificarSensorComponent implements OnInit{
     }
 
     ngOnInit(){}
+
+    getPermisoGestionarSensor(){
+        return this.permisoGestionarSensor;
+    }
 
     getPerfilSensorSeleccionado(){
         return this.perfilSensorSeleccionado;
@@ -74,7 +87,12 @@ export class ModificarSensorComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageModificarSensor=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageModificarSensor=error.error_description;
+                        }
                     }
                 );
         }

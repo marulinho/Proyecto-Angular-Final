@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, InformeEvento } from '../generar.repotes.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector: 'reporte-evento-personalizado',
@@ -14,6 +15,9 @@ import { GenerarReportesService, InformeEvento } from '../generar.repotes.servic
 })
 
 export class ReporteEventoPersonalizadoComponent implements OnInit {
+
+    erroresSistema = new ErroresSistema();
+    permisoGenerarReporteEventoPersonalizado = JSON.parse(localStorage.getItem('puedeGenerarInformeEventoPersonalizado'));
 
     errorMessageReporte = "";
     idFinca:number=parseInt(JSON.parse(localStorage.getItem('idFinca'))); 

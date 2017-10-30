@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../../app/app.service';
 import { AsignarComponenteSensorSectorService, ComponenteSensor } from './asignar.componente.sensor.sector.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'asignar-componente-sensor-sector',
@@ -23,14 +24,16 @@ export class AsignarComponenteSensorSectorComponent implements OnInit{
     perfilAsignarComponenteSensorSector:Boolean;
     errorMessageAsingarComponenteSensor="";
 
-    
+    erroresSistema = new ErroresSistema();
+    permisoAsignarComponenteSensor = JSON.parse(localStorage.getItem('puedeAsignarComponenteSensor'));
+
     constructor(private router:Router,
                 private route:ActivatedRoute,
                 private asignarComponenteSensorSectorService:AsignarComponenteSensorSectorService,
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Asignar Componente Sensor";
+        appService.getState().topnavTitle="Asignar Componente Sensor.";
         this.route.params.subscribe(params => {
             this.idSector = +params['idSector'];
             this.idFinca=+params['idFinca'];
@@ -54,9 +57,18 @@ export class AsignarComponenteSensorSectorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAsingarComponenteSensor=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAsingarComponenteSensor=error.error_description;
+                    }
                 }
             );
+    }
+
+    getPermisoAsignarComponenteSensor(){
+        return this.permisoAsignarComponenteSensor;
     }
 
     getPerfilAsignarComponenteSensorSector(){
@@ -72,7 +84,12 @@ export class AsignarComponenteSensorSectorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAsingarComponenteSensor=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAsingarComponenteSensor=error.error_description;
+                    }
                 }
             );
     }

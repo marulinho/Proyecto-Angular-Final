@@ -5,6 +5,7 @@ import { AppService } from '../../../app.service';
 import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialog-example.component';
 import { MdDialog } from '@angular/material';
 import { ABMSensorFincaService, TipoMediciones } from '../abm.sensores.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'crear-sensor-finca',
@@ -14,6 +15,9 @@ import { ABMSensorFincaService, TipoMediciones } from '../abm.sensores.service';
 })
 
 export class CrearSensorComponent implements OnInit{
+
+    erroresSistema = new ErroresSistema();
+    permisoCrearSensor = JSON.parse(localStorage.getItem('puedeGestionarSensores'));
 
     idFinca:number;
     perfilSensorSeleccionado:Boolean;
@@ -46,7 +50,12 @@ export class CrearSensorComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageCrearSensor=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageCrearSensor=error.error_description;
+                        }
                     }
                 );
         });
@@ -54,6 +63,10 @@ export class CrearSensorComponent implements OnInit{
     }
 
     ngOnInit(){}
+
+    getPermisoCrearSensor(){
+        return this.permisoCrearSensor;
+    }
 
     getPerfilSensorSeleccionado(){
         return this.perfilSensorSeleccionado;
@@ -72,7 +85,12 @@ export class CrearSensorComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageCrearSensor=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageCrearSensor=error.error_description;
+                        }
                     }
                 );
         }

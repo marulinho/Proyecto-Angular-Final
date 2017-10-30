@@ -1,5 +1,5 @@
 <!--SECCION REPORTE RIEGO EJECUCION-->
-<div class="page-content">
+<div *ngIf="getPermisoGenerarReporteEstadoHistoricoSector()" class="page-content">
     <md-card class="page-card">
         <md-card-title>Reporte Hist&oacute;rico Sector.</md-card-title>
         <md-card-content>
@@ -18,7 +18,7 @@
                 <md-input-container   >
                     <input  mdInput placeholder="Fecha Fin" type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
                 </md-input-container>
-                <button md-raised-button (click)="apretarGenerarReporte()">Generar.</button>
+                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR.</button>
             </section>
 
             <section *ngIf="getPerfilEstadoHistoricoSeleccionado()" class="bs">
@@ -79,7 +79,7 @@
             </section>
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button *ngIf="getPerfilEstadoHistoricoSeleccionado()" (click)="apretarSalir()">SALIR</button>
+            <button md-raised-button *ngIf="getPerfilEstadoHistoricoSeleccionado()" (click)="apretarSalir()">SALIR.</button>
         </md-card-actions>
     </md-card>
 </div>

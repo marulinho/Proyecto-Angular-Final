@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../../app.service';
 import { GestionarSectorFincaService, Sector } from './gestionar.sector.service';
-
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 
 @Component({
@@ -22,7 +22,10 @@ export class GestionarSectorFincaComponent implements OnInit{
     descripcion:string;
     superficie:number;
 
+    erroresSistema=new ErroresSistema();
+
     idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    permisoGestionarSector = JSON.parse(localStorage.getItem('puedeGestionarSector'));
     
     constructor(private router:Router,
                 private route:ActivatedRoute,
@@ -37,8 +40,10 @@ export class GestionarSectorFincaComponent implements OnInit{
 
     }
 
-    ngOnInit(){
-        
+    ngOnInit(){}
+
+    getPermisoGestionarSector(){
+        return this.permisoGestionarSector;
     }
 
    getSectorSeleccionado(){
@@ -60,7 +65,12 @@ export class GestionarSectorFincaComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageGestionarSectorFinca=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageGestionarSectorFinca=error.error_description;
+                        }
                     }
                 );
         }

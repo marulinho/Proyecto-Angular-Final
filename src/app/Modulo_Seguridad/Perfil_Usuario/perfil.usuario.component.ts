@@ -9,7 +9,7 @@ import { DialogExampleComponent } from '../../../app/shared/dialog/dialog-exampl
 import { PerfilUsuarioService, Usuario } from './perfil.usuario.service';
 import { ModificarUsuarioService } from '../CU_Modificar_Usuario/modificar.usuario.service';
 import { FinalizarSesionService } from '../CU_Finalizar_Sesion/finalizar.sesion.service';
-
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector: 'app-perfil-usuario',
@@ -19,6 +19,8 @@ import { FinalizarSesionService } from '../CU_Finalizar_Sesion/finalizar.sesion.
 })
 
 export class PerfilUsuarioComponent implements OnInit {
+
+    erroresSistema = new ErroresSistema();
 
     position = 'above';
     errorMessage: string = "";
@@ -42,7 +44,7 @@ export class PerfilUsuarioComponent implements OnInit {
         private finalizarSesionService: FinalizarSesionService,
         private appService: AppService,
         private dialog: MdDialog) {
-        appService.getState().topnavTitle = 'Perfil Usuario';
+        appService.getState().topnavTitle = 'Perfil Usuario.';
     }
 
     ngOnInit() {
@@ -56,8 +58,13 @@ export class PerfilUsuarioComponent implements OnInit {
             )
             .catch(
                 error => {
-                    this.perfilUsuarioSeleccionado = false;
-                    this.errorMessage = error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.perfilUsuarioSeleccionado = false;
+                        this.errorMessage = error.error_description;
+                    }
 
                 }
             );
@@ -89,7 +96,12 @@ export class PerfilUsuarioComponent implements OnInit {
                         )
                         .catch(
                             error => {
-                                this.errorMessage = error.error_description;
+                                if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                    this.router.navigate(['/login/']);
+                                }
+                                else{
+                                    this.errorMessage = error.error_description;
+                                }
                             }
                         );
                 }

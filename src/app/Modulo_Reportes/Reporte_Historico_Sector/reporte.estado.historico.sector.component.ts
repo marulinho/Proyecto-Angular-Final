@@ -6,6 +6,8 @@ import { MdDialog } from '@angular/material';
 import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, HistoricoSector } from '../generar.repotes.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+
 
 @Component({
     selector: 'reporte-estado-historico-sector',
@@ -15,6 +17,9 @@ import { GenerarReportesService, HistoricoSector } from '../generar.repotes.serv
 })
 
 export class ReporteEstadoHistoricoSectorComponent implements OnInit {
+
+    erroresSistema = new ErroresSistema();
+    permisoGenerarReporteEstadoHistoricoSector = JSON.parse(localStorage.getItem(''));
 
     errorMessageReporte = "";
     idFinca: number = parseInt(JSON.parse(localStorage.getItem('idFinca')));
@@ -106,66 +111,75 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
 
     ngOnInit() { }
 
+    getPermisoGenerarReporteEstadoHistoricoSector(){
+        return this.permisoGenerarReporteEstadoHistoricoSector;
+    }
+    
     apretarGenerarReporte() {
         let resultado = this.compararFechas();
-        if(resultado){
+        if (resultado) {
             this.generarReportesService.obtenerInformeHistoricoSector(this.idSector, this.idFinca, this.fechaInicioReporte, this.fechaFinReporte)
                 .then(
-                    response => {
-                        if (response.detalle_operacion == "No hay datos") {
-                            this.errorMessageReporte = "No hay datos para construir el reporte.";
-                        }
-                        else {
-                            this.estadoHistoricoSector = response.datos_operacion['componenteMedicionListaMediciones'];
-                            this.obtenerTablasInternas();
-                            this.dataTemperatura = this.temperaturaHistorico;
-                            this.sourceTemperatura = new LocalDataSource(this.dataTemperatura);
-
-                            this.dataHumedad = this.humedadHistorico;
-                            this.sourceHumedad = new LocalDataSource(this.dataHumedad);
-
-                            this.llenarGraficoTemperatura();
-                            this.llenarGraficoHumedad();
-                            this.perfilEstadoHistorico = true;
-                        }
+                response => {
+                    if (response.detalle_operacion == "No hay datos") {
+                        this.errorMessageReporte = "No hay datos para construir el reporte.";
                     }
+                    else {
+                        this.estadoHistoricoSector = response.datos_operacion['componenteMedicionListaMediciones'];
+                        this.obtenerTablasInternas();
+                        this.dataTemperatura = this.temperaturaHistorico;
+                        this.sourceTemperatura = new LocalDataSource(this.dataTemperatura);
+
+                        this.dataHumedad = this.humedadHistorico;
+                        this.sourceHumedad = new LocalDataSource(this.dataHumedad);
+
+                        this.llenarGraficoTemperatura();
+                        this.llenarGraficoHumedad();
+                        this.perfilEstadoHistorico = true;
+                    }
+                }
                 )
                 .catch(
-                    error=>{
-                        this.errorMessageReporte=error.error_description;
+                error => {
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
                     }
+                    else{
+                        this.errorMessageReporte = error.error_description;
+                    }
+                }
                 );
-        }    
+        }
     }
     getPerfilEstadoHistoricoSeleccionado() {
         return this.perfilEstadoHistorico;
     }
 
-    compararFechas(){
-        let resultado:boolean;
-        if( this.fechaInicioReporte==null || this.fechaInicioReporte=="" ||
-            this.fechaFinReporte==null || this.fechaFinReporte==null){
-            this.errorMessageReporte="Debe completar todos los campos obligatorios (*).";
-            resultado=false;
+    compararFechas() {
+        let resultado: boolean;
+        if (this.fechaInicioReporte == null || this.fechaInicioReporte == "" ||
+            this.fechaFinReporte == null || this.fechaFinReporte == null) {
+            this.errorMessageReporte = "Debe completar todos los campos obligatorios (*).";
+            resultado = false;
         }
-        else{ 
-            let fechaInicializacion=[];
+        else {
+            let fechaInicializacion = [];
             let fechaInicial;
-            fechaInicializacion=this.fechaInicioReporte.split("-");
-            fechaInicial=parseInt(fechaInicializacion[0]+""+fechaInicializacion[1]+""+fechaInicializacion[2]);
+            fechaInicializacion = this.fechaInicioReporte.split("-");
+            fechaInicial = parseInt(fechaInicializacion[0] + "" + fechaInicializacion[1] + "" + fechaInicializacion[2]);
 
-            let fechaFinalizacion=[];
+            let fechaFinalizacion = [];
             let fechaFinal;
-            fechaFinalizacion=this.fechaFinReporte.split("-");
-            fechaFinal=parseInt(fechaFinalizacion[0]+""+fechaFinalizacion[1]+""+fechaFinalizacion[2]);
+            fechaFinalizacion = this.fechaFinReporte.split("-");
+            fechaFinal = parseInt(fechaFinalizacion[0] + "" + fechaFinalizacion[1] + "" + fechaFinalizacion[2]);
 
-            if(fechaInicial>fechaFinal){
-                this.errorMessageReporte="La fecha inicial no puede ser mayor que la fecha final.";
-                resultado=false;
+            if (fechaInicial > fechaFinal) {
+                this.errorMessageReporte = "La fecha inicial no puede ser mayor que la fecha final.";
+                resultado = false;
             }
-            else{
-                this.errorMessageReporte="";
-                resultado=true;
+            else {
+                this.errorMessageReporte = "";
+                resultado = true;
             }
         }
         return resultado;
@@ -182,7 +196,7 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
             let estadoActual = this.estadoHistoricoSector[i]['medicionCabecera'];
             let tamanioMedicion = (estadoActual['lista_mediciones_detalle']).length;
             console.log(tamanioMedicion);
-            for(var k=0; k<tamanioMedicion;k++){
+            for (var k = 0; k < tamanioMedicion; k++) {
                 let medicion = estadoActual['lista_mediciones_detalle'][k]['tipo_medicion'];
                 if (medicion == "temperatura") {
                     valorMedicion = (estadoActual['lista_mediciones_detalle'][k]['valor']);
@@ -199,9 +213,8 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
                     }
                 }
             }
-            
+
         }
-        console.log(humedad);
         this.obtenerTablaTemperatura(temperatura);
         this.obtenerTablaHumedad(humedad);
     }
@@ -320,7 +333,7 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
         ChartMock.bar.data.labels = this.diasUnicosTemperatura;
 
     }
-    llenarGraficoHumedad(){
+    llenarGraficoHumedad() {
         let longitud = this.humedadMaximoMinimo.length;
         let maximo = [];
         let minimo = [];
@@ -364,7 +377,7 @@ export class tablaMedicionesMaximoMinimo {
         this.fechaMedicion = fechaMedicion;
     }
     getFecha() {
-        return this.fechaMedicion; 
+        return this.fechaMedicion;
     }
     getValorMedicionMaxima() {
         return this.valorMedicionMaxima;

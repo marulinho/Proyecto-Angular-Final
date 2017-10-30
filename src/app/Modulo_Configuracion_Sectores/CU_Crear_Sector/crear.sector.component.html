@@ -1,13 +1,13 @@
 <!--SECCION CREAR SECTOR FINCA-->
-<div  class="page-content">
+<div  *ngIf="getPermisoCrearSector()" class="page-content">
     <md-card><br>
-      <md-card-title>Crear Sector</md-card-title>
+      <md-card-title>Crear Sector.</md-card-title>
       <md-card-content>
         <md-tab-group selectedIndex="{{selectIndex}}">
           <md-tab disabled label="Paso 1">
             <div class="tab-body-content">
               <h3>
-                <small>Datos del Sector</small>
+                <small>Datos del Sector.</small>
               </h3>
               <p>Los campos con (*) son obligatorios.</p>
               <section *ngIf="errorMessageCrearSectorFinca" class="bs">
@@ -18,19 +18,19 @@
                   </div><br>
               </section>
               <md-input-container>
-                <input mdInput placeholder="Nombre" type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required><br>
               </md-input-container>
   
               <md-input-container>
-                  <input mdInput placeholder="N&uacute;mero" type="number" [(ngModel)]="numero" name="numero" required><br>
+                  <input mdInput placeholder="N&uacute;mero." type="number" [(ngModel)]="numero" name="numero" required><br>
               </md-input-container>
   
               <md-input-container>
-                  <input mdInput placeholder="Descripci&oacute;n" type="text" [(ngModel)]="descripcion" name="descripcion" required><br>
+                  <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcion" name="descripcion" required><br>
               </md-input-container>
   
               <md-input-container>
-                  <input mdInput placeholder="Superficie en hect&aacute;reas" type="number" [(ngModel)]="superficie" name="superficie" required><br>
+                  <input mdInput placeholder="Superficie en hect&aacute;reas." type="number" [(ngModel)]="superficie" name="superficie" required><br>
               </md-input-container>
   
             </div>
@@ -39,7 +39,7 @@
          
           <md-tab disabled label="Paso 2">
             <div class="tab-body-content">
-              <h4>Resumen Creaci&oacute;n</h4>
+              <h4>Resumen Creaci&oacute;n.</h4>
               <section *ngIf="errorMessageCrearSectorFinca" class="bs">
                   <div class="bd-example" data-example-id="">
                     <div class="alert alert-danger" role="alert">
@@ -48,21 +48,30 @@
                   </div><br>
                 </section>
             
-              <label>Finca: {{idFinca}}</label><br><br>
-              <label>Nombre: {{nombre}}</label><br><br>
-              <label>N&uacute;mero: {{numero}}</label><br><br>
-              <label>Descripci&oacute;n: {{descripcion}}</label><br><br>
-              <label>Superficie: {{superficie }} hect&aacute;reas</label><br><br>         
+              <label id="atributo">Finca: </label>
+              <label>{{idFinca}}.</label><br><br>
+
+              <label id="atributo">Nombre: </label>
+              <label>{{nombre}}.</label><br><br>
+
+              <label id="atributo">N&uacute;mero: </label>
+              <label>{{numero}}.</label><br><br>
+
+              <label id="atributo">Descripci&oacute;n: </label>
+              <label>{{descripcion}}.</label><br><br>
+
+              <label id="atributo">Superficie: </label>
+              <label>{{superficie }} hect&aacute;reas.</label><br><br>         
 
           </div>
           </md-tab>
         </md-tab-group>
       </md-card-content>
       <md-card-actions>
-        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-        <button *ngIf="selectIndex >=0 && selectIndex <1" md-raised-button (click)="apretarNextCrear()">NEXT</button>
-        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarCrearSector()">CREAR SECTOR</button>
-        <button md-raised-button (click)="apretarSalir()">SALIR</button>
+        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ANTR&Aacute;S.</button>
+        <button *ngIf="selectIndex >=0 && selectIndex <1" md-raised-button (click)="apretarNextCrear()">SIGUIENTE.</button>
+        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarCrearSector()">CREAR SECTOR.</button>
+        <button md-raised-button (click)="apretarSalir()">SALIR.</button>
       </md-card-actions>
     </md-card>
 </div>

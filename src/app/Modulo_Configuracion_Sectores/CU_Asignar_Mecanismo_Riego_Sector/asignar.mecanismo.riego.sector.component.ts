@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../../app.service';
 import { AsignarMecanismoRiegoSectorService } from '../CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.service';
 import { AsignarMecanismoRiegoFincaService, MecanismoRiego } from '../../Modulo_Configuracion_Finca/CU_Asignar_Mecanismo_Riego_Finca/asignar.mecanismo.riego.finca.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'asignar-mecanismo-sector',
@@ -14,6 +15,9 @@ import { AsignarMecanismoRiegoFincaService, MecanismoRiego } from '../../Modulo_
 
 export class AsignarMecanismoRiegoSectorComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoAsignarMecRiegoASector=JSON.parse(localStorage.getItem('puedeAsignarMecRiegoASector'));
+
     //ATRIBUTOS PERFIL MECANISMO RIEGO
     perfilMecanismoRiego:Boolean=true;
     idFinca:number;
@@ -38,7 +42,7 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
                 private asignarMecanismoRiegoFincaService:AsignarMecanismoRiegoFincaService,
                 private appService:AppService){
 
-        appService.getState().topnavTitle="Asignar Mecanismo Riego";
+        appService.getState().topnavTitle="Asignar Mecanismo Riego.";
         this.route.params.subscribe(params => {
             this.idSector = +params['idSector'];
             this.idFinca= +params['idFinca'];
@@ -61,9 +65,18 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessagePerfilMecanismoSectorFinca=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessagePerfilMecanismoSectorFinca=error.error_description;
+                    }
                 }
             )
+    }
+
+    getPermisoAsignarMecRiegoASector(){
+        return this.permisoAsignarMecRiegoASector;
     }
 
     getPerfilMecanismoRiego(){
@@ -104,7 +117,12 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAsignarMecanismo=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAsignarMecanismo=error.error_description;
+                    }
                 }
             );
     }

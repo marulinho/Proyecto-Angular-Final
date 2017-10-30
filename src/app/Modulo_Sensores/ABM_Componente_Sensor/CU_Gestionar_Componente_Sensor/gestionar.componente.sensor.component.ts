@@ -5,6 +5,7 @@ import { AppService } from '../../../app.service';
 import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialog-example.component';
 import { MdDialog } from '@angular/material';
 import { GestionarComponenteSensorService } from '../gestionar.componente.sensor.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'gestionar-componente-sensor-finca',
@@ -14,6 +15,9 @@ import { GestionarComponenteSensorService } from '../gestionar.componente.sensor
 })
 
 export class GestionarComponenteSensorComponent implements OnInit{
+
+    erroresSistema = new ErroresSistema();
+    permisoGestionarComponenteSensor = JSON.parse(localStorage.getItem('puedeGestionarComponenteSensor'));
 
     idFinca:number;
     idComponenteSensor:number;
@@ -30,7 +34,7 @@ export class GestionarComponenteSensorComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Modificar Componente Sensor";
+        appService.getState().topnavTitle="Modificar Componente Sensor.";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
             this.idComponenteSensor = +params['idComponenteSensor'];
@@ -40,6 +44,10 @@ export class GestionarComponenteSensorComponent implements OnInit{
     }
 
     ngOnInit(){}
+
+    getPermisoGestionarComponenteSensor(){
+        return this.permisoGestionarComponenteSensor;
+    }
 
     getPerfilComponenteSeleccionado(){
         return this.perfilComponenteSeleccionado;
@@ -60,7 +68,12 @@ export class GestionarComponenteSensorComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageModificarComponente=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageModificarComponente=error.error_description;
+                        }
                     }
                 );
         }

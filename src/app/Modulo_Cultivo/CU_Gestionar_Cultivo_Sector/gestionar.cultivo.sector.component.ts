@@ -5,7 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GestionarCultivoSectorService } from './gestionar.cultivo.sector.service';
-
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'gestionar-cultivo-sector',
@@ -16,6 +16,8 @@ import { GestionarCultivoSectorService } from './gestionar.cultivo.sector.servic
 
 export class GestionarCultivoSectorComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoGestionarCultivo = JSON.parse(localStorage.getItem('puedeGestionarCultivoSector'));
 
     idSector:number;
     idFinca:number;
@@ -32,7 +34,7 @@ export class GestionarCultivoSectorComponent implements OnInit{
                 private gestionarCultivoSectorService:GestionarCultivoSectorService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Modificar Cultivo";
+        appService.getState().topnavTitle="Modificar Cultivo.";
         this.route.params.subscribe(params => {
             this.idSector = +params['idSector'];
             this.idFinca = +params['idFinca'];
@@ -43,6 +45,10 @@ export class GestionarCultivoSectorComponent implements OnInit{
     }
 
     ngOnInit(){}  
+
+    getPermisoGestionarCultivo(){
+        return this.permisoGestionarCultivo;
+    }
 
     apretarNextModificar(){
         if(this.selectIndex==0){
@@ -67,7 +73,12 @@ export class GestionarCultivoSectorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageModificarCultivo=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageModificarCultivo=error.error_description;
+                    }
                 }
             );
     }

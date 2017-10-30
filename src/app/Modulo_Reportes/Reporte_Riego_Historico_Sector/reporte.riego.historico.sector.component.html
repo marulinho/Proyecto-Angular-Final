@@ -1,5 +1,5 @@
 <!--SECCION REPORTE RIEGO EJECUCION-->
-<div class="page-content">
+<div *ngIf="getPermisoRiegoHistorico()" class="page-content">
     <md-card class="page-card">
         <md-card-title>Reporte Hist&oacute;rico Riego.</md-card-title>
         <md-card-content>
@@ -13,12 +13,12 @@
 
             <section *ngIf="!getRiegosSeleccionado()" >
                 <md-input-container  >
-                    <input mdInput placeholder="Fecha Inicio" type="date" [(ngModel)]="fechaInicioReporte" name="fechaInicioReporte" required><br>
+                    <input mdInput placeholder="Fecha Inicio." type="date" [(ngModel)]="fechaInicioReporte" name="fechaInicioReporte" required><br>
                 </md-input-container>
                 <md-input-container   >
-                    <input  mdInput placeholder="Fecha Fin" type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
+                    <input  mdInput placeholder="Fecha Fin." type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
                 </md-input-container>
-                <button md-raised-button (click)="apretarGenerarReporte()">Generar.</button>
+                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR.</button>
             </section>
 
             <section *ngIf="getRiegosSeleccionado()" class="bs">
@@ -69,7 +69,7 @@
             </section>
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button *ngIf="getRiegosSeleccionado()" (click)="apretarSalir()">SALIR</button>
+            <button md-raised-button *ngIf="getRiegosSeleccionado()" (click)="apretarSalir()">SALIR.</button>
         </md-card-actions>
     </md-card>
 </div>

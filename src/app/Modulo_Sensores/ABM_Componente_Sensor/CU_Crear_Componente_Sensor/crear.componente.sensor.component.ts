@@ -5,6 +5,7 @@ import { AppService } from '../../../app.service';
 import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialog-example.component';
 import { MdDialog } from '@angular/material';
 import { GestionarComponenteSensorService } from '../gestionar.componente.sensor.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'crear-componente-sensor-finca',
@@ -14,6 +15,9 @@ import { GestionarComponenteSensorService } from '../gestionar.componente.sensor
 })
 
 export class CrearComponenteSensorComponent implements OnInit{
+
+    erroresSistema = new ErroresSistema();
+    permisoCrearComponenteSensor = JSON.parse(localStorage.getItem('puedeCrearComponenteSensor'));
 
     idFinca:number;
     perfilComponenteSeleccionado:Boolean;
@@ -29,7 +33,7 @@ export class CrearComponenteSensorComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Crear Componente Sensor";
+        appService.getState().topnavTitle="Crear Componente Sensor.";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
             
@@ -38,6 +42,10 @@ export class CrearComponenteSensorComponent implements OnInit{
     }
 
     ngOnInit(){}
+
+    getPermisoCrearComponenteSensor(){
+        return this.permisoCrearComponenteSensor;
+    }
 
     getPerfilComponenteSeleccionado(){
         return this.perfilComponenteSeleccionado;
@@ -58,7 +66,12 @@ export class CrearComponenteSensorComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageCrearComponente=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageCrearComponente=error.error_description;
+                        }
                     }
                 );
         }

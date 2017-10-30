@@ -1,5 +1,5 @@
 <!--SECCION ASIGNAR MECANISMO SECTOR-->
-<div *ngIf="getPerfilMecanismoRiego()" class="sign-container">
+<div *ngIf="getPerfilMecanismoRiego() && getPermisoAsignarMecRiegoASector()" class="sign-container">
     
         <md-card class="page-card">
             <md-card-title>Mecanismos Riego Sector</md-card-title>
@@ -16,20 +16,20 @@
                     <table class="table table-striped table-hover table-card">
                             <thead>
                                     <tr>
-                                            <th style="width:37%;">Nombre</th>
-                                            <th style="width:36%;">Direcci&oacute;n IP</th>
-                                            <th>Fecha Instalaci&oacute;n</th>
-                                            <th class="actions">Acci&oacute;n</th>
+                                            <th style="width:37%;">Nombre.</th>
+                                            <th style="width:36%;">Direcci&oacute;n IP.</th>
+                                            <th>Fecha Instalaci&oacute;n.</th>
+                                            <th class="actions">Acci&oacute;n.</th>
                                     </tr>
                             </thead>
                             <tbody>
                                     <tr *ngFor="let mecanismoRiego of mecanismosRiego">
-                                            <td>{{mecanismoRiego.tipoMecanismoRiego}}</td>
-                                            <td>{{mecanismoRiego.direccionIP}}</td>
-                                            <td>{{mecanismoRiego.fechaInstalacion.substring(0,10)}}</td>
+                                            <td>{{mecanismoRiego.tipoMecanismoRiego}}.</td>
+                                            <td>{{mecanismoRiego.direccionIP}}.</td>
+                                            <td>{{mecanismoRiego.fechaInstalacion.substring(0,10)}}.</td>
                                             <td>
 
-                                                    <a class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismo}} [mdTooltipPosition]="position">
+                                                    <a *ngIf="getPermisoAsignarMecRiegoASector()" class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismo}} [mdTooltipPosition]="position">
                                                     <img src="assets/icons/agregarMecanismo.png" (click)="apretarAgregarMecanismo(mecanismoRiego.idMecanismoRiegoFinca)">
                                             </a>
                                             </td>
@@ -46,15 +46,15 @@
     </div>
 
 <!--SECCION ASIGNAR MECANISMO RIEGO SECTOR-->
-<div *ngIf="getPerfilAsignarMecanismo()" class="page-content">
+<div *ngIf="getPerfilAsignarMecanismo() && getPermisoAsignarMecRiegoASector()" class="page-content">
         <md-card><br>
-          <md-card-title>Agregar Mecanismo</md-card-title>
+          <md-card-title>Agregar Mecanismo.</md-card-title>
           <md-card-content>
             <md-tab-group selectedIndex="{{selectIndex}}">
               <md-tab disabled label="Paso 1">
                 <div class="tab-body-content">
                   <h3>
-                    <small>Datos Mecanismo</small>
+                    <small>Datos Mecanismo.</small>
                   </h3>
                   <p>Los campos con (*) son obligatorios.</p>
                   <section *ngIf="errorMessageAsignarMecanismo" class="bs">
@@ -65,11 +65,11 @@
                     </div><br>
                   </section>
                   <md-input-container>  
-                    <input mdInput placeholder="Caudal Mecanismo" type="number" [(ngModel)]="caudal" name="caudal" required>
+                    <input mdInput placeholder="Caudal Mecanismo." type="number" [(ngModel)]="caudal" name="caudal" required>
                   </md-input-container>
                   
                   <md-input-container>
-                    <input mdInput placeholder="Presi&oacute;n Mecanismo" type="number" [(ngModel)]="presion" name="presion" required>
+                    <input mdInput placeholder="Presi&oacute;n Mecanismo." type="number" [(ngModel)]="presion" name="presion" required>
                   </md-input-container>
       
       
@@ -78,7 +78,7 @@
               
               <md-tab disabled label="Paso 2">
                 <div class="tab-body-content">
-                  <h4>Resumen Registraci&oacute;n</h4>
+                  <h4>Resumen Registraci&oacute;n.</h4>
                   <section *ngIf="errorMessageAsignarMecanismo" class="bs">
                       <div class="bd-example" data-example-id="">
                         <div class="alert alert-danger" role="alert">
@@ -87,23 +87,23 @@
                       </div><br>
                     </section>
                 <label id="atributo">Sector: </label>
-                <label> {{idSector}}</label><br><br>
+                <label> {{idSector}}.</label><br><br>
                 <label id="atributo">Mecanismo Riego Finca: </label>
-                <label>{{idMecanismoRiegoFinca}}</label><br><br>
+                <label>{{idMecanismoRiegoFinca}}.</label><br><br>
                 <label id="atributo">Caudal Mecanismo de Riego: </label>
-                <label>{{caudal}}</label><br><br>
+                <label>{{caudal}}.</label><br><br>
                 <label id="atributo">Presi&oacute; Mecanismo de Riego: </label>
-                <label>{{presion}}</label><br><br>
+                <label>{{presion}}.</label><br><br>
             
               </div>
               </md-tab>
             </md-tab-group>
           </md-card-content>
           <md-card-actions>
-            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-            <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAsignar()" >NEXT</button>
-            <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregaMecanismo()">ASIGNAR</button>
-            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
+            <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAsignar()" >SIGUIENTE.</button>
+            <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregaMecanismo()">ASIGNAR.</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR.</button>
           </md-card-actions>
         </md-card>
       

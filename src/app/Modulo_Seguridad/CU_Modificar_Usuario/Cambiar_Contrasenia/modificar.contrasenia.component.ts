@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppService } from '../../../app.service';
 import { ModificarUsuarioService } from '../modificar.usuario.service';
 import { FinalizarSesionService } from '../../CU_Finalizar_Sesion/finalizar.sesion.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector: 'app-modificar-contrasenia',
@@ -14,6 +15,8 @@ import { FinalizarSesionService } from '../../CU_Finalizar_Sesion/finalizar.sesi
 
 export class ModificarContraseniaComponent implements OnInit {
 
+    erroresSistema = new ErroresSistema();
+
     errorMessage: string = "";
     passwordVieja: string;
     password1: string;
@@ -23,7 +26,7 @@ export class ModificarContraseniaComponent implements OnInit {
         private modificarUsuarioService: ModificarUsuarioService,
         private finalizarSesisonService:FinalizarSesionService,
         private appService: AppService) {
-        appService.getState().topnavTitle = 'Modificar Contraseña';
+        appService.getState().topnavTitle = 'Modificar Contraseña.';
     }
 
     ngOnInit() { }
@@ -55,14 +58,24 @@ export class ModificarContraseniaComponent implements OnInit {
                                     )
                                     .catch(
                                         error=>{
-                                            this.errorMessage=error.error_description;
+                                            if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                                this.router.navigate(['/login/']);
+                                            }
+                                            else{
+                                                this.errorMessage=error.error_description;
+                                            }
                                         }
                                     );
                             }
                         )
                         .catch(
                             error => {
-                                this.errorMessage = error.error_description;
+                                if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                    this.router.navigate(['/login/']);
+                                }
+                                else{
+                                    this.errorMessage = error.error_description;
+                                }
                             }
                         );
                 }

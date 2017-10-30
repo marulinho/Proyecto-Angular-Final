@@ -2,7 +2,7 @@
 <div class="page-content">
   <md-card class="page-card">
     <md-card-title>
-      Resumen de Fincas
+      Resumen de Fincas.
     </md-card-title>
     <md-card-subtitle>En esta secci&oacute;n el usuario puede crear y observar las fincas que tiene asignada con distintos roles.</md-card-subtitle>
     <md-card-content>
@@ -19,7 +19,7 @@
     <!--SECCION FINCA ENCARGADO-->
     <md-card class="page-card">
       <md-card-title>
-        Fincas con Rol Encargado
+        Fincas con Rol Encargado.
       </md-card-title>
       <md-card-content>
         <section *ngIf="errorMessageFincasEncargado" class="bs">
@@ -33,20 +33,20 @@
           <table class="table table-striped table-hover table-card">
             <thead>
               <tr>
-                <th style="width:37%;">Nombre</th>
-                <th style="width:30%;">Tama&ntilde;o</th>
-                <th>Ubicaci&oacute;n</th>
-                <th class="actions">Acci&oacute;n</th>
+                <th style="width:37%;">Nombre.</th>
+                <th style="width:30%;">Tama&ntilde;o.</th>
+                <th>Ubicaci&oacute;n.</th>
+                <th class="actions">Acci&oacute;n.</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let fincaEncargado of fincasEncargado">
-                <td>{{fincaEncargado.nombreFinca}}</td>
-                <td>{{fincaEncargado.tamanio}} hect&aacute;reas</td>
+                <td>{{fincaEncargado.nombreFinca}}.</td>
+                <td>{{fincaEncargado.tamanio}} hect&aacute;reas.</td>
                 <td>
                   <ul>
-                    <li>Latitud: {{fincaEncargado.ubicacion[0]}}</li>
-                    <li>Longitud: {{fincaEncargado.ubicacion[1]}}</li>
+                    <li>Latitud: {{fincaEncargado.ubicacion[0]}}.</li>
+                    <li>Longitud: {{fincaEncargado.ubicacion[1]}}.</li>
                   </ul>
                 </td>
                 <td>
@@ -66,7 +66,7 @@
     <!--SECCION FINCA OTRO ROL-->
     <md-card class="page-card">
       <md-card-title>
-        Fincas con otro Roles
+        Fincas con otro Roles.
       </md-card-title>
 
       <md-card-content>
@@ -97,22 +97,22 @@
           <table class="table table-striped table-hover table-card">
             <thead>
               <tr>
-                <th style="width:37%;">Nombre</th>
-                <th style="width:36%;">Ubicaci&oacute;n</th>
-                <th>Rol</th>
-                <th class="actions">Acci&oacute;n</th>
+                <th style="width:37%;">Nombre.</th>
+                <th style="width:36%;">Ubicaci&oacute;n.</th>
+                <th>Rol.</th>
+                <th class="actions">Acci&oacute;n.</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let fincaSinRolEncargado of fincasSinRolEncargado">
-                <td>{{fincaSinRolEncargado.nombreFinca}}</td>
+                <td>{{fincaSinRolEncargado.nombreFinca}}.</td>
                 <td>
                   <ul>
-                    <li>Latitud: {{fincaSinRolEncargado.ubicacion[0]}}</li>
-                    <li>Longitud: {{fincaSinRolEncargado.ubicacion[1]}}</li>
+                    <li>Latitud: {{fincaSinRolEncargado.ubicacion[0]}}.</li>
+                    <li>Longitud: {{fincaSinRolEncargado.ubicacion[1]}}.</li>
                   </ul>
                 </td>
-                <td>{{fincaSinRolEncargado.nombreRol}}</td>
+                <td>{{fincaSinRolEncargado.nombreRol}}.</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
                 <img src="assets/icons/ver.png" (click)="apretarIconoVerFinca(fincaSinRolEncargado.idFinca,fincaSinRolEncargado.idUsuarioFinca)">
@@ -131,7 +131,7 @@
     <!--SECCION FINCA PENDIENTE -->
     <md-card class="page-card">
       <md-card-title>
-        Fincas Pendientes de Aprobaci&oacute;n
+        Fincas Pendientes de Aprobaci&oacute;n.
       </md-card-title>
       <md-card-content>
         <section *ngIf="errorMessageFincasPendientes" class="bs">
@@ -145,22 +145,22 @@
           <table class="table table-striped table-hover table-card">
             <thead>
               <tr>
-                <th style="width:37%;">Nombre</th>
-                <th style="width:36%;">Ubicaci&oacute;n</th>
-                <th>Tama&ntilde;o</th>
-                <th class="actions">Acci&oacute;n</th>
+                <th style="width:37%;">Nombre.</th>
+                <th style="width:36%;">Ubicaci&oacute;n.</th>
+                <th>Tama&ntilde;o.</th>
+                <th class="actions">Acci&oacute;n.</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let fincaPendientesAprobacion of fincasPendientesAprobacion">
-                <td>{{fincaPendientesAprobacion.nombreFinca}}</td>
+                <td>{{fincaPendientesAprobacion.nombreFinca}}.</td>
                 <td>
                   <ul>
-                    <li>Latitud: {{fincaPendientesAprobacion.ubicacion[0]}}</li>
-                    <li>Longitud: {{fincaPendientesAprobacion.ubicacion[1]}}</li>
+                    <li>Latitud: {{fincaPendientesAprobacion.ubicacion[0]}}.</li>
+                    <li>Longitud: {{fincaPendientesAprobacion.ubicacion[1]}}.</li>
                   </ul>
                 </td>
-                <td>{{fincaPendientesAprobacion.tamanio}} hect&aacute;reas</td>
+                <td>{{fincaPendientesAprobacion.tamanio}} hect&aacute;reas.</td>
                 <td>
                   <a class="example-tooltip-host" mdTooltip={{tooltipVer}} [mdTooltipPosition]="position">
                     <img src="assets/icons/ver.png"  (click)="apretarIconoVerFinca(fincaPendientesAprobacion.idFinca,fincaPendientesAprobacion.idUsuarioFinca)">
@@ -178,7 +178,7 @@
     <!--SECCION FINCAS DESHABILITADAS -->
     <md-card class="page-card">
       <md-card-title>
-        Fincas Deshabilitadas
+        Fincas Deshabilitadas.
       </md-card-title>
       <md-card-content>
         <section *ngIf="errorMessageFincasDeshabilitadas" class="bs">
@@ -192,10 +192,10 @@
           <table class="table table-striped table-hover table-card">
             <thead>
               <tr>
-                <th style="width:37%;">Nombre</th>
-                <th style="width:36%;">Ubicaci&oacute;n</th>
-                <th>Rol</th>
-                <th class="actions">Acci&oacute;n</th>
+                <th style="width:37%;">Nombre.</th>
+                <th style="width:36%;">Ubicaci&oacute;n.</th>
+                <th>Rol.</th>
+                <th class="actions">Acci&oacute;n.</th>
               </tr>
             </thead>
             <tbody>

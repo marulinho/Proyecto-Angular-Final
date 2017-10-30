@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../../shared/dialog/dialog-example/di
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../../app.service';
 import { GestionarConfiguracionRiegoService } from '../gestionar.configuracion.riego.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'crear-configuracion-riego',
@@ -15,6 +16,9 @@ import { GestionarConfiguracionRiegoService } from '../gestionar.configuracion.r
 
 export class ModificarConfiguracionRiegoComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoModificarConfiguracionRiego = JSON.parse(localStorage.getItem('puedeModificarConfiguracionRiego'));
+
     idFinca:number;
     idMecanismoRiegoFincaSector:number;
     idConfiguracionRiego:number;
@@ -44,7 +48,9 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
     }
 
     ngOnInit(){}
-
+    getPermisoModificarConfiguracionRiego(){
+        return this.permisoModificarConfiguracionRiego;
+    }
     apretarNextModificar(){
         if(this.selectIndex==0){
             if( this.nombreConfiguracion=="" || this.nombreConfiguracion==null ||
@@ -70,7 +76,12 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageModificarConfiguracionRiego=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageModificarConfiguracionRiego=error.error_description;
+                        }
                     }
                 );
 

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../../app.service';
 import { CrearSectorFincaService,Sector } from './crear.sector.service';
-
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'crearSectorFinca',
@@ -21,21 +21,26 @@ export class CrearSectorFincaComponent implements OnInit{
     numero:number;
     descripcion:string;
     superficie:number;
+
+    erroresSistema = new ErroresSistema();
+    permisoCrearSector = JSON.parse(localStorage.getItem('puedeCrearSector'));
     
     constructor(private router:Router,
                 private route:ActivatedRoute,
                 private crearSectorFincaService:CrearSectorFincaService,
                 private appService:AppService){
 
-        appService.getState().topnavTitle="Crear Sector";
+        appService.getState().topnavTitle="Crear Sector.";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
-            console.log("idFinca: "+this.idFinca);
         });
     }
 
     ngOnInit(){}
-   
+    
+    getPermisoCrearSector(){
+        return this.permisoCrearSector;
+    }
     apretarNextCrear(){
         if(this.selectIndex==0){
             if( this.nombre=="" || this.nombre==null ||
@@ -59,7 +64,12 @@ export class CrearSectorFincaComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageCrearSectorFinca=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageCrearSectorFinca=error.error_description;
+                    }
                 }
             );
     }

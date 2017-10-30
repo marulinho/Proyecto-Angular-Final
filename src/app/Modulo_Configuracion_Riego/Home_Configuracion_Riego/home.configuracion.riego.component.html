@@ -1,17 +1,17 @@
 <!--SECCION HOME SECTOR-->
-<div class="page-content">
+<div *ngIf="getPermisoModificarConfiguracionRiego()" class="page-content">
     <md-card class="page-card">
         <md-card-title>
             Home Configuraci&oacute;n de Riego.
-            <a class="example-tooltip-host" mdTooltip={{tooltipEditarConfiguracion}} [mdTooltipPosition]="position">
+            <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipEditarConfiguracion}} [mdTooltipPosition]="position">
                 <img src="assets/icons/editar.png" [routerLink]="['/gestionarConfiguracionRiego/',idFinca,idMecanismoRiegoFincaSector,idConfiguracionRiego]">
             </a>
 
-            <a class="example-tooltip-host" mdTooltip={{tooltipCambiarEstadoConfiguracion}} [mdTooltipPosition]="position">
+            <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipCambiarEstadoConfiguracion}} [mdTooltipPosition]="position">
                 <img src="assets/icons/cambiar.png" (click)="apretarCambiarEstadoConfiguracionRiego()">
             </a>
 
-            <a class="example-tooltip-host" mdTooltip={{tooltipEliminarConfiguracion}} [mdTooltipPosition]="position">
+            <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipEliminarConfiguracion}} [mdTooltipPosition]="position">
                 <img src="assets/icons/delete.png" (click)="apretarEliminarConfiguracion()">
             </a>
         </md-card-title>
@@ -24,10 +24,10 @@
                         </div><br>
                 </section>
             <!--SECCION CRITERIO INICIAL-->
-            <md-card class="page-card">
+            <md-card *ngIf="getPermisoModificarConfiguracionRiego()" class="page-card">
                 <md-card-title>
                     Criterio de Inicio.
-                    <a *ngIf="!getExisteCriterioInicial()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioInicial}} [mdTooltipPosition]="position">
+                    <a *ngIf="!getExisteCriterioInicial() && getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioInicial}} [mdTooltipPosition]="position">
                             <img src="assets/icons/nuevo.png" [routerLink]="['/agregarCriterioInicial/',idFinca,idMecanismoRiegoFincaSector,idConfiguracionRiego,idSector]" >
                 </a>
 
@@ -58,10 +58,10 @@
                                 <td *ngIf="tipoCriterioEncontrado=='Hora.'">D&iacute;a = {{criterio.numeroDia}} Hora:{{criterio.v}}.</td>
                                 <td>
 
-                                    <a class="example-tooltip-host" mdTooltip={{tooltipModificarCriterioInicial}} [mdTooltipPosition]="position">
+                                    <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipModificarCriterioInicial}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/editar.png" (click)="apretarEditarCriterioRiego(criterio.id_criterio_riego,criterio.tipo_criterio_riego)">                                                        
                                     </a>
-                                    <a class="example-tooltip-host" mdTooltip={{tooltipEliminarCriterioInicial}} [mdTooltipPosition]="position">
+                                    <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipEliminarCriterioInicial}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/delete.png" (click)="apretarEliminarCriterioRiego(criterio.id_criterio_riego,'inicio')">                                                        
                                     </a>
                                 </td>
@@ -75,10 +75,10 @@
             </md-card>
 
             <!--SECCION CRITERIO DE FINALIZACION-->
-            <md-card class="page-card">
+            <md-card *ngIf="getPermisoModificarConfiguracionRiego()" class="page-card">
                 <md-card-title>
                     Criterio de Finalizaci&oacute;n.
-                    <a *ngIf="!getExisteCriterioFinal()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioFinal}} [mdTooltipPosition]="position">
+                    <a *ngIf="!getExisteCriterioFinal() && getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioFinal}} [mdTooltipPosition]="position">
                             <img src="assets/icons/nuevo.png" [routerLink]="['/agregarCriterioFinal/']" >
                 </a>
                 </md-card-title>
@@ -108,10 +108,10 @@
                                 <td *ngIf="tipoCriterioFinalEncontrado=='Por hora.'">D&iacute;a = {{criterioFinal.numeroDia}} Hora:{{criterioFinal.hora.substring(0,8)}}.</td>
                                 <td *ngIf="tipoCriterioFinalEncontrado=='Por volumen de agua.'">Volumen = {{criterioFinal.volumen}} litros.</td>
                                 <td>
-                                    <a class="example-tooltip-host" mdTooltip={{tooltipModificarCriterioFinal}} [mdTooltipPosition]="position">
+                                    <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipModificarCriterioFinal}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/editar.png" (click)="apretarEditarCriterioRiego(criterioFinal.id_criterio_riego,criterioFinal.tipo_criterio_riego)">                                                        
                                     </a>
-                                    <a class="example-tooltip-host" mdTooltip={{tooltipEliminarCriterioFinal}} [mdTooltipPosition]="position">
+                                    <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipEliminarCriterioFinal}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/delete.png" (click)="apretarEliminarCriterioRiego(criterioFinal.id_criterio_riego,'fin')">                                                        
                                     </a>
                                 </td>

@@ -8,7 +8,7 @@ import { DialogExampleComponent } from '../../../../app/shared/dialog/dialog-exa
 import { AppService } from '../../../app.service';
 import { ModificarUsuarioService} from '../modificar.usuario.service';
 import { PerfilUsuarioService, Usuario } from '../../Perfil_Usuario/perfil.usuario.service';
-
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'app-modificar-usuario',
@@ -19,6 +19,8 @@ import { PerfilUsuarioService, Usuario } from '../../Perfil_Usuario/perfil.usuar
 
 export class ModificarUsuarioComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+
     position = 'above';
     errorMessage:string="";
     usuarioActual:Usuario;
@@ -38,7 +40,7 @@ export class ModificarUsuarioComponent implements OnInit{
                 private perfilUsuarioService:PerfilUsuarioService,
                 private appService:AppService,
                 private dialog: MdDialog){
-    appService.getState().topnavTitle = 'Modificar Usuario';
+    appService.getState().topnavTitle = 'Modificar Usuario.';
         
     }
 
@@ -51,7 +53,12 @@ export class ModificarUsuarioComponent implements OnInit{
             )
             .catch(
                 error => {
-                    this.errorMessage = error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessage = error.error_description;
+                    }
                     
                 }
             );
@@ -98,7 +105,12 @@ export class ModificarUsuarioComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessage=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessage=error.error_description;
+                        }
                     }
                 );
 

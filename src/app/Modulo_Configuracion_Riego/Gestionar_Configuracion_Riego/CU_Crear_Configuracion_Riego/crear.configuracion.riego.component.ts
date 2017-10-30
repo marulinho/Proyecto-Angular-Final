@@ -7,6 +7,7 @@ import { AppService } from '../../../app.service';
 import { GestionarConfiguracionRiegoService } from '../gestionar.configuracion.riego.service';
 import { HomeFincaDetalleService } from '../../../Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.service';
 import { AsignarMecanismoRiegoSectorService } from '../../../Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'crear-configuracion-riego',
@@ -17,6 +18,9 @@ import { AsignarMecanismoRiegoSectorService } from '../../../Modulo_Configuracio
 
 export class CrearConfiguracionRiegoComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoCrearConfiguracionRiego = JSON.parse(localStorage.getItem('puedeCrearConfiguracionRiego'));
+
     idFinca:number;
     idSector:number;
     idMecanismoRiegoFincaSector:number;
@@ -38,7 +42,7 @@ export class CrearConfiguracionRiegoComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Crear Configuración Riego";
+        appService.getState().topnavTitle="Crear Configuración Riego.";
         this.route.params.subscribe(params => {
             this.idMecanismoRiegoFincaSector = +params['idMecanismoRiegoFincaSector'];
             this.idFinca=+params['idFinca'];
@@ -57,7 +61,12 @@ export class CrearConfiguracionRiegoComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageCrearConfiguracionRiego=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageCrearConfiguracionRiego=error.error_description;
+                    }
                 }
             );
 
@@ -74,11 +83,19 @@ export class CrearConfiguracionRiegoComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageCrearConfiguracionRiego=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageCrearConfiguracionRiego=error.error_description;
+                    }
                 }
             );
     }
 
+    getPermisoCrearConfiguracionRiego(){
+        return this.permisoCrearConfiguracionRiego;
+    }
     apretarNextCrear(){
         if(this.selectIndex==0){
             if( this.nombreConfiguracion=="" || this.nombreConfiguracion==null ||
@@ -106,7 +123,12 @@ export class CrearConfiguracionRiegoComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageCrearConfiguracionRiego=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageCrearConfiguracionRiego=error.error_description;
+                        }
                     }
                 );
         }
@@ -120,7 +142,12 @@ export class CrearConfiguracionRiegoComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageCrearConfiguracionRiego=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageCrearConfiguracionRiego=error.error_description;
+                        }
                     }
                 );
         }

@@ -1,8 +1,8 @@
 <!--SECCION MODIFICAR PROVEEDOR-->
-<div *ngIf="getProveedorSeleccionado()" class="sign-container">
+<div *ngIf="getProveedorSeleccionado() && getPermisoConfigurarProveedor()" class="sign-container">
     
         <md-card class="page-card">
-            <md-card-title>Modificar Proveedor</md-card-title>
+            <md-card-title>Modificar Proveedor.</md-card-title>
             <md-card-content>
                 <section *ngIf="errorMessage" class="bs">
                     <div class="bd-example" data-example-id="">
@@ -12,24 +12,24 @@
                     </div><br>
                 </section>
     
-                <h2>Datos Proveedor</h2>
+                <h2>Datos Proveedor.</h2>
     
                 <label id=atributo class="col-2">Proveedor: </label>
-                <label id=valor class="col-3">{{nombreProveedor}}</label><br><br>
+                <label id=valor class="col-3">{{nombreProveedor}}.</label><br><br>
 
                 <label id=atributo class="col-2">Frecuencia actual de obtenci&oacute;n de mediciones: </label>
-                <label id=valor class="col-3">{{proveedor.frecuenciaActual}} por hora</label><br><br>
+                <label id=valor class="col-3">{{proveedor.frecuenciaActual}} por hora.</label><br><br>
                 
 
                 <md-input-container>
-                    <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones por hora" type="number" [(ngModel)]="frecuencia" name="frecuencia" required><br>
+                    <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones por hora." type="number" [(ngModel)]="frecuencia" name="frecuencia" required><br>
                 </md-input-container>
       
     
             </md-card-content>
             <md-card-actions>
-                <button md-raised-button (click)="apretarModificarProveedor()">MODIFICAR</button>
-                <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                <button md-raised-button (click)="apretarModificarProveedor()">MODIFICAR.</button>
+                <button md-raised-button (click)="apretarSalir()">SALIR.</button>
             </md-card-actions>
             <md-card-footer></md-card-footer>
         </md-card>

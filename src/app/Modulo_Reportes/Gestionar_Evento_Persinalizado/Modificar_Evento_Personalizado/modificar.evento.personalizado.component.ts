@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../../app.service';
 import { GestionarEventoPersonalizadoService, TipoMedicionClimatica } from '../../Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'modificar-evento-personalizado-component',
@@ -15,6 +16,9 @@ import { GestionarEventoPersonalizadoService, TipoMedicionClimatica } from '../.
 
 export class ModificarEventoPersonalizadoComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoGestionarEventoPersonalizado = JSON.parse(localStorage.getItem('puedeGestionarEventoPersonalizado'));
+
     errorMessageModificarEvento="";
     idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
     idUsuarioFinca:number=JSON.parse(localStorage.getItem("idUsuarioFinca"));
@@ -65,7 +69,12 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageModificarEvento=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageModificarEvento=error.error_description;
+                    }
                 }
             );
         
@@ -82,20 +91,21 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageModificarEvento=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageModificarEvento=error.error_description;
+                    }
                 }
             );
     }
 
+    getPermisoGestionarEventoPersonalizado(){
+        return this.permisoGestionarEventoPersonalizado;
+    }
+
     apretarNextModificar(){
-        console.log("nombre:" +this.nombre);
-        console.log("descripcion:" +this.descripcion);
-        console.log("tipoInterna:" +this.tipoInterna);
-        console.log("MED MIN:" +this.valorMinimoInterno);
-        console.log("MED MAX:" +this.valorMaximoInterno);
-        console.log("tipo ext:" +this.tipoExterna);
-        console.log("MED MIN:" +this.valorMinimoExterno);
-        console.log("MED MAX:" +this.valorMaximoExterno);
 
         if(this.selectIndex==0){
             if( this.nombre=="" || this.nombre==null ||
@@ -147,7 +157,12 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessageModificarEvento=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageModificarEvento=error.error_description;
+                        }
                     }
                 );
     }

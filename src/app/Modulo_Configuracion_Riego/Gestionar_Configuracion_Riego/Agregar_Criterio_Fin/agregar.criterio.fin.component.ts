@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../../../app.service';
 import { GestionarConfiguracionRiegoService } from '../gestionar.configuracion.riego.service';
 import { GestionarEventoPersonalizadoService, TipoMedicion } from '../../../Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'agregar-criterio-fin',
@@ -13,6 +14,9 @@ import { GestionarEventoPersonalizadoService, TipoMedicion } from '../../../Modu
 
 export class AgregarCriterioFinComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoModificarConfiguracionRiego = JSON.parse(localStorage.getItem('puedeModificarConfiguracionRiego'));
+
     //GENERALES
     idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
     idMecanismoRiegoFincaSector:number=JSON.parse(localStorage.getItem('idMecanismoRiegoFincaSector'));
@@ -73,11 +77,20 @@ export class AgregarCriterioFinComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAgregarCriterioFinal=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAgregarCriterioFinal=error.error_description;
+                    }
                 }
             );
     }
     
+    getPermisoModificarConfiguracionRiego(){
+        return this.permisoModificarConfiguracionRiego;
+    }
+
     apretarNextCrear(){
         if(this.selectIndex==0){
             if( this.nombreCriterio=="" || this.nombreCriterio==null ||
@@ -181,7 +194,12 @@ export class AgregarCriterioFinComponent implements OnInit{
                     )
                     .catch(
                         error=>{
-                            this.errorMessageAgregarCriterioFinal=error.error_description;
+                            if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                this.router.navigate(['/login/']);
+                            }
+                            else{
+                                this.errorMessageAgregarCriterioFinal=error.error_description;
+                            }
                         }
                     );
             }

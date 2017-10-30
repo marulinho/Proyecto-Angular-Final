@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, EstadoActualSector } from '../generar.repotes.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector: 'reporte-estado-actual-sector',
@@ -14,6 +15,9 @@ import { GenerarReportesService, EstadoActualSector } from '../generar.repotes.s
 })
 
 export class ReporteEstadoActualEstadoSector implements OnInit {
+
+    erroresSistema = new ErroresSistema();
+    permisoGenerarReporteEstadoActual = JSON.parse(localStorage.getItem('puedeGenerarInformeEstadoActualSectores'));
 
     errorMessageReporte = "";
     idFinca:number=parseInt(JSON.parse(localStorage.getItem('idFinca'))); 
@@ -58,9 +62,18 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
         )
         .catch(
             error=>{
-                this.errorMessageReporte=error.error_description;
+                if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                    this.router.navigate(['/login/']);
+                }
+                else{
+                    this.errorMessageReporte=error.error_description;
+                }
             }
         );
+    }
+
+    getPermisoGenerarReporteEstadoActual(){
+        return this.permisoGenerarReporteEstadoActual;
     }
 
     getEstadoActualSeleccionado(){

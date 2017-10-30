@@ -6,6 +6,7 @@ import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { HomeFincaService, Finca } from '../../Modulo_Configuracion_Finca/Home_Finca/home.finca.service';
 import { GestionarSectorFincaService, Sector } from '../../Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector: 'home-reporte',
@@ -15,6 +16,8 @@ import { GestionarSectorFincaService, Sector } from '../../Modulo_Configuracion_
 })
 
 export class HomeReporteComponent implements OnInit {
+
+    erroresSistema = new ErroresSistema();
 
     errorMessageReporte = "";
     fincasUsuario = [];
@@ -71,7 +74,12 @@ export class HomeReporteComponent implements OnInit {
             )
             .catch(
                 error => {
-                    this.errorMessageReporte = error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageReporte = error.error_description;
+                    }
                 }
             );
     }
@@ -125,7 +133,12 @@ export class HomeReporteComponent implements OnInit {
             )
             .catch(
                 error=>{
-                    this.errorMessageReporte=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageReporte=error.error_description;
+                    }
                 }
             );
     }
@@ -135,9 +148,7 @@ export class HomeReporteComponent implements OnInit {
         localStorage.setItem('idSector',JSON.stringify(this.sectorSeleccionado));
         let nombre=this.nombresReportes.find(x => x.id == parseInt(this.reporteSeleccionado))['nombre'];
         localStorage.setItem('nombreReporte',JSON.stringify(nombre));
-        console.log("nombreReporte: "+nombre);
         localStorage.setItem('descripcionReporte',JSON.stringify(this.descripcionesReportes[this.reporteSeleccionado]));
-        console.log("nombreReporte: "+this.descripcionesReportes[this.reporteSeleccionado]);
 
         if(this.reporteSeleccionado=='0'){
             this.router.navigate(['/reporteEstadoActualSector/']);

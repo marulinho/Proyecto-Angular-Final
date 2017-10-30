@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../../../app.service';
 import { GestionarProveedorInformacionService, ProveedorInformacion } from'../gestionar.proveedor.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'cambiar-proveedor-informacion',
@@ -13,6 +14,9 @@ import { GestionarProveedorInformacionService, ProveedorInformacion } from'../ge
 
 export class CambiarProveedorInformacionComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoConfigurarProveedor=JSON.parse(localStorage.getItem('puedeConfigurarObtencionInfoExterna'));
+
     idFinca:number;
     proveedoresInformacion:ProveedorInformacion;
     errorMessage="";
@@ -26,7 +30,7 @@ export class CambiarProveedorInformacionComponent implements OnInit{
                 private gestionarProveedorInformacionService:GestionarProveedorInformacionService,
                 private appService:AppService){
 
-        appService.getState().topnavTitle="Cambiar Proveedor Información";
+        appService.getState().topnavTitle="Cambiar Proveedor Información.";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
             if (this.idFinca) {
@@ -39,7 +43,12 @@ export class CambiarProveedorInformacionComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessage=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessage=error.error_description;
+                        }
                     }
                 );
             }
@@ -48,6 +57,10 @@ export class CambiarProveedorInformacionComponent implements OnInit{
     }
 
     ngOnInit(){}
+
+    getPermisoConfigurarProveedor(){
+        return this.permisoConfigurarProveedor;
+    }
 
    getProveedorSeleccionado(){
        return this.proveedorSeleccionado;
@@ -66,7 +79,12 @@ export class CambiarProveedorInformacionComponent implements OnInit{
                 )
                 .catch(
                     error=>{
-                        this.errorMessage=error.error_description;
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessage=error.error_description;
+                        }
                     }
                 );
        }

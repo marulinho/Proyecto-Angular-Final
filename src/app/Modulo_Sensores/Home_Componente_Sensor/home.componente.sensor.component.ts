@@ -5,6 +5,8 @@ import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GestionarComponenteSensorService, ComponenteSensor } from '../ABM_Componente_Sensor/gestionar.componente.sensor.service';
 import { AsignarSensorComponenteSensorService, Sensor } from '../Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+
 
 @Component({
     selector:'home-componente-sensor',
@@ -15,6 +17,10 @@ import { AsignarSensorComponenteSensorService, Sensor } from '../Asignar_Sensor_
 
 export class HomeComponenteSensorComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoGestionarComponenteSensor = JSON.parse(localStorage.getItem('puedeGestionarComponenteSensor'));
+    permisoGestionarSensor = JSON.parse(localStorage.getItem('puedeGestionarSensores'));
+
     //ATRIBUTOS HOME COMPONENTE SENSOR
     title:string;
     description:string;
@@ -58,14 +64,18 @@ export class HomeComponenteSensorComponent implements OnInit{
         this.gestionarComponenteSensorService.buscarComponenteSensorId(this.idComponenteSensor)
             .then(
                 response=>{
-                    this.componenteSensor=response.datos_operacion;
-                                     
+                    this.componenteSensor=response.datos_operacion;             
                     this.perfilComponenteSeleccionado=true;
                 }
             )
             .catch(
                 error=>{
-                    this.errorMessageHomeComponente=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageHomeComponente=error.error_description;
+                    }
                 }
             );
 
@@ -83,9 +93,22 @@ export class HomeComponenteSensorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageSensor=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageSensor=error.error_description;
+                    }
                 }
             );
+    }
+
+    getPermisoGestionarComponenteSensor(){
+        return this.permisoGestionarComponenteSensor;
+    }
+
+    getPermisoGestionarSensor(){
+        return this.permisoGestionarSensor;
     }
 
     getperfilHomeComponenteSeleccionado(){
@@ -134,7 +157,12 @@ export class HomeComponenteSensorComponent implements OnInit{
                             )
                             .catch(
                                 error=>{
-                                    this.errorMessageHomeComponente=error.error_description;
+                                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                        this.router.navigate(['/login/']);
+                                    }
+                                    else{
+                                        this.errorMessageHomeComponente=error.error_description;
+                                    }
                                 }
                             );
                         }
@@ -163,7 +191,12 @@ export class HomeComponenteSensorComponent implements OnInit{
                             )
                             .catch(
                                 error=>{
-                                    this.errorMessageSensor=error.error_description;
+                                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                        this.router.navigate(['/login/']);
+                                    }
+                                    else{
+                                        this.errorMessageSensor=error.error_description;
+                                    } 
                                 }
                             );
                         }

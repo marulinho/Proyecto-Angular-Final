@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, MedicionCruzada } from '../generar.repotes.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector: 'reporte-medicion-cruzada',
@@ -14,6 +15,9 @@ import { GenerarReportesService, MedicionCruzada } from '../generar.repotes.serv
 })
 
 export class ReporteMedicionCruzadaComponent implements OnInit {
+
+    erroresSistema = new ErroresSistema();
+    permisoGenerarMedicionCruzada = JSON.parse(localStorage.getItem('puedeGenerarInformeCruzadoRiegoMedicion'));
 
     errorMessageReporte = "";
     idFinca:number=parseInt(JSON.parse(localStorage.getItem('idFinca'))); 
@@ -59,6 +63,20 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                     }
                 }
             )
+            .catch(
+                error=>{
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageReporte=error.error_description;
+                    }
+                }
+            )
+    }
+
+    getPermisoGenerarMedicionCruzada(){
+        return this.permisoGenerarMedicionCruzada;
     }
 
     compararFechas(){

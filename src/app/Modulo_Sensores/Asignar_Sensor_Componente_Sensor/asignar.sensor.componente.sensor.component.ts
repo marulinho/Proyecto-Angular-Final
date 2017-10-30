@@ -4,7 +4,8 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { AsignarSensorComponenteSensorService, Sensor } from '../Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.service';
-
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+ 
 @Component({
     selector:'asginar-sensor-componente-sensor',
     templateUrl: './asignar.sensor.componente.sensor.component.html',
@@ -14,6 +15,9 @@ import { AsignarSensorComponenteSensorService, Sensor } from '../Asignar_Sensor_
 
 export class AsignarSensorComponenteSensorComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoAsignarSensor = JSON.parse(localStorage.getItem('puedeGestionarSensores'));
+
     //ATRIBUTOS SENSORES
     idFinca:number;
     idComponenteSensor:number;
@@ -30,7 +34,7 @@ export class AsignarSensorComponenteSensorComponent implements OnInit{
                 private appService: AppService,
                 private dialog: MdDialog) {
             
-            this.appService.getState().topnavTitle="Asignar Sensor Componente Sensor";
+            this.appService.getState().topnavTitle="Asignar Sensor Componente Sensor.";
             this.route.params.subscribe(params => {
                 this.idFinca = +params['idFinca'];
                 this.idComponenteSensor = +params['idComponenteSensor'];
@@ -54,9 +58,18 @@ export class AsignarSensorComponenteSensorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAgregarSensorComponente=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAgregarSensorComponente=error.error_description;
+                    }
                 }
             );
+    }
+
+    getPermisoAsignarSensor(){
+        return this.permisoAsignarSensor;
     }
 
     getPerfilAgregarSensorSeleccionado(){
@@ -72,7 +85,12 @@ export class AsignarSensorComponenteSensorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAgregarSensorComponente=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAgregarSensorComponente=error.error_description;
+                    }
                 }
             );
     }

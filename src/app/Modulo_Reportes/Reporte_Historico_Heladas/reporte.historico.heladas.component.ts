@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, Helada } from '../generar.repotes.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector: 'reporte-historico-heladas',
@@ -14,6 +15,9 @@ import { GenerarReportesService, Helada } from '../generar.repotes.service';
 })
 
 export class ReporteHistoricoHeladaComponent implements OnInit {
+
+    erroresSistema = new ErroresSistema();
+    permisoGenerarReporteHeladas = JSON.parse(localStorage.getItem('puedeGenerarInformeHeladasHistorico'));
 
     errorMessageReporte = "";
     idFinca:number=parseInt(JSON.parse(localStorage.getItem('idFinca'))); 
@@ -51,6 +55,10 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
         return this.heladasExistentes;
     }
 
+    getPermisoGenerarReporteHeladas(){
+        return this.permisoGenerarReporteHeladas;
+    }
+    
     apretarGenerarReporte(){
         let resultado=this.compararFechas();
         if(resultado){
@@ -68,7 +76,12 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
             )
             .catch(
                 error=>{
-                    this.errorMessageReporte=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageReporte=error.error_description;
+                    }
                 }
             );
         }

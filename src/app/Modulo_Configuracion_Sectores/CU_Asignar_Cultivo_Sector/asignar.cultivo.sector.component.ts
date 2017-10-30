@@ -5,7 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../../app/app.service';
 import { AsignarCultivoSectorService, Cultivo } from './asignar.cultivo.sector.service';
-
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'asignar-cultivo-sector',
@@ -16,6 +16,8 @@ import { AsignarCultivoSectorService, Cultivo } from './asignar.cultivo.sector.s
 
 export class AsignarCultivoSectorComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoAsignarCultivo = JSON.parse(localStorage.getItem('puedeAsignarCultivo'));
 
     //ATRIBUTOS PERFIL CULTIVO
     position='above';
@@ -64,9 +66,18 @@ export class AsignarCultivoSectorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageCultivo=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageCultivo=error.error_description;
+                    }
                 }
             );
+    }
+
+    getPermisoAsignarCultivo(){
+        return this.permisoAsignarCultivo;
     }
 
     getCultivoSectorSeleccionado(){
@@ -109,7 +120,12 @@ export class AsignarCultivoSectorComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAgregarCultivo=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAgregarCultivo=error.error_description;
+                    }
                 }
             );
     }

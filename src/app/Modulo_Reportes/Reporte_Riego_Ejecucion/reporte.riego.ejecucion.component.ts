@@ -5,6 +5,8 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, RiegoSector } from '../generar.repotes.service';
+import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+
 
 @Component({
     selector: 'reporte-riego-ejecucion',
@@ -14,6 +16,9 @@ import { GenerarReportesService, RiegoSector } from '../generar.repotes.service'
 })
 
 export class ReporteRiegoEjecucionComponent implements OnInit {
+
+    erroresSistema = new ErroresSistema();
+    permisoRiegoEjecucion = JSON.parse(localStorage.getItem('puedeGenerarInformeRiegoEnEjecucion'));
 
     errorMessageReporte = "";
     idFinca:number=parseInt(JSON.parse(localStorage.getItem('idFinca'))); 
@@ -45,8 +50,6 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
         private generarReportesService:GenerarReportesService,
         private dialog: MdDialog) {
         appService.getState().topnavTitle = "Reporte Riego Ejecución.";
-        console.log("idFinca: "+this.idFinca);
-        console.log("idSector: "+this.idSector);
 
     }
 
@@ -100,7 +103,12 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
         )
         .catch(
             error=>{
-                this.errorMessageReporte=error.error_description;
+                if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                    this.router.navigate(['/login/']);
+                }
+                else{
+                    this.errorMessageReporte=error.error_description;
+                }
             }
         );
     }
@@ -109,6 +117,9 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
         return this.riegoSeleccionado;
     }
     
+    getPermisoRiegoEjecucion(){
+        return this.permisoRiegoEjecucion;
+    }
     apretarSalir(){
         this.router.navigate(['/homeReportes/']);
     }

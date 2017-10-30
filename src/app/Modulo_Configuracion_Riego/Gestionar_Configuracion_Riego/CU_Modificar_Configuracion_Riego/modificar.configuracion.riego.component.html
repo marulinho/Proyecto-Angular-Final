@@ -1,5 +1,5 @@
 <!--SECCION MODIFICAR CONFIGURACION RIEGO SECTOR-->
-<div class="page-content">
+<div *ngIf="getPermisoModificarConfiguracionRiego()" class="page-content">
         <md-card>
             <md-card-title>Modificar Configuraci&oacute;n Riego.</md-card-title>
             <md-card-content>
@@ -58,10 +58,10 @@
                 </md-tab-group>
             </md-card-content>
             <md-card-actions>
-                <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">PREV</button>
-                <button *ngIf="selectIndex <1" md-raised-button [disabled]="selectIndex == 1" (click)="apretarNextModificar()">NEXT</button>
-                <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarModificarConfiguracion()">MODIFICAR</button>
-                <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
+                <button *ngIf="selectIndex <1" md-raised-button [disabled]="selectIndex == 1" (click)="apretarNextModificar()">SIGUIENTE.</button>
+                <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarModificarConfiguracion()">MODIFICAR.</button>
+                <button md-raised-button (click)="apretarSalir()">SALIR.</button>
             </md-card-actions>
         </md-card>
     </div>

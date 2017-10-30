@@ -1,5 +1,5 @@
 <!--SECCION REPORTE ESTADO ACTUAL SECTOR-->
-<div class="page-content">
+<div *ngIf="getPermisoGenerarReporteEstadoActual()" class="page-content">
     <md-card class="page-card">
         <md-card-title>Reporte Estado Actual Sector.</md-card-title>
         <md-card-content>
@@ -46,7 +46,7 @@
             </section>
         </md-card-content>
         <md-card-actions>
-                <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                <button md-raised-button (click)="apretarSalir()">SALIR.</button>
         </md-card-actions>
     </md-card>
 </div>

@@ -1,7 +1,7 @@
 <!--SECCION MODIFICAR SENSOR-->
-<div class="sign-container">
+<div *ngIf="getPermisoGestionarSensor()" class="sign-container">
     <md-card class="page-card">
-        <md-card-title>Modificar Sensor</md-card-title>
+        <md-card-title>Modificar Sensor.</md-card-title>
         <md-card-content>
             <section *ngIf="errorMessageModificarSensor" class="bs">
                 <div class="bd-example" data-example-id="">
@@ -10,9 +10,9 @@
                     </div>
                 </div><br>
             </section>                
-                <h2>Datos Sensor</h2><br>
+                <h2>Datos Sensor.</h2><br>
 
-                <md-select placeholder="Seleccionar Tipo Medicion" [(ngModel)]="tipoMedicion" name="tipoMedicion">
+                <md-select placeholder="Seleccionar Tipo Medicion." [(ngModel)]="tipoMedicion" name="tipoMedicion">
                     <md-option *ngFor="let medicion of mediciones" [value]="medicion.idTipoMedicion" requerid>
                         {{medicion.nombreTipoMedicion}}
                     </md-option>
@@ -20,14 +20,14 @@
                 <br><br>
 
                 <md-input-container>
-                    <input mdInput placeholder="Modelo Sensor" type="text" [(ngModel)]="modeloSensor" name="modeloSensor" required><br>
+                    <input mdInput placeholder="Modelo Sensor." type="text" [(ngModel)]="modeloSensor" name="modeloSensor" required><br>
                 </md-input-container>
 
 
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button (click)="apretarModificarSensor()">MODIFICAR</button>
-            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+            <button md-raised-button (click)="apretarModificarSensor()">MODIFICAR.</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR.</button>
         </md-card-actions>
 
     </md-card>

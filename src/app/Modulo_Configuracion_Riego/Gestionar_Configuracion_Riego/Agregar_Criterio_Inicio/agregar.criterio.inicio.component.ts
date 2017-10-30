@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../../../app.service';
 import { GestionarConfiguracionRiegoService } from '../gestionar.configuracion.riego.service';
 import { GestionarEventoPersonalizadoService, TipoMedicion } from '../../../Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
+import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 @Component({
     selector:'agregar-criterio-inicio',
@@ -13,6 +14,9 @@ import { GestionarEventoPersonalizadoService, TipoMedicion } from '../../../Modu
 
 export class AgregarCriterioInicioComponent implements OnInit{
     
+    erroresSistema = new ErroresSistema();
+    permisoGestionarConfiguracionRiego=JSON.parse(localStorage.getItem('puedeModificarConfiguracionRiego'));
+
     //GENERALES
     idFinca:number;
     idMecanismoRiegoFincaSector:number;
@@ -49,7 +53,7 @@ export class AgregarCriterioInicioComponent implements OnInit{
                 private gestionarConfiguracionRiegoService:GestionarConfiguracionRiegoService,
                 private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Agregar Criterio Inicio";
+            this.appService.getState().topnavTitle="Agregar Criterio Inicio.";
             this.route.params.subscribe(params => {
                 
                 this.idFinca = +params['idFinca'];
@@ -69,11 +73,19 @@ export class AgregarCriterioInicioComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAgregarCriterioInicial=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAgregarCriterioInicial=error.error_description;
+                    }
                 }
             );
     }
     
+    getPermisoGestionarConfiguracionRiego(){
+        return this.permisoGestionarConfiguracionRiego;
+    }
     apretarNextCrear(){
         if(this.selectIndex==0){
             if( this.nombreCriterio=="" || this.nombreCriterio==null ||
@@ -155,7 +167,12 @@ export class AgregarCriterioInicioComponent implements OnInit{
             )
             .catch(
                 error=>{
-                    this.errorMessageAgregarCriterioInicial=error.error_description;
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageAgregarCriterioInicial=error.error_description;
+                    }
                 }
             );
     }
