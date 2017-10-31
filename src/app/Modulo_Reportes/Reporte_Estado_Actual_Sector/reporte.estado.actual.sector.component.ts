@@ -20,68 +20,146 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
     permisoGenerarReporteEstadoActual = JSON.parse(localStorage.getItem('puedeGenerarInformeEstadoActualSectores'));
 
     errorMessageReporte = "";
-    idFinca:number=parseInt(JSON.parse(localStorage.getItem('idFinca'))); 
-    idSector:number=parseInt(JSON.parse(localStorage.getItem('idSector')));
-    nombreReporte:string=JSON.parse(localStorage.getItem('nombreReporte'));
-    descripcionReporte:string=JSON.parse(localStorage.getItem('descripcionReporte'));   
-   
-    estadoActual:EstadoActualSector;
-    estadoActualSeleccionado:Boolean;
-   
-    dia = new Date().getDay();
-    mes = new Date().getMonth() + 1;
-    anio = new Date().getFullYear();
-    fechaActual: string = this.dia + "-" + this.mes + "-" + this.anio;
-    hora=new Date().getHours();
-    minutos=new Date().getMinutes();
-    segundos = new Date().getSeconds();
-    horaActual = this.hora+":"+this.minutos+":"+this.segundos;
+    idFinca: number = parseInt(JSON.parse(localStorage.getItem('idFinca')));
+    idSector: number = parseInt(JSON.parse(localStorage.getItem('idSector')));
+    nombreReporte: string = JSON.parse(localStorage.getItem('nombreReporte'));
+    descripcionReporte: string = JSON.parse(localStorage.getItem('descripcionReporte'));
+
+    estadoActual: EstadoActualSector;
+    estadoActualSeleccionado: Boolean;
+
+    TEMPERATURA_SUELO = "Temperatura suelo";
+    TEMPERATURA_AIRE = "Temperatura aire";
+    HUMEDAD_SUELO = "Humedad suelo";
+    HUMEDAD_AIRE = "Humedad aire";
+    RADIACION_SOLAR = "Radiacion solar";
+    PRESION_ATMOSFERICA = "Presion";
+    CONDICION_CLIMATICA = "Condicion";
+
+    temperaturaSuelo;
+    temperaturaAire;
+    humedadSuelo;
+    humedadAire;
+    radiacionSolar;
+    presionAtmosferica;
+    condicionClimatica;
+
+    fecha = new Date();
+    hora = new Date();
+
 
     constructor(private router: Router,
         private route: ActivatedRoute,
         private appService: AppService,
-        private generarReportesService:GenerarReportesService,
+        private generarReportesService: GenerarReportesService,
         private dialog: MdDialog) {
         appService.getState().topnavTitle = "Reporte Estado Actual Sector.";
 
     }
 
-    ngOnInit(){
-        console.log("estado :" +this.permisoGenerarReporteEstadoActual);
-        this.generarReportesService.obtenerEstadoActualSector(this.idSector,this.idFinca)
-        .then(
-            response=>{
-                if(response.datos_operacion['ultima_medicion']==""){
-                    this.errorMessageReporte="No hay mediciones asociadas al sector seleccionado.";
+    ngOnInit() {
+        this.generarReportesService.obtenerEstadoActualSector(this.idSector, this.idFinca)
+            .then(
+            response => {
+                if (response.datos_operacion['ultima_medicion'] == "" || response.detalle_operacion == "") {
+                    this.errorMessageReporte = "No hay mediciones asociadas al sector seleccionado.";
                 }
-                else{
-                    this.estadoActual=response.datos_operacion;
-                    this.estadoActualSeleccionado=true;
-                    
+                else {
+                    this.estadoActual = response.datos_operacion;
+                    this.llenarDatos();
+                    this.estadoActualSeleccionado = true;
+
                 }
             }
-        )
-        .catch(
-            error=>{
+            )
+            .catch(
+            error => {
                 if (error.error_description == this.erroresSistema.getInicioSesion()) {
                     this.router.navigate(['/login/']);
                 }
-                else{
-                    this.errorMessageReporte=error.error_description;
+                else {
+                    this.errorMessageReporte = error.error_description;
                 }
             }
-        );
+            );
     }
 
-    getPermisoGenerarReporteEstadoActual(){
+    getPermisoGenerarReporteEstadoActual() {
         return this.permisoGenerarReporteEstadoActual;
     }
 
-    getEstadoActualSeleccionado(){
+    getEstadoActualSeleccionado() {
         return this.estadoActualSeleccionado;
     }
-    
-    apretarSalir(){
+
+    llenarDatos() {
+        let longitud = (this.estadoActual['ultima_medicion']['lista_mediciones_detalle']).length;
+        for (var i = 0; i < longitud; i++) {
+            let tipoActual = this.estadoActual['ultima_medicion']['lista_mediciones_detalle'][i];
+
+            console.log(tipoActual);
+            console.log(tipoActual['tipo_medicion']);
+            if (tipoActual['tipo_medicion'] == this.CONDICION_CLIMATICA) {
+                console.log(tipoActual['valor']);
+                this.condicionClimatica=tipoActual['valor'];
+            }
+            if (tipoActual['tipo_medicion'] == this.TEMPERATURA_AIRE) {
+                console.log(tipoActual['valor']);
+                this.temperaturaAire=tipoActual['valor'];
+            }
+            if (tipoActual['tipo_medicion'] == this.TEMPERATURA_SUELO) {
+                console.log(tipoActual['valor']);
+                this.temperaturaSuelo=tipoActual['valor'];
+            }
+            if (tipoActual['tipo_medicion'] == this.HUMEDAD_AIRE) {
+                console.log(tipoActual['valor']);
+                this.humedadAire=tipoActual['valor'];
+            }
+            if (tipoActual['tipo_medicion'] == this.HUMEDAD_SUELO) {
+                console.log(tipoActual['valor']);
+                this.humedadSuelo=tipoActual['valor'];
+            }
+            if (tipoActual['tipo_medicion'] == this.PRESION_ATMOSFERICA) {
+                console.log(tipoActual['valor']);
+                this.presionAtmosferica=tipoActual['valor'];
+            }
+            if (tipoActual['tipo_medicion'] == this.RADIACION_SOLAR) {
+                console.log(tipoActual['valor']);
+                this.radiacionSolar=tipoActual['valor'];
+            }
+
+        }
+
+        if (this.condicionClimatica == "" || this.condicionClimatica == null) {
+            this.condicionClimatica = "No se ha podido determinar";
+        }
+
+        if (this.temperaturaAire == "") {
+            this.temperaturaAire = "No se ha podido determinar";
+        }
+
+        if (this.temperaturaSuelo == "") {
+            this.temperaturaSuelo = "No se ha podido determinar";
+        }
+
+        if (this.humedadAire == "") {
+            this.humedadAire = "No se ha podido determinar";
+        }
+
+        if (this.humedadSuelo == "") {
+            this.humedadSuelo = "No se ha podido determinar";
+        }
+
+        if (this.presionAtmosferica == "") {
+            this.presionAtmosferica = "No se ha podido determinar";
+        }
+        if (this.radiacionSolar == "") {
+            this.radiacionSolar = "No se ha podido determinar";
+        }
+    }
+
+
+    apretarSalir() {
         this.router.navigate(['/homeReportes/']);
     }
 }

@@ -19,7 +19,7 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 export class ReporteEstadoHistoricoSectorComponent implements OnInit {
 
     erroresSistema = new ErroresSistema();
-    permisoGenerarReporteEstadoHistoricoSector = JSON.parse(localStorage.getItem(''));
+    permisoGenerarReporteEstadoHistoricoSector = JSON.parse(localStorage.getItem('puedeGenerarInformeEstadoHistoricoSectoresFinca'));
 
     errorMessageReporte = "";
     idFinca: number = parseInt(JSON.parse(localStorage.getItem('idFinca')));
@@ -347,6 +347,10 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
         ChartMockHumedad.bar.data.datasets[0]['data'] = maximo;
         ChartMockHumedad.bar.data.datasets[1]['data'] = minimo;
         ChartMockHumedad.bar.data.labels = this.diasUnicosHumedad;
+    }
+
+    apretarSalir(){
+        this.router.navigate(['/homeReportes/']);
     }
 }
 

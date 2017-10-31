@@ -31,10 +31,10 @@
                 <label>{{descripcionReporte}}</label><br>
 
                 <label id="atributo">Fecha creaci&oacute;n: </label>
-                <label>{{fechaActual}}.</label><br>
+                <label>{{fecha | date: 'dd-MM-yyyy'}}.</label><br>
 
                 <label id="atributo">Hora creaci&oacute;n: </label>
-                <label>{{horaActual}}.</label><br><br>
+                <label>{{hora | date: 'hh:mm:ss'}}.</label><br>
 
                 <h5>Detalle Reporte</h5>
                 <label id="atributo">Fecha inicio reporte: </label>
@@ -43,17 +43,34 @@
                 <label id="atributo">Fecha fin reporte: </label>
                 <label>{{fechaFinReporte}}.</label><br><br>
 
+                <label id="atributo">Cantidad heladas: </label>
+                <label>{{cantidad}} heladas.</label><br><br>
+
                 <table class="table table-striped table-hover table-card">
                     <thead>
                         <tr>
-                            <th>Fecha.</th>
-                            <th>horaInicio.</th>
+                            <th>Fecha - Hora.</th>
+                            <th>Mediciones Internas.</th>
+                            <th>Mediciones Externas.</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let helada of heladas">
-                            <td>{{helada.fechaInicioSector}}.</td>
-                            <td>{{helada.fechaFinSector}}.</td>
+                            <td>{{helada.fechaHora.substring(0,10)}}  {{helada.fechaHora.substring(11,19)}}.</td>
+                            <td>
+                                <ul *ngFor="let medicion of mediciones.lista_mediciones_internas">
+                                    <li>Tipo: {{medicion.tipo_medicion}}.</li>
+                                    <li>Valor M&iacute;nimo: {{medicion.valor_minimo}} {{medicion.unidad_medicion}}.</li>
+                                    <li>Valor M&aacute;ximo: {{medicion.valor_maximo}} {{medicion.unidad_medicion}}.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul *ngFor="let medicion of mediciones.lista_mediciones_externas">
+                                    <li>Tipo: {{medicion.tipo_medicion}}.</li>
+                                    <li>Valor M&iacute;nimo: {{medicion.valor_minimo}} {{medicion.unidad_medicion}}.</li>
+                                    <li>Valor M&aacute;ximo: {{medicion.valor_maximo}} {{medicion.unidad_medicion}}.</li>
+                                </ul>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

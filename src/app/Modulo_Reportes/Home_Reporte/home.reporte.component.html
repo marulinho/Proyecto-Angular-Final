@@ -28,6 +28,7 @@
                 </md-select>
                 </div>
                 <br><br>
+                <div *ngIf="getSectoresSeleccionados()">
                 <md-select placeholder="Seleccione reporte." [(ngModel)]="reporteSeleccionado" name="reporteSeleccionado" required>
                     <md-option *ngFor="let nombresReporte of nombresReportes" [value]="nombresReporte.id">
                         {{nombresReporte.nombre}}
@@ -63,6 +64,7 @@
                     <label id="atributo">Descripci&oacute;n: </label>
                     <label>{{descripcionesReportes[6]}}</label>
                 </div>
+            </div>
             </section>
         </md-card-content>
         <md-card-actions>

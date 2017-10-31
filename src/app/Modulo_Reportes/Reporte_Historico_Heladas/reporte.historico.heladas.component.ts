@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, Helada } from '../generar.repotes.service';
+import { GestionarEventoPersonalizadoService, ConfiguracionEvento } from '../Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
 import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
@@ -20,23 +21,19 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
     permisoGenerarReporteHeladas = JSON.parse(localStorage.getItem('puedeGenerarInformeHeladasHistorico'));
 
     errorMessageReporte = "";
-    idFinca:number=parseInt(JSON.parse(localStorage.getItem('idFinca'))); 
-    idSector:number=parseInt(JSON.parse(localStorage.getItem('idSector')));
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca')); 
+    idSector:number=JSON.parse(localStorage.getItem('idSector'));
     nombreReporte:string=JSON.parse(localStorage.getItem('nombreReporte'));
     descripcionReporte:string=JSON.parse(localStorage.getItem('descripcionReporte'));   
     
    
-    dia = new Date().getDay();
-    mes = new Date().getMonth() + 1;
-    anio = new Date().getFullYear();
-    fechaActual: string = this.dia + "-" + this.mes + "-" + this.anio;
-    hora=new Date().getHours();
-    minutos=new Date().getMinutes();
-    segundos = new Date().getSeconds();
-    horaActual = this.hora+":"+this.minutos+":"+this.segundos;
+    fecha = new Date();
+    hora=new Date();
 
     heladas:Helada;
+    cantidadHeladas:number;
     heladasExistentes:Boolean;
+    mediciones=[];
     fechaInicioReporte;
     fechaFinReporte;
 
@@ -44,6 +41,7 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
         private route: ActivatedRoute,
         private appService: AppService,
         private generarReportesService:GenerarReportesService,
+        private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
         private dialog: MdDialog) {
         appService.getState().topnavTitle = "Reporte Histórico Heladas.";
 
@@ -69,7 +67,9 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
                         this.errorMessageReporte="No se han registrados heladas durante ese periodo de días.";
                     }
                     else{
-                        this.heladas=response.datos_operacion;
+                        this.heladas=response.datos_operacion['dto_evento_lista'];
+                        this.cantidadHeladas=this.heladas['cantidad'];
+                        this.buscarConfiguracion(3);
                         this.heladasExistentes=true;
                     }
                 }
@@ -115,6 +115,30 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
             }
         }
         return resultado;
+    }
+
+    buscarConfiguracion(idConfiguracionEvento:number){
+        this.gestionarEventoPersonalizadoService.mostrarConfiguracionEventoPersonalizado(this.idFinca,idConfiguracionEvento)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageReporte="No se han podido obtener las heladas, intente de nuevo.";
+                    }
+                    else{
+                        this.mediciones = response.datos_operacion;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    if(this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageReporte=error.error_description;
+                    }
+                }
+            );
     }
 
     apretarSalir(){

@@ -28,14 +28,8 @@ export class ReporteRiegoHistoricoSectorComponent implements OnInit {
     riegosHistoricos=[];
     riegosSeleccionado:Boolean;
    
-    dia = new Date().getDay();
-    mes = new Date().getMonth() + 1;
-    anio = new Date().getFullYear();
-    fechaActual: string = this.dia + "-" + this.mes + "-" + this.anio;
-    hora=new Date().getHours();
-    minutos=new Date().getMinutes();
-    segundos = new Date().getSeconds();
-    horaActual = this.hora+":"+this.minutos+":"+this.segundos;
+    fecha = new Date();
+    hora=new Date();
 
     fechaInicioReporte:string;
     fechaFinReporte:string;

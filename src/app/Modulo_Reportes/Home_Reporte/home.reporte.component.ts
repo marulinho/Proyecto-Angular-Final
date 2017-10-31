@@ -6,7 +6,9 @@ import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { HomeFincaService, Finca } from '../../Modulo_Configuracion_Finca/Home_Finca/home.finca.service';
 import { GestionarSectorFincaService, Sector } from '../../Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
+import { HomeFincaDetalleService, Permisos } from '../../Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.service';
 import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+import { PermisosSistema } from '../../Datos_Sistema/permisos.sistema';
 
 @Component({
     selector: 'home-reporte',
@@ -39,7 +41,7 @@ export class HomeReporteComponent implements OnInit {
 
     ];
     descripcionesReportes = [
-        "Mediante este reporte se puede observar el estado actual del sector, incluyendo entre otras cosas la configuración de riego actual.",
+        "Mediante este reporte se puede observar el estado actual del sector, incluyendo las mediciones a las  que se encuentra sometido el mismo.",
         "Mediante este reporte se puede observar los datos relativos al riego en ejecución de un determinado sector.",
         "Mediante este reporte se puede observar el estado histórico del sector, incluyendo entre otras cosas las condifuraciones de riego históricas.",
         "Mediante este reporte se puede observar los datos históricos relativos al riego en un determinado sector.",
@@ -49,12 +51,12 @@ export class HomeReporteComponent implements OnInit {
     ];
 
 
-
     constructor(private router: Router,
         private route: ActivatedRoute,
         private appService: AppService,
         private homeFincaService: HomeFincaService,
         private gestionarSectorFincaService:GestionarSectorFincaService,
+        private homeFincaDetalleService:HomeFincaDetalleService,
         private dialog: MdDialog) {
         appService.getState().topnavTitle = "Home Reportes.";
     }
@@ -119,13 +121,36 @@ export class HomeReporteComponent implements OnInit {
     }
 
     seleccionarFinca(){
+        this.homeFincaDetalleService.devolverPermisos(this.fincaSeleccionada)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageReporte="No se han podido obtener los reportes disponibles para la finca, intente de nuevo.";
+                    }
+                    else{
+                        let permisos = new PermisosSistema(response.datos_operacion);
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    if(this.erroresSistema.getInicioSesion()){
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageReporte=error.error_description;
+                    }
+                }
+            );
+        
         this.gestionarSectorFincaService.buscarSectoresFinca(this.fincaSeleccionada)
             .then(
                 response=>{
-                    if(response.datos_operacion=="No hay datos"){
+                    if(response.detalle_operacion=="No hay datos"){
                         this.errorMessageReporte="No hay sectores asociadas a las fincas.";
                     }
                     else{
+                        this.errorMessageReporte="";
                         this.sectores=response.datos_operacion;
                         this.sectoresSeleccionado=true;
                     }
@@ -141,6 +166,9 @@ export class HomeReporteComponent implements OnInit {
                     }
                 }
             );
+    }
+    getSectoresSeleccionados(){
+        return this.sectoresSeleccionado;
     }
 
     apretarBuscarReporte(){
@@ -171,6 +199,5 @@ export class HomeReporteComponent implements OnInit {
         if(this.reporteSeleccionado=='6'){
             this.router.navigate(['/reporteCruzado/']);
         }
-    }
-    
+    }    
 }

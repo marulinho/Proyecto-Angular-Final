@@ -20,10 +20,10 @@
                         <label>{{descripcionReporte}}</label><br>
                         
                         <label id="atributo">Fecha creaci&oacute;n: </label>
-                        <label>{{fechaActual.substring(0,10)}}.</label><br>
-
+                        <label>{{fecha | date: 'dd-MM-yyyy'}}.</label><br>
+        
                         <label id="atributo">Hora creaci&oacute;n: </label>
-                        <label>{{horaActual}}.</label><br>
+                        <label>{{hora | date: 'hh:mm:ss'}}.</label><br>
                     
                     <h5>Detalle Reporte</h5>
                         <label id="atributo">Fecha inicio programada: </label>

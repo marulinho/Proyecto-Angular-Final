@@ -20,29 +20,32 @@
                     <label>{{descripcionReporte}}</label><br>
                     
                     <label id="atributo">Fecha creaci&oacute;n: </label>
-                    <label>{{fechaActual}}.</label><br>
+                    <label>{{fecha | date: 'dd-MM-yyyy'}}.</label><br>
 
                     <label id="atributo">Hora creaci&oacute;n: </label>
-                    <label>{{horaActual}}.</label><br>
+                    <label>{{hora | date: 'hh:mm:ss'}}.</label><br>
                 
                 <h5>Detalle Reporte</h5>
-                    <label id="atributo">Humedad del aire: </label>
-                    <label>{{estadoActual.ultima_medicion['lista_mediciones_detalle'][0]['valor']}}.</label><br>
+                    <label id="atributo">Humedad del aire (%): </label>
+                    <label>{{humedadAire}}.</label><br>
                     
-                    <label id="atributo">Humedad del suelo: </label>
-                    <label>{{estadoActual.ultima_medicion['lista_mediciones_detalle'][1]['valor']}}.</label><br>
+                    <label id="atributo">Humedad del suelo (%): </label>
+                    <label>{{humedadSuelo}}.</label><br>
 
-                    <label id="atributo">Temperatura del suelo: </label>
-                    <label></label><br>
+                    <label id="atributo">Temperatura del suelo (Grados Celcius): </label>
+                    <label>{{temperaturaSuelo}}.</label><br>
 
-                    <label id="atributo">Temperatura del aire: </label>
-                    <label></label><br>
+                    <label id="atributo">Temperatura del aire (Grados Celcius): </label>
+                    <label>{{temperaturaAire}}.</label><br>
 
-                    <label id="atributo">Presi&oacute;n atmosf&eacute;rica: </label>
-                    <label></label><br>
+                    <label id="atributo">Radiaci&oacute;n solar: </label>
+                    <label>{{presionAtmosferica}}.</label><br>
+
+                    <label id="atributo">Presi&oacute;n atmosf&eacute;rica (hPa): </label>
+                    <label>{{presionAtmosferica}}.</label><br>
 
                     <label id="atributo">Condici&oacute;n clim&aacute;tica: </label>
-                    <label></label>
+                    <label>{{condicionClimatica}}</label>
             </section>
         </md-card-content>
         <md-card-actions>
