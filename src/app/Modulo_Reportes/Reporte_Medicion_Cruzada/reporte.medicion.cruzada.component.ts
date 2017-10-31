@@ -38,6 +38,7 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
     fechaInicioReporte:string;
     fechaFinReporte:string;
     medicionCruzada=[];
+    reporteSeleccionado:Boolean;
 
 
 
@@ -50,33 +51,42 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
 
     }
 
-    ngOnInit(){
-        this.generarReportesService.obtenerInformeMedicionCruzada(this.idFinca,this.idSector,this.fechaInicioReporte,this.fechaFinReporte)
-            .then(
-                response=>{
-                    if(response.detalle_operacion=="No hay datos"){
-                        this.errorMessageReporte="No hay registros en el plazo de tiempo establecido.";
+    ngOnInit(){}
+    apretarGenerarReporte(){
+        let resultado=this.compararFechas()
+        if(resultado){
+            this.generarReportesService.obtenerInformeMedicionCruzada(this.idFinca,this.idSector,this.fechaInicioReporte,this.fechaFinReporte)
+                .then(
+                    response=>{
+                        if(response.detalle_operacion=="No hay datos"){
+                            this.errorMessageReporte="No hay registros en el plazo de tiempo establecido.";
+                        }
+                        else{
+                            this.medicionCruzada=response.datos_operacion;
+                            //this.obtenerTablas();
+                            this.reporteSeleccionado=true;
+                        }
                     }
-                    else{
-                        this.medicionCruzada=response.datos_operacion;
-                        this.obtenerTablas();
+                )
+                .catch(
+                    error=>{
+                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                            this.router.navigate(['/login/']);
+                        }
+                        else{
+                            this.errorMessageReporte=error.error_description;
+                        }
                     }
-                }
-            )
-            .catch(
-                error=>{
-                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
-                        this.router.navigate(['/login/']);
-                    }
-                    else{
-                        this.errorMessageReporte=error.error_description;
-                    }
-                }
-            )
+                );
+        }
     }
 
     getPermisoGenerarMedicionCruzada(){
         return this.permisoGenerarMedicionCruzada;
+    }
+
+    getReporteSeleccionado(){
+        return this.reporteSeleccionado;
     }
 
     compararFechas(){

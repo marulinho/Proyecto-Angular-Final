@@ -19,3 +19,6 @@ tr:nth-child(even){
 ul{
     list-style: none;
 }
+#atributo{
+    font-weight: bold;
+}

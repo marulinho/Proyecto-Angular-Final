@@ -33,8 +33,8 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
     HUMEDAD_SUELO = "Humedad suelo";
     HUMEDAD_AIRE = "Humedad aire";
     RADIACION_SOLAR = "Radiacion solar";
-    PRESION_ATMOSFERICA = "Presion";
-    CONDICION_CLIMATICA = "Condicion";
+    PRESION_ATMOSFERICA = "presion";
+    CONDICION_CLIMATICA = "condicionClima";
 
     temperaturaSuelo;
     temperaturaAire;
@@ -129,32 +129,42 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
             }
 
         }
-
+        
         if (this.condicionClimatica == "" || this.condicionClimatica == null) {
             this.condicionClimatica = "No se ha podido determinar";
         }
 
-        if (this.temperaturaAire == "") {
-            this.temperaturaAire = "No se ha podido determinar";
+        if (this.temperaturaAire == "" || this.temperaturaAire==null) {
+            if(this.temperaturaAire==0){
+
+            }
+            else{
+                this.temperaturaAire = "No se ha podido determinar";
+            }
         }
 
-        if (this.temperaturaSuelo == "") {
-            this.temperaturaSuelo = "No se ha podido determinar";
+        if (this.temperaturaSuelo == "" || this.temperaturaSuelo ==null) {
+            if(this.temperaturaSuelo==0){}
+            else{this.temperaturaSuelo = "No se ha podido determinar";}
         }
 
-        if (this.humedadAire == "") {
-            this.humedadAire = "No se ha podido determinar";
+        if (this.humedadAire == "" || this.humedadAire ==null) {
+            if(this.humedadAire==0){}
+            else{this.humedadAire = "No se ha podido determinar";}
         }
 
-        if (this.humedadSuelo == "") {
-            this.humedadSuelo = "No se ha podido determinar";
+        if (this.humedadSuelo == "" || this.humedadSuelo ==null) {
+            if(this.humedadSuelo==0){}
+            else{this.humedadSuelo = "No se ha podido determinar";}
         }
 
-        if (this.presionAtmosferica == "") {
-            this.presionAtmosferica = "No se ha podido determinar";
+        if (this.presionAtmosferica == "" || this.presionAtmosferica ==null) {
+            if(this.presionAtmosferica==0){}
+            else{this.presionAtmosferica = "No se ha podido determinar";}
         }
-        if (this.radiacionSolar == "") {
-            this.radiacionSolar = "No se ha podido determinar";
+        if (this.radiacionSolar == "" || this.radiacionSolar ==null) {
+            if(this.radiacionSolar==0){}
+            else{this.radiacionSolar = "No se ha podido determinar";}
         }
     }
 
