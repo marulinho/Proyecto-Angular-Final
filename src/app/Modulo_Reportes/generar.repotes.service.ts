@@ -64,10 +64,13 @@ export class GenerarReportesService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    obtenerInformeEventosPersonalizados(idConfiguracionEvento: number,idFinca:number): Promise<InformeEvento> {
+    obtenerInformeEventosPersonalizados(idConfiguracionEvento: number,idSector:number,idFinca:number,fechaInicioSector:string, fechaFinSector:string): Promise<InformeEvento> {
         const data = {
             'idConfiguracionEvento': idConfiguracionEvento,
-            'idFinca':idFinca
+            'idSector':idSector,
+            'idFinca':idFinca,
+            'fechaInicioSector':fechaInicioSector,
+            'fechaFinSector':fechaFinSector
         };
         return this.http.post(GenerarReportesService.serverUrl + this.obtenerInformeEventosPersonalizadosUrl, JSON.stringify(data), this.getRestHeader())
             .toPromise()

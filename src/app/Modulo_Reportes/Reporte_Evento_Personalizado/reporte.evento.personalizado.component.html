@@ -12,12 +12,13 @@
             </section>
 
             <section *ngIf="!getEventosExistente()">
+                <br>
                 <md-select placeholder="Seleccione evento." [(ngModel)]="eventoSeleccionado" name="eventoSeleccionado" required>
-                    <md-option *ngFor="let evento of eventosPersonalizados" [value]="evento.id_configuracion_evento">
+                    <md-option *ngFor="let evento of eventosPersonalizados" [value]="evento.idConfiguracion">
                         {{evento.nombre}}
                     </md-option>
                 </md-select>
-
+                <br><br>
                 <md-input-container>
                     <input mdInput placeholder="Fecha Inicio." type="date" [(ngModel)]="fechaInicioReporte" name="fechaInicioReporte" required><br>
                 </md-input-container>
@@ -49,8 +50,8 @@
                 <label id="atributo">Fecha fin reporte: </label>
                 <label>{{fechaFinReporte}}.</label><br>
 
-                <label id="atributo">Cantidad heladas: </label>
-                <label>{{cantidad}} heladas.</label><br><br>
+                <label id="atributo">Cantidad de ocurrencias: </label>
+                <label>{{cantidad}} ocurrencias.</label><br><br>
 
                 <table class="table table-striped table-hover table-card">
                     <thead>
@@ -61,20 +62,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let helada of heladas">
-                            <td>{{helada.fechaHora.substring(0,10)}} {{helada.fechaHora.substring(11,19)}}.</td>
+                        <tr *ngFor="let evento of informeEvento">
+                            <td>{{evento.fechaHora.substring(0,10)}}   {{evento.fechaHora.substring(11,19)}}.</td>
                             <td>
-                                <ul *ngFor="let medicion of mediciones.lista_mediciones_internas">
-                                    <li>Tipo: {{medicion.tipo_medicion}}.</li>
-                                    <li>Valor M&iacute;nimo: {{medicion.valor_minimo}} {{medicion.unidad_medicion}}.</li>
-                                    <li>Valor M&aacute;ximo: {{medicion.valor_maximo}} {{medicion.unidad_medicion}}.</li>
+                                <ul>
+                                    <li>Tipo: {{tipoMedicionInterna}}.</li>
+                                    <li>Valor M&iacute;nimo: {{valorMinimoInterna}} {{unidadMedicionInterna}}.</li>
+                                    <li>Valor M&aacute;ximo: {{valorMaximoInterna}} {{unidadMedicionInterna}}.</li>
                                 </ul>
                             </td>
                             <td>
-                                <ul *ngFor="let medicion of mediciones.lista_mediciones_externas">
-                                    <li>Tipo: {{medicion.tipo_medicion}}.</li>
-                                    <li>Valor M&iacute;nimo: {{medicion.valor_minimo}} {{medicion.unidad_medicion}}.</li>
-                                    <li>Valor M&aacute;ximo: {{medicion.valor_maximo}} {{medicion.unidad_medicion}}.</li>
+                                <ul>
+                                    <li>Tipo: {{tipoMedicionExterna}}.</li>
+                                    <li>Valor M&iacute;nimo: {{valorMinimoExterna}} {{unidadMedicionExterna}}.</li>
+                                    <li>Valor M&aacute;ximo: {{valorMaximoExterna}} {{unidadMedicionExterna}}.</li>
                                 </ul>
                             </td>
                         </tr>
