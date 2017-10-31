@@ -10,8 +10,9 @@ export class GestionarProveedorInformacionService extends RestBaseService{
   private obtenerProvFincaUrl = '/obtenerProveedorFinca/';
   private deshabilitarProvUrl ='/deshabilitarProveedorFinca/';
   private cambiarProvUrl= '/cambiarProveedorFinca/';
-  
+  private buscarProveedorNombreUrl = "/buscarProveedorNombre/";
 
+  
   constructor(private http: Http) {super();}
 
 
@@ -35,6 +36,20 @@ export class GestionarProveedorInformacionService extends RestBaseService{
     .catch(this.handleError);
   }
 
+  buscarProveedorNombre(idFinca:number,nombreProveedor):Promise<ProveedorInformacion>{
+    const data = {
+      'idFinca': idFinca,
+      'nombreProveedor':nombreProveedor
+    };
+
+    return this.http.post(GestionarProveedorInformacionService.serverUrl +this.buscarProveedorNombreUrl, JSON.stringify(data), this.getRestHeader())
+      .toPromise()
+      .then(response => {
+        return response.json() as ProveedorInformacion;
+      })
+      .catch(this.handleError);
+  
+  }
 
   modificarProveedor(idFinca:number,nombreProveedor:string,frecuencia:number):Promise<any>{
     const data = {

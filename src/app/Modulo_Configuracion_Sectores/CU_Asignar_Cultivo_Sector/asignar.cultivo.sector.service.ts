@@ -19,13 +19,14 @@ export class AsignarCultivoSectorService extends RestBaseService{
         .catch(this.handleError);
     }
 
-    asignarCultivoSector(idSector:number,nombreSubtipoCultivo:string,nombreCultivo:string,descripcionCultivo:string,fechaPlantacion:string,idFinca:number):Promise<any>{
+    asignarCultivoSector(idSector:number,nombreSubtipoCultivo:string,nombreCultivo:string,descripcionCultivo:string,fechaPlantacion:string,cantidadPlantas:number,idFinca:number):Promise<any>{
         const data = {
             'idSector': idSector,
             'nombreSubtipoCultivo': nombreSubtipoCultivo,
             'nombreCultivo':nombreCultivo,
             'descripcionCultivo':descripcionCultivo,
             'fechaPlantacion':fechaPlantacion,
+            'cantidadPlantas':cantidadPlantas,
             'idFinca':idFinca
           };
       

@@ -13,13 +13,19 @@
                 </section>
     
                 <h2>Datos Proveedor.</h2>
-    
+                <br>
                 <md-select placeholder="Seleccionar Proveedor." [(ngModel)]="nombreProveedor" name="nombreProveedor">
-                    <md-option *ngFor="let proveedorInformacion of proveedoresInformacion" [value]="proveedorInformacion.nombreProveedor" requerid>
+                    <md-option *ngFor="let proveedorInformacion of proveedoresInformacion" [value]="proveedorInformacion.nombreProveedor" requerid (click)="apretarProveedor()">
                       {{proveedorInformacion.nombreProveedor}}
                     </md-option>
                 </md-select>  
-                <br><br><md-input-container>
+                
+                <div *ngIf="frecuenciaProveedor">
+                    <br><br><label id="atributo">Frecuencia obtenci&oacute;n mediciones m&aacute;xima: </label>
+                    <label>{{frecuenciaProveedor}} mediciones por hora.</label>
+                </div>
+                <br>
+                <md-input-container>
                     <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones por hora." type="number" [(ngModel)]="frecuencia" name="frecuencia" required><br>
                 </md-input-container>
       

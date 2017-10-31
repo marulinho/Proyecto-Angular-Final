@@ -4,7 +4,7 @@
         <md-card-title>
             Home Configuraci&oacute;n de Riego.
             <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipEditarConfiguracion}} [mdTooltipPosition]="position">
-                <img src="assets/icons/editar.png" [routerLink]="['/gestionarConfiguracionRiego/',idFinca,idMecanismoRiegoFincaSector,idConfiguracionRiego]">
+                <img src="assets/icons/editar.png" [routerLink]="['/gestionarConfiguracionRiego/']">
             </a>
 
             <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipCambiarEstadoConfiguracion}} [mdTooltipPosition]="position">

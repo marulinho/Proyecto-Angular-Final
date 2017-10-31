@@ -26,7 +26,7 @@ import { PermisosSistema } from '../../Datos_Sistema/permisos.sistema';
 
 export class HomeFincaDetalleComponent implements OnInit{
     //ATRIBUTOS GENERALES
-        idFinca:number;
+        idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
         position = 'above';    
         title:string="";
         description:string="";
@@ -122,9 +122,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                 private dialog: MdDialog){
 
         appService.getState().topnavTitle="Home Finca Detalle.";
-        this.route.params.subscribe(params => {
-            this.idFinca = +params['idFinca'];
-        });
+
 
     }
 
@@ -426,6 +424,7 @@ export class HomeFincaDetalleComponent implements OnInit{
             this.gestionarUsuarioFincaService.modificarRolUsuario(this.idUsuarioFinca,this.idFinca,this.nombreRol)
                 .then(
                     response=>{
+                        this.errorMessageUsuarioFinca="";
                         this.refresh();
                     }
                 )
@@ -529,7 +528,7 @@ export class HomeFincaDetalleComponent implements OnInit{
             result => {
                         this.selectedOption = result;
                         if(this.selectedOption==="Aceptar"){
-                            this.abmSensorFincaService.deshabilitarSensor(idSensor)
+                            this.abmSensorFincaService.deshabilitarSensor(idSensor,this.idFinca)
                             .then(
                                 response=>{
                                     this.refresh();
@@ -648,6 +647,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                             this.gestionarUsuarioFincaService.eliminarUsuarioFinca(this.idUsuarioFinca,this.idFinca)
                                 .then(
                                     response=>{
+                                        this.errorMessageUsuarioFinca="";
                                         this.refresh();
                                     }
                                 )
@@ -722,6 +722,20 @@ export class HomeFincaDetalleComponent implements OnInit{
             });
     }
     
+    apretarVerSector(idSector:number){
+        localStorage.setItem('idSector',JSON.stringify(idSector));
+        this.router.navigate(['/homeSector/']);
+    }
+    
+    apretarModificarSensor(idSensor:number){
+        localStorage.setItem('idSensor',JSON.stringify(idSensor));
+        this.router.navigate(['/modificarSensorFinca/']);
+    }
+
+    verComponenteSensor(idComponenteSensor:number){
+        localStorage.setItem('idComponenteSensor',JSON.stringify(idComponenteSensor));
+        this.router.navigate(['/homeComponenteSensorFinca/'])
+    }
     refresh(): void {
         window.location.reload();
     }

@@ -20,8 +20,8 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
 
     //ATRIBUTOS PERFIL MECANISMO RIEGO
     perfilMecanismoRiego:Boolean=true;
-    idFinca:number;
-    idSector:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    idSector:number=JSON.parse(localStorage.getItem('idSector'));
     errorMessagePerfilMecanismoSectorFinca="";
     mecanismosRiego:MecanismoRiego;
     mecanismosRiegoSeleccionado:Boolean;
@@ -30,7 +30,7 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
     errorMessageAsignarMecanismo="";
     perfilAsignarMecanismo:Boolean=false;
     position='above';
-    tooltipAgregarMecanismo='Agregar Mecanismo';
+    tooltipAgregarMecanismo='Agregar Mecanismo.';
     idMecanismoRiegoFinca:number;
     selectIndex:number=0;
     caudal:number;
@@ -43,10 +43,7 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
                 private appService:AppService){
 
         appService.getState().topnavTitle="Asignar Mecanismo Riego.";
-        this.route.params.subscribe(params => {
-            this.idSector = +params['idSector'];
-            this.idFinca= +params['idFinca'];
-        });
+ 
 
     }
 
@@ -112,7 +109,7 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
         this.asignarMecanismoRiegoSectorService.asignarMecanismoSector(this.idSector,this.idMecanismoRiegoFinca,this.caudal,this.presion,this.idFinca)
             .then(
                 response=>{
-                    this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);
+                    this.router.navigate(['/homeSector/']);
                 }
             )
             .catch(
@@ -128,6 +125,6 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);
+        this.router.navigate(['/homeSector/']);
     }
 }

@@ -19,12 +19,13 @@ export class ModificarSensorComponent implements OnInit{
     erroresSistema = new ErroresSistema();
     permisoGestionarSensor = JSON.parse(localStorage.getItem('puedeGestionarSensores'));
 
-    idFinca:number;
-    idSensor:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    idSensor:number = JSON.parse(localStorage.getItem('idSensor'));
     perfilSensorSeleccionado:Boolean;
     errorMessageModificarSensor:string="";
     modeloSensor:string;
     mediciones:TipoMediciones;
+    medicionActual:string;
     tipoMedicion:number;
 
 
@@ -35,36 +36,56 @@ export class ModificarSensorComponent implements OnInit{
                 private dialog: MdDialog){
 
         appService.getState().topnavTitle="Modificar Sensor.";
-        this.route.params.subscribe(params => {
-            this.idFinca = +params['idFinca'];
-            this.idSensor = +params['idSensor'];
-            this.abmSensorFincaService.buscarTipoMediciones()
-                .then(
-                    response=>{
-                        if(response.detalle_operacion=="No hay datos"){
-                            this.errorMessageModificarSensor="No hay tipos de mediciones habilitadas.";
-                        }
-                        else{
-                            this.mediciones=response.datos_operacion;
-                            this.perfilSensorSeleccionado=true;
-                        }
-                    }
-                )
-                .catch(
-                    error=>{
-                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
-                            this.router.navigate(['/login/']);
-                        }
-                        else{
-                            this.errorMessageModificarSensor=error.error_description;
-                        }
-                    }
-                );
-        });
+
 
     }
 
-    ngOnInit(){}
+    ngOnInit(){
+        this.abmSensorFincaService.buscarSensorId(this.idSensor,this.idFinca)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageModificarSensor="No se ha podido encontrar el sensor, intente más tarde.";
+                    }
+                    else{
+                        this.modeloSensor= response['datos_operacion']['modelo'];
+                        this.medicionActual=response['datos_operacion']['tipoMedicion'];
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageModificarSensor=error.error_description;
+                    }
+                }
+            )
+        this.abmSensorFincaService.buscarTipoMediciones()
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageModificarSensor="No hay tipos de mediciones habilitadas.";
+                    }
+                    else{
+                        this.mediciones=response.datos_operacion;
+                        this.perfilSensorSeleccionado=true;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageModificarSensor=error.error_description;
+                    }
+                }
+            );
+    }
 
     getPermisoGestionarSensor(){
         return this.permisoGestionarSensor;
@@ -79,10 +100,10 @@ export class ModificarSensorComponent implements OnInit{
             this.errorMessageModificarSensor="Debe completar todos los campos obligatorios (*).";
         }
         else{
-            this.abmSensorFincaService.modificarSensor(this.tipoMedicion,this.modeloSensor,this.idSensor)
+            this.abmSensorFincaService.modificarSensor(this.tipoMedicion,this.modeloSensor,this.idSensor,this.idFinca)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+                        this.router.navigate(['/homeFincaDetalle/']);
                     }
                 )
                 .catch(
@@ -100,7 +121,7 @@ export class ModificarSensorComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+        this.router.navigate(['/homeFincaDetalle/']);
     }
 
 

@@ -14,7 +14,7 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 export class CrearSectorFincaComponent implements OnInit{
     
-    idFinca:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
     selectIndex:number=0;
     errorMessageCrearSectorFinca="";
     nombre:string;
@@ -31,9 +31,6 @@ export class CrearSectorFincaComponent implements OnInit{
                 private appService:AppService){
 
         appService.getState().topnavTitle="Crear Sector.";
-        this.route.params.subscribe(params => {
-            this.idFinca = +params['idFinca'];
-        });
     }
 
     ngOnInit(){}
@@ -49,8 +46,13 @@ export class CrearSectorFincaComponent implements OnInit{
                     this.errorMessageCrearSectorFinca="Debe completar todos los campos obligatorios (*).";
             }
             else{
-                this.selectIndex+=1;
-                this.errorMessageCrearSectorFinca="";
+                if(this.superficie<=0){
+                    this.errorMessageCrearSectorFinca="La superficie del sector debe ser mayor que cero.";
+                }
+                else{
+                    this.selectIndex+=1;
+                    this.errorMessageCrearSectorFinca="";
+                }
             }
         }
     }
@@ -59,7 +61,7 @@ export class CrearSectorFincaComponent implements OnInit{
         this.crearSectorFincaService.crearSector(this.idFinca,this.nombre,this.numero,this.descripcion,this.superficie)
             .then(
                 response=>{
-                    this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+                    this.router.navigate(['/homeFincaDetalle/']);
                 }
             )
             .catch(
@@ -75,6 +77,6 @@ export class CrearSectorFincaComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+        this.router.navigate(['/homeFincaDetalle/']);
     }
 }

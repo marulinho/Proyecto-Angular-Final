@@ -25,8 +25,8 @@ export class HomeSectorComponent implements OnInit {
     erroresSistema = new ErroresSistema();
 
     //ATRIBUTOS HOME SECTOR
-        idFinca: number;
-        idSector: number;
+        idFinca: number=JSON.parse(localStorage.getItem('idFinca'));
+        idSector: number=JSON.parse(localStorage.getItem('idSector'));
         sector: Sector;
         errorMessageHomeSector = "";
         sectorSeleccionado: Boolean;
@@ -35,6 +35,7 @@ export class HomeSectorComponent implements OnInit {
         position = 'above';
         selectedOption: string;
         permisosGestionarSector = JSON.parse(localStorage.getItem('puedeGestionarSector'));
+        tooltipAtras='Volver HomeFincaDetalle.';
 
     //ATRIBUTOS MECANISMO RIEGO SECTOR
         errorMessageMecanismoSector = "";
@@ -110,35 +111,28 @@ export class HomeSectorComponent implements OnInit {
         private appService: AppService,
         private dialog: MdDialog) {
 
-        appService.getState().topnavTitle = "Home Sector";
-        this.route.params.subscribe(params => {
-            this.idSector = +params['idSector'];
-            this.idFinca = +params['idFinca'];
-            localStorage.setItem('idSector', JSON.stringify(this.idSector));
-            if (this.idSector) {
-                this.gestionarSectorFincaService.buscarSectorId(this.idSector)
-                    .then(
-                    response => {
-                        this.sector = response.datos_operacion;
-                        this.sectorSeleccionado = true;
-                    }
-                    )
-                    .catch(
-                    error => {
-                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
-                            this.router.navigate(['/login/']);
-                        }
-                        else {
-                            this.errorMessageHomeSector = error.error_description;
-                        }
-                    }
-                    );
-            }
-        });
+        appService.getState().topnavTitle = "Home Sector.";
 
     }
 
     ngOnInit() {
+        this.gestionarSectorFincaService.buscarSectorId(this.idSector,this.idFinca)
+            .then(
+                response => {
+                    this.sector = response.datos_operacion;
+                    this.sectorSeleccionado = true;
+                }
+            )
+            .catch(
+                error => {
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else {
+                        this.errorMessageHomeSector = error.error_description;
+                    }
+                }
+            );
         this.asignarMecanismoRiegoSectorService.mostrarMecanismos(this.idSector)
             .then(
             response => {
@@ -153,6 +147,7 @@ export class HomeSectorComponent implements OnInit {
                     if (this.mecanismoRiego['mecanismoRiegoFinca'] != null) {
                         this.mecanismoHabilitado = true;
                         this.idMecanismoRiegoFincaSector = this.mecanismoRiego['idMecanismoRiegoFincaSector'];
+                        localStorage.setItem('idMecanismoRiegoFincaSector',JSON.stringify(this.idMecanismoRiegoFincaSector));
                         this.buscarConfiguracionesRiego();
                         this.buscarRiegoEnEjecucion();
                     }
@@ -179,7 +174,7 @@ export class HomeSectorComponent implements OnInit {
             }
             );
 
-        this.gestionarCultivoSectorService.mostrarCultivoSector(this.idSector)
+        this.gestionarCultivoSectorService.mostrarCultivoSector(this.idSector,this.idFinca)
             .then(
             response => {
                 if (response.detalle_operacion == "No hay datos") {
@@ -256,8 +251,6 @@ export class HomeSectorComponent implements OnInit {
         this.gestionarConfiguracionRiegoService.obtenerConfiguracionesRiegoFincaMecanismoSector(this.idFinca, this.idMecanismoRiegoFincaSector)
             .then(
             response => {
-                console.log(this.idFinca);
-                console.log(this.idMecanismoRiegoFincaSector)
                 if (response.detalle_operacion == "No hay datos") {
                     this.errorMessageConfiguracionRiego = "No hay configuraciones de riego asociadas al sector.";
                 }
@@ -620,8 +613,22 @@ export class HomeSectorComponent implements OnInit {
             });
     }
 
+    apretarEditarCultivo(idCultivo:number){
+        localStorage.setItem('idCultivo',JSON.stringify(idCultivo));
+        
+        this.router.navigate(['/gestionarCultivoSector/']);
+    }
 
+    apretarHomeConfiguracionRiego(idConfiguracionRiego:number){
+        localStorage.setItem('idConfiguracionRiego',JSON.stringify(idConfiguracionRiego));
+        this.router.navigate(['/homeConfiguracionRiego/']);
+    }
+    
     refresh(): void {
         window.location.reload();
+    }
+
+    apretarAtras(){
+        this.router.navigate(['/homeFincaDetalle/']);
     }
 }

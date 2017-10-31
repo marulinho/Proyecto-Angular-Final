@@ -18,11 +18,11 @@ export class AgregarCriterioInicioComponent implements OnInit{
     permisoGestionarConfiguracionRiego=JSON.parse(localStorage.getItem('puedeModificarConfiguracionRiego'));
 
     //GENERALES
-    idFinca:number;
-    idMecanismoRiegoFincaSector:number;
-    idConfiguracionRiego:number;
-    idSector:number;
-    tooltipAgregarCriterioInicial='Agregar Criterio';
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    idMecanismoRiegoFincaSector:number=JSON.parse(localStorage.getItem('idMecanismoRiegoFincaSector'));
+    idConfiguracionRiego:number=JSON.parse(localStorage.getItem('idConfiguracionRiego'));
+    idSector:number=JSON.parse(localStorage.getItem('idSector'));
+    tooltipAgregarCriterioInicial='Agregar Criterio.';
     position='above';
     errorMessageAgregarCriterioInicial="";
     selectIndex:number=0;
@@ -54,14 +54,7 @@ export class AgregarCriterioInicioComponent implements OnInit{
                 private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
                 private appService: AppService) {
             this.appService.getState().topnavTitle="Agregar Criterio Inicio.";
-            this.route.params.subscribe(params => {
-                
-                this.idFinca = +params['idFinca'];
-                this.idMecanismoRiegoFincaSector =+params['idMecanismoRiegoFincaSector'];
-                this.idConfiguracionRiego=+params['idConfiguracionRiego'];
-                this.idSector = +params['idSector'];                
 
-            });
     }
 
     ngOnInit(){
@@ -162,7 +155,7 @@ export class AgregarCriterioInicioComponent implements OnInit{
             this.valorMedicionCriterioRiego,this.horaInicioCriterioRiego,this.numeroDiaInicioCriterioRiego,this.operadorEnviar)
             .then(
                 reponse=>{
-                    this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
+                    this.router.navigate(['/homeConfiguracionRiego/']);
                 }
             )
             .catch(
@@ -178,7 +171,7 @@ export class AgregarCriterioInicioComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
+        this.router.navigate(['/homeConfiguracionRiego/']);
     }
 }
 

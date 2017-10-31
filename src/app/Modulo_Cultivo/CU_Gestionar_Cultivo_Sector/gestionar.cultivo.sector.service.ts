@@ -12,12 +12,13 @@ export class GestionarCultivoSectorService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  modificarCultivoSector(idCultivo:number,descripcionCultivo:string,nombreCultivo:string,fechaPlantacion:string,idFinca:number):Promise<any> {
+  modificarCultivoSector(idCultivo:number,descripcionCultivo:string,nombreCultivo:string,fechaPlantacion:string,cantidadPlantas:number,idFinca:number):Promise<any> {
     const data = {
       'idCultivo':idCultivo,
       'descripcionCultivo':descripcionCultivo,
       'nombreCultivo':nombreCultivo,
       'fechaPlantacion':fechaPlantacion,
+      'cantidadPlantas':cantidadPlantas,
       'idFinca':idFinca
     };
     return this.http.post(GestionarCultivoSectorService.serverUrl + this.modificarCultivoSectorUrl, JSON.stringify(data), this.getRestHeader())
@@ -37,9 +38,10 @@ export class GestionarCultivoSectorService extends RestBaseService{
     .catch(this.handleError);
   }
   
-  mostrarCultivoSector(idSector:number):Promise<Cultivo>{
+  mostrarCultivoSector(idSector:number,idFinca:number):Promise<Cultivo>{
     const data = {
-        'idSector':idSector
+        'idSector':idSector,
+        'idFinca':idFinca
       };
       return this.http.post(GestionarCultivoSectorService.serverUrl + this.mostrarCultivoSectorUrl, JSON.stringify(data), this.getRestHeader())
       .toPromise()

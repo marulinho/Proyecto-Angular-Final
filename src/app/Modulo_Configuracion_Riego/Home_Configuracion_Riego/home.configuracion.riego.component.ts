@@ -19,10 +19,10 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
     erroresSistema = new ErroresSistema();
     permisoModificarConfiguracionRiego = JSON.parse(localStorage.getItem('puedeModificarConfiguracionRiego'));
 
-    idFinca: number;
-    idConfiguracionRiego: number;
-    idMecanismoRiegoFincaSector: number;
-    idSector: number;
+    idFinca: number=JSON.parse(localStorage.getItem('idFinca'));
+    idConfiguracionRiego: number= JSON.parse(localStorage.getItem('idConfiguracionRiego'));
+    idMecanismoRiegoFincaSector: number = JSON.parse(localStorage.getItem('idMecanismoRiegoFincaSector'));
+    idSector: number=JSON.parse(localStorage.getItem('idSector'));
     position = 'above';
     tooltipEditarConfiguracion = 'Editar Configuración.';
     tooltipEliminarConfiguracion = 'Eliminar Configuración.';
@@ -61,15 +61,7 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
         private appService: AppService,
         private dialog: MdDialog) {
 
-        appService.getState().topnavTitle = "Home Configuración Riego";
-        this.route.params.subscribe(params => {
-            this.idMecanismoRiegoFincaSector = +params['idMecanismoRiegoFincaSector'];
-            this.idFinca = +params['idFinca'];
-            this.idConfiguracionRiego = +params['idConfiguracionRiego'];
-            this.idSector = +params['idSector'];
-
-
-        });
+        appService.getState().topnavTitle = "Home Configuración Riego.";
 
     }
 
@@ -210,7 +202,7 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
                     this.gestionarConfiguracionRiegoService.eliminarConfiguracionRiego(this.idFinca, this.idMecanismoRiegoFincaSector, this.idConfiguracionRiego)
                         .then(
                         response => {
-                            this.router.navigate(['/homeSector/' + this.idFinca + "/" + this.idSector]);
+                            this.router.navigate(['/homeSector/']);
                         }
                         )
                         .catch(
@@ -231,7 +223,7 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
         this.gestionarConfiguracionRiegoService.cambiarEstadoConfiguracionRiego(this.idFinca, this.idMecanismoRiegoFincaSector, this.idConfiguracionRiego)
             .then(
             response => {
-                this.router.navigate(['/homeSector/' + this.idSector + "/" + this.idFinca]);
+                this.router.navigate(['/homeSector/']);
             }
             )
             .catch(
@@ -247,8 +239,6 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
     }
 
     apretarEditarCriterioRiego(idCriterioRiego: number, tipoCriterioRiego: string) {
-        localStorage.setItem('idMecanismoRiegoFincaSector', JSON.stringify(this.idMecanismoRiegoFincaSector));
-        localStorage.setItem('idConfiguracionRiego', JSON.stringify(this.idConfiguracionRiego));
         localStorage.setItem('tipoCriterioRiego', JSON.stringify(tipoCriterioRiego));
         localStorage.setItem('idCriterioRiego', JSON.stringify(idCriterioRiego));
         this.router.navigate(['/gestionarCriterioRiego/']);

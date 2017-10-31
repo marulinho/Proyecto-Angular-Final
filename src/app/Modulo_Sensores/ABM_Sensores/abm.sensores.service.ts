@@ -11,6 +11,7 @@ export class ABMSensorFincaService extends RestBaseService {
     private mostrarSensoresFincaUrl="/mostrarSensoresFinca/";
     private modificarSensorFincaUrl="/modificarSensor/";
     private deshabilitarSensorFincaUrl="/deshabilitarSensor/";
+    private buscarSensorIdUrl = "/buscarSensorId/";
 
     constructor(private http: Http) { super(); }
 
@@ -49,11 +50,12 @@ export class ABMSensorFincaService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    modificarSensor(idTipoMedicion: number, modeloSensor: string, idSensor: number): Promise<any> {
+    modificarSensor(idTipoMedicion: number, modeloSensor: string, idSensor: number,idFinca:number): Promise<any> {
         const data = {
             'idTipoMedicion': idTipoMedicion,
             'modeloSensor': modeloSensor,
-            'idSensor': idSensor
+            'idSensor': idSensor,
+            'idFinca':idFinca
         };
 
         return this.http.post(ABMSensorFincaService.serverUrl + this.modificarSensorFincaUrl, JSON.stringify(data), this.getRestHeader())
@@ -64,9 +66,10 @@ export class ABMSensorFincaService extends RestBaseService {
             .catch(this.handleError);
     }
 
-    deshabilitarSensor(idSensor:number){
+    deshabilitarSensor(idSensor:number,idFinca:number){
         const data = {
-            'idSensor': idSensor
+            'idSensor': idSensor,
+            'idFinca':idFinca
         };
 
         return this.http.post(ABMSensorFincaService.serverUrl + this.deshabilitarSensorFincaUrl, JSON.stringify(data), this.getRestHeader())
@@ -75,6 +78,20 @@ export class ABMSensorFincaService extends RestBaseService {
                 return response.json() as any;
             })
             .catch(this.handleError);
+    }
+
+    buscarSensorId(idSensor:number,idFinca:number):Promise<Sensor>{
+        const data = {
+            'idSensor': idSensor,
+            'idFinca':idFinca
+        };
+
+        return this.http.post(ABMSensorFincaService.serverUrl + this.buscarSensorIdUrl, JSON.stringify(data), this.getRestHeader())
+            .toPromise()
+            .then(response => {
+                return response.json() as any;
+            })
+            .catch(this.handleError);    
     }
 }
 

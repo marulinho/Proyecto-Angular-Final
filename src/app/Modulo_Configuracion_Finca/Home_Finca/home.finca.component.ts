@@ -260,10 +260,11 @@ export class HomeFincaComponent implements OnInit{
             );
     }
 
-    apretarIconoVerFinca(idFinca:number,idUsuarioFinca:number){
+    apretarIconoVerFinca(idFinca:number,idUsuarioFinca:number,nombreFinca:string){
         localStorage.setItem('idFinca',JSON.stringify(idFinca));
         localStorage.setItem('idUsuarioFinca',JSON.stringify(idUsuarioFinca));
-        this.router.navigate(['/homeFincaDetalle/'+idFinca]);
+        localStorage.setItem('nombreFinca',JSON.stringify(nombreFinca));
+        this.router.navigate(['/homeFincaDetalle/']);
     }
 
     refresh(): void {

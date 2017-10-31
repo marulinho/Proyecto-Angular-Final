@@ -13,9 +13,9 @@ export class GestionarSectorFincaService extends RestBaseService{
 
   constructor(private http: Http) {super();}
 
-  buscarSectoresFinca(id:number):Promise<Sector> {
+  buscarSectoresFinca(idFinca:number):Promise<Sector> {
     const data = {
-      'idFinca':id
+      'idFinca':idFinca
     };
     return this.http.post(GestionarSectorFincaService.serverUrl + this.mostrarSectoresUrl, JSON.stringify(data), this.getRestHeader())
     .toPromise()
@@ -23,9 +23,10 @@ export class GestionarSectorFincaService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  buscarSectorId(id:number):Promise<Sector> {
+  buscarSectorId(idSector:number,idFinca:number):Promise<Sector> {
     const data = {
-      'idSector':id
+      'idSector':idSector,
+      'idFinca':idFinca
     };
     return this.http.post(GestionarSectorFincaService.serverUrl + this.buscarSectorIdUrl, JSON.stringify(data), this.getRestHeader())
     .toPromise()

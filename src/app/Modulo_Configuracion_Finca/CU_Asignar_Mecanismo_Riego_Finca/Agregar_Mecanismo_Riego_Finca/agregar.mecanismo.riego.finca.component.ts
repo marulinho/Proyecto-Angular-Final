@@ -13,13 +13,13 @@ import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 
 export class AgregarMecanismoRiegoFincaComponent implements OnInit{
     
-    idFinca:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
     permisoAsignarMecanismoFinca=JSON.parse(localStorage.getItem('puedeAsignarMecRiegoAFinca'));
     
     erroresSistema = new ErroresSistema();
 
     //ATRIBUTOS PERFIL AGREGAR MECANISMO
-    tooltipAgregarMecanismo='Agregar Mecanismo';
+    tooltipAgregarMecanismo='Agregar Mecanismo.';
     position='above';
     errorMessagePerfilMecanismo="";
     mecanismosRiego:MecanismoRiego;
@@ -37,38 +37,34 @@ export class AgregarMecanismoRiegoFincaComponent implements OnInit{
                 private route:ActivatedRoute,
                 private asginarMecanismoRiegoFincaService: AsignarMecanismoRiegoFincaService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Mecanismos de Riego";
-            this.route.params.subscribe(params => {
-                
-                this.idFinca = +params['idFinca'];
-                if (this.idFinca) {
-                    this.asginarMecanismoRiegoFincaService.mostrarMecanismoRiegoNuevosFinca(this.idFinca)
-                    .then(
-                        response=>{
-                            if(response.detalle_operacion=="No hay datos"){
-                                this.errorMessagePerfilMecanismo="No existen mecanismos que se puedan agregar a la finca.";
-                            }
-                            else{
-                                this.mecanismosRiego=response.datos_operacion;
-                                this.mecanismoRiegoSeleccionado=true;
-                            }
-                        }
-                    )
-                    .catch(
-                        error=>{
-                            if(error.error_description==this.erroresSistema.getInicioSesion()){
-                                this.router.navigate(['/login/']);
-                            }
-                            else{
-                                this.errorMessagePerfilMecanismo=error.error_description;
-                            }
-                        }
-                    );
-                }
-            });
+            this.appService.getState().topnavTitle="Mecanismos de Riego.";
+
     }
 
-    ngOnInit(){}
+    ngOnInit(){
+        this.asginarMecanismoRiegoFincaService.mostrarMecanismoRiegoNuevosFinca(this.idFinca)
+        .then(
+            response=>{
+                if(response.detalle_operacion=="No hay datos"){
+                    this.errorMessagePerfilMecanismo="No existen mecanismos que se puedan agregar a la finca.";
+                }
+                else{
+                    this.mecanismosRiego=response.datos_operacion;
+                    this.mecanismoRiegoSeleccionado=true;
+                }
+            }
+        )
+        .catch(
+            error=>{
+                if(error.error_description==this.erroresSistema.getInicioSesion()){
+                    this.router.navigate(['/login/']);
+                }
+                else{
+                    this.errorMessagePerfilMecanismo=error.error_description;
+                }
+            }
+        );
+    }
 
     getPermisoAsignarMecanismoFinca(){
         return this.permisoAsignarMecanismoFinca;
@@ -99,7 +95,7 @@ export class AgregarMecanismoRiegoFincaComponent implements OnInit{
             this.asginarMecanismoRiegoFincaService.agregarMecanismoRiegoFinca(this.idFinca,this.nombreMecanismo,this.ip)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+                        this.router.navigate(['/homeFincaDetalle/']);
                     }
                 )
                 .catch(

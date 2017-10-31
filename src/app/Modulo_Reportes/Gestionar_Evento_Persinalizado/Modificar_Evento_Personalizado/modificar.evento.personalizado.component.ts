@@ -55,7 +55,26 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log("evento Personalizado:"+ this.idConfiguracionEvento);
+        /*this.gestionarEventoPersonalizadoService.buscarConfiguracionesEventosPersonalizados(this.idUsuarioFinca,this.idFinca,this.idSector)
+        .then(
+            response=>{
+                if(response.detalle_operacion=="No hay datos"){
+                    this.errorMessageModificarEvento="No se ha podido obtener el evento, intente nuevamente.";
+                }
+                else{
+                    this.nombre=response.datos_operacion['dto_evento_lista']['nombre'];
+                    this.descripcion=response.datos_operacion['dto_evento_lista']['descripcion'];
+                    this.notificacionActivada=response.datos_operacion['dto_evento_lista']['notificacion_activada'];
+                    this.configuracionActivada=response.datos_operacion['dto_evento_lista']['activado'];
+                    this.valorMinimoInterno=response.datos_operacion['lista_mediciones_internas']['valor_minimo'];
+                    this.valorMaximoInterno=response.datos_operacion['lista_mediciones_internas']['valor_maximo'];
+                    this.valorMinimoExterno=response.datos_operacion['lista_mediciones_externas']['valor_minimo'];
+                    this.valorMaximoExterno=response.datos_operacion['lista_mediciones_externas']['valor_maximo'];
+
+                }
+            }
+        )
+        */
         this.gestionarEventoPersonalizadoService.mostrarTipoMedicionInternaFinca(this.idFinca)
             .then(
                 response=>{
@@ -152,7 +171,7 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
             this.idSector,this.idFinca)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeSector/'+this.idFinca+"/"+this.idSector]);
+                        this.router.navigate(['/homeConfiguracionRiego/']);
                     }
                 )
                 .catch(
@@ -169,6 +188,6 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
 
 
     apretarSalir(){
-        this.router.navigate(['/homeSector/'+this.idFinca+"/"+this.idSector]);        
+        this.router.navigate(['/homeConfiguracionRiego/']);        
     }
 }

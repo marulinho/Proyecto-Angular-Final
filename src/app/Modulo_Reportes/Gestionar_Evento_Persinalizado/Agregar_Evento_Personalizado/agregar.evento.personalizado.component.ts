@@ -149,7 +149,7 @@ export class AgregarEventoPersonalizadoComponent implements OnInit{
             this.idUsuarioFinca,this.nombre,this.descripcion,this.notificacionActivada,this.configuracionActivada,this.idSector,this.idFinca)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeSector/'+this.idFinca+"/"+this.idSector]);
+                        this.router.navigate(['/homeSector/']);
                     }
                 )
                 .catch(
@@ -166,6 +166,6 @@ export class AgregarEventoPersonalizadoComponent implements OnInit{
 
 
     apretarSalir(){
-        this.router.navigate(['/homeSector/'+this.idFinca+"/"+this.idSector]);        
+        this.router.navigate(['/homeSector/']);        
     }
 }

@@ -21,12 +21,12 @@ export class AsignarCultivoSectorComponent implements OnInit{
 
     //ATRIBUTOS PERFIL CULTIVO
     position='above';
-    idSector:number;
-    idFinca:number;
+    idSector:number=JSON.parse(localStorage.getItem('idSector'));
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
     cultivoSectorSeleccionado:Boolean;
     errorMessageCultivo="";
     cultivos:Cultivo;
-    tooltipAgregarCultivo='Agregar Cultivo';
+    tooltipAgregarCultivo='Agregar Cultivo.';
     perfilCultivo:Boolean=true;
 
     //ATRIBUTOS AGREGAR CULTIVO
@@ -36,6 +36,7 @@ export class AsignarCultivoSectorComponent implements OnInit{
     errorMessageAgregarCultivo="";
     descripcion:string;
     fechaPlantacion:string;
+    cantidadPlantas:number;
     selectIndex:number=0;
 
     
@@ -47,11 +48,6 @@ export class AsignarCultivoSectorComponent implements OnInit{
                 private dialog: MdDialog){
 
         appService.getState().topnavTitle="Cultivo";
-        this.route.params.subscribe(params => {
-            this.idSector = +params['idSector'];
-            this.idFinca = +params['idFinca'];
-            
-        });
 
     }
 
@@ -101,21 +97,26 @@ export class AsignarCultivoSectorComponent implements OnInit{
         if(this.selectIndex==0){
             if( this.nombreCultivo=="" || this.nombreCultivo==null ||
                 this.descripcion=="" || this.descripcion==null ||
-                this.fechaPlantacion=="" || this.fechaPlantacion==null){
+                this.fechaPlantacion=="" || this.fechaPlantacion==null || this.cantidadPlantas==null){
                     this.errorMessageAgregarCultivo="Debe completar todos los campos obligatorios (*).";
                 }
             else{
-                this.errorMessageAgregarCultivo="";
-                this.selectIndex +=1;
+                if(this.cantidadPlantas<=0){
+                    this.errorMessageAgregarCultivo="La cantidad de plantas no puede ser menor o igual a cero.";
+                }
+                else{
+                    this.errorMessageAgregarCultivo="";
+                    this.selectIndex +=1;
+                }
             }
         }
     }
 
     apretarAgregaCultivo(){
-        this.asignarCultivoSectorService.asignarCultivoSector(this.idSector,this.nombreSubtipoCultivo,this.nombreCultivo,this.descripcion,this.fechaPlantacion,this.idFinca)
+        this.asignarCultivoSectorService.asignarCultivoSector(this.idSector,this.nombreSubtipoCultivo,this.nombreCultivo,this.descripcion,this.fechaPlantacion,this.cantidadPlantas,this.idFinca)
             .then(
                 response=>{
-                    this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);
+                    this.router.navigate(['/homeSector/']);
                 }
             )
             .catch(
@@ -131,6 +132,6 @@ export class AsignarCultivoSectorComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);
+        this.router.navigate(['/homeSector/']);
     }
 }

@@ -10,7 +10,6 @@ import { AppService } from './app.service';
 import { MaterialModule, MdTabsModule } from '@angular/material';
 import { Md2Module } from 'md2/module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Ng2Permission } from 'angular2-permission';
 import { RouterModule, NoPreloading } from '@angular/router';
 import { DialogExampleComponent } from './shared/dialog/dialog-example/dialog-example.component';
 import { AgmCoreModule, MapsAPILoader} from 'angular2-google-maps/core';
@@ -85,93 +84,93 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 //IMPORTS MODULO SEGURIDAD
-import { IniciarSesionComponent } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.component';
-import { IniciarSesionService } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.service';
-import { PerfilUsuarioComponent } from './Modulo_Seguridad/Perfil_Usuario/perfil.usuario.component';
-import { PerfilUsuarioService } from './Modulo_Seguridad/Perfil_Usuario/perfil.usuario.service';
-import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/Modificar_Usuario/modificar.usuario.component';
-import { ModificarUsuarioService } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.service';
-import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.component';
-import { RegistrarUsuarioService } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.service';
-import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
-import { RecuperarCuentaService } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.service';
-import { ModificarContraseniaComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/Cambiar_Contrasenia/modificar.contrasenia.component';
-import { FinalizarSesionService } from './Modulo_Seguridad/CU_Finalizar_Sesion/finalizar.sesion.service';
+  import { IniciarSesionComponent } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.component';
+  import { IniciarSesionService } from './Modulo_Seguridad/CU_Iniciar_Sesion/iniciar.sesion.service';
+  import { PerfilUsuarioComponent } from './Modulo_Seguridad/Perfil_Usuario/perfil.usuario.component';
+  import { PerfilUsuarioService } from './Modulo_Seguridad/Perfil_Usuario/perfil.usuario.service';
+  import { ModificarUsuarioComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/Modificar_Usuario/modificar.usuario.component';
+  import { ModificarUsuarioService } from './Modulo_Seguridad/CU_Modificar_Usuario/modificar.usuario.service';
+  import { RegistrarUsuarioComponent } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.component';
+  import { RegistrarUsuarioService } from './Modulo_Seguridad/CU_Registrar_Usuario/registrar.usuario.service';
+  import { RecuperarCuentaComponent } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.component';
+  import { RecuperarCuentaService } from './Modulo_Seguridad/CU_Recuperar_Cuenta/recuperar.cuenta.service';
+  import { ModificarContraseniaComponent } from './Modulo_Seguridad/CU_Modificar_Usuario/Cambiar_Contrasenia/modificar.contrasenia.component';
+  import { FinalizarSesionService } from './Modulo_Seguridad/CU_Finalizar_Sesion/finalizar.sesion.service';
 
 
 //IMPORTS MODULOS CONFIGURACION FINCA
-import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
-import { HomeFincaService } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.service';
-import { HomeFincaDetalleComponent } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.component';
-import { HomeFincaDetalleService } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.service';
-import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
-import { SolicitarCreacionFincaService } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.service';
-import { GestionarFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.component';
-import { GestionarFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.service';
-import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.compontent';
-import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
-import { ModificarRolUsuarioComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/Modificar_Rol_Usuario_Finca/modificar.rol.usuario.component';
-import { AsignarMecanismoRiegoFincaService } from './Modulo_Configuracion_Finca/CU_Asignar_Mecanismo_Riego_Finca/asignar.mecanismo.riego.finca.service';
-import { AgregarMecanismoRiegoFincaComponent } from './Modulo_Configuracion_Finca/CU_Asignar_Mecanismo_Riego_Finca/Agregar_Mecanismo_Riego_Finca/agregar.mecanismo.riego.finca.component';
+  import { HomeFincaComponent } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.component';
+  import { HomeFincaService } from './Modulo_Configuracion_Finca/Home_Finca/home.finca.service';
+  import { HomeFincaDetalleComponent } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.component';
+  import { HomeFincaDetalleService } from './Modulo_Configuracion_Finca/Home_Finca_Detalle/home.finca.detalle.service';
+  import { SolicitarCreacionFincaComponent } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.component';
+  import { SolicitarCreacionFincaService } from './Modulo_Configuracion_Finca/CU_Solicitar_Creacion_Finca/solicitar.creacion.finca.service';
+  import { GestionarFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.component';
+  import { GestionarFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Finca/gestionar.finca.service';
+  import { GestionarUsuarioFincaComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.compontent';
+  import { GestionarUsuarioFincaService } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/gestionar.usuario.finca.service';
+  import { ModificarRolUsuarioComponent } from './Modulo_Configuracion_Finca/CU_Gestionar_Usuario_Finca/Modificar_Rol_Usuario_Finca/modificar.rol.usuario.component';
+  import { AsignarMecanismoRiegoFincaService } from './Modulo_Configuracion_Finca/CU_Asignar_Mecanismo_Riego_Finca/asignar.mecanismo.riego.finca.service';
+  import { AgregarMecanismoRiegoFincaComponent } from './Modulo_Configuracion_Finca/CU_Asignar_Mecanismo_Riego_Finca/Agregar_Mecanismo_Riego_Finca/agregar.mecanismo.riego.finca.component';
 
 
 //IMPORTS MODULO CONFIGURACION SECTORES
-import { HomeSectorComponent } from './Modulo_Configuracion_Sectores/Home_Sector/home.sector.component';
-import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.component';
-import { GestionarSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
-import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
-import { CrearSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.service';
-import { AsignarMecanismoRiegoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.component';
-import { AsignarMecanismoRiegoSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.service';
-import { AsignarCultivoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.component';
-import { AsignarCultivoSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.service';
-import { AsignarComponenteSensorSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.component';
-import { AsignarComponenteSensorSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.service';
+  import { HomeSectorComponent } from './Modulo_Configuracion_Sectores/Home_Sector/home.sector.component';
+  import { GestionarSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.component';
+  import { GestionarSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Gestionar_Sector/gestionar.sector.service';
+  import { CrearSectorFincaComponent } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.component';
+  import { CrearSectorFincaService } from './Modulo_Configuracion_Sectores/CU_Crear_Sector/crear.sector.service';
+  import { AsignarMecanismoRiegoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.component';
+  import { AsignarMecanismoRiegoSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Mecanismo_Riego_Sector/asignar.mecanismo.riego.sector.service';
+  import { AsignarCultivoSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.component';
+  import { AsignarCultivoSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Cultivo_Sector/asignar.cultivo.sector.service';
+  import { AsignarComponenteSensorSectorComponent } from './Modulo_Configuracion_Sectores/CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.component';
+  import { AsignarComponenteSensorSectorService } from './Modulo_Configuracion_Sectores/CU_Asignar_Componente_Sensor_Sector/asignar.componente.sensor.sector.service';
 
 //IMPORTS MODULO SENSORES
-import { CrearSensorComponent } from './Modulo_Sensores/ABM_Sensores/Crear_Sensor/crear.sensor.component';
-import { ModificarSensorComponent } from './Modulo_Sensores/ABM_Sensores/Modificar_Sensor/modificar.sensor.component';
-import { ABMSensorFincaService } from './Modulo_Sensores/ABM_Sensores/abm.sensores.service';
-import { CrearComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Crear_Componente_Sensor/crear.componente.sensor.component';
-import { GestionarComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Gestionar_Componente_Sensor/gestionar.componente.sensor.component';
-import { GestionarComponenteSensorService } from './Modulo_Sensores/ABM_Componente_Sensor/gestionar.componente.sensor.service';
-import { HomeComponenteSensorComponent } from './Modulo_Sensores/Home_Componente_Sensor/home.componente.sensor.component';
-import { AsignarSensorComponenteSensorService } from './Modulo_Sensores/Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.service';
-import { AsignarSensorComponenteSensorComponent } from './Modulo_Sensores/Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.component';
+  import { CrearSensorComponent } from './Modulo_Sensores/ABM_Sensores/Crear_Sensor/crear.sensor.component';
+  import { ModificarSensorComponent } from './Modulo_Sensores/ABM_Sensores/Modificar_Sensor/modificar.sensor.component';
+  import { ABMSensorFincaService } from './Modulo_Sensores/ABM_Sensores/abm.sensores.service';
+  import { CrearComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Crear_Componente_Sensor/crear.componente.sensor.component';
+  import { GestionarComponenteSensorComponent } from './Modulo_Sensores/ABM_Componente_Sensor/CU_Gestionar_Componente_Sensor/gestionar.componente.sensor.component';
+  import { GestionarComponenteSensorService } from './Modulo_Sensores/ABM_Componente_Sensor/gestionar.componente.sensor.service';
+  import { HomeComponenteSensorComponent } from './Modulo_Sensores/Home_Componente_Sensor/home.componente.sensor.component';
+  import { AsignarSensorComponenteSensorService } from './Modulo_Sensores/Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.service';
+  import { AsignarSensorComponenteSensorComponent } from './Modulo_Sensores/Asignar_Sensor_Componente_Sensor/asignar.sensor.componente.sensor.component';
 
 //IMPORTS MODULO CULTIVO
-import { GestionarCultivoSectorComponent } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.component';
-import { GestionarCultivoSectorService } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.service';
+  import { GestionarCultivoSectorComponent } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.component';
+  import { GestionarCultivoSectorService } from './Modulo_Cultivo/CU_Gestionar_Cultivo_Sector/gestionar.cultivo.sector.service';
 
 //IMPORTS CONFIGURACION RIEGO
-import { GestionarConfiguracionRiegoService } from'./Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/gestionar.configuracion.riego.service';
-import { CrearConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Crear_Configuracion_Riego/crear.configuracion.riego.component';
-import { HomeConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Home_Configuracion_Riego/home.configuracion.riego.component';
-import { ModificarConfiguracionRiegoComponent }  from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Modificar_Configuracion_Riego/modificar.configuracion.riego.component';
-import { AgregarCriterioInicioComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Inicio/agregar.criterio.inicio.component';
-import { AgregarCriterioFinComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Fin/agregar.criterio.fin.component';
-import { GestionarRiegoService } from './Modulo_Configuracion_Riego/Gestionar_Riego/gestionar.riego.service';
-import { ModificarCriterioInicialFinalComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Modificar_Criterio_Inicial_Final/modificar.criterio.inicial.fincal.component';
+  import { GestionarConfiguracionRiegoService } from'./Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/gestionar.configuracion.riego.service';
+  import { CrearConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Crear_Configuracion_Riego/crear.configuracion.riego.component';
+  import { HomeConfiguracionRiegoComponent } from './Modulo_Configuracion_Riego/Home_Configuracion_Riego/home.configuracion.riego.component';
+  import { ModificarConfiguracionRiegoComponent }  from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/CU_Modificar_Configuracion_Riego/modificar.configuracion.riego.component';
+  import { AgregarCriterioInicioComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Inicio/agregar.criterio.inicio.component';
+  import { AgregarCriterioFinComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Agregar_Criterio_Fin/agregar.criterio.fin.component';
+  import { GestionarRiegoService } from './Modulo_Configuracion_Riego/Gestionar_Riego/gestionar.riego.service';
+  import { ModificarCriterioInicialFinalComponent } from './Modulo_Configuracion_Riego/Gestionar_Configuracion_Riego/Modificar_Criterio_Inicial_Final/modificar.criterio.inicial.fincal.component';
 
 
 //IMPORTS MODULO REPORTES
-import { GestionarEventoPersonalizadoService } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
-import { GenerarReportesService } from './Modulo_Reportes/generar.repotes.service';
-import { AgregarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Agregar_Evento_Personalizado/agregar.evento.personalizado.component';
-import { ModificarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Modificar_Evento_Personalizado/modificar.evento.personalizado.component';
-import { HomeReporteComponent } from './Modulo_Reportes/Home_Reporte/home.reporte.component';
-import { ReporteRiegoEjecucionComponent } from './Modulo_Reportes/Reporte_Riego_Ejecucion/reporte.riego.ejecucion.component';
-import { ReporteEstadoActualEstadoSector } from './Modulo_Reportes/Reporte_Estado_Actual_Sector/reporte.estado.actual.sector.component';
-import { ReporteRiegoHistoricoSectorComponent } from './Modulo_Reportes/Reporte_Riego_Historico_Sector/reporte.riego.historico.sector.component';
-import { ReporteHistoricoHeladaComponent } from './Modulo_Reportes/Reporte_Historico_Heladas/reporte.historico.heladas.component';
-import { ReporteEstadoHistoricoSectorComponent } from './Modulo_Reportes/Reporte_Historico_Sector/reporte.estado.historico.sector.component';
-import { ReporteMedicionCruzadaComponent } from './Modulo_Reportes/Reporte_Medicion_Cruzada/reporte.medicion.cruzada.component';
-import { ReporteEventoPersonalizadoComponent } from './Modulo_Reportes/Reporte_Evento_Personalizado/reporte.evento.personalizado.component';
+  import { GestionarEventoPersonalizadoService } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
+  import { GenerarReportesService } from './Modulo_Reportes/generar.repotes.service';
+  import { AgregarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Agregar_Evento_Personalizado/agregar.evento.personalizado.component';
+  import { ModificarEventoPersonalizadoComponent } from './Modulo_Reportes/Gestionar_Evento_Persinalizado/Modificar_Evento_Personalizado/modificar.evento.personalizado.component';
+  import { HomeReporteComponent } from './Modulo_Reportes/Home_Reporte/home.reporte.component';
+  import { ReporteRiegoEjecucionComponent } from './Modulo_Reportes/Reporte_Riego_Ejecucion/reporte.riego.ejecucion.component';
+  import { ReporteEstadoActualEstadoSector } from './Modulo_Reportes/Reporte_Estado_Actual_Sector/reporte.estado.actual.sector.component';
+  import { ReporteRiegoHistoricoSectorComponent } from './Modulo_Reportes/Reporte_Riego_Historico_Sector/reporte.riego.historico.sector.component';
+  import { ReporteHistoricoHeladaComponent } from './Modulo_Reportes/Reporte_Historico_Heladas/reporte.historico.heladas.component';
+  import { ReporteEstadoHistoricoSectorComponent } from './Modulo_Reportes/Reporte_Historico_Sector/reporte.estado.historico.sector.component';
+  import { ReporteMedicionCruzadaComponent } from './Modulo_Reportes/Reporte_Medicion_Cruzada/reporte.medicion.cruzada.component';
+  import { ReporteEventoPersonalizadoComponent } from './Modulo_Reportes/Reporte_Evento_Personalizado/reporte.evento.personalizado.component';
 
 //IMPORTS MODULO OBTENCION INFORMACION EXTERNA
-import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
-import { CambiarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Cambiar_Proveedor_Informacion/cambiar.proveedor.component';
-import { GestionarProveedorInformacionService } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
+  import { ModificarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Modificar_Proveedor_Informacion/modficar.proveedor.component';
+  import { CambiarProveedorInformacionComponent } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/Cambiar_Proveedor_Informacion/cambiar.proveedor.component';
+  import { GestionarProveedorInformacionService } from './Modulo_Obtencion_Informacion_Externa/CU_Gestionar_Proveedor_Informacion/gestionar.proveedor.service';
 
 
 import { TablasComponent } from './tablas/tablas.component';
@@ -307,7 +306,6 @@ import { TablasComponent } from './tablas/tablas.component';
   ],
   imports: [
     // Angular Imports
-    Ng2Permission,
     BrowserModule,
     BrowserAnimationsModule,
     MdTabsModule,

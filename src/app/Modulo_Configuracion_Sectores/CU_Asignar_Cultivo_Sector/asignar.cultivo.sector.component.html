@@ -71,6 +71,10 @@
               <input mdInput placeholder="Descripci&oacute;n cultivo." type="text" [(ngModel)]="descripcion" name="descripcion" required>
             </md-input-container>
             
+            <md-input-container>  
+              <input mdInput placeholder="Cantidad de plantas." type="text" [(ngModel)]="cantidadPlantas" name="cantidadPlantas" required>
+            </md-input-container>
+
             <md-input-container>
               <input mdInput placeholder="Fecha Plantaci&oacute;n." type="date" [(ngModel)]="fechaPlantacion" name="fechaPlantacion" required>
             </md-input-container>
@@ -89,14 +93,15 @@
                   </div>
                 </div><br>
               </section>
-          <label id="atributo">Sector: </label>
-          <label> {{idSector}}.</label><br><br>
+
           <label id="atributo">Nombre Cultivo: </label>
           <label>{{nombreCultivo}}.</label><br><br>
           <label id="atributo">SubTipo: </label>
           <label>{{nombreSubtipoCultivo}}.</label><br><br>
           <label id="atributo">Descripci&oacute;n: </label>
           <label>{{descripcion}}.</label><br><br>
+          <label id="atributo">Cantidad de plantas: </label>
+          <label>{{cantidadPlantas}} plantas.</label><br><br>
           <label id="atributo">Fecha Plantaci&oacute;n: </label>
           <label>{{fechaPlantacion}}.</label><br><br>
         

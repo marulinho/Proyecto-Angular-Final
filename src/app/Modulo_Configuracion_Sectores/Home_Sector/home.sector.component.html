@@ -4,11 +4,14 @@
         <md-card-title>
             Resumen del Sector.
             <a *ngIf="getPermisosGestionarSector()" class="example-tooltip-host" mdTooltip={{tooltipEditarSector}} [mdTooltipPosition]="position">
-            <img src="assets/icons/editar.png" [routerLink]="['/gestionarSectorFinca/',idSector]">
+            <img src="assets/icons/editar.png" [routerLink]="['/gestionarSectorFinca/']">
         </a>
 
             <a *ngIf="getPermisosGestionarSector()"class="example-tooltip-host" mdTooltip={{tooltipEliminarSector}} [mdTooltipPosition]="position" (click)="apretarEliminarIcono()">
             <img src="assets/icons/delete.png">
+        </a>
+        <a id="botonVolver" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
+            <img src="assets/icons/atras.png">
         </a>
         </md-card-title>
         <md-card-content *ngIf="getPermisosGestionarSector()">
@@ -42,7 +45,7 @@
             <md-card-title>
                 Mecanismo Riego.
                 <a *ngIf="!getMecanismoHabilitado() && getPermisosAsignarMecanismoSector()" class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismoSector}} [mdTooltipPosition]="position">
-                            <img src="assets/icons/nuevo.png" [routerLink]="['/asignarMecanismoSector/',idSector,idFinca]">
+                            <img src="assets/icons/nuevo.png" [routerLink]="['/asignarMecanismoSector/']">
                 </a>
 
             </md-card-title>
@@ -89,10 +92,10 @@
             <md-card-title>
                 Cultivo.
                 <a *ngIf="!getCultivoExistente() && getPermisosAsignarCultivo()" class="example-tooltip-host" mdTooltip={{tooltipAsignarCultivoSector}} [mdTooltipPosition]="position">
-                            <img src="assets/icons/nuevo.png" [routerLink]="['/asignarCultivo/',idSector,idFinca]">
+                            <img src="assets/icons/nuevo.png" [routerLink]="['/asignarCultivo/']">
                     </a>
                 <a *ngIf="getCultivoExistente() && getPermisosGestionarCultivoSector()" class="example-tooltip-host" mdTooltip={{tooltipModificarCultivoSector}} [mdTooltipPosition]="position">
-                            <img src="assets/icons/editar.png" [routerLink]="['/gestionarCultivoSector/',idSector,idFinca,cultivosSector.idCultivo]"> 
+                            <img src="assets/icons/editar.png" (click)="apretarEditarCultivo(cultivosSector.idCultivo)"> 
                     </a>
 
             </md-card-title>
@@ -109,7 +112,8 @@
                         <thead>
                             <tr>
                                 <th style="width:37%;">Nombre.</th>
-                                <th style="width:36%;">Descripci&oacute;n.</th>
+                                <th style="width:30%;">Descripci&oacute;n.</th>
+                                <th>Cantidad Plantas.</th>
                                 <th>Fecha Plantaci&oacute;n.</th>
                                 <th class="actions">Acci&oacute;n.</th>
                             </tr>
@@ -118,6 +122,7 @@
                             <tr>
                                 <td>{{cultivosSector.nombre}}.</td>
                                 <td>{{cultivosSector.descripcion}}.</td>
+                                <td>{{cultivosSector.cantidadPlantas}} plantas.</td>
                                 <td>{{cultivosSector.fechaPlantacion.substring(0,10)}}</td>
                                 <td>
 
@@ -138,7 +143,7 @@
             <md-card-title>
                 Componente Sensor Sector.
                 <a *ngIf="!getComponenteSensorExistente() && getPermisosAsignarComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipAsignarComponenteSector}} [mdTooltipPosition]="position">
-                                <img src="assets/icons/nuevo.png" [routerLink]="['/asignarComponenteSector/',idSector,idFinca]" >
+                                <img src="assets/icons/nuevo.png" [routerLink]="['/asignarComponenteSector/']" >
                         </a>
 
             </md-card-title>
@@ -184,7 +189,7 @@
             <md-card-title>
                 Configuraciones de Riego.
                 <a *ngIf="getMecanismoHabilitado() && getPermisoCrearConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipCrearConfiguracionRiego}} [mdTooltipPosition]="position">
-                    <img src="assets/icons/nuevo.png" [routerLink]="['/crearConfiguracionRiego/',idFinca,idSector,idMecanismoRiegoFincaSector]">
+                    <img src="assets/icons/nuevo.png" [routerLink]="['/crearConfiguracionRiego/']">
                 </a>
             </md-card-title>
             <md-card-content>
@@ -212,8 +217,8 @@
                                 <td>{{configuracionRiego.tipoConfiguracionRiego}}.</td>
                                 <td>
                                     <a *ngIf="configuracionRiego.estado_configuracion=='habilitado' && configuracionRiego.tipoConfiguracionRiego=='programado' && getPermisoModificarConfiguracionRiego()"
-                                        class="example-tooltip-host" mdTooltip={{tooltipVerConfiguracionRiego}} [mdTooltipPosition]="position"
-                                        [routerLink]="['/homeConfiguracionRiego/',idFinca,idMecanismoRiegoFincaSector,configuracionRiego.idConfiguracionRiego,idSector]">
+                                        class="example-tooltip-host" mdTooltip={{tooltipVerConfiguracionRiego}} [mdTooltipPosition]="position" 
+                                        (click)="apretarHomeConfiguracionRiego(configuracionRiego.idConfiguracionRiego)">
                                             <img src="assets/icons/ver.png">
                                     </a>
                                     <a *ngIf="configuracionRiego.estado_configuracion=='deshabilitado' && getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipHabilitarConfiguracionRiego}}
@@ -327,15 +332,15 @@
                                     </ul>
                                 </td>
                                 <td>
-                                    <a *ngIf="eventoPersonalizado.activado==false && getPermisoGestionarEventoPersonalizado()" class="example-tooltip-host" mdTooltip={{tooltipHabilitarEvento}} [mdTooltipPosition]="position">
+                                    <a *ngIf="eventoPersonalizado.activado==false && getPermisoGestionarEventoPersonalizado() && eventoPersonalizado.nombre!='helada'" class="example-tooltip-host" mdTooltip={{tooltipHabilitarEvento}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/habilitar.png" (click)="apretarHabilitarEvento(eventoPersonalizado.id_configuracion_evento)">
                                     </a>
 
-                                    <a *ngIf="eventoPersonalizado.activado==true && getPermisoGestionarEventoPersonalizado()" class="example-tooltip-host" mdTooltip={{tooltipEditarEvento}} [mdTooltipPosition]="position">
+                                    <a *ngIf="eventoPersonalizado.activado==true && getPermisoGestionarEventoPersonalizado() && eventoPersonalizado.nombre!='helada'" class="example-tooltip-host" mdTooltip={{tooltipEditarEvento}} [mdTooltipPosition]="position">
                                             <img src="assets/icons/editar.png" (click)="apretarModificarEvento(eventoPersonalizado.id_configuracion_evento)">
                                     </a>
 
-                                    <a *ngIf="eventoPersonalizado.activado==true && getPermisoGestionarEventoPersonalizado()" class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarEvento}} [mdTooltipPosition]="position">
+                                    <a *ngIf="eventoPersonalizado.activado==true && getPermisoGestionarEventoPersonalizado() && eventoPersonalizado.nombre!='helada'" class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarEvento}} [mdTooltipPosition]="position">
                                             <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarEvento(eventoPersonalizado.id_configuracion_evento)">
                                     </a>
                                 </td>

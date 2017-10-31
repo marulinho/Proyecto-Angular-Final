@@ -189,7 +189,7 @@ export class AgregarCriterioFinComponent implements OnInit{
                 this.horaInicioCriterioRiego,this.numeroDiaInicioCriterioRiego,this.operadorEnviar)
                     .then(
                         reponse=>{
-                            this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
+                            this.router.navigate(['/homeConfiguracionRiego/']);
                         }
                     )
                     .catch(
@@ -205,7 +205,7 @@ export class AgregarCriterioFinComponent implements OnInit{
             }
 
     apretarSalir(){
-        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
+        this.router.navigate(['/homeConfiguracionRiego/']);
     }
 }
 

@@ -167,42 +167,42 @@ export const ROUTES: Routes = [
 
    //MODULO CONFIGURACION FINCA
    { path:'homeFinca',component: HomeFincaComponent },
-   { path:'homeFincaDetalle/:idFinca', component: HomeFincaDetalleComponent },
+   { path:'homeFincaDetalle', component: HomeFincaDetalleComponent },
    { path:'crearFinca', component: SolicitarCreacionFincaComponent },
-   { path:'gestionarFinca/:idFinca', component: GestionarFincaComponent },
-   { path:'gestionarUsuarioFinca/:idFinca', component: GestionarUsuarioFincaComponent},
-   { path:'modificarRolUsuario/:idUsuarioFinca', component: ModificarRolUsuarioComponent},
-   { path:'agregarMecanismoFinca/:idFinca', component:AgregarMecanismoRiegoFincaComponent},
+   { path:'gestionarFinca', component: GestionarFincaComponent },
+   { path:'gestionarUsuarioFinca', component: GestionarUsuarioFincaComponent},
+   //{ path:'modificarRolUsuario/:idUsuarioFinca', component: ModificarRolUsuarioComponent},
+   { path:'agregarMecanismoFinca', component:AgregarMecanismoRiegoFincaComponent},
 
    //MODULO CONFIGURACION SECTORES
-   { path:'homeSector/:idSector/:idFinca' , component: HomeSectorComponent},
-   { path:'crearSectorFinca/:idFinca', component: CrearSectorFincaComponent},
-   { path:'gestionarSectorFinca/:idSector', component: GestionarSectorFincaComponent},
-   { path:'asignarMecanismoSector/:idSector/:idFinca', component: AsignarMecanismoRiegoSectorComponent},
-   { path:'asignarCultivo/:idSector/:idFinca', component:AsignarCultivoSectorComponent},
-   { path:'asignarSensorComponenteSectorFinca/:idFinca/:idComponenteSensor', component:AsignarSensorComponenteSensorComponent},
-   { path:'asignarComponenteSector/:idSector/:idFinca', component:AsignarComponenteSensorSectorComponent},
+   { path:'homeSector' , component: HomeSectorComponent},
+   { path:'crearSectorFinca', component: CrearSectorFincaComponent},
+   { path:'gestionarSectorFinca', component: GestionarSectorFincaComponent},
+   { path:'asignarMecanismoSector', component: AsignarMecanismoRiegoSectorComponent},
+   { path:'asignarCultivo', component:AsignarCultivoSectorComponent},
+   { path:'asignarSensorComponenteSectorFinca', component:AsignarSensorComponenteSensorComponent},
+   { path:'asignarComponenteSector', component:AsignarComponenteSensorSectorComponent},
 
    {path:'tablas',component:TablasComponent},
 
    //MODULO SENSORES
-   {path:'crearSensorFinca/:idFinca', component:CrearSensorComponent},
-   {path:'modificarSensorFinca/:idFinca/:idSensor', component:ModificarSensorComponent},
-   {path:'crearComponenteSensorFinca/:idFinca', component:CrearComponenteSensorComponent},
-   {path:'modificarComponenteSensorFinca/:idFinca/:idComponenteSensor', component:GestionarComponenteSensorComponent},
-   {path:'homeComponenteSensorFinca/:idFinca/:idComponenteSensor', component:HomeComponenteSensorComponent},
-   {path:'asignarSensorComponente/:idFinca/:idComponenteSensor', component:AsignarSensorComponenteSensorComponent },
+   {path:'crearSensorFinca', component:CrearSensorComponent},
+   {path:'modificarSensorFinca', component:ModificarSensorComponent},
+   {path:'crearComponenteSensorFinca', component:CrearComponenteSensorComponent},
+   {path:'modificarComponenteSensorFinca', component:GestionarComponenteSensorComponent},
+   {path:'homeComponenteSensorFinca', component:HomeComponenteSensorComponent},
+   {path:'asignarSensorComponente', component:AsignarSensorComponenteSensorComponent },
 
    //MODULO OBTENCION INFORMACION EXTERNA
-   {path:'gestionarProveedor/:idFinca', component:ModificarProveedorInformacionComponent},
-   {path:'cambiarProveedor/:idFinca', component:CambiarProveedorInformacionComponent},
+   {path:'gestionarProveedor', component:ModificarProveedorInformacionComponent},
+   {path:'cambiarProveedor', component:CambiarProveedorInformacionComponent},
 
 
    //MODULO CONFIGURACION RIEGO
-   {path:'crearConfiguracionRiego/:idFinca/:idSector/:idMecanismoRiegoFincaSector', component:CrearConfiguracionRiegoComponent},
-   {path:'homeConfiguracionRiego/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego/:idSector', component:HomeConfiguracionRiegoComponent},
-   {path:'gestionarConfiguracionRiego/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego', component:ModificarConfiguracionRiegoComponent},
-   {path:'agregarCriterioInicial/:idFinca/:idMecanismoRiegoFincaSector/:idConfiguracionRiego/:idSector',component:AgregarCriterioInicioComponent},
+   {path:'crearConfiguracionRiego', component:CrearConfiguracionRiegoComponent},
+   {path:'homeConfiguracionRiego', component:HomeConfiguracionRiegoComponent},
+   {path:'gestionarConfiguracionRiego', component:ModificarConfiguracionRiegoComponent},
+   {path:'agregarCriterioInicial',component:AgregarCriterioInicioComponent},
    {path:'agregarCriterioFinal',component:AgregarCriterioFinComponent},
    {path:'gestionarCriterioRiego',component:ModificarCriterioInicialFinalComponent},
    
@@ -220,7 +220,7 @@ export const ROUTES: Routes = [
    {path:'reporteEventosPersonalizados',component:ReporteEventoPersonalizadoComponent},
 
    //MODULO CULTIVOS
-   {path:'gestionarCultivoSector/:idSector/:idFinca/:idCultivo', component: GestionarCultivoSectorComponent},
+   {path:'gestionarCultivoSector', component: GestionarCultivoSectorComponent},
 
 
    {

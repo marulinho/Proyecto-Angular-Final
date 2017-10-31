@@ -12,8 +12,7 @@ import { AppService } from '../../app.service';
 @Component({
     selector: 'app-solicitar.creacion.finca',
     templateUrl: './solicitar.creacion.finca.component.html',
-
-    //styleUrls:['./solicitar.creacion.finca.component.css']
+    styleUrls:['./solicitar.creacion.finca.component.css']
 
 })
 

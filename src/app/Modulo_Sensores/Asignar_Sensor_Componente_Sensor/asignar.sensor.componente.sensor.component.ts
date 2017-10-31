@@ -19,12 +19,12 @@ export class AsignarSensorComponenteSensorComponent implements OnInit{
     permisoAsignarSensor = JSON.parse(localStorage.getItem('puedeGestionarSensores'));
 
     //ATRIBUTOS SENSORES
-    idFinca:number;
-    idComponenteSensor:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    idComponenteSensor:number=JSON.parse(localStorage.getItem('idComponenteSensor'));
     errorMessageAgregarSensorComponente="";
     perfilAgregarSensorSeleccionado:Boolean;
-    tooltipAgregarSensor='Agregar Sensor';
-    tooltipDesasignarSensor='Desasignar Sensor';
+    tooltipAgregarSensor='Agregar Sensor.';
+    tooltipDesasignarSensor='Desasignar Sensor.';
     position='above';
     sensores:Sensor;
 
@@ -35,12 +35,7 @@ export class AsignarSensorComponenteSensorComponent implements OnInit{
                 private dialog: MdDialog) {
             
             this.appService.getState().topnavTitle="Asignar Sensor Componente Sensor.";
-            this.route.params.subscribe(params => {
-                this.idFinca = +params['idFinca'];
-                this.idComponenteSensor = +params['idComponenteSensor'];
 
-                
-            });
     }
 
     ngOnInit(){
@@ -80,7 +75,7 @@ export class AsignarSensorComponenteSensorComponent implements OnInit{
         this.asignarSensorComponenteSensorService.asignarSensorComponente(this.idFinca,this.idComponenteSensor,idSensor)
             .then(
                 response=>{
-                    this.router.navigate(['/homeComponenteSensorFinca/'+this.idFinca+"/"+this.idComponenteSensor]);
+                    this.router.navigate(['/homeComponenteSensorFinca/']);
                 }
             )
             .catch(

@@ -19,7 +19,7 @@ export class CrearSensorComponent implements OnInit{
     erroresSistema = new ErroresSistema();
     permisoCrearSensor = JSON.parse(localStorage.getItem('puedeGestionarSensores'));
 
-    idFinca:number;
+    idFinca:number =JSON.parse(localStorage.getItem('idFinca'));
     perfilSensorSeleccionado:Boolean;
     errorMessageCrearSensor:string="";
     modeloSensor:string;
@@ -33,36 +33,34 @@ export class CrearSensorComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Crear Sensor";
-        this.route.params.subscribe(params => {
-            this.idFinca = +params['idFinca'];
-            this.abmSensorFincaService.buscarTipoMediciones()
-                .then(
-                    response=>{
-                        if(response.detalle_operacion=="No hay datos"){
-                            this.errorMessageCrearSensor="No hay tipos de mediciones habilitadas.";
-                        }
-                        else{
-                            this.mediciones=response.datos_operacion;
-                            this.perfilSensorSeleccionado=true;
-                        }
-                    }
-                )
-                .catch(
-                    error=>{
-                        if (error.error_description == this.erroresSistema.getInicioSesion()) {
-                            this.router.navigate(['/login/']);
-                        }
-                        else{
-                            this.errorMessageCrearSensor=error.error_description;
-                        }
-                    }
-                );
-        });
-
+        appService.getState().topnavTitle="Crear Sensor.";
+ 
     }
 
-    ngOnInit(){}
+    ngOnInit(){
+        this.abmSensorFincaService.buscarTipoMediciones()
+        .then(
+            response=>{
+                if(response.detalle_operacion=="No hay datos"){
+                    this.errorMessageCrearSensor="No hay tipos de mediciones habilitadas.";
+                }
+                else{
+                    this.mediciones=response.datos_operacion;
+                    this.perfilSensorSeleccionado=true;
+                }
+            }
+        )
+        .catch(
+            error=>{
+                if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                    this.router.navigate(['/login/']);
+                }
+                else{
+                    this.errorMessageCrearSensor=error.error_description;
+                }
+            }
+        );
+    }
 
     getPermisoCrearSensor(){
         return this.permisoCrearSensor;
@@ -80,7 +78,7 @@ export class CrearSensorComponent implements OnInit{
             this.abmSensorFincaService.crearSensor(this.tipoMedicion,this.modeloSensor,this.idFinca)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+                        this.router.navigate(['/homeFincaDetalle/']);
                     }
                 )
                 .catch(
@@ -98,7 +96,7 @@ export class CrearSensorComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+        this.router.navigate(['/homeFincaDetalle/']);
     }
 
 

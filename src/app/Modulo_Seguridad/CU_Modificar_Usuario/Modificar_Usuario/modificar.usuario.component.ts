@@ -49,6 +49,13 @@ export class ModificarUsuarioComponent implements OnInit{
             .then(
                 response => {
                     this.usuarioActual = response.datos_operacion;
+                    this.nombre=this.usuarioActual['nombre'];
+                    this.apellido=this.usuarioActual['apellido'];
+                    this.cuit=this.usuarioActual['cuit'];
+                    this.dni=this.usuarioActual['dni'];
+                    this.email=this.usuarioActual['email'];
+                    this.domicilio=this.usuarioActual['domicilio'];
+
                 }
             )
             .catch(

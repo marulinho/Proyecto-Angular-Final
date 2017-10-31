@@ -27,20 +27,20 @@ export class HomeComponenteSensorComponent implements OnInit{
     option1:string;
     option2:string;
     selectedOption:string;
-    idFinca:number;
-    idComponenteSensor:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    idComponenteSensor:number=JSON.parse(localStorage.getItem('idComponenteSensor'));
     errorMessageHomeComponente="";
     componenteSensor:ComponenteSensor;
-    tooltipEditarComponente='Editar Componente Sensor';
-    tooltipDeshabilitarComponente='Deshabilitar Componente Sensor';    
+    tooltipEditarComponente='Editar Componente Sensor.';
+    tooltipDeshabilitarComponente='Deshabilitar Componente Sensor.';    
     perfilHomeComponenteSeleccionado:Boolean=true;
     perfilComponenteSeleccionado:Boolean;
 
     //ATRIBUTOS SENSORES
     errorMessageSensor="";
     perfilAgregarSensorSeleccionado:Boolean;
-    tooltipAgregarSensor='Agregar Sensor';
-    tooltipDesasignarSensor='Desasignar Sensor';
+    tooltipAgregarSensor='Agregar Sensor.';
+    tooltipDesasignarSensor='Desasignar Sensor.';
     position='above';
     sensores:Sensor;
 
@@ -51,13 +51,7 @@ export class HomeComponenteSensorComponent implements OnInit{
                 private appService: AppService,
                 private dialog: MdDialog) {
             
-            this.appService.getState().topnavTitle="Home Componente Sensor";
-            this.route.params.subscribe(params => {
-                this.idFinca = +params['idFinca'];
-                this.idComponenteSensor = +params['idComponenteSensor'];
-
-                
-            });
+            this.appService.getState().topnavTitle="Home Componente Sensor.";
     }
 
     ngOnInit(){
@@ -152,7 +146,7 @@ export class HomeComponenteSensorComponent implements OnInit{
                             this.gestionarComponenteSensorService.deshabilitarComponenteSensor(this.idFinca,idComponenteSensor)
                             .then(
                                 response=>{
-                                    this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+                                    this.router.navigate(['/homeFincaDetalle/']);
                                 }
                             )
                             .catch(

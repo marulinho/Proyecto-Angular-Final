@@ -16,9 +16,9 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 export class AsignarComponenteSensorSectorComponent implements OnInit{
     
-    idFinca:number;
-    idSector:number;
-    tooltipAsignarComponenteSector='Asignar Componente';
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    idSector:number=JSON.parse(localStorage.getItem('idSector'));
+    tooltipAsignarComponenteSector='Asignar Componente.';
     position='above';
     componentesSensor:ComponenteSensor;
     perfilAsignarComponenteSensorSector:Boolean;
@@ -34,11 +34,7 @@ export class AsignarComponenteSensorSectorComponent implements OnInit{
                 private dialog: MdDialog){
 
         appService.getState().topnavTitle="Asignar Componente Sensor.";
-        this.route.params.subscribe(params => {
-            this.idSector = +params['idSector'];
-            this.idFinca=+params['idFinca'];
 
-        });
 
     }
 
@@ -79,7 +75,7 @@ export class AsignarComponenteSensorSectorComponent implements OnInit{
         this.asignarComponenteSensorSectorService.asignarComponenteSector(this.idFinca,idComponenteSensor,this.idSector)
             .then(
                 response=>{
-                    this.router.navigate(['/homeSector/'+this.idSector+"/"+this.idFinca]);
+                    this.router.navigate(['/homeSector/']);
                 }
             )
             .catch(

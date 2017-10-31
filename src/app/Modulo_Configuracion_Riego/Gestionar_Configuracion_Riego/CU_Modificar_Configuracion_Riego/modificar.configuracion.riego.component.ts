@@ -19,10 +19,10 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
     erroresSistema = new ErroresSistema();
     permisoModificarConfiguracionRiego = JSON.parse(localStorage.getItem('puedeModificarConfiguracionRiego'));
 
-    idFinca:number;
-    idMecanismoRiegoFincaSector:number;
-    idConfiguracionRiego:number;
-    idSector:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    idMecanismoRiegoFincaSector:number=JSON.parse(localStorage.getItem('idMecanismoRiegoFincaSector'));
+    idConfiguracionRiego:number=JSON.parse(localStorage.getItem('idConfiguracionRiego'));
+    idSector:number=JSON.parse(localStorage.getItem('idSector'));
     errorMessageModificarConfiguracionRiego="";
     selectIndex:number=0;
     nombreConfiguracion:string;        
@@ -36,14 +36,8 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Modificar Configuración Riego";
-        this.route.params.subscribe(params => {
-            this.idMecanismoRiegoFincaSector = +params['idMecanismoRiegoFincaSector'];
-            this.idFinca=+params['idFinca'];
-            this.idConfiguracionRiego=+params['idConfiguracionRiego'];
-            this.idSector=JSON.parse(localStorage.getItem('idSector'));
+        appService.getState().topnavTitle="Modificar Configuración Riego.";
 
-        });
 
     }
 
@@ -71,7 +65,7 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
                 this.idConfiguracionRiego,this.nombreConfiguracion,this.descripcionConfiguracionRiego,this.duracionMaximaConfiguracionRiego)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
+                        this.router.navigate(['/homeConfiguracionRiego/']);
                     }
                 )
                 .catch(
@@ -88,6 +82,6 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
+        this.router.navigate(['/homeConfiguracionRiego/']);
     }
 }

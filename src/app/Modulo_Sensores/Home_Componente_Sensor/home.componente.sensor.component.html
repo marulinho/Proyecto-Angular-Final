@@ -20,7 +20,7 @@
           <h4>
             Datos Componente Sensor.
             <a *ngIf="componenteSensor.estado=='habilitado' && getPermisoGestionarComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipEditarComponente}} [mdTooltipPosition]="position">
-                <img src="assets/icons/editar.png" [routerLink]="['/modificarComponenteSensorFinca/', idFinca, componenteSensor.idComponenteSensor]">
+                <img src="assets/icons/editar.png" [routerLink]="['/modificarComponenteSensorFinca/']">
             </a>
             <a *ngIf="componenteSensor.estado=='habilitado' && getPermisoGestionarComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarComponente}} [mdTooltipPosition]="position">
                 <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarComponenteSensor(componenteSensor.idComponenteSensor)">
@@ -52,7 +52,7 @@
             <md-card-title>
                 Sensores
                 <a *ngIf="getPermisoGestionarSensor()" class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
-                    <img src="assets/icons/nuevo.png" [routerLink]="['/asignarSensorComponenteSectorFinca/',idFinca,idComponenteSensor]">
+                    <img src="assets/icons/nuevo.png" [routerLink]="['/asignarSensorComponenteSectorFinca/']">
                 </a>
             </md-card-title>        
             <md-card-content>         

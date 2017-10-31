@@ -12,17 +12,13 @@ import { ErroresSistema } from '../../../Datos_Sistema/errores.sistema';
 })
 
 export class ModificarRolUsuarioComponent implements OnInit{
-    @Input() idFinca:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
     idFincaUsuarioFinca:number;
     
     constructor(private router: Router,
                 private route:ActivatedRoute,
                 private appService: AppService) {
             this.appService.getState().topnavTitle="Usuarios.";
-            this.route.params.subscribe(params => {
-                this.idFincaUsuarioFinca = +params['idUsuarioFinca'];
-                
-            });
     }
 
     ngOnInit(){

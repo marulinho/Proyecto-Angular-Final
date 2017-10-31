@@ -4,7 +4,7 @@
                 <md-card class="page-card">
                         <md-card-title>Perfil Finca.
                                 <a *ngIf="getPermisosGestionarFinca()" class="example-tooltip-host" mdTooltip={{tooltipEditarFinca}} [mdTooltipPosition]="position">
-                                <img src="assets/icons/editar.png" [routerLink]="['/gestionarFinca/', idFinca]">
+                                <img src="assets/icons/editar.png" [routerLink]="['/gestionarFinca/']">
                         </a>
                                 <a *ngIf="getPermisosGestionarFinca()" class="example-tooltip-host" mdTooltip={{tooltipEliminarFinca}} [mdTooltipPosition]="position"
                                         (click)="apretarEliminarFincaIcono()"><img src="assets/icons/delete.png">
@@ -48,14 +48,14 @@
                                 <md-card-title>
                                         Proveedor Informaci&oacute;n Clim&aacute;tica.
                                         <a class="example-tooltip-host" mdTooltip={{tooltipEditarProveedor}} [mdTooltipPosition]="position">
-                                        <img src="assets/icons/editar.png" [routerLink]="['/gestionarProveedor/', idFinca]">
+                                        <img src="assets/icons/editar.png" [routerLink]="['/gestionarProveedor/']">
                                 </a>
                                         <!--    <a class="example-tooltip-host" mdTooltip={{tooltipEliminarProveedor}} [mdTooltipPosition]="position" (click)="apretarEliminarProveedorIcono()">
                                         <img src="assets/icons/delete.png">                                                        
                                 </a>
                         -->
                                         <a class="example-tooltip-host" mdTooltip={{tooltipCambiarProveedor}} [mdTooltipPosition]="position">
-                                        <img src="assets/icons/cambiar.png" [routerLink]="['/cambiarProveedor/', idFinca]">                                                        
+                                        <img src="assets/icons/cambiar.png" [routerLink]="['/cambiarProveedor/']">                                                        
                                 </a>
                                 </md-card-title>
                                 <md-card-content>
@@ -103,7 +103,7 @@
                                 <md-card-title>
                                         Usuarios Finca
                                         <a class="example-tooltip-host" mdTooltip={{tooltipAgregarUsuario}} [mdTooltipPosition]="position">
-                                        <img src="assets/icons/nuevoUsuario.png" [routerLink]="['/gestionarUsuarioFinca/', idFinca]">
+                                        <img src="assets/icons/nuevoUsuario.png" [routerLink]="['/gestionarUsuarioFinca/']">
                                 </a>
                                 </md-card-title>
                                 <md-card-content>
@@ -130,12 +130,12 @@
                                                                         <td>{{usuarioFinca.apellido}}, {{usuarioFinca.nombre}}.</td>
                                                                         <td>{{usuarioFinca.rol}}.</td>
                                                                         <td>
-                                                                                <a class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" (click)="apretarEditarUsuarioFincaIcono(usuarioFinca.idUsuarioFinca)">
+                                                                                <a *ngIf="usuarioFinca.rol!='encargado'"class="example-tooltip-host" mdTooltip={{tooltipEditarUsuario}} [mdTooltipPosition]="position" (click)="apretarEditarUsuarioFincaIcono(usuarioFinca.idUsuarioFinca)">
                                                                                 <img src="assets/icons/editar.png">
                                                                                 
                                                                         </a>
 
-                                                                                <a class="example-tooltip-host" mdTooltip={{tooltipEliminarUsuario}} [mdTooltipPosition]="position" (click)="apretarEliminarUsuarioIcono(usuarioFinca.idUsuarioFinca)">
+                                                                                <a *ngIf="usuarioFinca.rol!='encargado'"class="example-tooltip-host" mdTooltip={{tooltipEliminarUsuario}} [mdTooltipPosition]="position" (click)="apretarEliminarUsuarioIcono(usuarioFinca.idUsuarioFinca)">
                                                                                 <img src="assets/icons/delete.png">
                                                                         </a>
                                                                         </td>
@@ -152,7 +152,7 @@
                                 <md-card-title>
                                         Sectores Finca
                                         <a *ngIf="getPermisoCrearSector()" class="example-tooltip-host" mdTooltip={{tooltipAgregarSector}} [mdTooltipPosition]="position">
-                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSectorFinca/', idFinca]">
+                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSectorFinca/']">
                         </a>
                                 </md-card-title>
                                 <md-card-content>
@@ -181,7 +181,7 @@
                                                                         <td>
 
                                                                                 <a *ngIf="getPermisoGestionarSector()" class="example-tooltip-host" mdTooltip={{tooltipVerSector}} [mdTooltipPosition]="position">
-                                                                        <img src="assets/icons/ver.png" [routerLink]="['/homeSector/', sectorFinca.idSector , idFinca]">
+                                                                        <img src="assets/icons/ver.png" (click)="apretarVerSector(sectorFinca.idSector)">
                                                                 </a>
                                                                         </td>
                                                                 </tr>
@@ -197,7 +197,7 @@
                                 <md-card-title>
                                         Mecanismos de Riego Finca
                                         <a class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismo}} [mdTooltipPosition]="position">
-                                                <img src="assets/icons/nuevo.png" [routerLink]="['/agregarMecanismoFinca/', idFinca]">
+                                                <img src="assets/icons/nuevo.png" [routerLink]="['/agregarMecanismoFinca/']">
                                 </a>
                                 </md-card-title>
                                 <md-card-content>
@@ -244,7 +244,7 @@
                                 <md-card-title>
                                         Sensores Finca
                                         <a class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
-                                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSensorFinca/', idFinca]">
+                                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearSensorFinca/']">
                                 </a>
                                 </md-card-title>
                                 <md-card-content>
@@ -272,7 +272,7 @@
                                                                         <td>{{sensorFinca.fechaAltaSensor.substring(0,10)}}</td>
                                                                         <td>
                                                                                 <a class="example-tooltip-host" mdTooltip={{tooltipModificarSensor}} [mdTooltipPosition]="position">
-                                                                                <img src="assets/icons/editar.png" [routerLink]="['/modificarSensorFinca/', idFinca,sensorFinca.idSensor]" >
+                                                                                <img src="assets/icons/editar.png" (click)="apretarModificarSensor(sensorFinca.idSensor)" >
                                                                         </a>
                                                                                 <a class="example-tooltip-host" mdTooltip={{tooltipDeshabilitarSensor}} [mdTooltipPosition]="position">
                                                                                 <img src="assets/icons/deshabilitar.png" (click)="apretarDeshabilitarSensorFinca(sensorFinca.idSensor)" >
@@ -291,7 +291,7 @@
                                 <md-card-title>
                                         Componente Sensores Finca
                                         <a *ngIf="getPermisoCrearComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipAgregarComponenteSensor}} [mdTooltipPosition]="position">
-                                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearComponenteSensorFinca/', idFinca]">
+                                                <img src="assets/icons/nuevo.png" [routerLink]="['/crearComponenteSensorFinca/']">
                                 </a>
                                 </md-card-title>
                                 <md-card-content>
@@ -320,7 +320,7 @@
                                                                         <td>
                                                                                 <a *ngIf="componenteSensor.estado=='habilitado' && getPermisoGestionarComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipVerComponenteSensor}}
                                                                                         [mdTooltipPosition]="position">
-                                                                                <img src="assets/icons/ver.png" [routerLink]="['/homeComponenteSensorFinca/', idFinca, componenteSensor.idComponenteSensor]">
+                                                                                <img src="assets/icons/ver.png" (click)="verComponenteSensor(componenteSensor.idComponenteSensor)">
                                                                         </a>
                                                                                 <a *ngIf="componenteSensor.estado=='deshabilitado' && getPermisoGestionarComponenteSensor()" class="example-tooltip-host"
                                                                                         mdTooltip={{tooltipHabilitarComponenteSensor}}
@@ -342,7 +342,7 @@
 
         <div *ngIf="getModificarUsuarioFincaSeleccionado() && getPermisoGestionarUsuario()" class="sign-container">
                 <md-card class="page-card">
-                        <md-card-title>Modificar Rol Usuario</md-card-title>
+                        <md-card-title>Modificar Rol Usuario.</md-card-title>
                         <md-card-content>
                                 <section *ngIf="errorMessageUsuarioFinca" class="bs">
                                         <div class="bd-example" data-example-id="">
@@ -352,11 +352,11 @@
                                         </div><br>
                                 </section>
 
-                                <h2>Datos Roles</h2>
+                                <h2>Datos Roles.</h2>
 
                                 <md-select placeholder="Seleccionar Rol" [(ngModel)]="nombreRol" name="nombreRol">
                                         <md-option *ngFor="let rol of roles" [value]="rol.nombreRol" requerid>
-                                                {{rol.nombreRol}}
+                                                {{rol.nombreRol}}.
                                         </md-option>
                                 </md-select>
                                 <br><br>
@@ -364,8 +364,8 @@
 
                         </md-card-content>
                         <md-card-actions>
-                                <button md-raised-button (click)="apretarCambiarRol()">CAMBIAR</button>
-                                <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                                <button md-raised-button (click)="apretarCambiarRol()">CAMBIAR.</button>
+                                <button md-raised-button (click)="apretarSalir()">SALIR.</button>
                         </md-card-actions>
                         <md-card-footer></md-card-footer>
                 </md-card>

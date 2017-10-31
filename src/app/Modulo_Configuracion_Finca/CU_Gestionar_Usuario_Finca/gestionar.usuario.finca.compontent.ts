@@ -12,7 +12,8 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 export class GestionarUsuarioFincaComponent implements OnInit{
     
-    idFinca:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    nombreFinca:string=JSON.parse(localStorage.getItem('nombreFinca'));
     erroresSistema = new ErroresSistema();
     //ATRIBUTOS PERFIL AGREGAR USUARIO
     tooltipAgregarUsuario='Agregar Usuario';
@@ -38,37 +39,31 @@ export class GestionarUsuarioFincaComponent implements OnInit{
                 private gestionarUsuarioFincaService: GestionarUsuarioFincaService,
                 private appService: AppService) {
             this.appService.getState().topnavTitle="Gestionar Usuarios.";
-            this.route.params.subscribe(params => {
-                
-                this.idFinca = +params['idFinca'];
-                if (this.idFinca) {
-                    this.gestionarUsuarioFincaService.buscarUsuarioNoFinca(this.idFinca)
-                    .then(
-                        response=>{
-                            if(response.detalle_operacion=="No hay datos"){
-                                this.errorMessageUsuariosFinca="No existen usuarios que se puedan agregar a la finca.";
-                            }
-                            else{
-                                this.usuariosNoFinca=response.datos_operacion;
-                                this.usuariosNoFincaSeleccionado=true;
-                            }
-                        }
-                    )
-                    .catch(
-                        error=>{
-                          if(error.error_description==this.erroresSistema.getInicioSesion()){
-                            this.router.navigate(['/login/']);
-                          }
-                          else{
-                            this.errorMessageUsuariosFinca=error.error_description;
-                          }
-                        }
-                    );
-                }
-            });
     }
 
     ngOnInit(){
+      this.gestionarUsuarioFincaService.buscarUsuarioNoFinca(this.idFinca)
+        .then(
+            response=>{
+                if(response.detalle_operacion=="No hay datos"){
+                    this.errorMessageUsuariosFinca="No existen usuarios que se puedan agregar a la finca.";
+                }
+                else{
+                    this.usuariosNoFinca=response.datos_operacion;
+                    this.usuariosNoFincaSeleccionado=true;
+                }
+            }
+        )
+        .catch(
+            error=>{
+              if(error.error_description==this.erroresSistema.getInicioSesion()){
+                this.router.navigate(['/login/']);
+              }
+              else{
+                this.errorMessageUsuariosFinca=error.error_description;
+              }
+            }
+        );
       this.gestionarUsuarioFincaService.buscarRoles()
           .then(
             response=>{
@@ -131,7 +126,7 @@ export class GestionarUsuarioFincaComponent implements OnInit{
       this.gestionarUsuarioFincaService.agregarUsuarioFinca(this.usuario,this.idFinca,this.rolSeleccionado)
           .then(
             response=>{
-              this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+              this.router.navigate(['/homeFincaDetalle/']);
             }
           )
           .catch(

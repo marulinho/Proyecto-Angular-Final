@@ -28,14 +28,14 @@ export class PerfilUsuarioComponent implements OnInit {
     perfilUsuarioSeleccionado: Boolean;
 
     //ATRIBUTOS MODIFICAR USUARIO
-    tooltipEditarUsuario = 'Editar Usuario';
+    tooltipEditarUsuario = 'Editar Usuario.';
 
     //ATRIBUTOS ELIMINAR USUARIO
     selectedOption: string;
-    tooltipEliminarUsuario = 'Eliminar Usuario';
+    tooltipEliminarUsuario = 'Eliminar Usuario.';
 
     //ATRIBUTOS MODIFICAR CONTRASEÑA
-    tooltipCambiarContrasenia = 'Cambiar Contraseña';
+    tooltipCambiarContrasenia = 'Cambiar Contraseña.';
 
 
     constructor(private router: Router,

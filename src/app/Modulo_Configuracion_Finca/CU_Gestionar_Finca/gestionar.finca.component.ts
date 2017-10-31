@@ -18,7 +18,7 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 export class GestionarFincaComponent implements OnInit {
 
-    idFinca: number;
+    idFinca: number=JSON.parse(localStorage.getItem('idFinca'));
     errorMessage = "";
     nombre: string;
     direccion: string;
@@ -46,10 +46,7 @@ export class GestionarFincaComponent implements OnInit {
         private ngZone: NgZone,
         private appService: AppService) {
         this.appService.getState().topnavTitle = "Gestionar Finca.";
-        this.route.params.subscribe(params => {
-            this.idFinca = +params['idFinca'];
 
-        });
     }
 
     ngOnInit() {
@@ -140,7 +137,7 @@ export class GestionarFincaComponent implements OnInit {
             this.gestionarFincaService.modificarFinca(this.idFinca, this.nombre, this.direccion, this.ubicacion, this.tamanio)
                 .then(
                 response => {
-                    this.router.navigate(['/homeFincaDetalle/' + this.idFinca]);
+                    this.router.navigate(['/homeFincaDetalle/']);
                 }
                 )
                 .catch(
@@ -157,7 +154,7 @@ export class GestionarFincaComponent implements OnInit {
     }
 
     apretarSalir() {
-        this.router.navigate(['/homeFincaDetalle/' + this.idFinca]);
+        this.router.navigate(['/homeFincaDetalle/']);
     }
 
 

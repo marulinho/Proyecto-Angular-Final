@@ -19,7 +19,7 @@ export class CrearComponenteSensorComponent implements OnInit{
     erroresSistema = new ErroresSistema();
     permisoCrearComponenteSensor = JSON.parse(localStorage.getItem('puedeCrearComponenteSensor'));
 
-    idFinca:number;
+    idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
     perfilComponenteSeleccionado:Boolean;
     errorMessageCrearComponente:string="";
     modeloComponente:string;
@@ -34,10 +34,7 @@ export class CrearComponenteSensorComponent implements OnInit{
                 private dialog: MdDialog){
 
         appService.getState().topnavTitle="Crear Componente Sensor.";
-        this.route.params.subscribe(params => {
-            this.idFinca = +params['idFinca'];
-            
-        });
+
 
     }
 
@@ -61,7 +58,7 @@ export class CrearComponenteSensorComponent implements OnInit{
             this.gestionarComponenteSensorService.crearComponente(this.idFinca,this.modeloComponente,this.descripcionComponente,this.cantMaximaSensores)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+                        this.router.navigate(['/homeFincaDetalle/']);
                     }
                 )
                 .catch(
@@ -79,7 +76,7 @@ export class CrearComponenteSensorComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeFincaDetalle/'+this.idFinca]);
+        this.router.navigate(['/homeFincaDetalle/']);
     }
 
 
