@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../../app.service';
+import { MdDialog, MdSnackBar } from '@angular/material';
 import { IniciarSesionService, Usuario } from './iniciar.sesion.service';
 import { RegistrarUsuarioService } from '../CU_Registrar_Usuario/registrar.usuario.service';
 import { RecuperarCuentaService, ResultadoRecuperacion } from '../CU_Recuperar_Cuenta/recuperar.cuenta.service';
@@ -16,6 +17,7 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 export class IniciarSesionComponent implements OnInit, OnDestroy {
 
   erroresSistema = new ErroresSistema();
+  snackBarRef: any;
 
   //ATRIBUTOS GENERALES
   errorMessage: string = "";
@@ -50,6 +52,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
     private iniciarSesionService: IniciarSesionService,
     private router: Router,
     private registrarUsuario: RegistrarUsuarioService,
+    private snackBar: MdSnackBar,
     private recuperarCuenta: RecuperarCuentaService) {
     appService.getState().pageFullscreen = true;
   }
@@ -133,6 +136,7 @@ export class IniciarSesionComponent implements OnInit, OnDestroy {
       this.fechaNacimiento, this.domicilio, this.email, this.usuario, this.password1)
       .then(
       response => {
+        this.snackBarRef = this.snackBar.open('Registración Exitosa!', 'Done', {duration: 3000,});
         this.iniciarSesionSeleccionado = true;
         this.registrarSeleccionado = false;
         this.errorMessage = "";
