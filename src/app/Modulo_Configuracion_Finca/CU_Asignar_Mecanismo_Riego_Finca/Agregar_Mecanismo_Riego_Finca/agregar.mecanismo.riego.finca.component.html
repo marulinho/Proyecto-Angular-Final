@@ -21,7 +21,7 @@
                         <tr>
                           <th style="width:37%;">Nombre.</th>
                           <th style="width:36%;">Descripci&oacute;n.</th>
-                          <th>Eficiencia.</th>
+                          <th>Eficiencia (X 100%).</th>
                           <th class="actions">Acci&oacute;n.</th>
                         </tr>
                       </thead>
@@ -29,7 +29,7 @@
                         <tr *ngFor="let mecanismoRiego of mecanismosRiego">
                           <td>{{mecanismoRiego.nombreMecanismo}}.</td>
                           <td>{{mecanismoRiego.descripcion}}.</td>
-                          <td>{{mecanismoRiego.eficiencia}.}</td>
+                          <td>{{mecanismoRiego.eficiencia}}.</td>
                           <td>
                               <a *ngIf="getPermisoAsignarMecanismoFinca()"class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismo}} [mdTooltipPosition]="position" 
                                  (click)="apretarAgregarIcono(mecanismoRiego.nombreMecanismo)">
