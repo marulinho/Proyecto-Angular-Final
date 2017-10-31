@@ -53,7 +53,7 @@ export class ReporteRiegoHistoricoSectorComponent implements OnInit {
                 .then(
                     response=>{
                         if(response.detalle_operacion=="No hay datos"){
-                            this.errorMessageReporte="No hay riegos en ejecución.";
+                            this.errorMessageReporte="No hay riegos registrados en el lapso de tiempo especificado.";
                         }
                         else{
                             this.errorMessageReporte="";

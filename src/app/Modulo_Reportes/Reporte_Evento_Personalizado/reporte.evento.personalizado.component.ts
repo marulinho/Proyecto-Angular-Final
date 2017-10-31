@@ -5,6 +5,7 @@ import { DialogExampleComponent } from '../../shared/dialog/dialog-example/dialo
 import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, InformeEvento } from '../generar.repotes.service';
+import { GestionarEventoPersonalizadoService , ConfiguracionEvento } from'../../Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
 import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 
 @Component({
@@ -26,27 +27,61 @@ export class ReporteEventoPersonalizadoComponent implements OnInit {
     descripcionReporte:string=JSON.parse(localStorage.getItem('descripcionReporte'));   
 
    
-    dia = new Date().getDay();
-    mes = new Date().getMonth() + 1;
-    anio = new Date().getFullYear();
-    fechaActual: string = this.dia + "-" + this.mes + "-" + this.anio;
-    hora=new Date().getHours();
-    minutos=new Date().getMinutes();
-    segundos = new Date().getSeconds();
-    horaActual = this.hora+":"+this.minutos+":"+this.segundos;
+    fecha=new Date();
+    hora=new Date();
 
-
+    eventosPersonalizados : ConfiguracionEvento;
+    eventosExistentes:Boolean;
+    eventoSeleccionado:number;
 
 
     constructor(private router: Router,
         private route: ActivatedRoute,
         private appService: AppService,
         private generarReportesService:GenerarReportesService,
+        private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
         private dialog: MdDialog) {
         appService.getState().topnavTitle = "Reporte Evento Personalizado.";
 
 
     }
 
-    ngOnInit(){}
+    ngOnInit(){
+        this.gestionarEventoPersonalizadoService.buscarEventoFinca(this.idFinca)
+            .then(
+                response=>{
+                    if(response.detalle_operacion=="No hay datos"){
+                        this.errorMessageReporte="No hay eventos configurados para la finca seleccionada.";
+                    }
+                    else{
+                        this.eventosPersonalizados=response.datos_operacion;
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                        this.router.navigate(['/login/']);
+                    }
+                    else{
+                        this.errorMessageReporte=error.error_description;
+                    }
+                }
+            )
+    }
+
+    getPermisoGenerarReporteEventoPersonalizado(){
+        return this.permisoGenerarReporteEventoPersonalizado;
+    }
+    getEventosExistente(){
+        return this.eventosExistentes;
+    }
+
+    apretarGenerarReporte(){
+        //this.generarReportesService.obtenerInformeEventosPersonalizados()
+    }
+
+    apretarSalir(){
+        this.router.navigate(['/homeReportes/']);
+    }
 }

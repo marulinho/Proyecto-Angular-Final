@@ -1,0 +1,89 @@
+<!--SECCION REPORTE HISTORICO HELADAS-->
+<div *ngIf="getPermisoGenerarReporteEventoPersonalizado()" class="page-content">
+    <md-card class="page-card">
+        <md-card-title>Reporte Evento Personalizado.</md-card-title>
+        <md-card-content>
+            <section *ngIf="errorMessageReporte" class="bs">
+                <div class="bd-example" data-example-id="">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{errorMessageReporte}}</strong>
+                    </div>
+                </div><br>
+            </section>
+
+            <section *ngIf="!getEventosExistente()">
+                <md-select placeholder="Seleccione evento." [(ngModel)]="eventoSeleccionado" name="eventoSeleccionado" required>
+                    <md-option *ngFor="let evento of eventosPersonalizados" [value]="evento.id_configuracion_evento">
+                        {{evento.nombre}}
+                    </md-option>
+                </md-select>
+
+                <md-input-container>
+                    <input mdInput placeholder="Fecha Inicio." type="date" [(ngModel)]="fechaInicioReporte" name="fechaInicioReporte" required><br>
+                </md-input-container>
+                <md-input-container>
+                    <input mdInput placeholder="Fecha Fin." type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
+                </md-input-container>
+                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR.</button>
+                <button md-raised-button *ngIf="!getEventosExistente()" (click)="apretarSalir()">SALIR.</button>
+            </section>
+
+            <section *ngIf="getEventosExistente()" class="bs">
+                <h5>Informaci&oacute;n General Reporte.</h5>
+                <label id="atributo">Nombre: </label>
+                <label>{{nombreReporte}}</label><br>
+
+                <label id="atributo">Descripci&oacute;n: </label>
+                <label>{{descripcionReporte}}</label><br>
+
+                <label id="atributo">Fecha creaci&oacute;n: </label>
+                <label>{{fecha | date: 'dd-MM-yyyy'}}.</label><br>
+
+                <label id="atributo">Hora creaci&oacute;n: </label>
+                <label>{{hora | date: 'hh:mm:ss'}}.</label><br><br><br>
+
+                <h5>Detalle Reporte</h5>
+                <label id="atributo">Fecha inicio reporte: </label>
+                <label>{{fechaInicioReporte}}.</label><br>
+
+                <label id="atributo">Fecha fin reporte: </label>
+                <label>{{fechaFinReporte}}.</label><br>
+
+                <label id="atributo">Cantidad heladas: </label>
+                <label>{{cantidad}} heladas.</label><br><br>
+
+                <table class="table table-striped table-hover table-card">
+                    <thead>
+                        <tr>
+                            <th>Fecha - Hora.</th>
+                            <th>Mediciones Internas.</th>
+                            <th>Mediciones Externas.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let helada of heladas">
+                            <td>{{helada.fechaHora.substring(0,10)}} {{helada.fechaHora.substring(11,19)}}.</td>
+                            <td>
+                                <ul *ngFor="let medicion of mediciones.lista_mediciones_internas">
+                                    <li>Tipo: {{medicion.tipo_medicion}}.</li>
+                                    <li>Valor M&iacute;nimo: {{medicion.valor_minimo}} {{medicion.unidad_medicion}}.</li>
+                                    <li>Valor M&aacute;ximo: {{medicion.valor_maximo}} {{medicion.unidad_medicion}}.</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul *ngFor="let medicion of mediciones.lista_mediciones_externas">
+                                    <li>Tipo: {{medicion.tipo_medicion}}.</li>
+                                    <li>Valor M&iacute;nimo: {{medicion.valor_minimo}} {{medicion.unidad_medicion}}.</li>
+                                    <li>Valor M&aacute;ximo: {{medicion.valor_maximo}} {{medicion.unidad_medicion}}.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </md-card-content>
+        <md-card-actions>
+            <button md-raised-button *ngIf="getEventosExistente()" (click)="apretarSalir()">SALIR.</button>
+        </md-card-actions>
+    </md-card>
+</div>

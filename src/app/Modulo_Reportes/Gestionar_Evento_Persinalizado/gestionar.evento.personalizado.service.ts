@@ -16,8 +16,21 @@ export class GestionarEventoPersonalizadoService extends RestBaseService {
     private desactivarConfiguracionEventoPersonalizadoUrl="/desactivarConfiguracionEventoPersonalizado/";
     private activarConfiguracionEventoPersonalizadoUrl ="/activarConfiguracionEventoPersonalizado/";
 
+    private buscarEventoFincaUrl="/buscarConfiguracionesEventosFinca/";
+
     constructor(private http: Http) { super(); }
 
+    buscarEventoFinca(idFinca:number): Promise<ConfiguracionEvento> {
+        const data = {
+            'idFinca':idFinca
+        };
+        return this.http.post(GestionarEventoPersonalizadoService.serverUrl + this.buscarEventoFincaUrl, JSON.stringify(data), this.getRestHeader())
+            .toPromise()
+            .then(response => { return response.json() as ConfiguracionEvento; })
+            .catch(this.handleError);
+    }
+    
+    
     buscarConfiguracionesEventosPersonalizados(idUsuarioFinca: number, idFinca:number,idSector:number): Promise<ConfiguracionEvento> {
         const data = {
             'idUsuarioFinca': idUsuarioFinca,
