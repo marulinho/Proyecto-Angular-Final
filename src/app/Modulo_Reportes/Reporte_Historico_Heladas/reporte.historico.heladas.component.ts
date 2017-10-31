@@ -131,7 +131,7 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
             )
             .catch(
                 error=>{
-                    if(this.erroresSistema.getInicioSesion()){
+                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
                         this.router.navigate(['/login/']);
                     }
                     else{
