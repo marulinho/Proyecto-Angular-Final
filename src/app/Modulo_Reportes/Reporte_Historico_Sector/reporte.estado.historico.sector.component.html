@@ -11,12 +11,12 @@
                 </div><br>
             </section>
 
-            <section *ngIf="!getPerfilEstadoHistoricoSeleccionado()" >
-                <md-input-container  >
+            <section *ngIf="!getPerfilEstadoHistoricoSeleccionado()">
+                <md-input-container>
                     <input mdInput placeholder="Fecha Inicio" type="date" [(ngModel)]="fechaInicioReporte" name="fechaInicioReporte" required><br>
                 </md-input-container>
-                <md-input-container   >
-                    <input  mdInput placeholder="Fecha Fin" type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
+                <md-input-container>
+                    <input mdInput placeholder="Fecha Fin" type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
                 </md-input-container>
                 <button md-raised-button (click)="apretarGenerarReporte()">GENERAR.</button>
             </section>
@@ -30,10 +30,10 @@
                 <label>{{descripcionReporte}}</label><br>
 
                 <label id="atributo">Fecha creaci&oacute;n: </label>
-                <label>{{fechaActual}}.</label><br>
+                <label>{{fecha | date: 'dd-MM-yyyy'}}.</label><br>
 
                 <label id="atributo">Hora creaci&oacute;n: </label>
-                <label>{{horaActual}}.</label><br><br>
+                <label>{{hora | date: 'hh:mm:ss'}}.</label><br><br><br>
 
                 <h5>Detalle Reporte</h5>
                 <label id="atributo">Fecha inicio: </label>
@@ -42,39 +42,102 @@
                 <label id="atributo">Fecha fin: </label>
                 <label>{{fechaFinReporte}}.</label><br><br>
 
-           <!--SECCION TEMPERATURA-->
-            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
-                <md-card class="page-card" fxFlex>
-                    <md-card-title>Temperatura.</md-card-title>
-                    <md-card-content>
-                        <ng2-smart-table [settings]="settingsTemperatura" [source]="sourceTemperatura"></ng2-smart-table>
-                    </md-card-content>
-                  </md-card>
-                <md-card class="page-card" fxFlex>
-                  <md-card-title>Temperatura.</md-card-title>
-                  <md-card-content>
-                    <lk-chart-js [type]="mock.bar.type" [options]="mock.bar.options" [data]="mock.bar.data"
-                                 [height]="320"></lk-chart-js>
-                  </md-card-content>
-                </md-card>
-            </div>
+                <!--SECCION TEMPERATURA-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Temperatura Aire.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsTemperatura" [source]="sourceTemperatura"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Temperatura Aire.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mock.bar.type" [options]="mock.bar.options" [data]="mock.bar.data" [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
 
-            <!--SECCION HUMEDAD-->
-            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
-                <md-card class="page-card" fxFlex>
-                    <md-card-title>Humedad.</md-card-title>
-                    <md-card-content>
-                        <ng2-smart-table [settings]="settingsHumedad" [source]="sourceHumedad"></ng2-smart-table>
-                    </md-card-content>
-                  </md-card>
-                <md-card class="page-card" fxFlex>
-                  <md-card-title>Humedad.</md-card-title>
-                  <md-card-content>
-                    <lk-chart-js [type]="mockHumedad.bar.type" [options]="mockHumedad.bar.options" [data]="mockHumedad.bar.data"
-                                 [height]="320"></lk-chart-js>
-                  </md-card-content>
-                </md-card>
-            </div>
+                <!--SECCION TEMPERATURA SUELO-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Temperatura Suelo.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsTemperaturaSuelo" [source]="sourceTemperaturaSuelo"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Temperatura Suelo.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mockTemperaturaSuelo.bar.type" [options]="mockTemperaturaSuelo.bar.options" [data]="mockTemperaturaSuelo.bar.data" [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
+                <!--SECCION HUMEDAD-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Humedad Aire.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsHumedad" [source]="sourceHumedad"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Humedad Aire.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mockHumedad.bar.type" [options]="mockHumedad.bar.options" [data]="mockHumedad.bar.data" [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
+
+                <!--SECCION HUMEDAD SUELO-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                        <md-card class="page-card" fxFlex>
+                            <md-card-title>Humedad Suelo.</md-card-title>
+                            <md-card-content>
+                                <ng2-smart-table [settings]="settingsHumedadSuelo" [source]="sourceHumedadSuelo"></ng2-smart-table>
+                            </md-card-content>
+                        </md-card>
+                        <md-card class="page-card" fxFlex>
+                            <md-card-title>Humedad Suelo.</md-card-title>
+                            <md-card-content>
+                                <lk-chart-js [type]="mockHumedadSuelo.bar.type" [options]="mockHumedadSuelo.bar.options" [data]="mockHumedadSuelo.bar.data" [height]="320"></lk-chart-js>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+
+                <!--SECCION PRESION-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Presi&oacute;n.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsPresion" [source]="sourcePresion"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Presi&oacute;n.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mockPresion.bar.type" [options]="mockPresion.bar.options" [data]="mockPresion.bar.data" [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
+                <!--SECCION PRESION-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                        <md-card class="page-card" fxFlex>
+                            <md-card-title>Radiaci&oacute;n.</md-card-title>
+                            <md-card-content>
+                                <ng2-smart-table [settings]="settingsRadiacion" [source]="sourceRadiacion"></ng2-smart-table>
+                            </md-card-content>
+                        </md-card>
+                        <md-card class="page-card" fxFlex>
+                            <md-card-title>Radiaci&oacute;n.</md-card-title>
+                            <md-card-content>
+                                <lk-chart-js [type]="mockRadiacion.bar.type" [options]="mockRadiacion.bar.options" [data]="mockRadiacion.bar.data" [height]="320"></lk-chart-js>
+                            </md-card-content>
+                        </md-card>
+                </div>
 
             </section>
         </md-card-content>
