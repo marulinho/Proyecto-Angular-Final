@@ -43,7 +43,7 @@ export class HomeReporteComponent implements OnInit {
     descripcionesReportes = [
         "Mediante este reporte se puede observar el estado actual del sector, incluyendo las mediciones a las  que se encuentra sometido el mismo.",
         "Mediante este reporte se puede observar los datos relativos al riego en ejecución de un determinado sector.",
-        "Mediante este reporte se puede observar el estado histórico del sector, incluyendo entre otras cosas las condifuraciones de riego históricas.",
+        "Mediante este reporte se puede observar el estado histórico del sector, incluyendo entre otras cosas las configuraciones de riego históricas.",
         "Mediante este reporte se puede observar los datos históricos relativos al riego en un determinado sector.",
         "Mediante este reporte se puede observar las heladas históricas que se han producido en el sector.",
         "Mediante este reporte se puede observar los eventos personalizados que se han cumplido para un determinado sector.",
