@@ -24,16 +24,10 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
     idSector:number=parseInt(JSON.parse(localStorage.getItem('idSector')));
     nombreReporte:string=JSON.parse(localStorage.getItem('nombreReporte'));
     descripcionReporte:string=JSON.parse(localStorage.getItem('descripcionReporte'));   
-
+    
    
-    dia = new Date().getDay();
-    mes = new Date().getMonth() + 1;
-    anio = new Date().getFullYear();
-    fechaActual: string = this.dia + "-" + this.mes + "-" + this.anio;
-    hora=new Date().getHours();
-    minutos=new Date().getMinutes();
-    segundos = new Date().getSeconds();
-    horaActual = this.hora+":"+this.minutos+":"+this.segundos;
+    fecha = new Date();
+    hora=new Date();
 
     fechaInicioReporte:string;
     fechaFinReporte:string;
@@ -42,6 +36,8 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
     medicionesComponenteAntes=[];
     medicionesClimaticas=[];
     reporteSeleccionado:Boolean;
+
+    arrayCompleto=[];
 
 
 
@@ -177,16 +173,16 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                     let tipo = 'Sin establecer';
                     let valor = 'Sin establecer';
                     let mediciones = new Mediciones(tipo,valor);
-                    let mediciones1 = new Mediciones(tipo,valor);
+                    /*let mediciones1 = new Mediciones(tipo,valor);
                     let mediciones2 = new Mediciones(tipo,valor);
                     let mediciones3 = new Mediciones(tipo,valor);
-                    let mediciones4 = new Mediciones(tipo,valor);
+                    let mediciones4 = new Mediciones(tipo,valor);*/
 
                     this.medicionesComponenteDespues.push(mediciones);
-                    this.medicionesComponenteDespues.push(mediciones1);
+                    /*this.medicionesComponenteDespues.push(mediciones1);
                     this.medicionesComponenteDespues.push(mediciones2);
                     this.medicionesComponenteDespues.push(mediciones3);
-                    this.medicionesComponenteDespues.push(mediciones4);
+                    this.medicionesComponenteDespues.push(mediciones4);*/
 
                 }
                 else{
@@ -215,22 +211,23 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
         
         //COLUMNA MEDICIONES ANTES
             for(var i=0;i<longitud;i++){
-                let medicionActual= (this.medicionCruzada[i]['medicionesComponenteAntes'])
+                let medicionActual= (this.medicionCruzada[i]['medicionesComponenteAntes']);
+                
                 if(medicionActual==""){
                     let medicionTamanio = [];
                     let tipo = 'Sin establecer';
                     let valor = 'Sin establecer';
                     let mediciones = new Mediciones(tipo,valor);
-                    let mediciones1 = new Mediciones(tipo,valor);
+                    /*let mediciones1 = new Mediciones(tipo,valor);
                     let mediciones2 = new Mediciones(tipo,valor);
                     let mediciones3 = new Mediciones(tipo,valor);
-                    let mediciones4 = new Mediciones(tipo,valor);
+                    let mediciones4 = new Mediciones(tipo,valor);*/
 
                     this.medicionesComponenteAntes.push(mediciones);
-                    this.medicionesComponenteAntes.push(mediciones1);
+                    /*this.medicionesComponenteAntes.push(mediciones1);
                     this.medicionesComponenteAntes.push(mediciones2);
                     this.medicionesComponenteAntes.push(mediciones3);
-                    this.medicionesComponenteAntes.push(mediciones4);
+                    this.medicionesComponenteAntes.push(mediciones4);*/
 
                 }
                 else{
@@ -265,16 +262,16 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                     let tipo = 'Sin establecer';
                     let valor = 'Sin establecer';
                     let mediciones = new Mediciones(tipo,valor);
-                    let mediciones1 = new Mediciones(tipo,valor);
+                    /*let mediciones1 = new Mediciones(tipo,valor);
                     let mediciones2 = new Mediciones(tipo,valor);
                     let mediciones3 = new Mediciones(tipo,valor);
-                    let mediciones4 = new Mediciones(tipo,valor);
+                    let mediciones4 = new Mediciones(tipo,valor);*/
 
                     this.medicionesClimaticas.push(mediciones);
-                    this.medicionesClimaticas.push(mediciones1);
+                    /*this.medicionesClimaticas.push(mediciones1);
                     this.medicionesClimaticas.push(mediciones2);
                     this.medicionesClimaticas.push(mediciones3);
-                    this.medicionesClimaticas.push(mediciones4);
+                    this.medicionesClimaticas.push(mediciones4);*/
 
                 }
                 else{

@@ -14,6 +14,9 @@
             <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipEliminarConfiguracion}} [mdTooltipPosition]="position">
                 <img src="assets/icons/delete.png" (click)="apretarEliminarConfiguracion()">
             </a>
+            <a id="botonVolver" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
+                <img src="assets/icons/atras.png">
+            </a>
         </md-card-title>
         <md-card-content>
                 <section *ngIf="errorEliminarConfiguracionRiego" class="bs">
@@ -44,8 +47,8 @@
                         <table class="table table-striped table-hover table-card">
                             <thead>
                                 <tr>
-                                    <th style="width:37%;">Nombre.</th>
-                                    <th style="width:30%;">Tipo Criterio.</th>
+                                    <th>Nombre.</th>
+                                    <th>Tipo Criterio.</th>
                                     <th>Activaci&oacute;n.</th>
                                     <th class="actions">Acci&oacute;n.</th>
                                 </tr>
@@ -94,8 +97,8 @@
                         <table class="table table-striped table-hover table-card">
                             <thead>
                                 <tr>
-                                    <th style="width:37%;">Nombre.</th>
-                                    <th style="width:30%;">Tipo Criterio.</th>
+                                    <th>Nombre.</th>
+                                    <th>Tipo Criterio.</th>
                                     <th>Activaci&oacute;n.</th>
                                     <th class="actions">Acci&oacute;n</th>
                                 </tr>

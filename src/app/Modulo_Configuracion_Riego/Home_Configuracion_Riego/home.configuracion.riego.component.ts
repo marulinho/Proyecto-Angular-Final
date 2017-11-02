@@ -29,6 +29,7 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
     tooltipCambiarEstadoConfiguracion = 'Cambiar Estado Configuración.';
     selectedOption: string;
     errorEliminarConfiguracionRiego = "";
+    tooltipAtras = 'Volver HomeSector.';
 
     //CRITERIO INICIAL
     criterioInicialRiego: CriterioRiego;
@@ -271,6 +272,10 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
 
     refresh(): void {
         window.location.reload();
+    }
+
+    apretarAtras(){
+        this.router.navigate(['/homeSector/']);
     }
 
 }   

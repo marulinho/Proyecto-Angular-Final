@@ -171,7 +171,7 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
             this.idSector,this.idFinca)
                 .then(
                     response=>{
-                        this.router.navigate(['/homeConfiguracionRiego/']);
+                        this.router.navigate(['/homeSector/']);
                     }
                 )
                 .catch(
@@ -188,6 +188,6 @@ export class ModificarEventoPersonalizadoComponent implements OnInit{
 
 
     apretarSalir(){
-        this.router.navigate(['/homeConfiguracionRiego/']);        
+        this.router.navigate(['/homeSector/']);        
     }
 }

@@ -165,7 +165,7 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
             this.horaInicioCriterioRiego,this.diaInicioCriterioRiego,this.operadorEnviar)
             .then(
                 reponse=>{
-                    this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
+                    this.router.navigate(['/homeConfiguracionRiego/']);
                 }
             )
             .catch(
@@ -181,7 +181,7 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
     }
 
     apretarSalir(){
-        this.router.navigate(['/homeConfiguracionRiego/'+this.idFinca+"/"+this.idMecanismoRiegoFincaSector+"/"+this.idConfiguracionRiego+"/"+this.idSector]);
+        this.router.navigate(['/homeConfiguracionRiego/']);
     }
 }
 
