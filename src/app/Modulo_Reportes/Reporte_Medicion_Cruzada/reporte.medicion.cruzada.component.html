@@ -44,46 +44,135 @@
                 <label id="atributo">Fecha fin: </label>
                 <label>{{fechaFinReporte}}.</label><br><br>
 
-                <table class="table table-striped table-hover table-card">
+                <!--SECCION TEMPERATURA AIRE-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Temperatura Aire.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsTemperaturaAire" [source]="sourceTemperaturaAire"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Temperatura Aire.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mockTemperaturaAire.bar.type" [options]="mockTemperaturaAire.bar.options" [data]="mockTemperaturaAire.bar.data"
+                                [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
+                <!--SECCION TEMPERATURA SUELO-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Temperatura Suelo.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsTemperaturaSuelo" [source]="sourceTemperaturaSuelo"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Temperatura Suelo.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mockTemperaturaSuelo.bar.type" [options]="mockTemperaturaSuelo.bar.options" [data]="mockTemperaturaSuelo.bar.data"
+                                [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
+                <!--SECCION HUMEDAD AIRE-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Humedad Aire.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsHumedadAire" [source]="sourceHumedadAire"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Humedad Aire.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mockHumedadAire.bar.type" [options]="mockHumedadAire.bar.options" [data]="mockHumedadAire.bar.data"
+                                [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
+                <!--SECCION HUMEDAD SUELO-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Humedad Suelo.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsHumedadSuelo" [source]="sourceHumedadSuelo"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Humedad Suelo.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mockHumedadSuelo.bar.type" [options]="mockHumedadSuelo.bar.options" [data]="mockHumedadSuelo.bar.data"
+                                [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
+                <!--SECCION RADIACION-->
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxFlex>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Radiaci&oacute;n.</md-card-title>
+                        <md-card-content>
+                            <ng2-smart-table [settings]="settingsRadiacion" [source]="sourceRadiacion"></ng2-smart-table>
+                        </md-card-content>
+                    </md-card>
+                    <md-card class="page-card" fxFlex>
+                        <md-card-title>Radiaci&oacute;n.</md-card-title>
+                        <md-card-content>
+                            <lk-chart-js [type]="mockRadiacion.bar.type" [options]="mockRadiacion.bar.options" [data]="mockRadiacion.bar.data"
+                                [height]="320"></lk-chart-js>
+                        </md-card-content>
+                    </md-card>
+                </div>
+
+
+                <!--<table class="table table-striped table-hover table-card">
                     <thead>
                         <tr>
                             <th>Fecha-Hora Inicio.</th>
                             <th>Fecha-Hora Fin.</th>
-                            <!--<th>Mediciones Clim&aacute;ticas.</th>-->
-                            <th>Mediciones Sensores Antes.</th>
-                            <th>Mediciones Sensores Despu&eacute;s.</th>
+                            <th>Mediciones Clim&aacute;ticas.</th>
+                <th>Mediciones Sensores Antes.</th>
+                <th>Mediciones Sensores Despu&eacute;s.</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let medicion of medicionCruzada">
-                            <td>{{medicion.ejecucion.fechaHoraInicio.substring(0,10)}} {{medicion.ejecucion.fechaHoraInicio.substring(11,19)}}.</td>
-                            <td>{{medicion.ejecucion.fechaHoraFinalizacion.substring(0,10)}} {{medicion.ejecucion.fechaHoraFinalizacion.substring(11,19)}}.</td>
-                            <!--<td>
-                                <ul *ngFor="let medicion of medicionesClimaticas">
-                                    <li>Tipo: {{medicion.tipo}}.</li>
-                                    <li>Valor: {{medicion.valor}}.</li>
-                                </ul>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let medicion of medicionCruzada">
+                        <td>{{medicion.ejecucion.fechaHoraInicio.substring(0,10)}} {{medicion.ejecucion.fechaHoraInicio.substring(11,19)}}.</td>
+                        <td>{{medicion.ejecucion.fechaHoraFinalizacion.substring(0,10)}} {{medicion.ejecucion.fechaHoraFinalizacion.substring(11,19)}}.</td>
+                        <td>
+                            <ul *ngFor="let medicion of medicionesClimaticas">
+                                <li>Tipo: {{medicion.tipo}}.</li>
+                                <li>Valor: {{medicion.valor}}.</li>
+                            </ul>
 
-                            </td>
-                        -->
-                            <td>
-                                <ul *ngFor="let medicion of medicionesComponenteAntes">
-                                    <li>Tipo: {{medicion.tipo}}.</li>
-                                    <li>Valor: {{medicion.valor}}.</li>
-                                </ul>
-                            </td>
+                        </td>
 
-                            <td>
-                                <ul *ngFor="let medicion of medicionesComponenteDespues">
-                                    <li>Tipo: {{medicion.tipo}}.</li>
-                                    <li>Valor: {{medicion.valor}}.</li>
-                                </ul>
-                            </td>
+                        <td>
+                            <ul *ngFor="let medicion of medicionesComponenteAntes">
 
-                        </tr>
-                    </tbody>
+                                <li>Tipo: {{medicion.tipo}}.</li>
+                                <li>Valor: {{medicion.valor}}.</li>
+                            </ul>
+                        </td>
+
+                        <td>
+                            <ul *ngFor="let medicion of medicionesComponenteDespues">
+                                <li>Tipo: {{medicion.tipo}}.</li>
+                                <li>Valor: {{medicion.valor}}.</li>
+                            </ul>
+                        </td>
+
+                    </tr>
+                </tbody>
+                
                 </table>
+                -->
 
             </section>
         </md-card-content>
