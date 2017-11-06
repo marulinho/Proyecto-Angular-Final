@@ -58,7 +58,7 @@
                                 <td>{{criterio.nombre}}.</td>
                                 <td>{{tipoCriterioEncontrado}}</td>
                                 <td *ngIf="tipoCriterioEncontrado=='Medición.'">{{criterio.tipoMedicion}} {{operadorInicial}} {{criterio.valor}} {{criterio.unidadMedicion}}.</td>
-                                <td *ngIf="tipoCriterioEncontrado=='Hora.'">D&iacute;a = {{criterio.numeroDia}} Hora:{{criterio.v}}.</td>
+                                <td *ngIf="tipoCriterioEncontrado=='Hora.'">D&iacute;a = {{criterio.numeroDia}}    Hora:{{criterio.hora}}.</td>
                                 <td>
 
                                     <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipModificarCriterioInicial}} [mdTooltipPosition]="position">
@@ -108,7 +108,7 @@
                                 <td>{{criterioFinal.nombre}}.</td>
                                 <td>{{tipoCriterioFinalEncontrado}}</td>
                                 <td *ngIf="tipoCriterioFinalEncontrado=='Medición.'">{{criterioFinal.tipoMedicion}} {{operadorFinal}} {{criterioFinal.valor}} {{criterioFinal.unidadMedicion}}.</td>
-                                <td *ngIf="tipoCriterioFinalEncontrado=='Por hora.'">D&iacute;a = {{criterioFinal.numeroDia}} Hora:{{criterioFinal.hora.substring(0,8)}}.</td>
+                                <td *ngIf="tipoCriterioFinalEncontrado=='Hora.'">D&iacute;a = {{criterioFinal.numeroDia}} Hora:{{criterioFinal.hora}}.</td>
                                 <td *ngIf="tipoCriterioFinalEncontrado=='Por volumen de agua.'">Volumen = {{criterioFinal.volumen}} litros.</td>
                                 <td>
                                     <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipModificarCriterioFinal}} [mdTooltipPosition]="position">
