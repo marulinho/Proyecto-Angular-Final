@@ -12,7 +12,7 @@ export class FinalizarSesionService extends RestBaseService{
   cerrarSesion():Promise<Boolean> {
 
 
-    return this.http.post(FinalizarSesionService.serverUrl +this.cerrarSesionUrl, this.getRestHeader())
+    return this.http.post(FinalizarSesionService.serverUrl +this.cerrarSesionUrl, this.getRestHeader(),{withCredentials:true})
       .toPromise()
       .then(response => {
         return response.json() as Boolean;
