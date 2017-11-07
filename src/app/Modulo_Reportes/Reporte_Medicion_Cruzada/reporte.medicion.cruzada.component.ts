@@ -268,6 +268,7 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                         this.llenarGraficoHumedadSuelo();
                         this.llenarGraficoRadiacion();
                         this.reporteSeleccionado = true;
+                        console.log("FIN LLENADO TABLAS")
 
                     }
                 }
@@ -278,6 +279,7 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                         this.router.navigate(['/login/']);
                     }
                     else {
+                        console.log(error.error_description)
                         this.errorMessageReporte = error.error_description;
                     }
                 }
@@ -336,16 +338,28 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
         let resultado = true;
         let i = 0;
         while (resultado == true) {
+            console.log("Iteracion: "+i);
+            console.log(this.medicionCruzada.length);
             let ejecucionFechaHoraActual = this.medicionCruzada[i]['ejecucion']['fechaHoraInicio'];
+            console.log("fecha ejecucion: "+ejecucionFechaHoraActual);
             if (ejecucionFechaHoraActual == null || ejecucionFechaHoraActual == "") {
-                resultado = false;
+                console.log("fecha vacia: "+i);
+                //resultado = false;
             }
+            
             else {
                 let ejecucionFechaHoraFinal = this.medicionCruzada[i]['ejecucion']['fechaHoraFinalizacion'];
                 let medicionDetalle = (this.medicionCruzada[i]['medicionesComponenteAntes']['lista_mediciones_detalle']);
                 if (medicionDetalle == null || medicionDetalle == "") {
-                    resultado = false;
+                    console.log("medicion vacia: "+i);
+                    let mediciones = new Mediciones("-", "-", "-");
+                    temperaturaAire.push(mediciones);
+                    temperaturaSuelo.push(mediciones);
+                    humedadAire.push(mediciones);
+                    humedadSuelo.push(mediciones);
+                    radiacion.push(mediciones);
                 }
+                
                 else {
                     let tamanio = medicionDetalle.length;
                     for (var j = 0; j < tamanio; j++) {
@@ -354,41 +368,60 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                             fechaYhoraInicio = ejecucionFechaHoraActual.substring(0, 10) + "  " + ejecucionFechaHoraActual.substring(11, 19);
                             fechaYhoraFin = ejecucionFechaHoraFinal.substring(0, 10) + "  " + ejecucionFechaHoraFinal.substring(11, 19);
                             valorMedicion = medicionDetalle[j]['valor']; 
-                            let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
-                            temperaturaAire.push(mediciones);
+                            if(valorMedicion==null || valorMedicion == ""){
+                            }
+                            else{
+                                let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
+                                temperaturaAire.push(mediciones);
+                            }
                         }
                         if(medicionActual=="Temperatura suelo"){
                             fechaYhoraInicio = ejecucionFechaHoraActual.substring(0, 10) + "  " + ejecucionFechaHoraActual.substring(11, 19);
                             fechaYhoraFin = ejecucionFechaHoraFinal.substring(0, 10) + "  " + ejecucionFechaHoraFinal.substring(11, 19);
                             valorMedicion = medicionDetalle[j]['valor']; 
-                            let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
-                            temperaturaSuelo.push(mediciones);
+                            if(valorMedicion==null || valorMedicion == ""){}
+                            else{
+                                let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
+                                temperaturaSuelo.push(mediciones);
+                            }
                         }
                         if(medicionActual=="Humedad aire"){
                             fechaYhoraInicio = ejecucionFechaHoraActual.substring(0, 10) + "  " + ejecucionFechaHoraActual.substring(11, 19);
                             fechaYhoraFin = ejecucionFechaHoraFinal.substring(0, 10) + "  " + ejecucionFechaHoraFinal.substring(11, 19);
                             valorMedicion = medicionDetalle[j]['valor']; 
-                            let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
-                            humedadAire.push(mediciones);
+                            if(valorMedicion == null || valorMedicion == ""){}
+                            else{    
+                                let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
+                                humedadAire.push(mediciones);
+                            }
                         }
                         if(medicionActual=="Humedad suelo"){
                             fechaYhoraInicio = ejecucionFechaHoraActual.substring(0, 10) + "  " + ejecucionFechaHoraActual.substring(11, 19);
                             fechaYhoraFin = ejecucionFechaHoraFinal.substring(0, 10) + "  " + ejecucionFechaHoraFinal.substring(11, 19);
                             valorMedicion = medicionDetalle[j]['valor']; 
-                            let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
-                            humedadSuelo.push(mediciones);
+                            if(valorMedicion==null || valorMedicion == ""){}
+                            else{    
+                                let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
+                                humedadSuelo.push(mediciones);
+                            }
                         }
                         if(medicionActual=="Radiacion solar"){
                             fechaYhoraInicio = ejecucionFechaHoraActual.substring(0, 10) + "  " + ejecucionFechaHoraActual.substring(11, 19);
                             fechaYhoraFin = ejecucionFechaHoraFinal.substring(0, 10) + "  " + ejecucionFechaHoraFinal.substring(11, 19);
                             valorMedicion = medicionDetalle[j]['valor']; 
-                            let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
-                            radiacion.push(mediciones);
+                            if(valorMedicion==null || valorMedicion == ""){}
+                            else{    
+                                let mediciones = new Mediciones(fechaYhoraInicio, fechaYhoraFin, valorMedicion);
+                                radiacion.push(mediciones);
+                            }
                         }
                     }
                 }
             }
             i += 1;
+            if (i >= this.medicionCruzada.length){
+                resultado = false;
+            }
         }
         this.temperaturaAireAntes=temperaturaAire;
         this.temperaturaSueloAntes=temperaturaSuelo;
@@ -411,80 +444,174 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
 
         let resultado = true;
         let i = 0;
+
         while (resultado == true) {
+            console.log("iteracion: "+i);
             let ejecucionFechaHoraActual = this.medicionCruzada[i]['ejecucion']['fechaHoraInicio'];
             if (ejecucionFechaHoraActual == null || ejecucionFechaHoraActual == "") {
-                resultado = false;
+                console.log("fecha vacia: "+i);
             }
             else {
+                console.log("antes de medicion: "+i);
                 let ejecucionFechaHoraFinal = this.medicionCruzada[i]['ejecucion']['fechaHoraFinalizacion'];
                 let medicionDetalle = (this.medicionCruzada[i]['medicionesComponenteDespues']['lista_mediciones_detalle']);
+                console.log("despues de medicion: "+i);
                 if (medicionDetalle == null || medicionDetalle == "") {
-                    resultado = false;
+                    console.log("medicion vacia: "+i);
+                    //resultado = false;
                 }
                 else {
                     let tamanio = medicionDetalle.length;
+                    console.log("medicion tamanio: "+tamanio);
+                    
                     for (var j = 0; j < tamanio; j++) {
                         let medicionActual = medicionDetalle[j]['tipo_medicion'];
+                        
                         if (medicionActual == "Temperatura aire") {
+                            console.log("medicion aire: "+i);
                             let temperaturaAireAntes = this.temperaturaAireAntes[i];
-                            diaInicio = temperaturaAireAntes['fechaHoraInicio'];
-                            diaFin = temperaturaAireAntes['fechaHoraFinal'];
-                            valorMedicionAntes = temperaturaAireAntes['medicion'];
-                            valorMedicionDespues = medicionDetalle[j]['valor'];
-                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
-                            temperaturaAire.push(mediciones);
+                            console.log("medicion aire: " + i + " "+this.temperaturaAireAntes[i]);
+                            if (temperaturaAireAntes != null){
+                                diaInicio = temperaturaAireAntes['fechaHoraInicio'];
+                                diaFin = temperaturaAireAntes['fechaHoraFinal'];
+                                valorMedicionAntes = temperaturaAireAntes['medicion'];
+                                if(valorMedicionAntes == null || valorMedicionAntes == ""){}
+                                else{    
+                                    console.log("medicion aire valoe medicon: " + valorMedicionAntes);
+                                    valorMedicionDespues = medicionDetalle[j]['valor'];
+                                    if(valorMedicionDespues==null || valorMedicionDespues == ""){}
+                                    else{    
+                                        if (diaInicio != "-") {   
+                                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
+                                            temperaturaAire.push(mediciones);
+                                        }    
+                                    }                            
+                                }
+                            }
+                            
                         }
+
                         if(medicionActual=="Temperatura suelo"){
+                            console.log("medicion temp suelo: "+i);
+
                             let temperaturaSueloAntes = this.temperaturaSueloAntes[i];
-                            diaInicio = temperaturaSueloAntes['fechaHoraInicio'];
-                            diaFin = temperaturaSueloAntes['fechaHoraFinal'];
-                            valorMedicionAntes = temperaturaSueloAntes['medicion'];
-                            valorMedicionDespues = medicionDetalle[j]['valor'];
-                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
-                            temperaturaSuelo.push(mediciones);
+                            if (temperaturaSueloAntes != null){
+                                diaInicio = temperaturaSueloAntes['fechaHoraInicio'];
+                                diaFin = temperaturaSueloAntes['fechaHoraFinal'];
+                                valorMedicionAntes = temperaturaSueloAntes['medicion'];
+                                if(valorMedicionAntes == null || valorMedicionAntes == ""){}
+                                else{
+                                    valorMedicionDespues = medicionDetalle[j]['valor'];
+                                    if(valorMedicionDespues == null || valorMedicionDespues == ""){}
+                                    else{
+                                        if (diaInicio != "-") {   
+                                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
+                                            temperaturaSuelo.push(mediciones);
+                                        }  
+                                    }
+                                }
+                            }
+                            
                         }
+
                         if(medicionActual=="Humedad aire"){
+                            console.log("medicion humedad aire: "+i);
+
                             let humedadAireAntes = this.humedadAireAntes[i];
-                            diaInicio = humedadAireAntes['fechaHoraInicio'];
-                            diaFin = humedadAireAntes['fechaHoraFinal'];
-                            valorMedicionAntes = humedadAireAntes['medicion'];
-                            valorMedicionDespues = medicionDetalle[j]['valor'];
-                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
-                            humedadAire.push(mediciones);
+                            if (humedadAireAntes != null){
+                                diaInicio = humedadAireAntes['fechaHoraInicio'];
+                                diaFin = humedadAireAntes['fechaHoraFinal'];
+                                valorMedicionAntes = humedadAireAntes['medicion'];
+                                if(valorMedicionAntes == null || valorMedicionAntes == ""){}
+                                else{
+                                    valorMedicionDespues = medicionDetalle[j]['valor'];
+                                    if(valorMedicionDespues == null || valorMedicionDespues == ""){}
+                                    else{  
+                                        if (diaInicio != "-") {   
+                                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
+                                            humedadAire.push(mediciones);
+                                        }   
+                                    }
+                                }
+                            }
+                            
                         }
+
                         if(medicionActual=="Humedad suelo"){
+                            console.log("medicion humedad suelo: "+i);
+
                             let humedadSueloAntes = this.humedadSueloAntes[i];
-                            diaInicio = humedadSueloAntes['fechaHoraInicio'];
-                            diaFin = humedadSueloAntes['fechaHoraFinal'];
-                            valorMedicionAntes = humedadSueloAntes['medicion'];
-                            valorMedicionDespues = medicionDetalle[j]['valor'];
-                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
-                            humedadSuelo.push(mediciones);
+                            if (humedadSueloAntes != null){
+                                diaInicio = humedadSueloAntes['fechaHoraInicio'];
+                                diaFin = humedadSueloAntes['fechaHoraFinal'];
+                                valorMedicionAntes = humedadSueloAntes['medicion'];
+                                if(valorMedicionAntes==null || valorMedicionAntes == ""){}
+                                else{
+                                    valorMedicionDespues = medicionDetalle[j]['valor'];
+                                    if(valorMedicionDespues == null || valorMedicionDespues == ""){}
+                                    else{    
+
+                                        if (diaInicio != "-") {   
+                                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
+                                            humedadSuelo.push(mediciones);
+                                        } 
+                                    }
+                                }
+                            }
+                            
                         }
+
                         if(medicionActual=="Radiacion solar"){
+                            console.log("medicion radiacion: "+i);
+
                             let radiacionAntes = this.radiacionAntes[i];
-                            diaInicio = radiacionAntes['fechaHoraInicio'];
-                            diaFin = radiacionAntes['fechaHoraFinal'];
-                            valorMedicionAntes = radiacionAntes['medicion'];
-                            valorMedicionDespues = medicionDetalle[j]['valor'];
-                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
-                            radiacion.push(mediciones);
+                            if (radiacionAntes != null){
+                                console.log("medicion radiacion a: "+radiacionAntes);
+                                console.log("medicion radiacion a: "+radiacionAntes['fechaHoraInicio']);
+                                diaInicio = radiacionAntes['fechaHoraInicio'];
+                                console.log("medicion radiacion b: "+i);
+                                diaFin = radiacionAntes['fechaHoraFinal'];
+                                console.log("medicion radiacion c: "+i);
+                                valorMedicionAntes = radiacionAntes['medicion'];
+                                console.log("medicion radiacion d: "+i);
+                                if(valorMedicionAntes == null || valorMedicionAntes == ""){}
+                                else{
+                                    console.log("medicion radiacion e: "+i);
+                                    valorMedicionDespues = medicionDetalle[j]['valor'];
+                                    console.log("medicion radiacion f: "+i);
+                                    if(valorMedicionDespues == null || valorMedicionDespues == ""){}    
+                                    else{
+                                        if (diaInicio != "-") {   
+                                            let mediciones = new MedicionesTotal(diaInicio, diaFin, valorMedicionAntes,valorMedicionDespues);
+                                            radiacion.push(mediciones);
+                                        }   
+                                    }
+                                }
+                            }
+                            
                         }
                     }
                 }
             }
             i += 1;
+            if (i >= this.medicionCruzada.length){
+                resultado = false;
+            }
         }
         this.temperaturaAire=temperaturaAire;
+        console.log(temperaturaAire);
         this.temperaturaSuelo=temperaturaSuelo;
+        console.log(temperaturaSuelo);
         this.humedadAire=humedadAire;
+        console.log(humedadAire);
         this.humedadSuelo=humedadSuelo;
+        console.log(humedadSuelo);
         this.radiacion=radiacion;
-
+        console.log(radiacion);
     }
 
     llenarGraficoTemperaturaAire(){
+        console.log("llenarGraficoTemperaturaAire");
         let longitud = this.temperaturaAire.length;
         let antes = [];
         let despues = [];
@@ -493,17 +620,20 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
             let medicionAntes = this.temperaturaAire[i]['medicionAntes'];
             let medicionDespues = this.temperaturaAire[i]['medicionDespues'];
             let diasMediciones = this.temperaturaAire[i]['fechaHoraInicio'];
-            antes.push(medicionAntes);
-            despues.push(medicionDespues);
-            dias.push(diasMediciones);
+            if (diasMediciones != "-") {
+                console.log(diasMediciones)
+                antes.push(medicionAntes);
+                despues.push(medicionDespues);
+                dias.push(diasMediciones);
+            } 
         }
-
         ChartMockTemperaturaAire.bar.data.datasets[0]['data'] = antes;
         ChartMockTemperaturaAire.bar.data.datasets[1]['data'] = despues;
         ChartMockTemperaturaAire.bar.data.labels = dias;
     }
 
     llenarGraficoTemperaturaSuelo(){
+        console.log("llenarGraficoTemperaturaSuelo");
         let longitud = this.temperaturaSuelo.length;
         let antes = [];
         let despues = [];
@@ -512,17 +642,20 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
             let medicionAntes = this.temperaturaSuelo[i]['medicionAntes'];
             let medicionDespues = this.temperaturaSuelo[i]['medicionDespues'];
             let diasMediciones = this.temperaturaSuelo[i]['fechaHoraInicio'];
-            antes.push(medicionAntes);
-            despues.push(medicionDespues);
-            dias.push(diasMediciones);
+            if (diasMediciones != "-") {
+                console.log(diasMediciones)
+                antes.push(medicionAntes);
+                despues.push(medicionDespues);
+                dias.push(diasMediciones);
+            }
         }
-
         ChartMockTemperaturaSuelo.bar.data.datasets[0]['data'] = antes;
         ChartMockTemperaturaSuelo.bar.data.datasets[1]['data'] = despues;
         ChartMockTemperaturaSuelo.bar.data.labels = dias;
     }
 
     llenarGraficoHumedadAire(){
+        console.log("llenarGraficoHumedadAire");
         let longitud = this.humedadAire.length;
         let antes = [];
         let despues = [];
@@ -531,9 +664,12 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
             let medicionAntes = this.humedadAire[i]['medicionAntes'];
             let medicionDespues = this.humedadAire[i]['medicionDespues'];
             let diasMediciones = this.humedadAire[i]['fechaHoraInicio'];
-            antes.push(medicionAntes);
-            despues.push(medicionDespues);
-            dias.push(diasMediciones);
+            if (diasMediciones != "-") {
+                console.log(diasMediciones)
+                antes.push(medicionAntes);
+                despues.push(medicionDespues);
+                dias.push(diasMediciones);
+            }
         }
 
         ChartMockHumedadAire.bar.data.datasets[0]['data'] = antes;
@@ -542,6 +678,7 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
     }
 
     llenarGraficoHumedadSuelo(){
+        console.log("llenarGraficoHumedadSuelo");
         let longitud = this.humedadSuelo.length;
         let antes = [];
         let despues = [];
@@ -550,9 +687,12 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
             let medicionAntes = this.humedadSuelo[i]['medicionAntes'];
             let medicionDespues = this.humedadSuelo[i]['medicionDespues'];
             let diasMediciones = this.humedadSuelo[i]['fechaHoraInicio'];
-            antes.push(medicionAntes);
-            despues.push(medicionDespues);
-            dias.push(diasMediciones);
+            if (diasMediciones != "-") {
+                console.log(diasMediciones)
+                antes.push(medicionAntes);
+                despues.push(medicionDespues);
+                dias.push(diasMediciones);
+            }
         }
 
         ChartMockHumedadSuelo.bar.data.datasets[0]['data'] = antes;
@@ -561,17 +701,23 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
     }
 
     llenarGraficoRadiacion(){
+        console.log("llenarGraficoRadiacion");
         let longitud = this.radiacion.length;
         let antes = [];
         let despues = [];
         let dias = [];
         for (var i = 0; i < longitud; i++) {
             let medicionAntes = this.radiacion[i]['medicionAntes'];
+            console.log("medicion radiacion: " +i);
+            console.log("medicion radiacion: " + this.radiacion[i]['medicionAntes']);
             let medicionDespues = this.radiacion[i]['medicionDespues'];
             let diasMediciones = this.radiacion[i]['fechaHoraInicio'];
-            antes.push(medicionAntes);
-            despues.push(medicionDespues);
-            dias.push(diasMediciones);
+            if (diasMediciones != "-") {
+                console.log(diasMediciones)
+                antes.push(medicionAntes);
+                despues.push(medicionDespues);
+                dias.push(diasMediciones);
+            }
         }
 
         ChartMockRadiacion.bar.data.datasets[0]['data'] = antes;
