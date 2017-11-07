@@ -45,6 +45,7 @@ export class AgregarCriterioFinComponent implements OnInit{
 
     //CRITERIO HORA
     horaInicioCriterioRiego:string;
+    horaInicioCriterioRiegoString:string;
     diaInicioCriterioRiego:string;
     numeroDiaInicioCriterioRiego:number;    
     diasCriterio=['Lunes.','Martes.','Miércoles.','Jueves.','Viernes.','Sábado.','Domingo.']; 
@@ -148,6 +149,8 @@ export class AgregarCriterioFinComponent implements OnInit{
                             if(this.diaInicioCriterioRiego=="Domingo."){
                                 this.numeroDiaInicioCriterioRiego=7;
                             }
+                            this.horaInicioCriterioRiego = this.horaInicioCriterioRiego.toString();
+                            this.horaInicioCriterioRiegoString = this.horaInicioCriterioRiego.substring(16,21);
                             this.errorMessageAgregarCriterioFinal=="";
                             this.selectIndex+=1;                        
                         }
@@ -186,7 +189,7 @@ export class AgregarCriterioFinComponent implements OnInit{
         }
         this.gestionarConfiguracionRiegoService.agregarCriterioFinalRiegoFinca(this.idFinca,this.idMecanismoRiegoFincaSector,this.idConfiguracionRiego,
                 this.tipoSeleccionado,this.nombreCriterio,this.descripcionCriterio,this.tipoMedicion,this.valorMedicionCriterioRiego,this.volumenAgua,
-                this.horaInicioCriterioRiego,this.numeroDiaInicioCriterioRiego,this.operadorEnviar)
+                this.horaInicioCriterioRiegoString,this.numeroDiaInicioCriterioRiego,this.operadorEnviar)
                     .then(
                         reponse=>{
                             this.router.navigate(['/homeConfiguracionRiego/']);
