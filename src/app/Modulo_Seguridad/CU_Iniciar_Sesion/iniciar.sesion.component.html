@@ -15,16 +15,16 @@
         </div><br>
       </section>
       <md-input-container>
-        <input mdInput type="text" #username placeholder="Usuario" value="" required>
+        <input mdInput type="text" #username placeholder="Usuario" value="" required maxlength="100">
       </md-input-container>
       <md-input-container>
-        <input mdInput type="password" #password placeholder="Contrase&ntilde;a" value="" required>
+        <input mdInput type="password" #password placeholder="Contrase&ntilde;a" value="" required maxlength="50">
       </md-input-container>
       <p><a (click)="apretarLinkRegistrar()">Registrarse.</a></p>
       <p><a (click)="apretarLinkRecuperar()">¿Olvido su contrase&ntilde;a?</a></p>
     </md-card-content>
     <md-card-actions>
-      <button md-raised-button color="primary" (click)="apretarLogin(username.value,password.value)">LOGIN.</button>
+      <button md-raised-button color="primary" (click)="apretarLogin(username.value,password.value)">LOGIN</button>
     </md-card-actions>
   </md-card>
   <br>

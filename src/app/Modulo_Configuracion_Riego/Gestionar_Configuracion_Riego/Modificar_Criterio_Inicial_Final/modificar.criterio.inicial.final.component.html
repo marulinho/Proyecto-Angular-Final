@@ -56,8 +56,7 @@
                             </md-select>
                             
                             <br><br>
-                            <md2-datepicker [(ngModel)]="horaInicioCriterioRiego" type="time" placeholder="Hora inicio." format="HH:mm:ss"></md2-datepicker>
-
+                            <md2-datepicker [(ngModel)]="horaInicioCriterioRiego" type="time" placeholder="Hora inicio." format="HH:mm"></md2-datepicker>
                         </div>
 
                         <div *ngIf="tipoCriterio=='criterio_riego_volumen_agua'">
@@ -99,15 +98,15 @@
                         
                         <div *ngIf="tipoCriterio=='criterio_riego_hora'">
                             <label id=atributo>D&iacute;a: </label>
-                            <label>{{diaInicioCriterioRiego}}</label><br><br>
+                            <label>{{diaInicioCriterioRiego}}.</label><br><br>
     
                             <label id=atributo>Hora inicio: </label>
-                            <label>{{horaInicioCriterioRiego}}</label><br><br>
+                            <label>{{horaInicioCriterioRiegoString}}.</label><br><br>
                         </div>
 
                         <div *ngIf="tipoCriterio=='criterio_riego_volumen_agua'">
                             <label id=atributo>Volumen de agua: </label>
-                            <label>{{volumenAgua}}</label><br><br>
+                            <label>{{volumenAgua}}.</label><br><br>
                         </div>
 
                     </div>
