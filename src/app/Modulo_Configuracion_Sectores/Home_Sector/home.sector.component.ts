@@ -421,63 +421,6 @@ export class HomeSectorComponent implements OnInit {
         this.router.navigate(['/homeSector/' + this.idSector]);
     }
 
-    apretarDeshabilitarMecanismoIcono(idMecanismo: number) {
-        this.idMecanismoRiegoFincaSector = idMecanismo;
-        this.asignarMecanismoRiegoSectorService.deshabilitarMecanismoSector(this.idMecanismoRiegoFincaSector, this.idFinca)
-            .then(
-            response => {
-                this.refresh();
-            }
-            )
-            .catch(
-            error => {
-                if (error.error_description == this.erroresSistema.getInicioSesion()) {
-                    this.router.navigate(['/login/']);
-                }
-                else {
-                    this.errorMessageMecanismoSector = error.error_description;
-                }
-            }
-            );
-    }
-
-    apretarDeshabilitarCultivo(idCultivo: number) {
-        this.gestionarCultivoSectorService.deshabilitarCultivoSector(idCultivo, this.idFinca)
-            .then(
-            response => {
-                this.refresh();
-            }
-            )
-            .catch(
-            error => {
-                if (error.error_description == this.erroresSistema.getInicioSesion()) {
-                    this.router.navigate(['/login/']);
-                }
-                else {
-                    this.errorMessageCultivoSector = error.error_description;
-                }
-            }
-            );
-    }
-
-    apretarDeshabilitarComponenteSector(idComponenteSensor: number) {
-        this.asignarComponenteSensorSectorService.desasignarComponenteSector(this.idFinca, idComponenteSensor, this.idSector)
-            .then(
-            response => {
-                this.refresh();
-            }
-            )
-            .catch(
-            error => {
-                if (error.error_description == this.erroresSistema.getInicioSesion()) {
-                    this.router.navigate(['/login/']);
-                }
-                else {
-                    this.errorMessageComponenteSector = error.error_description;
-                }
-            }
-            );
-    }
 
     apretarHabilitarConfiguracionRiego(idConfiguracionRiego: number) {
         this.gestionarConfiguracionRiegoService.cambiarEstadoConfiguracionRiego(this.idFinca, this.idMecanismoRiegoFincaSector, idConfiguracionRiego)
@@ -631,4 +574,121 @@ export class HomeSectorComponent implements OnInit {
     apretarAtras(){
         this.router.navigate(['/homeFincaDetalle/']);
     }
+
+    apretarDeshabilitarMecanismoIcono(idMecanismo: number) {
+        let title = "Deshabilitar Mecanismo Riego."
+        let description = "¿Desea deshabilitar el Mecanismo de Riego?";
+        let option1="Aceptar";
+        let option2="Cancelar";
+        this.idMecanismoRiegoFincaSector = idMecanismo;
+        this.openDialogDeshabilitarMecanismo(title,description,option1,option2);
+        
+    }
+
+    openDialogDeshabilitarMecanismo(title,description,option1,option2){
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.componentInstance.title=title;
+        dialogRef.componentInstance.description=description;
+        dialogRef.componentInstance.option1=option1;
+        dialogRef.componentInstance.option2=option2;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                        this.selectedOption = result;
+                        if(this.selectedOption==="Aceptar"){
+                            this.asignarMecanismoRiegoSectorService.deshabilitarMecanismoSector(this.idMecanismoRiegoFincaSector, this.idFinca)
+                            .then(
+                            response => {
+                                this.refresh();
+                            }
+                            )
+                            .catch(
+                            error => {
+                                if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                    this.router.navigate(['/login/']);
+                                }
+                                else {
+                                    this.errorMessageMecanismoSector = error.error_description;
+                                }
+                            }
+                            );
+                        }
+            });
+    }
+
+    apretarDeshabilitarCultivo(idCultivo: number) {
+        let title = "Deshabilitar Cultivo.";
+        let description = "¿Desea deshabilitar el cultivo del sector?";
+        let option1 = "Aceptar";
+        let option2 = "Cancelar";
+        this.openDialogDeshabilitarCultivo(title, description, option1, option2, idCultivo);
+    }
+
+    openDialogDeshabilitarCultivo(title,description,option1,option2, idCultivo){
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.componentInstance.title=title;
+        dialogRef.componentInstance.description=description;
+        dialogRef.componentInstance.option1=option1;
+        dialogRef.componentInstance.option2=option2;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                        this.selectedOption = result;
+                        if(this.selectedOption==="Aceptar"){
+                            this.gestionarCultivoSectorService.deshabilitarCultivoSector(idCultivo, this.idFinca)
+                            .then(
+                            response => {
+                                this.refresh();
+                            }
+                            )
+                            .catch(
+                            error => {
+                                if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                    this.router.navigate(['/login/']);
+                                }
+                                else {
+                                    this.errorMessageCultivoSector = error.error_description;
+                                }
+                            }
+                            );
+                        }
+            });
+    }
+
+    apretarDeshabilitarComponenteSector(idComponenteSensor: number) {
+        let title = "Deshabilitar Componente Sensor.";
+        let description = "¿Desea deshabilitar el componente sensor del sector?";
+        let option1 = "Aceptar";
+        let option2 = "Cancelar";
+        this.openDialogDeshabilitarCultivo(title, description, option1, option2, idComponenteSensor);
+        
+    }
+    openDialogDeshabilitarComponenteSensor(title,description,option1,option2, idComponenteSensor){
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.componentInstance.title=title;
+        dialogRef.componentInstance.description=description;
+        dialogRef.componentInstance.option1=option1;
+        dialogRef.componentInstance.option2=option2;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                        this.selectedOption = result;
+                        if(this.selectedOption==="Aceptar"){
+                            this.asignarComponenteSensorSectorService.desasignarComponenteSector(this.idFinca, idComponenteSensor, this.idSector)
+                            .then(
+                            response => {
+                                this.refresh();
+                            }
+                            )
+                            .catch(
+                            error => {
+                                if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                    this.router.navigate(['/login/']);
+                                }
+                                else {
+                                    this.errorMessageComponenteSector = error.error_description;
+                                }
+                            }
+                            );
+                        }
+            });
+    }
+
 }

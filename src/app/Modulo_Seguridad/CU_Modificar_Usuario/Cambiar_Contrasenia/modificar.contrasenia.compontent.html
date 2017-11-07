@@ -2,7 +2,7 @@
 <div class="sign-container">
 
     <md-card class="page-card">
-        <md-card-title>Cambiar Contrase&ntilde;a</md-card-title>
+        <md-card-title>Cambiar Contrase&ntilde;a.</md-card-title>
         <md-card-content>
             <section *ngIf="errorMessage" class="bs">
                 <div class="bd-example" data-example-id="">
@@ -12,26 +12,26 @@
                 </div><br>
             </section>
 
-            <h2>Datos nueva Contrase&ntilde;a</h2>
+            <h2>Datos nueva Contrase&ntilde;a.</h2>
 
             <p>Los campos con (*) son obligatorios.</p>
 
             <md-input-container>
-                <input mdInput placeholder="Contrase&ntilde;a Actual" type="password" [(ngModel)]="passwordVieja" name="passwordVieja" required><br>
+                <input mdInput placeholder="Contrase&ntilde;a Actual." type="password" [(ngModel)]="passwordVieja" name="passwordVieja" required maxlength="50"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Nueva Contrase&ntilde;a" type="password" [(ngModel)]="password1" name="password1" required><br>
+                <input mdInput placeholder="Nueva Contrase&ntilde;a." type="password" [(ngModel)]="password1" name="password1" required maxlength="50"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Repetir Nueva Contrase&ntilde;" type="password" [(ngModel)]="password2" name="password2" required><br>
+                <input mdInput placeholder="Repetir Nueva Contrase&ntilde;." type="password" [(ngModel)]="password2" name="password2" required maxlength="50"><br>
             </md-input-container>
 
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button (click)="apretarModificarContrasenia()">MODIFICAR</button>
-            <button md-raised-button (click)="apretarSalir()">SALIR</button>
+            <button md-raised-button (click)="apretarModificarContrasenia()">MODIFICAR.</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR.</button>
         </md-card-actions>
         <md-card-footer></md-card-footer>
     </md-card>

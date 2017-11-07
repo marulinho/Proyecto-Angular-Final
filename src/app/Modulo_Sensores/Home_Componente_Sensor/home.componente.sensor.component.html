@@ -2,7 +2,14 @@
 <div *ngIf="getperfilHomeComponenteSeleccionado() && getPermisoGestionarComponenteSensor()" class="sign-container">
 
   <md-card *ngIf="getPermisoGestionarComponenteSensor()" class="page-card">
-    <md-card-title>Home Componente Sensor.</md-card-title>
+    <md-card-title>
+      
+      Home Componente Sensor.
+      <a id="botonVolver" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
+          <img src="assets/icons/atras.png">
+      </a>
+
+    </md-card-title>
     <md-card-subtitle>
       En esta secci&oacute;n el Encargado de la Finca puede modificar, deshabilitar el componente sensor y asignar sensores a los componente sensor de la finca.
     </md-card-subtitle>
@@ -34,13 +41,13 @@
         <label >{{componenteSensor.modelo}}.</label><br>
 
         <label id=atributo >Descripci&oacute;n:</label>
-        <label id=valor >{{componenteSensor.descripcion}}.</label><br>
+        <label  >{{componenteSensor.descripcion}}.</label><br>
 
         <label id=atributo>Cantidad de sensores soportados:</label>
-        <label id=valor >{{componenteSensor.cantidadMaximaSensores}}.</label><br>
+        <label  >{{componenteSensor.cantidadMaximaSensores}}.</label><br>
 
         <label id=atributo >Sensores asignados:</label>
-        <label id=valor >{{componenteSensor.cantidadSensoresAsignados}}.</label><br>
+        <label  >{{componenteSensor.cantidadSensoresAsignados}}.</label><br>
 
       </section>
     </md-card-content>
@@ -50,7 +57,7 @@
   <!-- SECCION AGREGAR SENSORES COMPONENTE SENSOR -->
   <md-card *ngIf="getPermisoGestionarSensor()"class="page-card">
             <md-card-title>
-                Sensores
+                Sensores.
                 <a *ngIf="getPermisoGestionarSensor()" class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
                     <img src="assets/icons/nuevo.png" [routerLink]="['/asignarSensorComponenteSectorFinca/']">
                 </a>
@@ -68,8 +75,8 @@
                     <table class="table table-striped table-hover table-card">
                       <thead>
                         <tr>
-                          <th style="width:37%;">Modelo.</th>
-                          <th style="width:36%;">Tipo Medici&oacute;n.</th>
+                          <th >Modelo.</th>
+                          <th >Tipo Medici&oacute;n.</th>
                           <th>Fecha Alta.</th>
                           <th class="actions">Acci&oacute;n.</th>
                         </tr>

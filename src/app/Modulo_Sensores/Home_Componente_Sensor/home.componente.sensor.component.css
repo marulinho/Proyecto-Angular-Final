@@ -24,3 +24,7 @@ tr:nth-child(even){
 a{
     cursor:pointer;
 }
+#botonVolver{
+    float: right ;
+    
+}

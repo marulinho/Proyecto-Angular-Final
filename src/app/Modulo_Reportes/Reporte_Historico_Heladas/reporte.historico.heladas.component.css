@@ -22,3 +22,10 @@ ul{
 #atributo{
     font-weight: bold;
 }
+#botonVolver{
+    float: right ;
+    
+}
+a{
+    cursor:pointer;
+}

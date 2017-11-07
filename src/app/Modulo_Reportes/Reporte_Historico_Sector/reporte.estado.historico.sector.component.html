@@ -1,7 +1,12 @@
 <!--SECCION REPORTE RIEGO EJECUCION-->
 <div *ngIf="getPermisoGenerarReporteEstadoHistoricoSector()" class="page-content">
     <md-card class="page-card">
-        <md-card-title>Reporte Hist&oacute;rico Sector.</md-card-title>
+        <md-card-title>
+            Reporte Hist&oacute;rico Sector.
+           <a id="botonVolver" *ngIf="!getPerfilEstadoHistoricoSeleccionado()" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
+                        <img src="assets/icons/atras.png">
+            </a> 
+        </md-card-title>
         <md-card-content>
             <section *ngIf="errorMessageReporte" class="bs">
                 <div class="bd-example" data-example-id="">

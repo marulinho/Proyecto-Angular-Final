@@ -18,15 +18,15 @@
                       </div><br>
                   </section>
                   <md-input-container>
-                    <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                    <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required maxlength="30"><br>
                   </md-input-container>
       
                   <md-input-container>
-                      <input mdInput placeholder="Direcci&oacute;n." type="text" [(ngModel)]="direccion" name="direccion" required><br>
+                      <input mdInput placeholder="Direcci&oacute;n." type="text" [(ngModel)]="direccion" name="direccion" required maxlength="50"><br>
                   </md-input-container>
                   
                   <md-input-container>
-                    <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas." type="number" [(ngModel)]="tamanio" name="tamanio" required><br>
+                    <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas." type="number" [(ngModel)]="tamanio" name="tamanio" required maxlength="4"><br>
                 </md-input-container>
 
                   <!--UBICACION-->
@@ -59,7 +59,7 @@
                         </md-option>
                     </md-select>  
                     <br><br><md-input-container>
-                        <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones por hora." type="number" [(ngModel)]="frecuencia" name="frecuencia" required><br>
+                        <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones por hora." type="number" [(ngModel)]="frecuencia" name="frecuencia" required maxlength="4"><br>
                     </md-input-container>
                                                       
          

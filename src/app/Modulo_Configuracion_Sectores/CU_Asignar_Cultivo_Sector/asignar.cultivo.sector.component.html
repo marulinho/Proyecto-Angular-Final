@@ -64,15 +64,15 @@
             </section>
             
             <md-input-container>  
-              <input mdInput placeholder="Nombre cultivo." type="text" [(ngModel)]="nombreCultivo" name="nombreCultivo" required>
+              <input mdInput placeholder="Nombre cultivo." type="text" [(ngModel)]="nombreCultivo" name="nombreCultivo" required maxlength="30">
             </md-input-container>
 
             <md-input-container>  
-              <input mdInput placeholder="Descripci&oacute;n cultivo." type="text" [(ngModel)]="descripcion" name="descripcion" required>
+              <input mdInput placeholder="Descripci&oacute;n cultivo." type="text" [(ngModel)]="descripcion" name="descripcion" required maxlength="100">
             </md-input-container>
             
             <md-input-container>  
-              <input mdInput placeholder="Cantidad de plantas." type="text" [(ngModel)]="cantidadPlantas" name="cantidadPlantas" required>
+              <input mdInput placeholder="Cantidad de plantas." type="text" [(ngModel)]="cantidadPlantas" name="cantidadPlantas" required maxlength="6">
             </md-input-container>
 
             <md-input-container>

@@ -19,7 +19,8 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
 
     erroresSistema = new ErroresSistema();
     permisoGenerarReporteHeladas = JSON.parse(localStorage.getItem('puedeGenerarInformeHeladasHistorico'));
-
+    tooltipAtras ='Volver HomeReportes';
+    position = 'above';
     errorMessageReporte = "";
     idFinca:number=JSON.parse(localStorage.getItem('idFinca')); 
     idSector:number=JSON.parse(localStorage.getItem('idSector'));
@@ -142,6 +143,9 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
     }
 
     apretarSalir(){
+        this.router.navigate(['/homeReportes/']);
+    }
+    apretarAtras(){
         this.router.navigate(['/homeReportes/']);
     }
 }

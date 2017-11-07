@@ -1,7 +1,11 @@
 <!--SECCION REPORTE RIEGO EJECUCION-->
 <div *ngIf="getPermisoRiegoHistorico()" class="page-content">
     <md-card class="page-card">
-        <md-card-title>Reporte Hist&oacute;rico Riego.</md-card-title>
+        <md-card-title>Reporte Hist&oacute;rico Riego.
+                <a id="botonVolver" *ngIf="!getRiegosSeleccionado()" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
+                        <img src="assets/icons/atras.png">
+            </a>
+        </md-card-title>
         <md-card-content>
             <section *ngIf="errorMessageReporte" class="bs">
                 <div class="bd-example" data-example-id="">
@@ -34,7 +38,7 @@
 
                 <label id="atributo">Hora creaci&oacute;n: </label>
                 <label>{{hora | date: 'hh:mm:ss'}}.</label><br>
-
+                <br><br>
                 <h5>Detalle Reporte</h5>
                 <label id="atributo">Fecha inicio: </label>
                 <label>{{fechaInicioReporte}}.</label><br>

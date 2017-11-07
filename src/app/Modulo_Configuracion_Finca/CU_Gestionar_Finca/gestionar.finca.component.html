@@ -15,11 +15,11 @@
             <h2>Datos Finca.</h2>
             <p>Los campos con (*) son obligatorios.</p>
             <md-input-container>
-                <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required maxlength="30"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Direcci&oacute;n." type="text" [(ngModel)]="direccion" name="direccion" required><br>
+                <input mdInput placeholder="Direcci&oacute;n." type="text" [(ngModel)]="direccion" name="direccion" required maxlength="50"><br>
             </md-input-container>
 
             <!--UBICACION-->
@@ -33,7 +33,7 @@
             </agm-map>
 
             <md-input-container>
-                <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas." type="number" [(ngModel)]="tamanio" name="tamanio" required><br>
+                <input mdInput placeholder="Tama&ntilde;o en hect&aacute;reas." type="number" [(ngModel)]="tamanio" name="tamanio" required maxlength="5"><br>
             </md-input-container>
 
 
