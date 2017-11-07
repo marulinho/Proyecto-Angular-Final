@@ -13,15 +13,15 @@
                 <h2>Datos Componente Sensor.</h2><br>
 
                 <md-input-container>
-                    <input mdInput placeholder="Modelo Componente." type="text" [(ngModel)]="modeloComponente" name="modeloComponente" required><br>
+                    <input mdInput placeholder="Modelo Componente." type="text" [(ngModel)]="modeloComponente" name="modeloComponente" required maxlength="100"><br>
                 </md-input-container>
 
                 <md-input-container>
-                    <input mdInput placeholder="Descripci&oacute;n Componente." type="text" [(ngModel)]="descripcionComponente" name="descripcionComponente" required><br>
+                    <input mdInput placeholder="Descripci&oacute;n Componente." type="text" [(ngModel)]="descripcionComponente" name="descripcionComponente" required maxlength="200"><br>
                 </md-input-container>
 
                 <md-input-container>
-                    <input mdInput placeholder="Cantidad M&aacute;xima de Sensores." type="number" [(ngModel)]="cantMaximaSensores" name="cantMaximaSensores" required><br>
+                    <input mdInput placeholder="Cantidad M&aacute;xima de Sensores." type="number" [(ngModel)]="cantMaximaSensores" name="cantMaximaSensores" required maxlength="3"><br>
                 </md-input-container>
 
         </md-card-content>

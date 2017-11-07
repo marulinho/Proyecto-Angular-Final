@@ -18,11 +18,11 @@
                             </div><br>
                         </section>
                         <md-input-container>
-                            <input mdInput placeholder="Nombre evento." type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                            <input mdInput placeholder="Nombre evento." type="text" [(ngModel)]="nombre" name="nombre" required maxlength="30"><br>
                         </md-input-container>
 
                         <md-input-container>
-                            <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcion" name="descripcion" required><br>
+                            <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcion" name="descripcion" required maxlength="100"><br>
                         </md-input-container>
 
                         <br><br><md-select placeholder="Seleccione tipo medici&oacute;n interna." [(ngModel)]="tipoInterna"  name="tipoInterna" required>
@@ -32,11 +32,11 @@
                         </md-select>
 
                         <br><br><md-input-container>
-                            <input mdInput placeholder="Valor m&iacute;nimo medici&oacute;n interna." type="number" [(ngModel)]="valorMinimoInterno" name="valorMinimoInterno" required><br>
+                            <input mdInput placeholder="Valor m&iacute;nimo medici&oacute;n interna." type="number" [(ngModel)]="valorMinimoInterno" name="valorMinimoInterno" required maxlength="5"><br>
                         </md-input-container>
 
                         <md-input-container>
-                            <input mdInput placeholder="Valor m&aacute;ximo medici&oacute;n interna." type="number" [(ngModel)]="valorMaximoInterno" name="valorMaximoInterno" required><br>
+                            <input mdInput placeholder="Valor m&aacute;ximo medici&oacute;n interna." type="number" [(ngModel)]="valorMaximoInterno" name="valorMaximoInterno" required maxlength="5"><br>
                         </md-input-container>
 
                         <br><br><md-select placeholder="Seleccione tipo medici&oacute;n externa." [(ngModel)]="tipoExterna"  name="tipoInterna" required>
@@ -46,15 +46,15 @@
                         </md-select>
 
                         <br><br><md-input-container>
-                            <input mdInput placeholder="Valor m&iacute;nimo medici&oacute;n externa." type="number" [(ngModel)]="valorMinimoExterno" name="valorMinimoExterno" required><br>
+                            <input mdInput placeholder="Valor m&iacute;nimo medici&oacute;n externa." type="number" [(ngModel)]="valorMinimoExterno" name="valorMinimoExterno" required maxlength="5"><br>
                         </md-input-container>
 
                         <md-input-container>
-                            <input mdInput placeholder="Valor m&aacute;ximo medici&oacute;n externa." type="number" [(ngModel)]="valorMaximoExterno" name="valorMaximoExterno" required><br>
+                            <input mdInput placeholder="Valor m&aacute;ximo medici&oacute;n externa." type="number" [(ngModel)]="valorMaximoExterno" name="valorMaximoExterno" required maxlength="5"><br>
                         </md-input-container>
 
-                        <md-checkbox class="example-margin" [(ngModel)]="notificacionActivada">Activar Notificaciones</md-checkbox><br><br>
-                        <md-checkbox class="example-margin" [(ngModel)]="configuracionActivada">Activar Configuraci&oacute;n </md-checkbox>
+                        <md-checkbox class="example-margin" [(ngModel)]="notificacionActivada">Activar Notificaciones.</md-checkbox><br><br>
+                        <md-checkbox class="example-margin" [(ngModel)]="configuracionActivada">Activar Configuraci&oacute;n. </md-checkbox>
                         
 
                     </div>
@@ -89,11 +89,11 @@
                             <li>Valor M&aacute;ximo: {{configuracion.valorMaximo}}.</li>
                         </ul>
 
-                        <label id=atributo>Notificaci&oacute;n: </label>
+                       <!-- <label id=atributo>Notificaci&oacute;n: </label>
                         <label>{{notificacionActivada}}.</label><br><br>
 
                         <label id=atributo>Configuraci&oacute;n: </label>
-                        <label>{{configuracionActivada}}</label><br><br>
+                        <label>{{configuracionActivada}}</label><br><br>-->
 
                     </div>
                 </md-tab>

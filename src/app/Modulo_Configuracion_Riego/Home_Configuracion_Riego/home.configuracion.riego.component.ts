@@ -245,30 +245,6 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
         this.router.navigate(['/gestionarCriterioRiego/']);
     }
 
-    apretarEliminarCriterioRiego(idCriterio: number, tipo: string) {
-        this.gestionarConfiguracionRiegoService.eliminarCriterioConfiguracionRiego(this.idFinca, this.idMecanismoRiegoFincaSector,
-            this.idConfiguracionRiego, idCriterio)
-            .then(
-            response => {
-                this.refresh();
-            }
-            )
-            .catch(
-            error => {
-                if (error.error_description == this.erroresSistema.getInicioSesion()) {
-                    this.router.navigate(['/login/']);
-                }
-                else {
-                    if (tipo == "inicio") {
-                        this.errorMessageCriterioInicialRiego = error.error_description;
-                    }
-                    else {
-                        this.errorMessageCriterioFinalRiego = error.error_description;
-                    }
-                }
-            }
-            );
-    }
 
     refresh(): void {
         window.location.reload();
@@ -276,6 +252,52 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
 
     apretarAtras(){
         this.router.navigate(['/homeSector/']);
+    }
+
+    apretarEliminarCriterioRiego(idCriterio: number, tipo: string) {
+        let title = "Eliminar Criterio de Riego.";
+        let description = "¿Desea eliminar el criterio?";
+        let option1 = "Aceptar";
+        let option2 = "Cancelar";
+        this.openDialogEliminarCriterioRiego(title, description, option1, option2, idCriterio,tipo);
+
+    }
+
+
+    openDialogEliminarCriterioRiego(title,description,option1,option2, idCriterio,tipo){
+        let dialogRef = this.dialog.open(DialogExampleComponent);
+        dialogRef.componentInstance.title=title;
+        dialogRef.componentInstance.description=description;
+        dialogRef.componentInstance.option1=option1;
+        dialogRef.componentInstance.option2=option2;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                        this.selectedOption = result;
+                        if(this.selectedOption==="Aceptar"){
+                            this.gestionarConfiguracionRiegoService.eliminarCriterioConfiguracionRiego(this.idFinca, this.idMecanismoRiegoFincaSector,
+                                this.idConfiguracionRiego, idCriterio)
+                                .then(
+                                response => {
+                                    this.refresh();
+                                }
+                                )
+                                .catch(
+                                error => {
+                                    if (error.error_description == this.erroresSistema.getInicioSesion()) {
+                                        this.router.navigate(['/login/']);
+                                    }
+                                    else {
+                                        if (tipo == "inicio") {
+                                            this.errorMessageCriterioInicialRiego = error.error_description;
+                                        }
+                                        else {
+                                            this.errorMessageCriterioFinalRiego = error.error_description;
+                                        }
+                                    }
+                                }
+                                );
+                        }
+            });
     }
 
 }   

@@ -44,6 +44,8 @@ export class HomeComponenteSensorComponent implements OnInit{
     position='above';
     sensores:Sensor;
 
+    tooltipAtras = 'Volver HomeSector';
+
     constructor(private router: Router,
                 private route:ActivatedRoute,
                 private gestionarComponenteSensorService:GestionarComponenteSensorService,
@@ -204,6 +206,9 @@ export class HomeComponenteSensorComponent implements OnInit{
     refresh(): void {
         window.location.reload();
     } 
+    apretarAtras(){
+        this.router.navigate(['/homeSector/']);
+    }
 }
 
   

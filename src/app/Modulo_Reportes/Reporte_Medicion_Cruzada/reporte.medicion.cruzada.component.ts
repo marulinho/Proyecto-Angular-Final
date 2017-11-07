@@ -19,7 +19,8 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
 
     erroresSistema = new ErroresSistema();
     permisoGenerarMedicionCruzada = JSON.parse(localStorage.getItem('puedeGenerarInformeCruzadoRiegoMedicion'));
-
+    tooltipAtras ='Volver HomeReportes';
+    position = 'above';
     errorMessageReporte = "";
     idFinca: number = parseInt(JSON.parse(localStorage.getItem('idFinca')));
     idSector: number = parseInt(JSON.parse(localStorage.getItem('idSector')));
@@ -581,6 +582,9 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
 
 
     apretarSalir() {
+        this.router.navigate(['/homeReportes/']);
+    }
+    apretarAtras(){
         this.router.navigate(['/homeReportes/']);
     }
 

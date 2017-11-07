@@ -27,7 +27,8 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
     nombreReporte: string = JSON.parse(localStorage.getItem('nombreReporte'));
     descripcionReporte: string = JSON.parse(localStorage.getItem('descripcionReporte'));
 
-
+    tooltipAtras ='Volver HomeReportes';
+    position = 'above';
     fecha = new Date();
     hora = new Date();
 
@@ -727,6 +728,10 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
     }
 
     apretarSalir() {
+        this.router.navigate(['/homeReportes/']);
+    }
+
+    apretarAtras(){
         this.router.navigate(['/homeReportes/']);
     }
 }

@@ -43,6 +43,9 @@ export class AgregarEventoPersonalizadoComponent implements OnInit{
 
     configuracionInterna;
     configuracionExterna;
+    notificacionActivadaString;
+    configuracionActivadaString;
+
 
     constructor(private router:Router,
                 private route:ActivatedRoute,

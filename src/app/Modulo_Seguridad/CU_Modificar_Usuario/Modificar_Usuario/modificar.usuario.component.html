@@ -2,7 +2,7 @@
 <div  class="sign-container">
 
         <md-card class="page-card">
-                <md-card-title>Modificar Usuario</md-card-title>
+                <md-card-title>Modificar Usuario.</md-card-title>
                 <md-card-content>
                         <section *ngIf="errorMessage" class="bs">
                                 <div class="bd-example" data-example-id="">
@@ -12,39 +12,39 @@
                                 </div><br>
                         </section>
 
-                        <h2>Datos Personales</h2>
+                        <h2>Datos Personales.</h2>
 
                         <md-input-container>
-                                <input mdInput placeholder="Nombre" type="text" [(ngModel)]="nombre" name="nombre"  required><br>
+                                <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre"  required maxlength="30"><br>
                         </md-input-container>
 
                         <md-input-container>
-                                <input mdInput placeholder="Apellido" type="text" [(ngModel)]="apellido" name="apellido"  required><br>
+                                <input mdInput placeholder="Apellido." type="text" [(ngModel)]="apellido" name="apellido"  required maxlength="30"><br>
                         </md-input-container>
 
                         <md-input-container>
-                                <input mdInput placeholder="Email" type="email" [(ngModel)]="email" name="email"  required><br>
+                                <input mdInput placeholder="Email." type="email" [(ngModel)]="email" name="email"  required maxlength="75"><br>
                         </md-input-container>
 
                         <md-input-container>
-                                <input mdInput placeholder="Fecha Nacimiento" type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" ><br>
+                                <input mdInput placeholder="Fecha Nacimiento." type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" ><br>
                         </md-input-container>
 
                         <md-input-container>
-                                <input mdInput placeholder="DNI" type="number" [(ngModel)]="dni" name="dni"  ><br>
+                                <input mdInput placeholder="DNI." type="number" [(ngModel)]="dni" name="dni" maxlength="8"  ><br>
                         </md-input-container>
 
                         <md-input-container>
-                                <input mdInput placeholder="CUIT" type="text" [(ngModel)]="cuit" name="cuit" ><br>
+                                <input mdInput placeholder="CUIT." type="text" [(ngModel)]="cuit" name="cuit" maxlength="15" ><br>
                         </md-input-container>
 
                         <md-input-container>
-                                <input mdInput placeholder="Domicilio" type="text" [(ngModel)]="domicilio" name="domicilio" ><br>
+                                <input mdInput placeholder="Domicilio." type="text" [(ngModel)]="domicilio" name="domicilio" maxlength="50" ><br>
                         </md-input-container>
                 </md-card-content>
                 <md-card-actions>
-                        <button md-raised-button (click)="apretarModificarUsuario()">MODIFICAR</button>
-                        <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                        <button md-raised-button (click)="apretarModificarUsuario()">MODIFICAR.</button>
+                        <button md-raised-button (click)="apretarSalir()">SALIR.</button>
                 </md-card-actions>
                 <md-card-footer></md-card-footer>
         </md-card>

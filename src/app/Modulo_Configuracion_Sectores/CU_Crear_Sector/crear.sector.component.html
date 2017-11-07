@@ -18,19 +18,19 @@
                   </div><br>
               </section>
               <md-input-container>
-                <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required><br>
+                <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required maxlength="30"><br>
               </md-input-container>
   
               <md-input-container>
-                  <input mdInput placeholder="N&uacute;mero." type="number" [(ngModel)]="numero" name="numero" required><br>
+                  <input mdInput placeholder="N&uacute;mero." type="number" [(ngModel)]="numero" name="numero" required maxlength="5"><br>
               </md-input-container>
   
               <md-input-container>
-                  <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcion" name="descripcion" required><br>
+                  <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcion" name="descripcion" required maxlength="100"><br>
               </md-input-container>
   
               <md-input-container>
-                  <input mdInput placeholder="Superficie en hect&aacute;reas." type="number" [(ngModel)]="superficie" name="superficie" required><br>
+                  <input mdInput placeholder="Superficie en hect&aacute;reas." type="number" [(ngModel)]="superficie" name="superficie" required maxlength="5"><br>
               </md-input-container>
   
             </div>

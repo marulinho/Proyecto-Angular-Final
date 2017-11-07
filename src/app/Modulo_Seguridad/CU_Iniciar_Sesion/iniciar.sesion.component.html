@@ -53,31 +53,31 @@
               </div><br>
             </section>
             <md-input-container>
-              <input mdInput placeholder="Nombre" type="text" [(ngModel)]="nombre" name="nombre" required><br>
+              <input mdInput placeholder="Nombre." type="text" [(ngModel)]="nombre" name="nombre" required maxlength="30"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Apellido" type="text" [(ngModel)]="apellido" name="apellido" required><br>
+                <input mdInput placeholder="Apellido." type="text" [(ngModel)]="apellido" name="apellido" required maxlength="30"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Email" type="email" [(ngModel)]="email" name="email" required><br>
+                <input mdInput placeholder="Email." type="email" [(ngModel)]="email" name="email" required maxlength="75"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Fecha Nacimiento" type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento"><br>
+                <input mdInput placeholder="Fecha Nacimiento." type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="DNI" type="number" [(ngModel)]="dni" name="dni"><br>
+                <input mdInput placeholder="DNI." type="number" [(ngModel)]="dni" name="dni" maxlength="8"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="CUIT" type="text" [(ngModel)]="cuit" name="cuit"><br>
+                <input mdInput placeholder="CUIT." type="text" [(ngModel)]="cuit" name="cuit" maxlength="15"><br>
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Domicilio" type="text" [(ngModel)]="domicilio" name="domicilio"><br>
+                <input mdInput placeholder="Domicilio." type="text" [(ngModel)]="domicilio" name="domicilio" maxlength="50"><br>
             </md-input-container>
 
 
@@ -86,7 +86,7 @@
         <md-tab disabled label="Paso 2">
           <div class="tab-body-content">
             <h3>
-              <small>Datos Usuario</small>
+              <small>Datos Usuario.</small>
             </h3>
             <p>Los campos con (*) son obligatorios.</p><br>        
             <section *ngIf="errorMessage" class="bs">
@@ -97,21 +97,21 @@
               </div><br>
             </section>
             <md-input-container>  
-              <input mdInput placeholder="Usuario" type="text" [(ngModel)]="usuario" name="usuario" required>
+              <input mdInput placeholder="Usuario." type="text" [(ngModel)]="usuario" name="usuario" required maxlength="100">
             </md-input-container>
             
             <md-input-container>
-              <input mdInput placeholder="Contrase&ntilde;a" type="password" [(ngModel)]="password1" name="password1" required>
+              <input mdInput placeholder="Contrase&ntilde;a." type="password" [(ngModel)]="password1" name="password1" required maxlength="50">
             </md-input-container>
 
             <md-input-container>
-                <input mdInput placeholder="Repetir Contrase&ntilde;a" type="password" [(ngModel)]="password2" name="password2" required>
+                <input mdInput placeholder="Repetir Contrase&ntilde;a." type="password" [(ngModel)]="password2" name="password2" required maxlength="50">
             </md-input-container>
           </div>
         </md-tab>
         <md-tab disabled label="Paso 3">
           <div class="tab-body-content">
-            <h4>Resumen Registraci&oacute;n</h4>
+            <h4>Resumen Registraci&oacute;n.</h4>
             <section *ngIf="errorMessage" class="bs">
                 <div class="bd-example" data-example-id="">
                   <div class="alert alert-danger" role="alert">
@@ -120,28 +120,28 @@
                 </div><br>
               </section>
           <label id="atributo">Nombre: </label>
-          <label>{{nombre}}</label><br><br>
+          <label>{{nombre}}.</label><br><br>
 
           <label id="atributo">Apellido: </label>
-          <label>{{apellido}}</label><br><br>
+          <label>{{apellido}}.</label><br><br>
 
           <label id="atributo">Email: </label>
-          <label>{{email}}</label><br><br>
+          <label>{{email}}.</label><br><br>
 
           <label id="atributo">Fecha de Nacimiento: </label>
-          <label>{{fechaNacimiento}}</label><br><br>
+          <label>{{fechaNacimiento}}.</label><br><br>
 
           <label id="atributo">DNI: </label>
-          <label>{{dni}}</label><br><br>
+          <label>{{dni}}.</label><br><br>
 
           <label id="atributo">CUIT: </label>
-          <label>{{cuit}}</label><br><br>
+          <label>{{cuit}}.</label><br><br>
 
           <label id="atributo">Domicilio: </label>
-          <label>{{domicilio}}</label><br><br>
+          <label>{{domicilio}}.</label><br><br>
 
           <label id="atributo">Usuario: </label>
-          <label>{{usuario}}</label><br><br>
+          <label>{{usuario}}.</label><br><br>
           
         
         </div>
@@ -182,7 +182,7 @@
                 </section>
               
               <md-input-container>
-                  <input mdInput placeholder="Email" type="email" [(ngModel)]="email" name="email" required><br>
+                  <input mdInput placeholder="Email." type="email" [(ngModel)]="email" name="email" required maxlength="75"><br>
               </md-input-container>
   
             </div>
@@ -190,7 +190,7 @@
           <md-tab disabled label="Paso 2">
             <div class="tab-body-content">
               <h3>
-                <small>Datos Recuperaci&oacute;n</small>
+                <small>Datos Recuperaci&oacute;n.</small>
               </h3>
               <p>Los campos con (*) son obligatorios.</p><br>  
 
@@ -203,15 +203,15 @@
                 </section>
 
               <md-input-container>  
-                <input mdInput placeholder="C&oacute;digo." type="text" [(ngModel)]="codigo" name="codigo" required>
+                <input mdInput placeholder="C&oacute;digo." type="text" [(ngModel)]="codigo" name="codigo" required maxlength="10">
               </md-input-container>
               
               <md-input-container>
-                <input mdInput placeholder="Contrase&ntilde;a." type="password" [(ngModel)]="password1" name="password1" required>
+                <input mdInput placeholder="Contrase&ntilde;a." type="password" [(ngModel)]="password1" name="password1" required maxlength="50">
               </md-input-container>
   
               <md-input-container>
-                  <input mdInput placeholder="Repetir Contrase&ntilde;a." type="password" [(ngModel)]="password2" name="password2" required>
+                  <input mdInput placeholder="Repetir Contrase&ntilde;a." type="password" [(ngModel)]="password2" name="password2" required maxlength="50">
               </md-input-container>
             </div>
           </md-tab>

@@ -23,22 +23,22 @@
                                         </div><br>
                                 </section>
 
-                                <h2>Datos Finca</h2>
+                                <h2>Datos Finca.</h2>
 
-                                <label id="atributo" class="col-2">Nombre: </label>
-                                <label class="col-3">{{perfilFinca.nombre}}.</label><br>
+                                <label id="atributo" >Nombre: </label>
+                                <label >{{perfilFinca.nombre}}.</label><br>
 
-                                <label id=atributo class="col-2">Direcci&oacute;n: </label>
-                                <label id=valor class="col-3">{{perfilFinca.direccionLegal}}.</label><br>
+                                <label id=atributo >Direcci&oacute;n: </label>
+                                <label >{{perfilFinca.direccionLegal}}.</label><br>
 
-                                <label id=atributo class="col-2">Ubicaci&oacute;n: </label>
+                                <label id=atributo >Ubicaci&oacute;n: </label>
                                 <ul>
                                         <li>Latitud: {{ubicacion[0]}}</li>
                                         <li>Longitud: {{ubicacion[1]}}</li>
                                 </ul>
 
-                                <label id=atributo class="col-2">Tama&ntilde;o: </label>
-                                <label id=valor class="col-3">{{perfilFinca.tamanio }} hect&aacute;reas.</label><br>
+                                <label id=atributo >Tama&ntilde;o: </label>
+                                <label id=valor >{{perfilFinca.tamanio }} hect&aacute;reas.</label><br>
 
 
                         </md-card-content>
@@ -101,7 +101,7 @@
                         <!--SECCION USUARIOS FINCA-->
                         <md-card *ngIf="getPermisoGestionarUsuario()" class="page-card">
                                 <md-card-title>
-                                        Usuarios Finca
+                                        Usuarios Finca.
                                         <a class="example-tooltip-host" mdTooltip={{tooltipAgregarUsuario}} [mdTooltipPosition]="position">
                                         <img src="assets/icons/nuevoUsuario.png" [routerLink]="['/gestionarUsuarioFinca/']">
                                 </a>
@@ -118,8 +118,8 @@
                                                 <table class="table table-striped table-hover table-card">
                                                         <thead>
                                                                 <tr>
-                                                                        <th style="width:37%;">Usuario.</th>
-                                                                        <th style="width:36%;">Apellido y Nombre.</th>
+                                                                        <th >Usuario.</th>
+                                                                        <th >Apellido y Nombre.</th>
                                                                         <th>Rol.</th>
                                                                         <th class="actions">Acci&oacute;n.</th>
                                                                 </tr>
@@ -150,7 +150,7 @@
                         <!--SECCION SECTORES FINCA-->
                         <md-card *ngIf="getPermisoGestionarSector()" class="page-card">
                                 <md-card-title>
-                                        Sectores Finca
+                                        Sectores Finca.
                                         <a *ngIf="getPermisoCrearSector()" class="example-tooltip-host" mdTooltip={{tooltipAgregarSector}} [mdTooltipPosition]="position">
                                 <img src="assets/icons/nuevo.png" [routerLink]="['/crearSectorFinca/']">
                         </a>
@@ -167,8 +167,8 @@
                                                 <table class="table table-striped table-hover table-card">
                                                         <thead>
                                                                 <tr>
-                                                                        <th style="width:37%;">Nombre.</th>
-                                                                        <th style="width:36%;">Descripci&oacute;n.</th>
+                                                                        <th >Nombre.</th>
+                                                                        <th >Descripci&oacute;n.</th>
                                                                         <th>Superficie.</th>
                                                                         <th class="actions">Acci&oacute;n.</th>
                                                                 </tr>
@@ -195,7 +195,7 @@
                         <!--SECCION MECANISMO RIEGO FINCA-->
                         <md-card *ngIf="getPermisoAsignarMecanismoFinca()" class="page-card">
                                 <md-card-title>
-                                        Mecanismos de Riego Finca
+                                        Mecanismos de Riego Finca.
                                         <a class="example-tooltip-host" mdTooltip={{tooltipAgregarMecanismo}} [mdTooltipPosition]="position">
                                                 <img src="assets/icons/nuevo.png" [routerLink]="['/agregarMecanismoFinca/']">
                                 </a>
@@ -212,8 +212,8 @@
                                                 <table class="table table-striped table-hover table-card">
                                                         <thead>
                                                                 <tr>
-                                                                        <th style="width:37%;">Nombre.</th>
-                                                                        <th style="width:36%;">Direcci&oacute;n de Conex&oacute;n.</th>
+                                                                        <th >Nombre.</th>
+                                                                        <th >Direcci&oacute;n de Conex&oacute;n.</th>
                                                                         <th>Fecha Instalaci&oacute;n.</th>
                                                                         <th class="actions">Acci&oacute;n.</th>
                                                                 </tr>
@@ -242,7 +242,7 @@
                         <!--SECCION SENSORES FINCA-->
                         <md-card *ngIf="getPermisoGestionarSensores()" class="page-card">
                                 <md-card-title>
-                                        Sensores Finca
+                                        Sensores Finca.
                                         <a class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
                                                 <img src="assets/icons/nuevo.png" [routerLink]="['/crearSensorFinca/']">
                                 </a>
@@ -259,8 +259,8 @@
                                                 <table class="table table-striped table-hover table-card">
                                                         <thead>
                                                                 <tr>
-                                                                        <th style="width:37%;">Modelo.</th>
-                                                                        <th style="width:36%;">Tipo Medici&oacute;n.</th>
+                                                                        <th >Modelo.</th>
+                                                                        <th >Tipo Medici&oacute;n.</th>
                                                                         <th>Fecha Alta.</th>
                                                                         <th class="actions">Acci&oacute;n.</th>
                                                                 </tr>
@@ -289,7 +289,7 @@
                         <!--SECCION COMPONENTES SENSORES FINCA-->
                         <md-card *ngIf="getPermisoGestionarComponenteSensor()" class="page-card">
                                 <md-card-title>
-                                        Componente Sensores Finca
+                                        Componente Sensores Finca.
                                         <a *ngIf="getPermisoCrearComponenteSensor()" class="example-tooltip-host" mdTooltip={{tooltipAgregarComponenteSensor}} [mdTooltipPosition]="position">
                                                 <img src="assets/icons/nuevo.png" [routerLink]="['/crearComponenteSensorFinca/']">
                                 </a>
@@ -306,8 +306,8 @@
                                                 <table class="table table-striped table-hover table-card">
                                                         <thead>
                                                                 <tr>
-                                                                        <th style="width:37%;">Modelo</th>
-                                                                        <th style="width:36%;">Descripci&oacute;n</th>
+                                                                        <th >Modelo</th>
+                                                                        <th >Descripci&oacute;n</th>
                                                                         <th>Sensores Asignados</th>
                                                                         <th class="actions">Acci&oacute;n</th>
                                                                 </tr>

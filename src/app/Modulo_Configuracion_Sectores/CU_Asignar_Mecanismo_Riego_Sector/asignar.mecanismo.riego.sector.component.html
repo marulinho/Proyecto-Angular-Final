@@ -16,8 +16,8 @@
                     <table class="table table-striped table-hover table-card">
                             <thead>
                                     <tr>
-                                            <th style="width:37%;">Nombre.</th>
-                                            <th style="width:36%;">Direcci&oacute;n IP.</th>
+                                            <th >Nombre.</th>
+                                            <th >Direcci&oacute;n IP.</th>
                                             <th>Fecha Instalaci&oacute;n.</th>
                                             <th class="actions">Acci&oacute;n.</th>
                                     </tr>
@@ -65,11 +65,11 @@
                     </div><br>
                   </section>
                   <md-input-container>  
-                    <input mdInput placeholder="Caudal Mecanismo." type="number" [(ngModel)]="caudal" name="caudal" required>
+                    <input mdInput placeholder="Caudal Mecanismo." type="number" [(ngModel)]="caudal" name="caudal" required maxlength="4">
                   </md-input-container>
                   
                   <md-input-container>
-                    <input mdInput placeholder="Presi&oacute;n Mecanismo." type="number" [(ngModel)]="presion" name="presion" required>
+                    <input mdInput placeholder="Presi&oacute;n Mecanismo." type="number" [(ngModel)]="presion" name="presion" required maxlength="4">
                   </md-input-container>
       
       
@@ -86,14 +86,11 @@
                         </div>
                       </div><br>
                     </section>
-                <label id="atributo">Sector: </label>
-                <label> {{idSector}}.</label><br><br>
-                <label id="atributo">Mecanismo Riego Finca: </label>
-                <label>{{idMecanismoRiegoFinca}}.</label><br><br>
                 <label id="atributo">Caudal Mecanismo de Riego: </label>
-                <label>{{caudal}}.</label><br><br>
+                <label>{{caudal}} litros/minutos.</label><br><br>
+
                 <label id="atributo">Presi&oacute; Mecanismo de Riego: </label>
-                <label>{{presion}}.</label><br><br>
+                <label>{{presion}} Pascal.</label><br><br>
             
               </div>
               </md-tab>

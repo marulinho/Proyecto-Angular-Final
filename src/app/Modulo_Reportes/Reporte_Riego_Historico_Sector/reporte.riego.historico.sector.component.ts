@@ -19,6 +19,8 @@ export class ReporteRiegoHistoricoSectorComponent implements OnInit {
     erroresSistema = new ErroresSistema();
     permisoRiegoHistorico = JSON.parse(localStorage.getItem('puedeGenerarInformeRiegoPorSectoresHistorico'));
 
+    tooltipAtras ='Volver HomeReportes';
+    position = 'above';
     errorMessageReporte = "";
     idFinca:number=parseInt(JSON.parse(localStorage.getItem('idFinca'))); 
     idSector:number=parseInt(JSON.parse(localStorage.getItem('idSector')));
@@ -85,9 +87,7 @@ export class ReporteRiegoHistoricoSectorComponent implements OnInit {
         return this.riegosSeleccionado;
     }
     
-    apretarSalir(){
-        this.router.navigate(['/homeReportes/']);
-    }
+
 
     compararFechas(){
         let resultado:boolean;
@@ -189,6 +189,12 @@ export class ReporteRiegoHistoricoSectorComponent implements OnInit {
         else{
             this.riegosSeleccionado=true;
         }
+    }
+    apretarAtras(){
+        this.router.navigate(['/homeReportes/']);
+    }
+    apretarSalir(){
+        this.router.navigate(['/homeReportes/']);
     }
 }
 
