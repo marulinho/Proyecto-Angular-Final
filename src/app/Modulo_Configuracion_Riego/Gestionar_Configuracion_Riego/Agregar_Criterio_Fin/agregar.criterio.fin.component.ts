@@ -59,7 +59,7 @@ export class AgregarCriterioFinComponent implements OnInit{
                 private gestionarConfiguracionRiegoService:GestionarConfiguracionRiegoService,
                 private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Agregar Criterio Fin";
+            this.appService.getState().topnavTitle="Agregar Criterio Fin.";
             if(this.criterioInicial=="criterio_riego_medicion"){
                 this.criteriosTipo=["Medición.","Hora."];
             }
@@ -149,8 +149,9 @@ export class AgregarCriterioFinComponent implements OnInit{
                             if(this.diaInicioCriterioRiego=="Domingo."){
                                 this.numeroDiaInicioCriterioRiego=7;
                             }
-                            this.horaInicioCriterioRiego = this.horaInicioCriterioRiego.toString();
-                            this.horaInicioCriterioRiegoString = this.horaInicioCriterioRiego.substring(16,21);
+                            let variableAuxiliar = this.horaInicioCriterioRiego;
+                            variableAuxiliar = variableAuxiliar.toString();
+                            this.horaInicioCriterioRiegoString = variableAuxiliar.substring(16,21);
                             this.errorMessageAgregarCriterioFinal=="";
                             this.selectIndex+=1;                        
                         }

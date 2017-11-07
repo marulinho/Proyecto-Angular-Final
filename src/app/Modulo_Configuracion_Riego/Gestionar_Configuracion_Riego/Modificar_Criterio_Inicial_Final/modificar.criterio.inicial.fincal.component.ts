@@ -137,8 +137,9 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
                             if(this.diaInicioCriterioRiego=="Domingo."){
                                 this.numeroDiaInicioCriterioRiego=7;
                             }
-                            this.horaInicioCriterioRiego = this.horaInicioCriterioRiego.toString();
-                            this.horaInicioCriterioRiegoString = this.horaInicioCriterioRiego.substring(16,21);
+                            let variableAuxiliar = this.horaInicioCriterioRiego;
+                            variableAuxiliar = variableAuxiliar.toString();
+                            this.horaInicioCriterioRiegoString = variableAuxiliar.substring(16,21);
                             this.errorMessageModificarCriterio=="";
                             this.selectIndex+=1;
                         }

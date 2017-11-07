@@ -138,7 +138,7 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
                         else {
                             if (this.tipoCriterioFinalEncontrado == "criterio_riego_hora") {
                                 this.tipoCriterioFinal = this.tipoCriterioFinalEncontrado;
-                                this.tipoCriterioFinalEncontrado = "Por hora.";
+                                this.tipoCriterioFinalEncontrado = "Hora.";
                             }
                             else {
                                 this.tipoCriterioFinal = this.tipoCriterioFinalEncontrado;
