@@ -200,7 +200,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
     modificarCriterioConfiguracionRiego(idFinca: number, idMecanismoRiegoFincaSector: number, idConfiguracionRiego: number,
         tipoCriterioRiego:string, idCriterioRiego:number, nombreCriterioRiego:string, descripcionCriterioRiego:string,
         idTipoMedicion:number, valorMedicionCriterioRiego:number, volumenAguaCriterioRiego:number, horaInicioCriterioRiego:string,
-        diaInicioCriterioRiego:string,operador:string): Promise<any> {
+        numeroDiaInicioCriterioRiego:number,operador:string): Promise<any> {
         const data = {
             'idFinca': idFinca,
             'idMecanismoRiegoFincaSector': idMecanismoRiegoFincaSector,
@@ -213,7 +213,7 @@ export class GestionarConfiguracionRiegoService extends RestBaseService {
             'valorMedicionCriterioRiego':valorMedicionCriterioRiego,
             'volumenAguaCriterioRiego':volumenAguaCriterioRiego,
             'horaInicioCriterioRiego':horaInicioCriterioRiego,
-            'diaInicioCriterioRiego':diaInicioCriterioRiego,
+            'diaInicioCriterioRiego':numeroDiaInicioCriterioRiego,
             'operador':operador
 
         };

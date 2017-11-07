@@ -42,7 +42,7 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
     horaInicioCriterioRiegoString:string;
     diaInicioCriterioRiego:string;
     numeroDiaInicioCriterioRiego:number;    
-    diasCriterio=['Lunes.','Martes.','Miércoles.','Jueves','Viernes','Sábado','Domingo']; 
+    diasCriterio=['Lunes.','Martes.','Miércoles.','Jueves.','Viernes.','Sábado.','Domingo.']; 
 
     //CRITERIO VOLUMEN
     volumenAgua:number;
@@ -134,7 +134,7 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
                             if(this.diaInicioCriterioRiego=="Sábado."){
                                 this.numeroDiaInicioCriterioRiego=6;
                             }
-                            if(this.diaInicioCriterioRiego=="Doming."){
+                            if(this.diaInicioCriterioRiego=="Domingo."){
                                 this.numeroDiaInicioCriterioRiego=7;
                             }
                             this.horaInicioCriterioRiego = this.horaInicioCriterioRiego.toString();
@@ -165,7 +165,7 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
     apretarModificarCriterioRiego(){
         this.gestionarConfiguracionRiegoService.modificarCriterioConfiguracionRiego(this.idFinca,this.idMecanismoRiegoFincaSector,this.idConfiguracionRiego,
             this.tipoCriterio,this.idCriterioRiego,this.nombre,this.descripcion,this.medicionSeleccionada,this.valorMedicion,this.volumenAgua,
-            this.horaInicioCriterioRiegoString,this.diaInicioCriterioRiego,this.operadorEnviar)
+            this.horaInicioCriterioRiegoString,this.numeroDiaInicioCriterioRiego,this.operadorEnviar)
             .then(
                 reponse=>{
                     this.router.navigate(['/homeConfiguracionRiego/']);
