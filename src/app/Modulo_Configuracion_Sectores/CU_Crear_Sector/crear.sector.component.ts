@@ -15,6 +15,7 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 export class CrearSectorFincaComponent implements OnInit{
     
     idFinca:number=JSON.parse(localStorage.getItem('idFinca'));
+    tamanioDisponible = JSON.parse(localStorage.getItem('tamanioDisponible'));
     selectIndex:number=0;
     errorMessageCrearSectorFinca="";
     nombre:string;

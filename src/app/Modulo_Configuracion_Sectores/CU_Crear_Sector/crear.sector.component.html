@@ -28,7 +28,10 @@
               <md-input-container>
                   <input mdInput placeholder="Descripci&oacute;n." type="text" [(ngModel)]="descripcion" name="descripcion" required maxlength="100"><br>
               </md-input-container>
-  
+              <br><br>
+              <label id=atributo >Tama&ntilde;o disponible: </label>
+              <label id=valor >{{tamanioDisponible }} hect&aacute;reas.</label><br>
+              <br>
               <md-input-container>
                   <input mdInput placeholder="Superficie en hect&aacute;reas." type="number" [(ngModel)]="superficie" name="superficie" required maxlength="5"><br>
               </md-input-container>

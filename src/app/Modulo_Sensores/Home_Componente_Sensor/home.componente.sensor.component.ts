@@ -44,7 +44,7 @@ export class HomeComponenteSensorComponent implements OnInit{
     position='above';
     sensores:Sensor;
 
-    tooltipAtras = 'Volver HomeSector';
+    tooltipAtras = 'Volver HomeFincaDetalle';
 
     constructor(private router: Router,
                 private route:ActivatedRoute,
@@ -207,7 +207,7 @@ export class HomeComponenteSensorComponent implements OnInit{
         window.location.reload();
     } 
     apretarAtras(){
-        this.router.navigate(['/homeSector/']);
+        this.router.navigate(['/homeFincaDetalle/']);
     }
 }
 
