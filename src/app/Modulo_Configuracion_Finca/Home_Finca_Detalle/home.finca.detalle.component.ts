@@ -39,6 +39,8 @@ export class HomeFincaDetalleComponent implements OnInit{
         errorMessagePerfilFinca="";
         perfilFinca: Finca;
         perfilFincaSeleccionada:Boolean;
+        tamanioOcupado:number;
+        tamanioDisponible:number;
         ubicacion=[];
         tooltipEditarFinca='Editar Finca.';
         tooltipAtras = 'Volver HomeFinca.';
@@ -206,7 +208,9 @@ export class HomeFincaDetalleComponent implements OnInit{
                     }
                     else{
                         this.sectoresFinca=response.datos_operacion;
+                        let longitud = response.datos_operacion.length;
                         this.sectoresFincaSeleccionado=true;
+                        this.determinarTamanios(longitud);
                     }
                 }
             )
@@ -381,6 +385,18 @@ export class HomeFincaDetalleComponent implements OnInit{
         return this.perfilComponenteSensorSeleccionado;
     }
 
+    determinarTamanios(longitud){
+        let tamanioOcupado = 0;
+        for(var i = 0; i<longitud;i++){
+            tamanioOcupado = tamanioOcupado + this.sectoresFinca[i]["superficieSector"];
+        }
+        this.tamanioOcupado = tamanioOcupado;
+        this.tamanioDisponible = this.perfilFinca["tamanio"] - this.tamanioOcupado;
+        console.log(tamanioOcupado);
+        console.log(this.tamanioDisponible);
+        localStorage.setItem('tamanioDisponible',JSON.stringify(this.tamanioDisponible));
+    }
+    
     apretarEliminarFincaIcono(){
         this.title="Eliminar Finca";
         this.description="¿Desea eliminar la finca?";

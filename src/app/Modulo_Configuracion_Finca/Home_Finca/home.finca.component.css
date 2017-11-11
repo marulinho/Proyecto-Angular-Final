@@ -9,8 +9,10 @@ td,th{
     cursor: pointer;
     
 }
-th{
-    background-color:#4CAF50; 
+thead th{
+    background-color:#009688; 
+    color:red;
+    
 }
 
 tr:nth-child(even){

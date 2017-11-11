@@ -262,9 +262,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{riegos.configuracion_riego}}</td>
+                                <td>{{configiruacionRiego}}</td>
                                 <td>{{riegos.fechaHoraInicio.substring(0,10)}} {{riegos.fechaHoraInicio.substring(11,19)}}</td>
-                                <td>{{riegos.fechaHoraFinalProgramada}}</td>
+                                <td>{{fechaFinRiego}}</td>
                                 <td>
                                     <a *ngIf="riegos.estado_ejecucion_riego=='en_ejecucion' && getPermisoIniciarODetenerRiegoManualmente()" class="example-tooltip-host" mdTooltip={{tooltipPausarRiego}} [mdTooltipPosition]="position"
                                         (click)="apretarPausarRiego()">

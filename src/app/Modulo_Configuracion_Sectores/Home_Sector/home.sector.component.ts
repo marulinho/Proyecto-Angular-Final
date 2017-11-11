@@ -23,7 +23,8 @@ import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
 export class HomeSectorComponent implements OnInit {
 
     erroresSistema = new ErroresSistema();
-
+    configiruacionRiego;
+    fechaFinRiego;
     //ATRIBUTOS HOME SECTOR
         idFinca: number=JSON.parse(localStorage.getItem('idFinca'));
         idSector: number=JSON.parse(localStorage.getItem('idSector'));
@@ -283,6 +284,16 @@ export class HomeSectorComponent implements OnInit {
                 }
                 else {
                     this.riegos = response.datos_operacion;
+                    this.configiruacionRiego = this.riegos['configuracion_riego'];
+                    
+                    if(this.configiruacionRiego=="" || this.configiruacionRiego==null){
+                        this.configiruacionRiego="Manual.";
+                    }
+                    this.fechaFinRiego = this.riegos['fechaHoraFinalProgramada'];
+                    if(this.fechaFinRiego=="" || this.fechaFinRiego==null){
+                        this.fechaFinRiego="No se ha determinado.";
+                    }
+                    
                     this.existeRiego = true;
                     this.riegoSeleccionado = true;
                 }
