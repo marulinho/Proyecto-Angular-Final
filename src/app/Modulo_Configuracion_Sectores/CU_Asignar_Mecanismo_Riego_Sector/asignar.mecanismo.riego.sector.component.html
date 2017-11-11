@@ -64,10 +64,18 @@
                       </div>
                     </div><br>
                   </section>
+                  
+                  <label id=atributo >Caudal m&aacute;ximo: </label>
+                  <label id=valor >{{caudalMaximo }} litros/minutos.</label><br>
+
                   <md-input-container>  
                     <input mdInput placeholder="Caudal Mecanismo." type="number" [(ngModel)]="caudal" name="caudal" required maxlength="4">
                   </md-input-container>
                   
+                  <br><br>
+                  <label id=atributo >Presi&oacute;n m&aacute;xima: </label>
+                  <label id=valor >{{presionMaxima }} Pascal.</label><br>
+
                   <md-input-container>
                     <input mdInput placeholder="Presi&oacute;n Mecanismo." type="number" [(ngModel)]="presion" name="presion" required maxlength="4">
                   </md-input-container>

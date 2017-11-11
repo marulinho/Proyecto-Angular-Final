@@ -25,6 +25,7 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
     errorMessagePerfilMecanismoSectorFinca="";
     mecanismosRiego:MecanismoRiego;
     mecanismosRiegoSeleccionado:Boolean;
+    
 
     //ATRIBUTOS AGREGAR MECANISMO A SECTOR
     errorMessageAsignarMecanismo="";
@@ -35,7 +36,9 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
     selectIndex:number=0;
     caudal:number;
     presion:number;
-    
+    caudalMaximo: number;
+    presionMaxima:number;
+
     constructor(private router:Router,
                 private route:ActivatedRoute,
                 private asignarMecanismoRiegoSectorService: AsignarMecanismoRiegoSectorService,
@@ -56,6 +59,8 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
                     }
                     else{
                         this.mecanismosRiego=response.datos_operacion;
+                        this.caudalMaximo = this.mecanismosRiego['caudalMaximo'];
+                        this.presionMaxima = this.mecanismosRiego['presionMaxima'];
                         this.mecanismosRiegoSeleccionado=true;
                     }
                 }

@@ -207,6 +207,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                         this.sectoresFincaSeleccionado=false;
                         this.tamanioOcupado = 0;
                         this.tamanioDisponible = this.perfilFinca['tamanio'];
+                        localStorage.setItem('tamanioDisponible',JSON.stringify(this.tamanioDisponible));
                     }
                     else{
                         this.sectoresFinca=response.datos_operacion;
