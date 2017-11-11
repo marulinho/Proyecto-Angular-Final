@@ -391,7 +391,16 @@ export class HomeFincaDetalleComponent implements OnInit{
             tamanioOcupado = tamanioOcupado + this.sectoresFinca[i]["superficieSector"];
         }
         this.tamanioOcupado = tamanioOcupado;
+        console.log(this.tamanioOcupado);
+        if(this.tamanioOcupado == null ){
+            this.tamanioOcupado=0;
+        }
         this.tamanioDisponible = this.perfilFinca["tamanio"] - this.tamanioOcupado;
+        console.log(this.tamanioDisponible);
+        if(this.tamanioDisponible == null || this.tamanioDisponible <0){
+            this.tamanioDisponible=0;
+        }
+        
         console.log(tamanioOcupado);
         console.log(this.tamanioDisponible);
         localStorage.setItem('tamanioDisponible',JSON.stringify(this.tamanioDisponible));
