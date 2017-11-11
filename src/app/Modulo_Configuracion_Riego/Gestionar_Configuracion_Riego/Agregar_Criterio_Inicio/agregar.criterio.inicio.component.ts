@@ -54,7 +54,7 @@ export class AgregarCriterioInicioComponent implements OnInit{
                 private gestionarConfiguracionRiegoService:GestionarConfiguracionRiegoService,
                 private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Agregar Criterio Inicio.";
+            this.appService.getState().topnavTitle="Agregar Criterio Inicio";
 
     }
 

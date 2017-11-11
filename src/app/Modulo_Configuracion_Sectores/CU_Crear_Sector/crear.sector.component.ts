@@ -31,7 +31,7 @@ export class CrearSectorFincaComponent implements OnInit{
                 private crearSectorFincaService:CrearSectorFincaService,
                 private appService:AppService){
 
-        appService.getState().topnavTitle="Crear Sector.";
+        appService.getState().topnavTitle="Crear Sector";
     }
 
     ngOnInit(){}

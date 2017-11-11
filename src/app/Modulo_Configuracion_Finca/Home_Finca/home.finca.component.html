@@ -3,14 +3,15 @@
   
   <md-card class="page-card">
     <md-card-title>
-      Resumen de Fincas.
+      Resumen de Fincas
     </md-card-title>
     <md-card-subtitle>En esta secci&oacute;n el usuario puede crear y observar las fincas que tiene asignada con distintos roles.</md-card-subtitle>
     <md-card-content>
       <h3>
         <small>¿Desea crear una finca?</small>
         <a class="example-tooltip-host" mdTooltip={{tooltipCrearFinca}} [mdTooltipPosition]="position" md-icon-button (click)="apretarNuevaFincaIcono()">
-          <md-icon>fiber_new</md-icon>
+          <!--<md-icon>fiber_new</md-icon>-->
+          <img src="assets/icons/nuevo.png">
         </a>
 
       </h3>
@@ -34,11 +35,11 @@
           <table class="table table-striped table-hover table-card">
             <thead>
               <tr>
-                <th>Nombre.</th>
-                <th>Tama&ntilde;o.</th>
-                <th>Direcci&oacute;n.</th>
-                <th>Ubicaci&oacute;n.</th>
-                <th class="actions">Acci&oacute;n.</th>
+                <th>Nombre</th>
+                <th>Tama&ntilde;o</th>
+                <th>Direcci&oacute;n</th>
+                <th>Ubicaci&oacute;n</th>
+                <th class="actions">Acci&oacute;n</th>
               </tr>
             </thead>
             <tbody>
@@ -69,7 +70,7 @@
     <!--SECCION FINCA OTRO ROL-->
     <md-card class="page-card">
       <md-card-title>
-        Fincas con otro Roles.
+        Fincas con otro Roles
       </md-card-title>
 
       <md-card-content>
@@ -100,11 +101,11 @@
           <table class="table table-striped table-hover table-card">
             <thead>
               <tr>
-                <th>Nombre.</th>
-                <th>Rol.</th>
-                <th>Direcci&oacute;n.</th>
-                <th>Ubicaci&oacute;n.</th>
-                <th class="actions">Acci&oacute;n.</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Direcci&oacute;n</th>
+                <th>Ubicaci&oacute;n</th>
+                <th class="actions">Acci&oacute;n</th>
               </tr>
             </thead>
             <tbody>
@@ -136,7 +137,7 @@
     <!--SECCION FINCA PENDIENTE -->
     <md-card class="page-card">
       <md-card-title>
-        Fincas Pendientes de Aprobaci&oacute;n.
+        Fincas Pendientes de Aprobaci&oacute;n
       </md-card-title>
       <md-card-content>
         <section *ngIf="errorMessageFincasPendientes" class="bs">
@@ -150,10 +151,10 @@
           <table class="table table-striped table-hover table-card">
             <thead>
               <tr>
-                <th>Nombre.</th>
-                <th>Tama&ntilde;o.</th>
-                <th>Direcci&oacute;n.</th>
-                <th>Ubicaci&oacute;n.</th>
+                <th>Nombre</th>
+                <th>Tama&ntilde;o</th>
+                <th>Direcci&oacute;n</th>
+                <th>Ubicaci&oacute;n</th>
                 <!--<th class="actions">Acci&oacute;n.</th>-->
               </tr>
             </thead>
@@ -185,7 +186,7 @@
     <!--SECCION FINCAS DESHABILITADAS -->
     <md-card class="page-card">
       <md-card-title>
-        Fincas Deshabilitadas.
+        Fincas Deshabilitadas
       </md-card-title>
       <md-card-content>
         <section *ngIf="errorMessageFincasDeshabilitadas" class="bs">
@@ -199,10 +200,10 @@
           <table class="table table-striped table-hover table-card">
             <thead>
               <tr>
-                <th>Nombre.</th>
-                <th>Rol.</th>
-                <th>Ubicaci&oacute;n.</th>
-                <th class="actions">Acci&oacute;n.</th>
+                <th>Nombre</th>
+                <th>Rol</th>
+                <th>Ubicaci&oacute;n</th>
+                <th class="actions">Acci&oacute;n</th>
               </tr>
             </thead>
             <tbody>

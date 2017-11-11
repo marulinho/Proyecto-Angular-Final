@@ -36,7 +36,7 @@ export class GestionarCultivoSectorComponent implements OnInit{
                 private gestionarCultivoSectorService:GestionarCultivoSectorService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Modificar Cultivo.";
+        appService.getState().topnavTitle="Modificar Cultivo";
 
     }
 

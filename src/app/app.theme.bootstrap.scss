@@ -740,14 +740,17 @@ body.light {
 
     $table-tfoot-cell-height: 3.5rem !default;
     $table-tfoot-color: $body-secondary-text-color !default;
-    $table-tfoot-font-size: 0.75rem !default;
+    $table-tfoot-font-size: 0.85rem !default;
     $table-tfoot-font-weight: $font-weight-regular !default;
     $table-tfoot-padding-y: (($table-tfoot-cell-height - $table-tfoot-font-size * $line-height-base) / 2) !default;
 
     $table-thead-cell-height: $table-tfoot-cell-height !default;
-    $table-thead-color: $body-color !default;
-    $table-thead-font-size: $table-tfoot-font-size !default;
-    $table-thead-font-weight: $font-weight-medium !default;
+    //$table-thead-color: $body-color !default;
+    $table-thead-color: rgba(255,255,255,255); 
+    //$table-thead-font-size: $table-tfoot-font-size !default;
+    $table-thead-font-size: 1rem;
+    //$table-thead-font-weight: $font-weight-medium !default;
+    $table-thead-font-weight: bold;
     $table-thead-padding-y: (($table-thead-cell-height - $table-thead-font-size * $line-height-base) / 2) !default;
 
     //
@@ -1884,14 +1887,17 @@ body.dark {
 
     $table-tfoot-cell-height: 3.5rem !default;
     $table-tfoot-color: $body-secondary-text-color !default;
-    $table-tfoot-font-size: 0.75rem !default;
+    $table-tfoot-font-size: 0.85rem !default;
     $table-tfoot-font-weight: $font-weight-regular !default;
     $table-tfoot-padding-y: (($table-tfoot-cell-height - $table-tfoot-font-size * $line-height-base) / 2) !default;
 
     $table-thead-cell-height: $table-tfoot-cell-height !default;
-    $table-thead-color: $body-color !default;
-    $table-thead-font-size: $table-tfoot-font-size !default;
-    $table-thead-font-weight: $font-weight-medium !default;
+    //$table-thead-color: $body-color !default;
+    $table-thead-color: rgba(255,255,255,255);    
+    //$table-thead-font-size: $table-tfoot-font-size !default;
+    $table-thead-font-size: 1rem;
+    //$table-thead-font-weight: $font-weight-medium !default;
+    $table-thead-font-weight: bold !default;
     $table-thead-padding-y: (($table-thead-cell-height - $table-thead-font-size * $line-height-base) / 2) !default;
 
     //

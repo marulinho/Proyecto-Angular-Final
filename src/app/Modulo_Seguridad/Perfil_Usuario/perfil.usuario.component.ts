@@ -44,7 +44,7 @@ export class PerfilUsuarioComponent implements OnInit {
         private finalizarSesionService: FinalizarSesionService,
         private appService: AppService,
         private dialog: MdDialog) {
-        appService.getState().topnavTitle = 'Perfil Usuario.';
+        appService.getState().topnavTitle = 'Perfil Usuario';
     }
 
     ngOnInit() {

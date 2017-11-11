@@ -4,7 +4,7 @@
   <md-card *ngIf="getPermisoGestionarComponenteSensor()" class="page-card">
     <md-card-title>
       
-      Home Componente Sensor.
+      Home Componente Sensor
       <a id="botonVolver" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
           <img src="assets/icons/atras.png">
       </a>
@@ -57,7 +57,7 @@
   <!-- SECCION AGREGAR SENSORES COMPONENTE SENSOR -->
   <md-card *ngIf="getPermisoGestionarSensor()"class="page-card">
             <md-card-title>
-                Sensores.
+                Sensores
                 <a *ngIf="getPermisoGestionarSensor()" class="example-tooltip-host" mdTooltip={{tooltipAgregarSensor}} [mdTooltipPosition]="position">
                     <img src="assets/icons/nuevo.png" [routerLink]="['/asignarSensorComponenteSectorFinca/']">
                 </a>
@@ -75,10 +75,10 @@
                     <table class="table table-striped table-hover table-card">
                       <thead>
                         <tr>
-                          <th >Modelo.</th>
-                          <th >Tipo Medici&oacute;n.</th>
-                          <th>Fecha Alta.</th>
-                          <th class="actions">Acci&oacute;n.</th>
+                          <th >Modelo</th>
+                          <th >Tipo Medici&oacute;n</th>
+                          <th>Fecha Alta</th>
+                          <th class="actions">Acci&oacute;n</th>
                         </tr>
                       </thead>
                       <tbody>

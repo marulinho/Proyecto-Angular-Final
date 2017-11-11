@@ -1,7 +1,7 @@
 <!--SECCION CREAR FINCA-->
 <div  class="page-content">
         <md-card><br>
-          <md-card-title>Crear Finca.</md-card-title>
+          <md-card-title>Crear Finca</md-card-title>
           <md-card-content>
             <md-tab-group selectedIndex="{{selectIndex}}">
               <md-tab disabled label="Paso 1">
@@ -53,12 +53,19 @@
                           </div>
                         </div><br>
                     </section>
+                    <br>
                     <md-select placeholder="Seleccionar Proveedor." [(ngModel)]="proveedor" name="proveedor">
-                        <md-option *ngFor="let proveedorInformacion of proveedoresInformacion" [value]="proveedorInformacion">
+                        <md-option *ngFor="let proveedorInformacion of proveedoresInformacion" [value]="proveedorInformacion" (click)="obtenerProveedorInformacion()">
                           {{proveedorInformacion}}.
                         </md-option>
                     </md-select>  
-                    <br><br><md-input-container>
+                    
+                    <br><br>
+                    <div *ngIf="proveedor">
+                        <label id="atributo">Frecuencia m&aacute;xima posible: </label>
+                        <label>{{frecuenciaMaxima}} mediciones por hora.</label><br><br>
+                    </div>
+                    <md-input-container>
                         <input mdInput placeholder="Frecuencia obtenci&oacute;n mediciones por hora." type="number" [(ngModel)]="frecuencia" name="frecuencia" required maxlength="4"><br>
                     </md-input-container>
                                                       
@@ -102,10 +109,10 @@
             </md-tab-group>
           </md-card-content>
           <md-card-actions>
-            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
-            <button *ngIf="selectIndex >=0 && selectIndex <=1" md-raised-button (click)="apretarNextCrear()">SIGUIENTE.</button>
-            <button *ngIf="selectIndex == 2" md-raised-button (click)="apretarCrearFinca()">CREAR FINCA.</button>
-            <button md-raised-button (click)="apretarSalir()">SALIR.</button>
+            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S</button>
+            <button *ngIf="selectIndex >=0 && selectIndex <=1" md-raised-button (click)="apretarNextCrear()">SIGUIENTE</button>
+            <button *ngIf="selectIndex == 2" md-raised-button (click)="apretarCrearFinca()">CREAR FINCA</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR</button>
           </md-card-actions>
           <md-card-footer></md-card-footer>
         </md-card>

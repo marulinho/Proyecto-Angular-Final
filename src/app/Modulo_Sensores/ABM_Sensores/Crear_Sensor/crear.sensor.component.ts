@@ -33,7 +33,7 @@ export class CrearSensorComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Crear Sensor.";
+        appService.getState().topnavTitle="Crear Sensor";
  
     }
 

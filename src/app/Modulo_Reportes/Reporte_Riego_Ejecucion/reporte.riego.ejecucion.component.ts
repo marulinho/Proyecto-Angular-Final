@@ -43,7 +43,7 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
         private appService: AppService,
         private generarReportesService:GenerarReportesService,
         private dialog: MdDialog) {
-        appService.getState().topnavTitle = "Reporte Riego Ejecución.";
+        appService.getState().topnavTitle = "Reporte Riego Ejecución";
 
     }
 

@@ -18,7 +18,7 @@ export class ModificarRolUsuarioComponent implements OnInit{
     constructor(private router: Router,
                 private route:ActivatedRoute,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Usuarios.";
+            this.appService.getState().topnavTitle="Usuarios";
     }
 
     ngOnInit(){

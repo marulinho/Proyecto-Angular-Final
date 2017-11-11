@@ -16,10 +16,10 @@
                     <table class="table table-striped table-hover table-card">
                             <thead>
                                     <tr>
-                                            <th >Nombre.</th>
-                                            <th >Direcci&oacute;n IP.</th>
-                                            <th>Fecha Instalaci&oacute;n.</th>
-                                            <th class="actions">Acci&oacute;n.</th>
+                                            <th >Nombre</th>
+                                            <th >Direcci&oacute;n IP</th>
+                                            <th>Fecha Instalaci&oacute;n</th>
+                                            <th class="actions">Acci&oacute;n</th>
                                     </tr>
                             </thead>
                             <tbody>
@@ -48,7 +48,7 @@
 <!--SECCION ASIGNAR MECANISMO RIEGO SECTOR-->
 <div *ngIf="getPerfilAsignarMecanismo() && getPermisoAsignarMecRiegoASector()" class="page-content">
         <md-card><br>
-          <md-card-title>Agregar Mecanismo.</md-card-title>
+          <md-card-title>Agregar Mecanismo</md-card-title>
           <md-card-content>
             <md-tab-group selectedIndex="{{selectIndex}}">
               <md-tab disabled label="Paso 1">
@@ -97,10 +97,10 @@
             </md-tab-group>
           </md-card-content>
           <md-card-actions>
-            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
-            <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAsignar()" >SIGUIENTE.</button>
-            <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregaMecanismo()">ASIGNAR.</button>
-            <button md-raised-button (click)="apretarSalir()">SALIR.</button>
+            <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S</button>
+            <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAsignar()" >SIGUIENTE</button>
+            <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregaMecanismo()">ASIGNAR</button>
+            <button md-raised-button (click)="apretarSalir()">SALIR</button>
           </md-card-actions>
         </md-card>
       

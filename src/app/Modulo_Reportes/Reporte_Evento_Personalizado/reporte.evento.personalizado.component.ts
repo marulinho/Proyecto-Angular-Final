@@ -56,7 +56,7 @@ export class ReporteEventoPersonalizadoComponent implements OnInit {
         private generarReportesService:GenerarReportesService,
         private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
         private dialog: MdDialog) {
-        appService.getState().topnavTitle = "Reporte Evento Personalizado.";
+        appService.getState().topnavTitle = "Reporte Evento Personalizado";
 
 
     }

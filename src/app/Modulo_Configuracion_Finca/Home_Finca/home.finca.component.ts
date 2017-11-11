@@ -87,7 +87,7 @@ export class HomeFincaComponent implements OnInit{
                 private homeFincaService:HomeFincaService,
                 private appService:AppService ){
                     
-           appService.getState().topnavTitle = 'Home Finca.';
+           appService.getState().topnavTitle = 'Home Finca';
                     
 
     }

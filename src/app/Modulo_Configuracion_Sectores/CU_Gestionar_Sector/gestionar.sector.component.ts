@@ -32,7 +32,7 @@ export class GestionarSectorFincaComponent implements OnInit{
                 private gestionarSectorFincaService:GestionarSectorFincaService,
                 private appService:AppService){
 
-        appService.getState().topnavTitle="Sector Finca.";
+        appService.getState().topnavTitle="Sector Finca";
 
     }
 

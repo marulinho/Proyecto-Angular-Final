@@ -26,6 +26,7 @@ export class SolicitarCreacionFincaComponent implements OnInit {
     direccion: string;
     tamanio: number;
     frecuencia: number;
+    frecuenciaMaxima: number;
 
     erroresSistema = new ErroresSistema();
     //UBICACION
@@ -40,11 +41,12 @@ export class SolicitarCreacionFincaComponent implements OnInit {
 
     constructor(private router: Router,
         private solicitarCreacionFincaService: SolicitarCreacionFincaService,
+        private gestionarProveedorInformacionService:GestionarProveedorInformacionService,
         private mapsAPILoader: MapsAPILoader,
         private ngZone: NgZone,
         private appService:AppService) {
             
-            this.appService.getState().topnavTitle = "Crear Finca.";
+            this.appService.getState().topnavTitle = "Crear Finca";
 
     }
 
@@ -169,4 +171,22 @@ export class SolicitarCreacionFincaComponent implements OnInit {
             );
     }
 
+    obtenerProveedorInformacion(){
+        this.gestionarProveedorInformacionService.buscarProveedorNombre(this.proveedor)
+            .then(
+                response=>{
+                    if(response.detalle_operacion == "No hay datos"){
+                        this.errorMessage = "No se ha podido obtener la información del proveedor, intente de nuevo.";
+                    }
+                    else{
+                        this.frecuenciaMaxima = response.datos_operacion['frecuenciaMaxPosible'];
+                    }
+                }
+            )
+            .catch(
+                error=>{
+                    this.errorMessage = error.error_description;
+                }
+            );
+    }
 }

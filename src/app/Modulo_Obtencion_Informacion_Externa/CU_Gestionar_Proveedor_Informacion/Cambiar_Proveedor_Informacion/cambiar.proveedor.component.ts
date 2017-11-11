@@ -31,7 +31,7 @@ export class CambiarProveedorInformacionComponent implements OnInit{
                 private gestionarProveedorInformacionService:GestionarProveedorInformacionService,
                 private appService:AppService){
 
-        appService.getState().topnavTitle="Cambiar Proveedor Información.";
+        appService.getState().topnavTitle="Cambiar Proveedor Información";
 
     }
 
@@ -98,7 +98,7 @@ export class CambiarProveedorInformacionComponent implements OnInit{
     } 
 
    apretarProveedor(){
-       this.gestionarProveedorInformacionService.buscarProveedorNombre(this.idFinca,this.nombreProveedor)
+       this.gestionarProveedorInformacionService.buscarProveedorNombre(this.nombreProveedor)
             .then(
                 response=>{
                     if(response.detalle_operacion=="No hay datos"){

@@ -1,7 +1,7 @@
 <!--SECCION REPORTE HISTORICO HELADAS-->
 <div *ngIf="getPermisoGenerarReporteEventoPersonalizado()" class="page-content">
     <md-card class="page-card">
-        <md-card-title>Reporte Evento Personalizado.
+        <md-card-title>Reporte Evento Personalizado
                 <a id="botonVolver" *ngIf="!getEventosExistente()" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
                         <img src="assets/icons/atras.png">
             </a>
@@ -29,8 +29,8 @@
                 <md-input-container>
                     <input mdInput placeholder="Fecha Fin." type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
                 </md-input-container>
-                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR.</button>
-                <button md-raised-button *ngIf="!getEventosExistente()" (click)="apretarSalir()">SALIR.</button>
+                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR</button>
+                <button md-raised-button *ngIf="!getEventosExistente()" (click)="apretarSalir()">SALIR</button>
             </section>
 
             <section *ngIf="getEventosExistente()" class="bs">
@@ -88,7 +88,7 @@
             </section>
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button *ngIf="getEventosExistente()" (click)="apretarSalir()">SALIR.</button>
+            <button md-raised-button *ngIf="getEventosExistente()" (click)="apretarSalir()">SALIR</button>
         </md-card-actions>
     </md-card>
 </div>

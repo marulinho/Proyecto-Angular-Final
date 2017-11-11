@@ -123,7 +123,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Home Finca Detalle.";
+        appService.getState().topnavTitle="Home Finca Detalle";
 
 
     }

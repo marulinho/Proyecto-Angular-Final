@@ -2,7 +2,7 @@
 <div *ngIf="getPermisoModificarConfiguracionRiego()" class="page-content">
     <md-card class="page-card">
         <md-card-title>
-            Home Configuraci&oacute;n de Riego.
+            Home Configuraci&oacute;n de Riego
             <a *ngIf="getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipEditarConfiguracion}} [mdTooltipPosition]="position">
                 <img src="assets/icons/editar.png" [routerLink]="['/gestionarConfiguracionRiego/']">
             </a>
@@ -47,10 +47,10 @@
                         <table class="table table-striped table-hover table-card">
                             <thead>
                                 <tr>
-                                    <th>Nombre.</th>
-                                    <th>Tipo Criterio.</th>
-                                    <th>Activaci&oacute;n.</th>
-                                    <th class="actions">Acci&oacute;n.</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo Criterio</th>
+                                    <th>Activaci&oacute;n</th>
+                                    <th class="actions">Acci&oacute;n</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,7 +80,7 @@
             <!--SECCION CRITERIO DE FINALIZACION-->
             <md-card *ngIf="getPermisoModificarConfiguracionRiego()" class="page-card">
                 <md-card-title>
-                    Criterio de Finalizaci&oacute;n.
+                    Criterio de Finalizaci&oacute;n
                     <a *ngIf="!getExisteCriterioFinal() && getPermisoModificarConfiguracionRiego()" class="example-tooltip-host" mdTooltip={{tooltipAgregarCriterioFinal}} [mdTooltipPosition]="position">
                             <img src="assets/icons/nuevo.png" [routerLink]="['/agregarCriterioFinal/']" >
                 </a>
@@ -97,9 +97,9 @@
                         <table class="table table-striped table-hover table-card">
                             <thead>
                                 <tr>
-                                    <th>Nombre.</th>
-                                    <th>Tipo Criterio.</th>
-                                    <th>Activaci&oacute;n.</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo Criterio</th>
+                                    <th>Activaci&oacute;n</th>
                                     <th class="actions">Acci&oacute;n</th>
                                 </tr>
                             </thead>

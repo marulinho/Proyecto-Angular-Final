@@ -42,7 +42,7 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
                 private asignarMecanismoRiegoFincaService:AsignarMecanismoRiegoFincaService,
                 private appService:AppService){
 
-        appService.getState().topnavTitle="Asignar Mecanismo Riego.";
+        appService.getState().topnavTitle="Asignar Mecanismo Riego";
  
 
     }

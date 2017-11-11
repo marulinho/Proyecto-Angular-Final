@@ -36,7 +36,7 @@ export class ModificarConfiguracionRiegoComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Modificar Configuración Riego.";
+        appService.getState().topnavTitle="Modificar Configuración Riego";
 
 
     }

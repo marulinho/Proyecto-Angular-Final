@@ -36,9 +36,9 @@ export class GestionarProveedorInformacionService extends RestBaseService{
     .catch(this.handleError);
   }
 
-  buscarProveedorNombre(idFinca:number,nombreProveedor):Promise<ProveedorInformacion>{
+  buscarProveedorNombre(nombreProveedor):Promise<ProveedorInformacion>{
     const data = {
-      'idFinca': idFinca,
+      //'idFinca': idFinca,
       'nombreProveedor':nombreProveedor
     };
 

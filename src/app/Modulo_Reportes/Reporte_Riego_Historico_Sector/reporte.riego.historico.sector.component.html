@@ -1,7 +1,7 @@
 <!--SECCION REPORTE RIEGO EJECUCION-->
 <div *ngIf="getPermisoRiegoHistorico()" class="page-content">
     <md-card class="page-card">
-        <md-card-title>Reporte Hist&oacute;rico Riego.
+        <md-card-title>Reporte Hist&oacute;rico Riego
                 <a id="botonVolver" *ngIf="!getRiegosSeleccionado()" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
                         <img src="assets/icons/atras.png">
             </a>
@@ -22,7 +22,7 @@
                 <md-input-container   >
                     <input  mdInput placeholder="Fecha Fin." type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
                 </md-input-container>
-                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR.</button>
+                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR</button>
             </section>
 
             <section *ngIf="getRiegosSeleccionado()" class="bs">
@@ -49,13 +49,13 @@
                 <table class="table table-striped table-hover table-card">
                     <thead>
                         <tr>
-                            <th>Fecha-Hora Inicio.</th>
-                            <th>Fecha-Hora Fin.</th>
-                            <th>Agua utilizada.</th>
-                            <th>Criterio riego.</th>
-                            <th>Duraci&oacute;n.</th>
-                            <th>Mecanismos riego.</th>
-                            <th>Estado riego.</th>
+                            <th>Fecha-Hora Inicio</th>
+                            <th>Fecha-Hora Fin</th>
+                            <th>Agua utilizada</th>
+                            <th>Criterio riego</th>
+                            <th>Duraci&oacute;n</th>
+                            <th>Mecanismos riego</th>
+                            <th>Estado riego</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,7 +73,7 @@
             </section>
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button *ngIf="getRiegosSeleccionado()" (click)="apretarSalir()">SALIR.</button>
+            <button md-raised-button *ngIf="getRiegosSeleccionado()" (click)="apretarSalir()">SALIR</button>
         </md-card-actions>
     </md-card>
 </div>

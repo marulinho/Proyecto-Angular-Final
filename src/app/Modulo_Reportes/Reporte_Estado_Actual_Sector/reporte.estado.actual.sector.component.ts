@@ -53,7 +53,7 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
         private appService: AppService,
         private generarReportesService: GenerarReportesService,
         private dialog: MdDialog) {
-        appService.getState().topnavTitle = "Reporte Estado Actual Sector.";
+        appService.getState().topnavTitle = "Reporte Estado Actual Sector";
 
     }
 

@@ -58,7 +58,7 @@ export class HomeReporteComponent implements OnInit {
         private gestionarSectorFincaService:GestionarSectorFincaService,
         private homeFincaDetalleService:HomeFincaDetalleService,
         private dialog: MdDialog) {
-        appService.getState().topnavTitle = "Home Reportes.";
+        appService.getState().topnavTitle = "Home Reportes";
     }
 
     ngOnInit() {

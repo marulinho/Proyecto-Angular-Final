@@ -53,7 +53,7 @@ export class ModificarCriterioInicialFinalComponent implements OnInit{
                 private gestionarConfiguracionRiegoService:GestionarConfiguracionRiegoService,
                 private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Modificar Criterio Riego.";
+            this.appService.getState().topnavTitle="Modificar Criterio Riego";
     }
 
     ngOnInit(){

@@ -1,7 +1,7 @@
 <!--SECCION CREAR SECTOR FINCA-->
 <div  *ngIf="getPermisoCrearSector()" class="page-content">
     <md-card><br>
-      <md-card-title>Crear Sector.</md-card-title>
+      <md-card-title>Crear Sector</md-card-title>
       <md-card-content>
         <md-tab-group selectedIndex="{{selectIndex}}">
           <md-tab disabled label="Paso 1">
@@ -68,10 +68,10 @@
         </md-tab-group>
       </md-card-content>
       <md-card-actions>
-        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
-        <button *ngIf="selectIndex >=0 && selectIndex <1" md-raised-button (click)="apretarNextCrear()">SIGUIENTE.</button>
-        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarCrearSector()">CREAR SECTOR.</button>
-        <button md-raised-button (click)="apretarSalir()">SALIR.</button>
+        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S</button>
+        <button *ngIf="selectIndex >=0 && selectIndex <1" md-raised-button (click)="apretarNextCrear()">SIGUIENTE</button>
+        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarCrearSector()">CREAR SECTOR</button>
+        <button md-raised-button (click)="apretarSalir()">SALIR</button>
       </md-card-actions>
     </md-card>
 </div>

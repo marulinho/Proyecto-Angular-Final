@@ -34,7 +34,7 @@ export class GestionarComponenteSensorComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Modificar Componente Sensor.";
+        appService.getState().topnavTitle="Modificar Componente Sensor";
         this.route.params.subscribe(params => {
             this.idFinca = +params['idFinca'];
             this.idComponenteSensor = +params['idComponenteSensor'];

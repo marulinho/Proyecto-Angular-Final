@@ -38,7 +38,7 @@ export class GestionarUsuarioFincaComponent implements OnInit{
                 private route:ActivatedRoute,
                 private gestionarUsuarioFincaService: GestionarUsuarioFincaService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Gestionar Usuarios.";
+            this.appService.getState().topnavTitle="Gestionar Usuarios";
     }
 
     ngOnInit(){

@@ -35,7 +35,7 @@ export class ModificarSensorComponent implements OnInit{
                 private appService:AppService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Modificar Sensor.";
+        appService.getState().topnavTitle="Modificar Sensor";
 
 
     }

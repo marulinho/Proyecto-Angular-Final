@@ -45,7 +45,7 @@ export class GestionarFincaComponent implements OnInit {
         private mapsAPILoader: MapsAPILoader,
         private ngZone: NgZone,
         private appService: AppService) {
-        this.appService.getState().topnavTitle = "Gestionar Finca.";
+        this.appService.getState().topnavTitle = "Gestionar Finca";
 
     }
 

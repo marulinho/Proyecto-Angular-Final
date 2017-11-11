@@ -59,7 +59,7 @@ export class AgregarCriterioFinComponent implements OnInit{
                 private gestionarConfiguracionRiegoService:GestionarConfiguracionRiegoService,
                 private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Agregar Criterio Fin.";
+            this.appService.getState().topnavTitle="Agregar Criterio Fin";
             if(this.criterioInicial=="criterio_riego_medicion"){
                 this.criteriosTipo=["Medición.","Hora."];
             }

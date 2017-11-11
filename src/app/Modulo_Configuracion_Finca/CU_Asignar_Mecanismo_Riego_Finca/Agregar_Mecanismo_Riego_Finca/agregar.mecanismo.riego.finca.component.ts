@@ -37,7 +37,7 @@ export class AgregarMecanismoRiegoFincaComponent implements OnInit{
                 private route:ActivatedRoute,
                 private asginarMecanismoRiegoFincaService: AsignarMecanismoRiegoFincaService,
                 private appService: AppService) {
-            this.appService.getState().topnavTitle="Mecanismos de Riego.";
+            this.appService.getState().topnavTitle="Mecanismos de Riego";
 
     }
 

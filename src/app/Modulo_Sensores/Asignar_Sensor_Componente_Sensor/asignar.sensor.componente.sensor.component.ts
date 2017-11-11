@@ -34,7 +34,7 @@ export class AsignarSensorComponenteSensorComponent implements OnInit{
                 private appService: AppService,
                 private dialog: MdDialog) {
             
-            this.appService.getState().topnavTitle="Asignar Sensor Componente Sensor.";
+            this.appService.getState().topnavTitle="Asignar Sensor Componente Sensor";
 
     }
 

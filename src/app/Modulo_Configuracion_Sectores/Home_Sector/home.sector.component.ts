@@ -112,7 +112,7 @@ export class HomeSectorComponent implements OnInit {
         private appService: AppService,
         private dialog: MdDialog) {
 
-        appService.getState().topnavTitle = "Home Sector.";
+        appService.getState().topnavTitle = "Home Sector";
 
     }
 

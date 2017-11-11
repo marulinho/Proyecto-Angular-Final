@@ -62,7 +62,7 @@ export class HomeConfiguracionRiegoComponent implements OnInit {
         private appService: AppService,
         private dialog: MdDialog) {
 
-        appService.getState().topnavTitle = "Home Configuración Riego.";
+        appService.getState().topnavTitle = "Home Configuración Riego";
 
     }
 

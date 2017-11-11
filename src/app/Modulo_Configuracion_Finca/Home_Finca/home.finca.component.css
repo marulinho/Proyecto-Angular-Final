@@ -7,16 +7,19 @@ td,th{
     text-align: left;
     padding: 10px;
     cursor: pointer;
+    color:white;
     
 }
-thead th{
+thead{
     background-color:#009688; 
-    color:red;
-    
+    color:red;    
 }
 
 tr:nth-child(even){
     background-color: #f2f2f2;
+}
+th:nth-child(1){
+    color:white;
 }
 
 label{
@@ -37,3 +40,4 @@ ul{
     list-style: none;
     margin-left: -35px;
 }
+

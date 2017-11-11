@@ -53,7 +53,7 @@ export class AgregarEventoPersonalizadoComponent implements OnInit{
                 private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
                 private dialog: MdDialog){
 
-        appService.getState().topnavTitle="Agregar Evento Personalizado.";
+        appService.getState().topnavTitle="Agregar Evento Personalizado";
     }
 
     ngOnInit(){

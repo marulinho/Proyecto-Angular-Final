@@ -1,7 +1,7 @@
 <!--SECCION REPORTE HISTORICO HELADAS-->
 <div *ngIf="getPermisoGenerarReporteHeladas()"class="page-content">
     <md-card class="page-card">
-        <md-card-title>Reporte Hist&oacute;rico Heladas.
+        <md-card-title>Reporte Hist&oacute;rico Heladas
                 <a id="botonVolver" *ngIf="!getHeladasExistentes()" class="example-tooltip-host" mdTooltip={{tooltipAtras}} [mdTooltipPosition]="position" (click)="apretarAtras()">
                         <img src="assets/icons/atras.png">
             </a>
@@ -22,8 +22,8 @@
                 <md-input-container   >
                     <input  mdInput placeholder="Fecha Fin." type="date" [(ngModel)]="fechaFinReporte" name="fechaFinReporte" requerid><br>
                 </md-input-container>
-                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR.</button>
-                <button md-raised-button *ngIf="!getHeladasExistentes()"(click)="apretarSalir()">SALIR.</button>
+                <button md-raised-button (click)="apretarGenerarReporte()">GENERAR</button>
+                <button md-raised-button *ngIf="!getHeladasExistentes()"(click)="apretarSalir()">SALIR</button>
             </section>
 
             <section *ngIf="getHeladasExistentes()" class="bs">
@@ -81,7 +81,7 @@
             </section>
         </md-card-content>
         <md-card-actions>
-            <button md-raised-button *ngIf="getHeladasExistentes()" (click)="apretarSalir()">SALIR.</button>
+            <button md-raised-button *ngIf="getHeladasExistentes()" (click)="apretarSalir()">SALIR</button>
         </md-card-actions>
     </md-card>
 </div>

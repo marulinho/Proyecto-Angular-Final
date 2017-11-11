@@ -31,7 +31,7 @@ export class ModificarProveedorInformacionComponent implements OnInit {
         private gestionarProveedorInformacionService: GestionarProveedorInformacionService,
         private appService: AppService) {
 
-        appService.getState().topnavTitle = "Gestionar Proveedor Información.";
+        appService.getState().topnavTitle = "Gestionar Proveedor Información";
 
     }
 

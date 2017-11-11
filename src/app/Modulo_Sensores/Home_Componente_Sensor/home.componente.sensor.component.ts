@@ -53,7 +53,7 @@ export class HomeComponenteSensorComponent implements OnInit{
                 private appService: AppService,
                 private dialog: MdDialog) {
             
-            this.appService.getState().topnavTitle="Home Componente Sensor.";
+            this.appService.getState().topnavTitle="Home Componente Sensor";
     }
 
     ngOnInit(){

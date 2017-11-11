@@ -1,7 +1,7 @@
 <!--SECCION PERFIL AGREGAR USUARIO-->
 <div *ngIf="getPerfilUsuariosNoFinca() && getPermisoGestionarUsuario()" class="sign-container">
     <md-card class="page-card">
-            <md-card-title>Usuarios no pertencientes a la Finca.</md-card-title>
+            <md-card-title>Usuarios no pertencientes a la Finca</md-card-title>
             <md-card-subtitle>
                 En esta secci&oacute;n el Encargado de la Finca puede agregar usuarios a su finca.
             </md-card-subtitle>            
@@ -19,10 +19,10 @@
                     <table class="table table-striped table-hover table-card">
                       <thead>
                         <tr>
-                          <th >Usuario.</th>
-                          <th >Apellido y Nombre.</th>
-                          <th>Domicilio.</th>
-                          <th class="actions">Acci&oacute;n.</th>
+                          <th >Usuario</th>
+                          <th >Apellido y Nombre</th>
+                          <th>Domicilio</th>
+                          <th class="actions">Acci&oacute;n</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -50,7 +50,7 @@
 <!--SECCION AGREGAR USUARIO FINCA-->
 <div *ngIf="getAgregarUsuariosFinca() && getPermisoGestionarUsuario()" class="page-content">
     <md-card><br>
-      <md-card-title>Registrar Usuario.</md-card-title>
+      <md-card-title>Registrar Usuario</md-card-title>
       <md-card-content>
         <md-tab-group selectedIndex="{{selectIndex}}">
           <md-tab disabled label="Paso 1">
@@ -100,10 +100,10 @@
         </md-tab-group>
       </md-card-content>
       <md-card-actions>
-        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S.</button>
-        <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAgregar()" >SIGUIENTE.</button>
-        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregarUsuario()">AGREGAR.</button>
-        <button md-raised-button (click)="apretarSalir()">SALIR.</button>
+        <button md-raised-button [disabled]="selectIndex <= 0" (click)="selectIndex = selectIndex - 1">ATR&Aacute;S</button>
+        <button *ngIf="selectIndex ==0" md-raised-button (click)="apretarNextAgregar()" >SIGUIENTE</button>
+        <button *ngIf="selectIndex == 1" md-raised-button (click)="apretarAgregarUsuario()">AGREGAR</button>
+        <button md-raised-button (click)="apretarSalir()">SALIR</button>
       </md-card-actions>
     </md-card>
   

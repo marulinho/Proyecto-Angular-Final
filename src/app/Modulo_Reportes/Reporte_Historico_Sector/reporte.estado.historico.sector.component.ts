@@ -208,7 +208,7 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
         private appService: AppService,
         private generarReportesService: GenerarReportesService,
         private dialog: MdDialog) {
-        appService.getState().topnavTitle = "Reporte Histórico Estado Sector.";
+        appService.getState().topnavTitle = "Reporte Histórico Estado Sector";
 
 
     }

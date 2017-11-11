@@ -44,7 +44,7 @@ export class ReporteHistoricoHeladaComponent implements OnInit {
         private generarReportesService:GenerarReportesService,
         private gestionarEventoPersonalizadoService:GestionarEventoPersonalizadoService,
         private dialog: MdDialog) {
-        appService.getState().topnavTitle = "Reporte Histórico Heladas.";
+        appService.getState().topnavTitle = "Reporte Histórico Heladas";
 
     }
 
