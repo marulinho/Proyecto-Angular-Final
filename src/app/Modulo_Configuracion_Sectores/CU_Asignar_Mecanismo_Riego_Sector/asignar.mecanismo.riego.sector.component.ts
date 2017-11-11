@@ -59,8 +59,10 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
                     }
                     else{
                         this.mecanismosRiego=response.datos_operacion;
-                        this.caudalMaximo = this.mecanismosRiego['caudalMaximo'];
-                        this.presionMaxima = this.mecanismosRiego['presionMaxima'];
+                        this.caudalMaximo = this.mecanismosRiego[0]['caudalMaximo'];
+                        console.log(this.caudalMaximo);
+                        this.presionMaxima = this.mecanismosRiego[0]['presionMaxima'];
+                        console.log(this.presionMaxima);
                         this.mecanismosRiegoSeleccionado=true;
                     }
                 }
@@ -104,8 +106,30 @@ export class AsignarMecanismoRiegoSectorComponent implements OnInit{
                 this.errorMessageAsignarMecanismo="Debe completar todos los campos obligatorios (*).";
             }
             else{
-                this.errorMessageAsignarMecanismo="";
-                this.selectIndex +=1;
+                if(this.presion<=0){
+                    this.errorMessageAsignarMecanismo="La presión debe ser mayor o igual que cero.";
+                }
+                else{
+                    if(this.caudal<=0){
+                        this.errorMessageAsignarMecanismo="El caudal debe ser mayor o igual que cero.";
+                    }
+                    else{
+                        if(this.presion>this.presionMaxima){
+                            this.errorMessageAsignarMecanismo="La presión ingresada no puede ser mayor que la presión máxima.";
+                        }
+                        else{
+                            if(this.caudal>this.caudalMaximo){
+                                this.errorMessageAsignarMecanismo="El caudal ingresado no puede ser mayor que el caudal máximo.";
+                            }
+                            else{
+                                this.errorMessageAsignarMecanismo="";
+                                this.selectIndex +=1;
+                            }
+                        }
+                    }
+                }
+                
+                
             }
         }
     }
