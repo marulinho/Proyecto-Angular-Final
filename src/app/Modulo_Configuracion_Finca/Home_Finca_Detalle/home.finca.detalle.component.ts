@@ -205,12 +205,16 @@ export class HomeFincaDetalleComponent implements OnInit{
                     if(response.detalle_operacion=="No hay datos"){
                         this.errorMessageSectoresFinca="No hay sectores asociados a la finca seleccionada.";
                         this.sectoresFincaSeleccionado=false;
+                        this.tamanioOcupado = 0;
+                        this.tamanioDisponible = this.perfilFinca['tamanio'];
                     }
                     else{
                         this.sectoresFinca=response.datos_operacion;
                         let longitud = response.datos_operacion.length;
                         this.sectoresFincaSeleccionado=true;
                         this.determinarTamanios(longitud);
+                        
+
                     }
                 }
             )
@@ -396,7 +400,7 @@ export class HomeFincaDetalleComponent implements OnInit{
             this.tamanioOcupado=0;
         }
         this.tamanioDisponible = this.perfilFinca["tamanio"] - this.tamanioOcupado;
-        console.log(this.tamanioDisponible);
+        console.log(this.tamanioDisponible  );
         if(this.tamanioDisponible == null || this.tamanioDisponible <0){
             this.tamanioDisponible=0;
         }
