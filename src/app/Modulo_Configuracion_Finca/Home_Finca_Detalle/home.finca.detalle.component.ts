@@ -531,7 +531,7 @@ export class HomeFincaDetalleComponent implements OnInit{
             result => {
                         this.selectedOption = result;
                         if(this.selectedOption==="Aceptar"){
-                            this.asignarMecanismoRiegoFincaService.deshabilitarMecanismoFinca(idMecanismoFinca)
+                            this.asignarMecanismoRiegoFincaService.deshabilitarMecanismoFinca(this.idFinca,idMecanismoFinca)
                                 .then(
                                     response=>{
                                         this.refresh();
@@ -618,7 +618,7 @@ export class HomeFincaDetalleComponent implements OnInit{
             result => {
                         this.selectedOption = result;
                         if(this.selectedOption==="Aceptar"){
-                            this.asignarMecanismoRiegoFincaService.habilitarMecanismoFinca(idMecanismoFinca)
+                            this.asignarMecanismoRiegoFincaService.habilitarMecanismoFinca(this.idFinca,idMecanismoFinca)
                                 .then(
                                     response=>{
                                         this.refresh();

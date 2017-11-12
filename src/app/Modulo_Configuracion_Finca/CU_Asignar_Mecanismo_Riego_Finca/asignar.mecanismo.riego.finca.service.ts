@@ -37,8 +37,9 @@ export class AsignarMecanismoRiegoFincaService extends RestBaseService{
     
   }
   
-  habilitarMecanismoFinca(idMecanismoRiegoFinca:number):Promise<any>{
+  habilitarMecanismoFinca(idFinca,idMecanismoRiegoFinca:number):Promise<any>{
     const data = {
+        'idFinca':idFinca,
         'idMecanismoRiegoFinca':idMecanismoRiegoFinca
       };
       return this.http.post(AsignarMecanismoRiegoFincaService.serverUrl + this.habilitarMecanismoUrl, JSON.stringify(data), this.getRestHeader())
@@ -47,8 +48,9 @@ export class AsignarMecanismoRiegoFincaService extends RestBaseService{
       .catch(this.handleError);
   }
 
-  deshabilitarMecanismoFinca(idMecanismoRiegoFinca:number):Promise<any>{
+  deshabilitarMecanismoFinca(idFinca,idMecanismoRiegoFinca:number):Promise<any>{
     const data = {
+        'idFinca':idFinca,
         'idMecanismoRiegoFinca':idMecanismoRiegoFinca
       };
       return this.http.post(AsignarMecanismoRiegoFincaService.serverUrl + this.deshabilitarMecanismoUrl, JSON.stringify(data), this.getRestHeader())
