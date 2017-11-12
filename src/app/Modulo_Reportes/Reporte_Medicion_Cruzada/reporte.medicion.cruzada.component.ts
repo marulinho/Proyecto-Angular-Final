@@ -61,11 +61,11 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                     filter: false,
                 },
                 medicionAntes: {
-                    title: 'Valor Antes.',
+                    title: 'Valor Antes (°C).',
                     filter: false,
                 },
                 medicionDespues: {
-                    title: 'Valor Después.',
+                    title: 'Valor Después (°C).',
                     filter: false,
                 }
 
@@ -97,11 +97,11 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                     filter: false,
                 },
                 medicionAntes: {
-                    title: 'Valor Antes.',
+                    title: 'Valor Antes (°C).',
                     filter: false,
                 },
                 medicionDespues: {
-                    title: 'Valor Después.',
+                    title: 'Valor Después (°C).',
                     filter: false,
                 }
 
@@ -133,11 +133,11 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                     filter: false,
                 },
                 medicionAntes: {
-                    title: 'Valor Antes.',
+                    title: 'Valor Antes (%).',
                     filter: false,
                 },
                 medicionDespues: {
-                    title: 'Valor Después.',
+                    title: 'Valor Después (%).',
                     filter: false,
                 }
     
@@ -169,11 +169,11 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                    filter: false,
                },
                medicionAntes: {
-                   title: 'Valor Antes.',
+                   title: 'Valor Antes (%).',
                    filter: false,
                },
                medicionDespues: {
-                   title: 'Valor Después.',
+                   title: 'Valor Después (%).',
                    filter: false,
                }
    
