@@ -41,6 +41,7 @@ export class HomeFincaDetalleComponent implements OnInit{
         perfilFincaSeleccionada:Boolean;
         tamanioOcupado:number;
         tamanioDisponible:number;
+        tamanio: number;
         ubicacion=[];
         tooltipEditarFinca='Editar Finca.';
         tooltipAtras = 'Volver HomeFinca.';
@@ -162,6 +163,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                 response=>{
                     this.perfilFinca=response.datos_operacion;
                     this.ubicacion=this.perfilFinca['ubicacion'].split(";");
+                    this.tamanio = this.perfilFinca['tamanio'];
                     this.perfilFincaSeleccionada=true;
                 }
             )
@@ -206,7 +208,7 @@ export class HomeFincaDetalleComponent implements OnInit{
                         this.errorMessageSectoresFinca="No hay sectores asociados a la finca seleccionada.";
                         this.sectoresFincaSeleccionado=false;
                         this.tamanioOcupado = 0;
-                        this.tamanioDisponible = this.perfilFinca['tamanio'];
+                        this.tamanioDisponible = this.tamanio;
                         localStorage.setItem('tamanioDisponible',JSON.stringify(this.tamanioDisponible));
                     }
                     else{
