@@ -36,6 +36,7 @@ export class AgregarEventoPersonalizadoComponent implements OnInit{
     valorMaximoInterno:number;
     valorMinimoInterno:number;
     tipoInterna:number;
+    
 
     valorMaximoExterno:number;
     valorMinimoExterno:number;
@@ -116,10 +117,7 @@ export class AgregarEventoPersonalizadoComponent implements OnInit{
                     this.errorMessageAgregarEvento="Debe completar todos los campos obligatorios (*).";
             }
             else{
-                if(this.valorMaximoExterno<0 || this.valorMaximoInterno<0 || this.valorMinimoExterno<0 || this.valorMinimoInterno<0){
-                    this.errorMessageAgregarEvento="Los valores configurados no pueden ser negativos.";
-                }
-                else{
+                
                     if(this.valorMinimoExterno>this.valorMaximoExterno){
                         this.errorMessageAgregarEvento="El valor mínimo externo debe ser menor o igual que el valor máximo externo.";
                     }
@@ -144,7 +142,7 @@ export class AgregarEventoPersonalizadoComponent implements OnInit{
                         }
                     }
                 }
-            }
+            
         }
 
     apretarCrearConfiguracion(){
