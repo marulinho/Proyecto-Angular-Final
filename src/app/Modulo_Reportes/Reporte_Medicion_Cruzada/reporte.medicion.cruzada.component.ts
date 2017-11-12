@@ -52,19 +52,19 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
             },
             columns: {
                 fechaHoraInicio: {
-                    title: 'Fecha Inicio.',
+                    title: 'Fecha Inicio',
                     filter: false,
                 },
                 fechaHoraFinal: {
-                    title: 'Fecha Fin.',
+                    title: 'Fecha Fin',
                     filter: false,
                 },
                 medicionAntes: {
-                    title: 'Valor Antes.',
+                    title: 'Valor Antes (°C)',
                     filter: false,
                 },
                 medicionDespues: {
-                    title: 'Valor Después.',
+                    title: 'Valor Después(°C)',
                     filter: false,
                 }
 
@@ -88,19 +88,19 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
             },
             columns: {
                 fechaHoraInicio: {
-                    title: 'Fecha Inicio.',
+                    title: 'Fecha Inicio',
                     filter: false,
                 },
                 fechaHoraFinal: {
-                    title: 'Fecha Fin.',
+                    title: 'Fecha Fin',
                     filter: false,
                 },
                 medicionAntes: {
-                    title: 'Valor Antes.',
+                    title: 'Valor Antes (°C)',
                     filter: false,
                 },
                 medicionDespues: {
-                    title: 'Valor Después.',
+                    title: 'Valor Antes (°C)',
                     filter: false,
                 }
 
@@ -124,19 +124,19 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
             },
             columns: {
                 fechaHoraInicio: {
-                    title: 'Fecha Inicio.',
+                    title: 'Fecha Inicio',
                     filter: false,
                 },
                 fechaHoraFinal: {
-                    title: 'Fecha Fin.',
+                    title: 'Fecha Fin',
                     filter: false,
                 },
                 medicionAntes: {
-                    title: 'Valor Antes.',
+                    title: 'Valor Antes(%)',
                     filter: false,
                 },
                 medicionDespues: {
-                    title: 'Valor Después.',
+                    title: 'Valor Después(%)',
                     filter: false,
                 }
     
@@ -160,19 +160,19 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
            },
            columns: {
                fechaHoraInicio: {
-                   title: 'Fecha Inicio.',
+                   title: 'Fecha Inicio',
                    filter: false,
                },
                fechaHoraFinal: {
-                   title: 'Fecha Fin.',
+                   title: 'Fecha Fin',
                    filter: false,
                },
                medicionAntes: {
-                   title: 'Valor Antes.',
+                   title: 'Valor Antes(%)',
                    filter: false,
                },
                medicionDespues: {
-                   title: 'Valor Después.',
+                   title: 'Valor Después(%)',
                    filter: false,
                }
    
@@ -196,19 +196,19 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
             },
             columns: {
                 fechaHoraInicio: {
-                    title: 'Fecha Inicio.',
+                    title: 'Fecha Inicio',
                     filter: false,
                 },
                 fechaHoraFinal: {
-                    title: 'Fecha Fin.',
+                    title: 'Fecha Fin',
                     filter: false,
                 },
                 medicionAntes: {
-                    title: 'Valor Antes.',
+                    title: 'Valor Antes(W/m2)',
                     filter: false,
                 },
                 medicionDespues: {
-                    title: 'Valor Después.',
+                    title: 'Valor Después(W/m2)',
                     filter: false,
                 }
     
