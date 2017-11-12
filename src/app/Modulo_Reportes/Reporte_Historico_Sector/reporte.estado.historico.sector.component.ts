@@ -58,7 +58,7 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
                 filter: false,
             },
             valorMedicion: {
-                title: 'Valor (Grados Centígrados).',
+                title: 'Valor (°C).',
                 filter: false,
             }
         }
@@ -139,7 +139,7 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
                 filter: false,
             },
             valorMedicion: {
-                title: 'Valor (Grados Centígrados).',
+                title: 'Valor (°C).',
                 filter: false,
             }
         }
@@ -193,7 +193,7 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
                 filter: false,
             },
             valorMedicion: {
-                title: 'Valor.',
+                title: 'Valor (W/m2).',
                 filter: false,
             }
         }

@@ -205,11 +205,11 @@ export class ReporteMedicionCruzadaComponent implements OnInit {
                     filter: false,
                 },
                 medicionAntes: {
-                    title: 'Valor Antes.',
+                    title: 'Valor Antes (W/m2).',
                     filter: false,
                 },
                 medicionDespues: {
-                    title: 'Valor Después.',
+                    title: 'Valor Después (W/m2).',
                     filter: false,
                 }
     
