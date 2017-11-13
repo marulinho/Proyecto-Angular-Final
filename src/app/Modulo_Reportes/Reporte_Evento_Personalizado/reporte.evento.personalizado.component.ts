@@ -94,7 +94,8 @@ export class ReporteEventoPersonalizadoComponent implements OnInit {
     }
 
     obtenerConfiguracionEvento(){
-        this.gestionarEventoPersonalizadoService.mostrarConfiguracionEventoPersonalizado(this.eventoSeleccionado,this.idFinca)
+    	console.log(this.eventoSeleccionado)
+        this.gestionarEventoPersonalizadoService.mostrarConfiguracionEventoPersonalizado(this.idFinca,this.eventoSeleccionado)
             .then(
                 response=>{
                     if(response.detalle_operacion=="No hay datos"){
