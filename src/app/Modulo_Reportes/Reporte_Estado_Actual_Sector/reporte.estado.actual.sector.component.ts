@@ -6,6 +6,7 @@ import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, EstadoActualSector } from '../generar.repotes.service';
 import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+import * as jsPDF from 'jspdf'
 
 @Component({
     selector: 'reporte-estado-actual-sector',
@@ -46,7 +47,8 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
 
     fecha = new Date();
     hora = new Date();
-
+    fechaMedicion;
+    horaMedicion;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -66,6 +68,8 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
                 }
                 else {
                     this.estadoActual = response.datos_operacion;
+                    this.fechaMedicion = (this.estadoActual['ultima_medicion']['fecha_y_hora']).substring(0,10);
+                    this.horaMedicion = (this.estadoActual['ultima_medicion']['fecha_y_hora']).substring(11,19);
                     this.llenarDatos();
                     this.estadoActualSeleccionado = true;
 
@@ -171,5 +175,56 @@ export class ReporteEstadoActualEstadoSector implements OnInit {
 
     apretarSalir() {
         this.router.navigate(['/homeReportes/']);
+    }
+
+
+    apretarGuardar(){
+        var doc = new jsPDF();
+        var lMargin=5; //left margin in mm
+        var rMargin=5; //right margin in mm
+        var pdfInMM=230;
+        var paragraph= this.descripcionReporte;
+        var lines = doc.splitTextToSize(paragraph, (pdfInMM-lMargin-rMargin));     
+
+        doc.setFontSize(25);
+        doc.text(50, 20, 'Reporte Estado Actual del Sector.');
+
+        doc.setFontSize(20);
+        doc.text(5, 30, 'Información General Reporte.');
+        doc.text(5,60, 'Detalle Reporte.');
+
+        doc.setFontSize(13);
+        doc.setFontType("bold");
+        doc.text(5, 40, 'Nombre: ')
+        doc.text(5,45,'Descripción: ');
+
+        doc.text(5, 70, 'Fecha medición: ');
+        doc.text(5, 75, 'Hora medición: ');
+        doc.text(5, 80, 'Humedad del aire (%): ');
+        doc.text(5, 85, 'Humedad del suelo (%): ');
+        doc.text(5, 90, 'Temperatura aire (°C): ');
+        doc.text(5, 95, 'Temperatura suelo (°C): ');
+        doc.text(5, 100, 'Radiación solar (W/m2): ');
+        doc.text(5, 105, 'Presión atmosférica (hPa): ');
+        doc.text(5, 110, 'Condición climática: ');
+
+        doc.setFontType("normal");
+        doc.text(25,40,this.nombreReporte);
+        doc.text(35,45,lines);        
+                 
+        doc.text(43, 70, this.fechaMedicion+'.');
+        doc.text(40, 75, this.horaMedicion+'.');
+        doc.text(58, 80, this.humedadAire+'.');
+        doc.text(60, 85, this.humedadSuelo+'.');
+        doc.text(58, 90, this.temperaturaAire+'.');
+        doc.text(60, 95, this.temperaturaSuelo+'.');
+        doc.text(60, 100, this.radiacionSolar+'.');
+        doc.text(65, 105, this.presionAtmosferica+'.');
+        doc.text(55, 110, this.condicionClimatica+'.');
+
+        
+            
+        // Save the PDF
+        doc.save('ReporteEstadoActual.pdf');
     }
 }

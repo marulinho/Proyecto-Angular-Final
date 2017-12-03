@@ -23,9 +23,18 @@
                     <label>{{fecha | date: 'dd-MM-yyyy'}}.</label><br>
 
                     <label id="atributo">Hora creaci&oacute;n: </label>
-                    <label>{{hora | date: 'hh:mm:ss'}}.</label><br><br><br>
-                
+                    <!--<label>{{hora | date: 'hh:mm:ss'}}.</label><br><br><br>
+                    <label>{{hora | date: 'hh:mm  j:m'}}.</label><br><br><br>-->
+                    <label>{{hora | date: 'HH:mm'}}.</label><br><br><br>
+                    
+                        
                 <h5>Detalle Reporte</h5>
+                    <label id="atributo">Fecha medici&oacute;n: </label>
+                    <label>{{fechaMedicion}}.</label><br>
+
+                    <label id="atributo">Hora medici&oacute;n: </label>
+                    <label>{{horaMedicion}}.</label><br>
+
                     <label id="atributo">Humedad del aire (%): </label>
                     <label>{{humedadAire}}.</label><br>
                     
@@ -50,6 +59,7 @@
         </md-card-content>
         <md-card-actions>
                 <button md-raised-button (click)="apretarSalir()">SALIR</button>
+                <button md-raised-button (click)="apretarGuardar()">GUARDAR</button>
         </md-card-actions>
     </md-card>
 </div>
