@@ -43,7 +43,8 @@
         "../node_modules/moment/min/moment.min.js",
         "../node_modules/fullcalendar/dist/fullcalendar.min.js",
         "../node_modules/jquery-fullscreen-plugin/jquery.fullscreen-min.js",
-        "../node_modules/jspdf/dist/jspdf.min.js"
+        "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

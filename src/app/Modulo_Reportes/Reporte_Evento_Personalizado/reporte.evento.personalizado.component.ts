@@ -7,6 +7,8 @@ import { AppService } from '../../app.service';
 import { GenerarReportesService, InformeEvento } from '../generar.repotes.service';
 import { GestionarEventoPersonalizadoService , ConfiguracionEvento } from'../../Modulo_Reportes/Gestionar_Evento_Persinalizado/gestionar.evento.personalizado.service';
 import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+import * as jsPDF from 'jspdf';
+
 
 @Component({
     selector: 'reporte-evento-personalizado',
@@ -195,5 +197,47 @@ export class ReporteEventoPersonalizadoComponent implements OnInit {
     }
     apretarAtras(){
         this.router.navigate(['/homeReportes/']);
+    }
+
+    apretarGuardar(){
+        var doc = new jsPDF('letter');
+        console.log(document.getElementById('table-container'));
+        
+        var lMargin=5; //left margin in mm
+        var rMargin=5; //right margin in mm
+        var pdfInMM=230;
+        var paragraph= this.descripcionReporte;
+        var lines = doc.splitTextToSize(paragraph, (pdfInMM-lMargin-rMargin));     
+
+        doc.setFontSize(25);
+        doc.text(50, 20, 'Reporte Evento Personalizado.');
+
+        doc.setFontSize(20);
+        doc.text(5, 30, 'Información General Reporte.');
+        doc.text(5,60, 'Detalle Reporte.');
+
+        doc.setFontSize(13);
+        doc.setFontType("bold");
+        doc.text(5, 40, 'Nombre: ')
+        doc.text(5,45,'Descripción: ');
+
+        doc.text(5, 70, 'Fecha inicio: ');
+        doc.text(5, 75, 'fecha fin: ');
+        doc.text(5, 80, 'Cantidad de ocurrencias: ');
+
+        doc.setFontType("normal");
+        doc.text(25,40,this.nombreReporte);
+        doc.text(35,45,lines);        
+                 
+        doc.text(43, 70, this.fechaInicioReporte+'.');
+        doc.text(40, 75, this.fechaFinReporte+'.');
+        doc.text(65, 80, this.cantidad+' ocurrencias.');
+        
+        doc.addPage();
+        doc.addHTML(document.getElementById('table-container'),10,10 , {}, function() {
+          doc.save('ReporteEventoPersonalizado.pdf');
+        });
+
+        
     }
 }

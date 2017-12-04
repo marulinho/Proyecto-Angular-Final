@@ -32,8 +32,8 @@
                 <button md-raised-button (click)="apretarGenerarReporte()">GENERAR</button>
                 <button md-raised-button *ngIf="!getEventosExistente()" (click)="apretarSalir()">SALIR</button>
             </section>
-
-            <section *ngIf="getEventosExistente()" class="bs">
+            
+            <section  *ngIf="getEventosExistente()" class="bs">
                 <h5>Informaci&oacute;n General Reporte.</h5>
                 <label id="atributo">Nombre: </label>
                 <label>{{nombreReporte}}</label><br>
@@ -57,7 +57,7 @@
                 <label id="atributo">Cantidad de ocurrencias: </label>
                 <label>{{cantidad}} ocurrencias.</label><br><br>
 
-                <table class="table table-striped table-hover table-card">
+                <table class="table table-striped table-hover table-card" id="table-container">
                     <thead>
                         <tr>
                             <th>Fecha - Hora.</th>
@@ -86,9 +86,11 @@
                     </tbody>
                 </table>
             </section>
+        
         </md-card-content>
         <md-card-actions>
             <button md-raised-button *ngIf="getEventosExistente()" (click)="apretarSalir()">SALIR</button>
+            <button md-raised-button *ngIf="getEventosExistente()" (click)="apretarGuardar()">GUARDAR</button>
         </md-card-actions>
     </md-card>
 </div>
