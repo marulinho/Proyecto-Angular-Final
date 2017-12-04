@@ -6,6 +6,7 @@ import { MdDialog } from '@angular/material';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, RiegoSector } from '../generar.repotes.service';
 import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+import * as jsPDF from 'jspdf';
 
 
 @Component({
@@ -36,6 +37,8 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
     fechaInicioReal:string;
     fechaFinProgramada:string;
 
+    aguaUtilizada;
+    criterioRiego;
 
 
     constructor(private router: Router,
@@ -56,7 +59,10 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
                 }
                 else{
                     this.riegoActual=response.datos_operacion;
-                    
+
+                    this.aguaUtilizada=this.riegoActual['ejecucion_riego']['cantidadAguaUtilizadaLitros'];
+                    this.criterioRiego = this.riegoActual['ejecucion_riego']['detalle'];
+
                     //estado
                     this.progreso=this.riegoActual['ejecucion_riego']['estado_ejecucion_riego'];
                     if(this.progreso=="en_ejecucion"){
@@ -116,5 +122,48 @@ export class ReporteRiegoEjecucionComponent implements OnInit {
     }
     apretarSalir(){
         this.router.navigate(['/homeReportes/']);
+    }
+
+    apretarGuardar(){
+        var doc = new jsPDF();
+        var lMargin=5; //left margin in mm
+        var rMargin=5; //right margin in mm
+        var pdfInMM=200;
+        var paragraph= this.descripcionReporte;
+        var lines = doc.splitTextToSize(paragraph, (pdfInMM-lMargin-rMargin));     
+
+        doc.setFontSize(25);
+        doc.text(50, 20, 'Reporte Riego en Ejecución.');
+
+        doc.setFontSize(20);
+        doc.text(5, 30, 'Información General Reporte.');
+        doc.text(5,60, 'Detalle Reporte.');
+
+        doc.setFontSize(13);
+        doc.setFontType("bold");
+        doc.text(5, 40, 'Nombre: ')
+        doc.text(5,45,'Descripción: ');
+
+        doc.text(5, 70, 'Fecha inicio programada: ');
+        doc.text(5, 75, 'Fecha inicio real: ');
+        doc.text(5, 80, 'Fecha fin programada: ');
+        doc.text(5, 85, 'Agua utilizada: ');
+        doc.text(5, 90, 'Criterio de riego: ');
+        doc.text(5, 95, 'Progreso: ');
+
+        doc.setFontType("normal");
+        doc.text(25,40,this.nombreReporte);
+        doc.text(35,45,lines);        
+                 
+        doc.text(65, 70, this.fechaInicioProgramada+'.');
+        doc.text(45, 75, this.fechaInicioReal+'.');
+        doc.text(58, 80, this.fechaFinProgramada+'.');
+        doc.text(40, 85, this.aguaUtilizada+' litros.');
+        doc.text(45, 90, this.criterioRiego+'.');
+        doc.text(30, 95, this.progreso);
+        
+            
+        // Save the PDF
+        doc.save('ReporteRiegoEjecucion.pdf');
     }
 }

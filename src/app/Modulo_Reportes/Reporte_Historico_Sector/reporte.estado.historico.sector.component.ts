@@ -7,6 +7,7 @@ import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
 import { AppService } from '../../app.service';
 import { GenerarReportesService, HistoricoSector } from '../generar.repotes.service';
 import { ErroresSistema } from '../../Datos_Sistema/errores.sistema';
+import * as jsPDF from 'jspdf';
 
 
 @Component({
@@ -734,6 +735,11 @@ export class ReporteEstadoHistoricoSectorComponent implements OnInit {
     apretarAtras(){
         this.router.navigate(['/homeReportes/']);
     }
+
+    apretarGuardar(){
+        
+    }
+
 }
 
 export class tablaMediciones {
